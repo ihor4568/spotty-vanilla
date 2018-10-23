@@ -1,2 +1,1 @@
-// CSS files import
-import "./style.scss";
+import "./index.scss";

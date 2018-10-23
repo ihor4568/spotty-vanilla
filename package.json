@@ -13,9 +13,9 @@
     "@material/ripple": "^0.40.0",
     "autoprefixer": "^9.1.5",
     "css-loader": "^1.0.0",
+    "ejs-loader": "^0.3.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
-    "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^1.0.0-rc.14",
     "img-loader": "^3.0.0",
@@ -45,7 +45,7 @@
       "prettier --write",
       "git add"
     ],
-    "index.html": [
+    "*.html": [
       "js-beautify -r",
       "git add"
     ]
