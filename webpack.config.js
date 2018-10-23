@@ -1,11 +1,12 @@
 const path = require("path");
-const autoprefixer = require("autoprefixer");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = [
   {
-    entry: ["./src/index.scss", "./src/index.js"],
+    entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, "./dist"),
       filename: "main.js"
@@ -16,43 +17,14 @@ module.exports = [
         {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
-            use: [
-              {
-                loader: "css-loader",
-                options: { sourceMap: true }
-              },
-              {
-                loader: "postcss-loader",
-                options: {
-                  sourceMap: true,
-                  plugins: [
-                    autoprefixer({
-                      browsers: ["ie >= 8", "last 4 version"]
-                    })
-                  ]
-                }
-              },
-              {
-                loader: "sass-loader",
-                options: {
-                  sourceMap: true,
-                  includePaths: ["./node_modules"]
-                }
-              }
-            ],
-            fallback: "style-loader"
+            use: [MiniCssExtractPlugin.loader],
+            fallback: "style-loader",
+            use: ["css-loader", "postcss-loader", "sass-loader"]
           })
         },
         {
-          test: /\.(png|gif|jpe?g)$/,
-          loaders: [
-            {
-              loader: "file-loader",
-              options: {
-                name: "[path][name].[ext]"
-              }
-            }
-          ]
+          test: [/.(png|jpg)$/, /\.(ttf)/],
+          use: "file-loader"
         },
         {
           test: /\.ejs$/,
@@ -66,9 +38,20 @@ module.exports = [
       ]
     },
     plugins: [
-      new ExtractTextPlugin("./style.css"),
+      new ExtractTextPlugin("style.css"),
+      new CleanWebpackPlugin(["dist"]),
       new HtmlWebpackPlugin({
-        template: "./index.html"
+        template: "index.html",
+        minify: {
+          collapseWhitespace: true,
+          removeEmptyAttributes: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true
+        }
+      }),
+      new MiniCssExtractPlugin({
+        filename: "[name].[hash].css",
+        chunkFilename: "[id].[hash].css"
       })
     ]
   }
