@@ -10,7 +10,6 @@
   "keywords": [],
   "license": "ISC",
   "devDependencies": {
-    "@material/ripple": "0.40.0",
     "autoprefixer": "9.1.5",
     "clean-webpack-plugin": "0.1.19",
     "css-loader": "1.0.0",
@@ -21,7 +20,7 @@
     "husky": "1.0.0-rc.14",
     "js-beautify": "1.8.6",
     "lint-staged": "7.2.2",
-    "material-components-web": "0.40.0",
+    "material-components-web": "0.40.1",
     "mini-css-extract-plugin": "0.4.3",
     "node-sass": "4.9.3",
     "postcss-loader": "3.0.0",
