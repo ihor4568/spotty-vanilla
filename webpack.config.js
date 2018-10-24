@@ -1,44 +1,57 @@
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const autoprefixer = require("autoprefixer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = [
   {
     entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, "./dist"),
-      filename: "main.js"
+      filename: "[name].[hash].js"
     },
 
     module: {
       rules: [
         {
-          test: /\.scss$/,
-          use: ExtractTextPlugin.extract({
-            use: [MiniCssExtractPlugin.loader],
-            fallback: "style-loader",
-            use: ["css-loader", "postcss-loader", "sass-loader"]
-          })
+          test: /\.(scss|css)$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+              options: {
+                minimize: {
+                  safe: true
+                }
+              }
+            },
+            {
+              loader: "postcss-loader",
+              options: {
+                autoprefixer: {
+                  browsers: ["last 2 versions"]
+                },
+                plugins: () => [autoprefixer]
+              }
+            },
+            {
+              loader: "sass-loader",
+              options: {}
+            }
+          ]
         },
         {
           test: [/.(png|jpg)$/, /\.(ttf)/],
           use: "file-loader"
         },
         {
-          test: /\.ejs$/,
-          loader: "ejs-loader",
-          query: {
-            variable: "data",
-            interpolate: "\\{\\{(.+?)\\}\\}",
-            evaluate: "\\[\\[(.+?)\\]\\]"
-          }
+          test: /\.html$/,
+          loader: "ejs-loader"
         }
       ]
     },
     plugins: [
-      new ExtractTextPlugin("style.css"),
       new CleanWebpackPlugin(["dist"]),
       new HtmlWebpackPlugin({
         template: "index.html",
