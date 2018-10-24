@@ -36,8 +36,7 @@ module.exports = [
               }
             },
             {
-              loader: "sass-loader",
-              options: {}
+              loader: "sass-loader"
             }
           ]
         },
