@@ -1,0 +1,15 @@
+@import "@material/top-app-bar/mdc-top-app-bar";
+
+.main-content__wrapper {
+  padding: 1rem 1rem 8rem 1rem;
+  z-index: 1;
+}
+
+.footer {
+  background: #ddd;
+  padding: 3rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+}

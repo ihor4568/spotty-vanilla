@@ -1,0 +1,14 @@
+@import "@material/textfield/mdc-text-field";
+
+.mdc-text-field {
+  @include mdc-text-field-label-color(rgba(128, 128, 128, 0.719));
+  @include mdc-text-field-fill-color(white);
+  margin-right: 1rem;
+  padding-right: 1rem;
+  border-radius: 2rem;
+  height: 2.5rem;
+}
+
+.mdc-text-field__icon {
+  height: 1rem;
+}
