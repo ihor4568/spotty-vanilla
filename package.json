@@ -1,0 +1,50 @@
+{
+  "name": "Spotty",
+  "version": "1.0.0",
+  "description": "Simple music streaming service",
+  "private": true,
+  "scripts": {
+    "build": "webpack -p",
+    "start": "webpack-dev-server --mode=development"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "devDependencies": {
+    "@material/ripple": "0.40.0",
+    "autoprefixer": "9.1.5",
+    "clean-webpack-plugin": "0.1.19",
+    "css-loader": "1.0.0",
+    "ejs-loader": "0.3.1",
+    "extract-text-webpack-plugin": "4.0.0-beta.0",
+    "file-loader": "2.0.0",
+    "html-webpack-plugin": "3.2.0",
+    "husky": "1.0.0-rc.14",
+    "js-beautify": "1.8.6",
+    "lint-staged": "7.2.2",
+    "material-components-web": "0.40.0",
+    "mini-css-extract-plugin": "0.4.3",
+    "node-sass": "4.9.3",
+    "postcss-loader": "3.0.0",
+    "prettier": "1.14.3",
+    "sass-loader": "7.1.0",
+    "style-loader": "0.23.0",
+    "webpack": "4.20.2",
+    "webpack-cli": "3.1.2",
+    "webpack-dev-server": "3.1.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,scss}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.html": [
+      "js-beautify -r -s 2",
+      "git add"
+    ]
+  }
+}
