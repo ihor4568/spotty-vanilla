@@ -1,22 +1,21 @@
 import { MDCDrawer } from "@material/drawer";
 
-import { SidebarComponent } from "../Sidebar/Sidebar";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
+import { SearchComponent } from "../Search/Search";
 import Main from "./Main.html";
 
 export class MainComponent {
-  constructor(mountPoint, props = { element: {} }) {
+  constructor(mountPoint) {
     this.mountPoint = mountPoint;
-    this.props = props;
   }
 
   querySelectors() {
     this.scrollTarget = document.getElementById("main-content");
-    this.sliderPoint = document.querySelector(".mdc-drawer");
-    this.playerPoint = document.querySelector(".spotty__player");
-    this.headerPoint = document.querySelector(".mdc-drawer-app-content");
     this.drawer = MDCDrawer.attachTo(document.querySelector(".mdc-drawer"));
+    this.headerPoint = document.querySelector(".mdc-top-app-bar");
+    this.playerPoint = document.querySelector(".spotty__player");
+    this.searchPoint = this.mountPoint.querySelector(".spotty__search");
   }
 
   mount() {
@@ -26,20 +25,21 @@ export class MainComponent {
   }
 
   mountChildren() {
-    this.sidebar = new SidebarComponent(this.sliderPoint);
-    this.sidebar.mount();
     this.header = new HeaderComponent(
       this.headerPoint,
       this.drawer,
-      this.sliderPoint
+      this.scrollTarget
     );
     this.header.mount();
 
     this.player = new PlayerComponent(this.playerPoint);
     this.player.mount();
+
+    this.search = new SearchComponent(this.searchPoint);
+    this.search.mount();
   }
 
   render() {
-    return Main(this.props);
+    return Main();
   }
 }

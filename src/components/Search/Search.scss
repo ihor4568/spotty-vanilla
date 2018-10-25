@@ -3,10 +3,14 @@
 .mdc-text-field {
   @include mdc-text-field-label-color(rgba(128, 128, 128, 0.719));
   @include mdc-text-field-fill-color(white);
-  margin-right: 1rem;
   padding-right: 1rem;
   border-radius: 2rem;
   height: 2.5rem;
+  position: absolute;
+  right: 1.5rem;
+  top: 0.75rem;
+  z-index: 2;
+  position: fixed;
 }
 
 .mdc-text-field__icon {

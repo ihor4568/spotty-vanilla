@@ -9,8 +9,8 @@ export class PlayerComponent {
 
   render() {
     return `
-      <div>
-        Content
+      <div class="mdc-typography--headline5">
+        Player
       </div>
     `;
   }

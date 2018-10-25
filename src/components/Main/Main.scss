@@ -1,4 +1,20 @@
+@import "@material/typography/mdc-typography";
+@import "@material/drawer/mdc-drawer";
+@import "@material/list/mdc-list";
+
+.mdc-drawer {
+  z-index: 2;
+}
+
 .main-content__wrapper {
-  padding: 5rem 1rem 8rem 1rem;
+  padding: 5rem 1rem 12rem 1rem;
   z-index: 1;
+}
+
+.container {
+  height: 100%;
+  max-width: 70rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
