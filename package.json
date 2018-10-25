@@ -46,5 +46,9 @@
       "js-beautify -r -s 2",
       "git add"
     ]
+  },
+  "dependencies": {
+    "@material/card": "^0.40.1",
+    "@material/typography": "^0.40.1"
   }
 }
