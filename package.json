@@ -4,7 +4,7 @@
   "description": "Simple music streaming service",
   "private": true,
   "scripts": {
-    "build": "webpack -p",
+    "build": "NODE_ENV='production' webpack -p",
     "start": "webpack-dev-server --mode=development"
   },
   "keywords": [],
