@@ -9,7 +9,7 @@ module.exports = [
     entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, "./dist"),
-      filename: "[name].[hash].js"
+      filename: "[name].[hash]DotsMenu.js"
     },
 
     module: {
@@ -36,7 +36,10 @@ module.exports = [
               }
             },
             {
-              loader: "sass-loader"
+              loader: "sass-loader",
+              options: {
+                includePaths: ["./node_modules"]
+              }
             }
           ]
         },

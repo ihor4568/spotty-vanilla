@@ -1,0 +1,13 @@
+<div class="mdc-menu-surface--anchor">
+  <div class="mdc-menu mdc-menu-surface more-menu" tabindex="-1">
+    <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
+      <% items.forEach(item => { %>
+      <li class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__text">
+          <%= item %></span>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+</div>
+<button class="mdc-icon-button material-icons menu-button">more_vert</button>
