@@ -3,6 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { SidebarComponent } from "../Sidebar/Sidebar";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
+import Main from "./Main.html";
 
 export class MainComponent {
   constructor(mountPoint, props = { element: {} }) {
@@ -27,7 +28,6 @@ export class MainComponent {
   mountChildren() {
     this.sidebar = new SidebarComponent(this.sliderPoint);
     this.sidebar.mount();
-
     this.header = new HeaderComponent(
       this.headerPoint,
       this.drawer,
@@ -40,15 +40,6 @@ export class MainComponent {
   }
 
   render() {
-    return `
-      <aside class="mdc-drawer mdc-drawer--dismissible"></aside>
-      <div class="mdc-drawer-app-content"></div>
-      <main class="main-content" id="main-content">
-        <div class="mdc-top-app-bar--fixed-adjust main-content__wrapper">
-          Your sample content <br /> sample content <br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content<br /> sample content
-        </div>
-      </main>
-      <div class="spotty__player"></div>
-    `;
+    return Main(this.props);
   }
 }

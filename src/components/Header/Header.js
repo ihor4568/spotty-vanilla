@@ -1,5 +1,6 @@
 import { MDCTopAppBar } from "@material/top-app-bar";
 import { SearchComponent } from "../Search/Search";
+import Header from "./Header.html";
 
 export class HeaderComponent {
   constructor(mountPoint, drawer, scroll) {
@@ -37,18 +38,6 @@ export class HeaderComponent {
   }
 
   render() {
-    return `
-      <header class="mdc-top-app-bar app-bar" id="app-bar">
-        <div class="mdc-top-app-bar__row">
-          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-            <a href="#" class="demo-menu material-icons mdc-top-app-bar__navigation-icon">menu</a>
-            <span class="mdc-top-app-bar__title">Spotty</span>
-          </section>
-          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-
-          </section>
-        </div>
-      </header>
-    `;
+    return Header(this.props);
   }
 }
