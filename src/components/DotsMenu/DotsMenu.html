@@ -1,13 +1,15 @@
-<div class="mdc-menu-surface--anchor">
-  <div class="mdc-menu mdc-menu-surface more-menu" tabindex="-1">
-    <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
-      <% items.forEach(item => { %>
-      <li class="mdc-list-item" role="menuitem">
-        <span class="mdc-list-item__text">
-          <%= item %></span>
-      </li>
-      <% }) %>
-    </ul>
+<div class="overflow-menu">
+  <div class="mdc-menu-surface--anchor">
+    <div class="mdc-menu mdc-menu-surface overflow-menu__holder" tabindex="-1">
+      <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
+        <% items.forEach(item => { %>
+        <li class="mdc-list-item mdc-typography--body1" role="menuitem">
+          <span class="mdc-list-item__text">
+            <%= item %></span>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
   </div>
+  <button class="mdc-icon-button material-icons overflow-menu__button">more_vert</button>
 </div>
-<button class="mdc-icon-button material-icons menu-button">more_vert</button>

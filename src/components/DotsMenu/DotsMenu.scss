@@ -3,3 +3,13 @@
 @import "@material/list/mdc-list";
 @import "@material/menu-surface/mdc-menu-surface";
 @import "@material/menu/mdc-menu";
+@import "@material/typography/mdc-typography";
+
+.mdc-icon-button {
+  @include mdc-icon-button-size(70px, 70px, 0);
+  font-size: 40px;
+}
+
+.mdc-menu {
+  min-width: 250px;
+}
