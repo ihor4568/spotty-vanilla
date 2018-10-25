@@ -1,0 +1,39 @@
+@import "@material/card/mdc-card";
+@import "@material/typography/mdc-typography";
+@import "@material/button/mdc-button";
+
+.share {
+  display: grid;
+  height: 220px;
+  grid-template-columns: 220px auto;
+  justify-content: center;
+  margin-top: 10px;
+
+  &__card {
+    grid-row-start: span 4;
+  }
+
+  &__image {
+    background: url("./img/Genius.jpg") center/cover no-repeat;
+  }
+
+  &__text {
+    margin: 0 10px;
+    line-height: 20px;
+
+    &-song-name {
+      grid-column-start: 2;
+      grid-row-start: 1;
+    }
+
+    &-album {
+      grid-column-start: 2;
+      grid-row-start: 2;
+    }
+
+    &-artist {
+      grid-column-start: 2;
+      grid-row-start: 3;
+    }
+  }
+}
