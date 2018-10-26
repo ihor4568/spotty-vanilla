@@ -1,5 +1,5 @@
 import { AlbumListItemComponent } from "../AlbumListItemComponent/AlbumListItemComponent";
-import AlbumList from "./AlbumList.html";
+import albumListTemplate from "./AlbumList.html";
 
 export class AlbumListComponent {
   constructor(mountPoint) {
@@ -22,6 +22,6 @@ export class AlbumListComponent {
   }
 
   render() {
-    return AlbumList();
+    return albumListTemplate();
   }
 }
