@@ -1,0 +1,35 @@
+@import "@material/typography/mdc-typography";
+
+.about {
+  max-width: 45rem;
+  &__text {
+    color: #5f6368;
+  }
+  &__subtitle {
+    font-weight: 600;
+    color: #5f6368;
+  }
+  &__links {
+    margin: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__link {
+    margin-bottom: 30px;
+    display: flex;
+    width: 180px;
+    color: #6200ee;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+  }
+  &__img {
+    margin-bottom: 15px;
+    width: 3.6rem;
+    height: 3.6rem;
+    font-size: 2rem;
+  }
+  &__copyright {
+    color: #5f6368;
+  }
+}
