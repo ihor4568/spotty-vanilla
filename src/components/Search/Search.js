@@ -7,9 +7,7 @@ export class SearchComponent {
   }
 
   initMaterial() {
-    this.textField = new MDCTextField(
-      document.querySelector(".search__wrapper")
-    );
+    this.textField = new MDCTextField(document.querySelector(".search"));
   }
 
   mount() {

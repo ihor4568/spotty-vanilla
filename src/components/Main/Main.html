@@ -1,32 +1,34 @@
-<aside class="sidebar mdc-drawer mdc-drawer--dismissible">
-  <div class="mdc-drawer__content">
-    <div class="mdc-list">
-      <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
-        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">library_music</i>
-        <span class="mdc-list-item__text mdc-typography--headline4">My Songs</span>
-      </a>
-      <a class="mdc-list-item" href="#">
-        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">album</i>
-        <span class="mdc-list-item__text mdc-typography--headline4">Albums</span>
-      </a>
-      <a class="mdc-list-item" href="#">
-        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">person_outline</i>
-        <span class="mdc-list-item__text mdc-typography--headline4">Artists</span>
-      </a>
-      <a class="mdc-list-item" href="#">
-        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
-        <span class="mdc-list-item__text mdc-typography--headline4">About</span>
-      </a>
+<div class="main">
+  <aside class="main__sidebar mdc-drawer mdc-drawer--dismissible">
+    <div class="mdc-drawer__content">
+      <div class="mdc-list">
+        <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">library_music</i>
+          <span class="mdc-list-item__text mdc-typography--headline4">My Songs</span>
+        </a>
+        <a class="mdc-list-item" href="#">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">album</i>
+          <span class="mdc-list-item__text mdc-typography--headline4">Albums</span>
+        </a>
+        <a class="mdc-list-item" href="#">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">person_outline</i>
+          <span class="mdc-list-item__text mdc-typography--headline4">Artists</span>
+        </a>
+        <a class="mdc-list-item" href="#">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+          <span class="mdc-list-item__text mdc-typography--headline4">About</span>
+        </a>
+      </div>
     </div>
+  </aside>
+  <div class="main__wrapper mdc-drawer-app-content">
+    <header class="main__header mdc-top-app-bar app-bar" id="app-bar"></header>
+    <main class="main__section main-content" id="main-content">
+      <div class="main__section-wrapper mdc-top-app-bar--fixed-adjust">
+        <h5 class="mdc-typography--headline3">Albums</h5>
+      </div>
+    </main>
   </div>
-</aside>
-<div class="sidebar__wrapper mdc-drawer-app-content">
-  <header class="header mdc-top-app-bar app-bar" id="app-bar"></header>
-  <main class="main main-content container" id="main-content">
-    <div class="header__wrapper mdc-top-app-bar--fixed-adjust">
-      <h5 class="mdc-typography--headline3">Albums</h5>
-    </div>
-  </main>
+  <div class="main__search"></div>
+  <div class="main__player"></div>
 </div>
-<div class="search"></div>
-<div class="player"></div>

@@ -1,4 +1,4 @@
-import Player from "./Player.html";
+import playerTemplate from "./Player.html";
 
 export class PlayerComponent {
   constructor(mountPoint) {
@@ -10,6 +10,6 @@ export class PlayerComponent {
   }
 
   render() {
-    return Player();
+    return playerTemplate();
   }
 }

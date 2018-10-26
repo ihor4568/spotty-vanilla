@@ -1,7 +1,6 @@
-.header__title {
-  font-size: 2.5rem;
-  line-height: 3rem;
-}
-.sidebar__wrapper {
-  z-index: 1;
+.header {
+  &__title {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
 }

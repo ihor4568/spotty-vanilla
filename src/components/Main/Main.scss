@@ -1,16 +1,19 @@
-.sidebar {
-  z-index: 2;
-}
-
-.header__wrapper {
-  padding: 5rem 1rem 12rem 1rem;
-  z-index: 1;
-}
-
-.container {
-  height: 100%;
-  max-width: 100rem;
-  overflow: hidden;
-  box-sizing: border-box;
-  margin: 0 auto;
+.main {
+  &__sidebar {
+    z-index: 2;
+  }
+  &__wrapper {
+    z-index: 1;
+  }
+  &__section {
+    height: 100%;
+    max-width: 100rem;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin: 0 auto;
+    &-wrapper {
+      padding: 5rem 1rem 12rem 1rem;
+      z-index: 1;
+    }
+  }
 }

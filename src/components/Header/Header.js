@@ -4,24 +4,21 @@ import headerTemplate from "./Header.html";
 export class HeaderComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
-    this.openFunction = props.openFunction;
-    this.scrollTarget = props.scrollTarget;
+    this.props = props;
   }
 
   initMaterial() {
-    this.topAppBar = MDCTopAppBar.attachTo(document.querySelector(".header"));
+    this.topAppBar = MDCTopAppBar.attachTo(
+      document.querySelector(".main__header")
+    );
   }
 
   querySelectors() {
-    this.topAppBar.setScrollTarget(this.scrollTarget);
+    this.topAppBar.setScrollTarget(this.props.scrollTarget);
   }
 
   addEventListeners() {
-    this.topAppBar.listen("MDCTopAppBar:nav", this.onOpen.bind(this));
-  }
-
-  onOpen(e) {
-    this.openFunction();
+    this.topAppBar.listen("MDCTopAppBar:nav", this.props.onOpen);
   }
 
   mount() {

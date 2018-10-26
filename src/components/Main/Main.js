@@ -11,28 +11,32 @@ export class MainComponent {
     this.props = props;
   }
 
+  initMaterial() {
+    this.drawer = MDCDrawer.attachTo(document.querySelector(".main__sidebar"));
+  }
+
   querySelectors() {
-    this.scrollTarget = document.querySelector(".main");
-    this.drawer = MDCDrawer.attachTo(document.querySelector(".sidebar"));
-    this.headerPoint = document.querySelector(".header");
-    this.playerPoint = document.querySelector(".player");
-    this.searchPoint = this.mountPoint.querySelector(".search");
+    this.mountPoint = document.querySelector(".main__sidebar");
+    this.headerPoint = document.querySelector(".main__header");
+    this.playerPoint = document.querySelector(".main__player");
+    this.searchPoint = document.querySelector(".main__search");
   }
 
   mount() {
     this.mountPoint.innerHTML = this.render();
+    this.initMaterial();
     this.querySelectors();
     this.mountChildren();
   }
 
-  onOpen() {
+  handleOpen() {
     this.drawer.open = !this.drawer.open;
   }
 
   mountChildren() {
     this.header = new HeaderComponent(this.headerPoint, {
-      openFunction: this.onOpen.bind(this),
-      scrollTarget: this.scrollTarget
+      onOpen: this.handleOpen.bind(this),
+      scrollTarget: this.mountPoint
     });
     this.header.mount();
 
