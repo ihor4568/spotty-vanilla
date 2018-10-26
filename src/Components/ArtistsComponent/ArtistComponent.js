@@ -1,13 +1,13 @@
 import { MDCRipple } from "@material/ripple";
-import artistComponent from "./ArtistComponent.html";
+import artistComponentTemplate from "./ArtistComponent.html";
 
 export class ArtistComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
   }
 
-  materialJavaScript() {
-    const cardRipple = this.mountPoint.querySelectorAll(".mdc-ripple");
+  initMaterial() {
+    const cardRipple = this.mountPoint.querySelectorAll(".artist_ripple");
     Array.from(cardRipple).forEach(item => {
       new MDCRipple(item);
     });
@@ -15,10 +15,10 @@ export class ArtistComponent {
 
   mount() {
     this.mountPoint.innerHTML = this.render();
-    this.materialJavaScript();
+    this.initMaterial();
   }
 
   render() {
-    return artistComponent();
+    return artistComponentTemplate();
   }
 }
