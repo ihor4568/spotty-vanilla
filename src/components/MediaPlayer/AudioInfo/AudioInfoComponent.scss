@@ -1,0 +1,26 @@
+.mediaPlayer {
+  background-color: #fefefe;
+  &__audioInfo {
+    display: flex;
+    margin-top: 1rem;
+  }
+}
+.audioInfo {
+  &__image {
+    width: 10rem;
+    height: 10rem;
+  }
+  &__text {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2.5rem;
+  }
+  &__songName {
+    font-size: 1.7rem;
+  }
+  &__albumArtistName {
+    margin-top: 1.5rem;
+    font-size: 1.7rem;
+  }
+}

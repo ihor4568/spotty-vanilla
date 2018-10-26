@@ -1,0 +1,27 @@
+@import "@material/linear-progress/mdc-linear-progress";
+@import "@material/fab/mdc-fab";
+@import "@material/typography/mdc-typography";
+@import "./Buttons/ButtonsComponent";
+@import "./ProgressBar/ProgressBarComponent";
+@import "./VolumeBar/VolumeBarComponent";
+@import "./AudioInfo/AudioInfoComponent";
+@import "./Rating/RatingComponent";
+
+.mediaPlayer {
+  max-width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  &__mainControl {
+    display: flex;
+    flex-basis: 50%;
+    justify-content: center;
+  }
+  &__audioInfo {
+    flex-basis: 22%;
+  }
+  &__audioRating {
+    flex-basis: 20%;
+  }
+}

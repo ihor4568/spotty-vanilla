@@ -1,0 +1,26 @@
+.mediaPlayer {
+  &__volumeBar {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    margin-left: 5rem;
+  }
+}
+
+.mdc-linear-progress {
+  &_volume {
+    width: 9rem;
+    margin: 0;
+  }
+  &__primary-bar_volume {
+    transform: none;
+    width: 0;
+    height: 0.5rem;
+  }
+}
+
+.volume__icon {
+  cursor: pointer;
+  margin-right: 1rem;
+  margin-bottom: 0.2rem;
+}

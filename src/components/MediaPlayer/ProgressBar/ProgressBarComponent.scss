@@ -1,0 +1,35 @@
+.mediaPlayer {
+  &__progressBar {
+    flex-basis: 100%;
+  }
+}
+.mdc-linear-progress {
+  height: 1.2rem;
+  padding-top: 0.5rem;
+  width: 80%;
+  margin: 1.5rem auto 0;
+  overflow: visible;
+  &__buffer {
+    height: 0.5rem;
+  }
+  &__bar {
+    &-inner {
+      border-radius: 5rem;
+      height: 0.5rem;
+    }
+  }
+  &__primary-bar {
+    transform: none;
+    width: 0;
+    height: 0.5rem;
+  }
+  &__circle {
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: #6200ee;
+    transform: translateX(calc(-15px / 2)) translateY(calc(-10px / 2));
+    cursor: pointer;
+  }
+}

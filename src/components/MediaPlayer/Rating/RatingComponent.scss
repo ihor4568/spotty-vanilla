@@ -1,0 +1,16 @@
+.audioRating {
+  margin-right: auto;
+  &__stars {
+    user-select: none;
+  }
+  &__star {
+    color: #a3a3a3;
+    cursor: pointer;
+    &:hover {
+      color: orange;
+    }
+    &_selected {
+      color: orange;
+    }
+  }
+}
