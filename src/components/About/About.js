@@ -1,4 +1,4 @@
-import aboutTpl from "./About.html";
+import aboutTemplate from "./About.html";
 
 export class About {
   constructor(mountPoint) {
@@ -10,6 +10,6 @@ export class About {
   }
 
   render() {
-    return aboutTpl();
+    return aboutTemplate();
   }
 }
