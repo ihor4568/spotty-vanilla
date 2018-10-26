@@ -8,10 +8,8 @@ export class AlbumListItemComponent {
 
   initMaterialCard() {
     const cardRipple = document.querySelectorAll(".mdc-card__primary-action");
-    console.log(cardRipple);
     Array.from(cardRipple).forEach(el => {
       new MDCRipple(el);
-      console.log(el);
     });
   }
 
