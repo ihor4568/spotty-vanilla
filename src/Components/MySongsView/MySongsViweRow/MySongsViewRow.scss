@@ -1,0 +1,54 @@
+.mySongsTable__td {
+  height: 48px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  font-weight: 500;
+  padding: 2px 18px;
+  box-sizing: border-box;
+  &_playBtn {
+    background: transparent;
+    background-image: url("./img/playButtonIcon.png");
+    background-size: cover;
+    background-position: center;
+    display: inline-block;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.5s;
+    &:hover {
+      height: 32px;
+    }
+  }
+
+  &_cover {
+    text-align: left;
+    padding: 2px 2px;
+  }
+
+  &_coverImg {
+    width: 50px;
+  }
+
+  &_name {
+    text-align: left;
+    padding: 2px 2px;
+    min-width: 250px;
+  }
+  &_duration {
+    text-align: right;
+    padding: 2px 5px;
+  }
+  &_artist {
+    text-align: left;
+    padding-left: 5px;
+    min-width: 150px;
+  }
+
+  &_album {
+    text-align: left;
+    padding: 2px 2px;
+    min-width: 100px;
+  }
+}
