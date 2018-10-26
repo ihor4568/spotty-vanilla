@@ -1,18 +1,22 @@
-@import "@material/textfield/mdc-text-field";
-
-.mdc-text-field {
+.search__wrapper {
   @include mdc-text-field-label-color(rgba(128, 128, 128, 0.719));
   @include mdc-text-field-fill-color(white);
-  padding-right: 1rem;
+  padding-right: -5rem;
   border-radius: 2rem;
-  height: 2.5rem;
+  height: 4rem;
+  width: 20rem;
   position: absolute;
-  right: 1.5rem;
-  top: 0.75rem;
+  right: 2rem;
+  top: 1.15rem;
   z-index: 2;
   position: fixed;
 }
 
-.mdc-text-field__icon {
-  height: 1rem;
+.search__input {
+  font-size: 2rem;
+}
+
+.search__icon {
+  height: 2rem;
+  font-size: 3rem;
 }

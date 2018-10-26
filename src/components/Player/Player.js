@@ -1,3 +1,5 @@
+import Player from "./Player.html";
+
 export class PlayerComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
@@ -8,10 +10,6 @@ export class PlayerComponent {
   }
 
   render() {
-    return `
-      <div class="mdc-typography--headline5">
-        Player
-      </div>
-    `;
+    return Player();
   }
 }

@@ -1,33 +1,37 @@
 import { MDCTopAppBar } from "@material/top-app-bar";
-import Header from "./Header.html";
+import headerTemplate from "./Header.html";
 
 export class HeaderComponent {
-  constructor(mountPoint, drawer, scroll) {
+  constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
-    this.drawer = drawer;
-    this.scroll = scroll;
+    this.openFunction = props.openFunction;
+    this.scrollTarget = props.scrollTarget;
+  }
+
+  initMaterial() {
+    this.topAppBar = MDCTopAppBar.attachTo(document.querySelector(".header"));
   }
 
   querySelectors() {
-    this.topAppBar = MDCTopAppBar.attachTo(document.getElementById("app-bar"));
-    this.topAppBar.setScrollTarget(this.scroll);
+    this.topAppBar.setScrollTarget(this.scrollTarget);
   }
 
   addEventListeners() {
-    this.topAppBar.listen("MDCTopAppBar:nav", this.handleOpening.bind(this));
+    this.topAppBar.listen("MDCTopAppBar:nav", this.onOpen.bind(this));
   }
 
-  handleOpening() {
-    this.drawer.open = !this.drawer.open;
+  onOpen(e) {
+    this.openFunction();
   }
 
   mount() {
     this.mountPoint.innerHTML = this.render();
+    this.initMaterial();
     this.querySelectors();
     this.addEventListeners();
   }
 
   render() {
-    return Header();
+    return headerTemplate();
   }
 }

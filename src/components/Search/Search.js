@@ -1,27 +1,23 @@
 import { MDCTextField } from "@material/textfield";
+import searchTemplate from "./Search.html";
 
 export class SearchComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
   }
 
-  querySelectors() {
+  initMaterial() {
     this.textField = new MDCTextField(
-      document.querySelector(".mdc-text-field")
+      document.querySelector(".search__wrapper")
     );
   }
 
   mount() {
     this.mountPoint.innerHTML = this.render();
-    this.querySelectors();
+    this.initMaterial();
   }
 
   render() {
-    return `
-      <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon">
-        <i class="material-icons mdc-text-field__icon">search</i>
-        <input type="text" id="tf-outlined" placeholder="Search..." class="mdc-text-field__input">
-      </div>
-    `;
+    return searchTemplate();
   }
 }
