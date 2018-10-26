@@ -8,9 +8,7 @@ export class HeaderComponent {
   }
 
   initMaterial() {
-    this.topAppBar = MDCTopAppBar.attachTo(
-      document.querySelector(".main__header")
-    );
+    this.topAppBar = MDCTopAppBar.attachTo(this.mountPoint);
   }
 
   querySelectors() {

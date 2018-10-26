@@ -11,21 +11,23 @@ export class MainComponent {
     this.props = props;
   }
 
-  initMaterial() {
-    this.drawer = MDCDrawer.attachTo(document.querySelector(".main__sidebar"));
+  querySelectors() {
+    this.scrollTarget = this.mountPoint.querySelector(".main__sidebar");
+    this.headerPoint = this.mountPoint.querySelector(".main__header");
+    this.playerPoint = this.mountPoint.querySelector(".main__player");
+    this.searchPoint = this.mountPoint.querySelector(".main__search");
   }
 
-  querySelectors() {
-    this.mountPoint = document.querySelector(".main__sidebar");
-    this.headerPoint = document.querySelector(".main__header");
-    this.playerPoint = document.querySelector(".main__player");
-    this.searchPoint = document.querySelector(".main__search");
+  initMaterial() {
+    this.drawer = MDCDrawer.attachTo(
+      this.mountPoint.querySelector(".main__sidebar")
+    );
   }
 
   mount() {
     this.mountPoint.innerHTML = this.render();
-    this.initMaterial();
     this.querySelectors();
+    this.initMaterial();
     this.mountChildren();
   }
 
@@ -36,7 +38,7 @@ export class MainComponent {
   mountChildren() {
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
-      scrollTarget: this.mountPoint
+      scrollTarget: this.scrollTarget
     });
     this.header.mount();
 

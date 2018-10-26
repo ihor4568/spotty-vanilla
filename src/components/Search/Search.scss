@@ -1,15 +1,9 @@
 .search {
-  @include mdc-text-field-label-color(rgba(128, 128, 128, 0.719));
+  @include mdc-text-field-label-color(#c0c0c0);
   @include mdc-text-field-fill-color(white);
-  padding-right: -5rem;
   border-radius: 2rem;
   height: 4rem;
   width: 20rem;
-  position: absolute;
-  right: 2rem;
-  top: 1.2rem;
-  z-index: 1;
-  position: fixed;
   &__input {
     font-size: 2rem;
   }
