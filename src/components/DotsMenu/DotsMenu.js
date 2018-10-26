@@ -1,6 +1,6 @@
 import { MDCMenu } from "@material/menu";
 
-import dotsMenuTpl from "./DotsMenu.html";
+import dotsMenuTemplate from "./DotsMenu.html";
 
 export class DotsMenu {
   constructor(mountPoint, props = { items: [] }) {
@@ -13,7 +13,7 @@ export class DotsMenu {
     this.menuButton = this.mountPoint.querySelector(".overflow-menu__button");
   }
 
-  initUIElements() {
+  initMaterial() {
     this.uiMenu = new MDCMenu(this.menu);
   }
 
@@ -31,11 +31,11 @@ export class DotsMenu {
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
-    this.initUIElements();
+    this.initMaterial();
     this.addEventListeners();
   }
 
   render() {
-    return dotsMenuTpl(this.props);
+    return dotsMenuTemplate(this.props);
   }
 }
