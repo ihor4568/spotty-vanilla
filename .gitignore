@@ -13,6 +13,9 @@
 # vscode settings
 .vscode/
 
+# Webstorm IDE settings
+.idea/
+
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
@@ -133,4 +136,3 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/node,linux,macos,windows
 
 dist/
-.idea/

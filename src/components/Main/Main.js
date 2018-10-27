@@ -3,6 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
+import { AlbumListComponent } from "../AlbumsComponents/AlbumListComponent/AlbumListComponent";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -16,6 +17,7 @@ export class MainComponent {
     this.headerPoint = this.mountPoint.querySelector(".main__header");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
+    this.albumsView = this.mountPoint.querySelector(".main__albums");
   }
 
   initMaterial() {
@@ -47,6 +49,9 @@ export class MainComponent {
 
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
+
+    this.albums = new AlbumListComponent(this.albumsView);
+    this.albums.mount();
   }
 
   render() {
