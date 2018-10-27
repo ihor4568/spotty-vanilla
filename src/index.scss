@@ -1,5 +1,15 @@
-@import "components/Page/page";
 @import "@material/card/mdc-card";
 @import "@material/button/mdc-button";
 @import "@material/typography/mdc-typography";
 @import "components/AlbumsComponents/albumsComponent";
+@import "@material/typography/mdc-typography";
+@import "@material/drawer/mdc-drawer";
+@import "@material/list/mdc-list";
+@import "@material/textfield/mdc-text-field";
+@import "@material/top-app-bar/mdc-top-app-bar";
+
+@import "./components/Header/Header";
+@import "./components/Search/Search";
+@import "./components/Main/Main";
+@import "./components/Player/Player";
+@import "./components/Page/Page";
