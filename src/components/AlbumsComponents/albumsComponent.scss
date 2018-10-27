@@ -1,7 +1,7 @@
 .albums {
-  max-width: 140rem;
+  //max-width: 140rem;
   margin: 0 auto;
-  padding: 3rem 0 0 0;
+  padding: 3rem 0.8rem 0 0.8rem;
   display: flex;
   flex-direction: column;
 
@@ -16,7 +16,6 @@
   }
 
   &__card {
-    @include mdc-card-shape-radius(1rem);
     margin-bottom: 4rem;
     width: 36rem;
   }
