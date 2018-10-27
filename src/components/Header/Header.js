@@ -9,9 +9,6 @@ export class HeaderComponent {
 
   initMaterial() {
     this.topAppBar = MDCTopAppBar.attachTo(this.mountPoint);
-  }
-
-  setScroll() {
     this.topAppBar.setScrollTarget(this.props.scrollTarget);
   }
 
@@ -22,7 +19,6 @@ export class HeaderComponent {
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.initMaterial();
-    this.setScroll();
     this.addEventListeners();
   }
 
