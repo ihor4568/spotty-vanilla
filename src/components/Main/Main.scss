@@ -4,10 +4,11 @@
   }
   &__wrapper {
     z-index: 1;
+    margin-bottom: 12rem;
   }
   &__section {
     height: 100%;
-    max-width: 100rem;
+    width: 100%;
     overflow: hidden;
     box-sizing: border-box;
     margin: 0 auto;
@@ -27,5 +28,7 @@
     bottom: 0;
     width: 100%;
     z-index: 3;
+  }
+  &__share-view {
   }
 }

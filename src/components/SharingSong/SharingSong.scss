@@ -1,0 +1,37 @@
+.share-view {
+  margin: 5rem auto 0;
+  width: 36rem;
+
+  &__card {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+  }
+
+  &__text {
+    margin: 0;
+    display: block;
+
+    &-song-name {
+      padding: 2rem 0 1.5rem;
+      font-size: 1.6rem;
+      line-height: 2.8rem;
+    }
+
+    &-album {
+      padding: 3px 0;
+      font-size: 1.4rem;
+      line-height: 2.2rem;
+    }
+
+    &-artist {
+      padding: 3px 0;
+      font-size: 1.2rem;
+      line-height: 2rem;
+    }
+  }
+}
