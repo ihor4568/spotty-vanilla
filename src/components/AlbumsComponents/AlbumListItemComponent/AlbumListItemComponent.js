@@ -7,7 +7,9 @@ export class AlbumListItemComponent {
   }
 
   initMaterialCard() {
-    const cardRipple = document.querySelectorAll(".albums__card-ripple-effect");
+    const cardRipple = this.mountPoint.querySelectorAll(
+      ".albums__card-ripple-effect"
+    );
     Array.from(cardRipple).forEach(el => {
       new MDCRipple(el);
     });
