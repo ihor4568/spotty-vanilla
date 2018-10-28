@@ -1,0 +1,14 @@
+.search {
+  @include mdc-text-field-label-color(#c0c0c0);
+  @include mdc-text-field-fill-color(white);
+  border-radius: 2rem;
+  height: 4rem;
+  width: 20rem;
+  &__input {
+    font-size: 2rem;
+  }
+  &__icon {
+    height: 2rem;
+    font-size: 3rem;
+  }
+}

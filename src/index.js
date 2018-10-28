@@ -1,10 +1,8 @@
 import "./index.scss";
+import { MainComponent } from "./components/Main/Main";
 
 const root = document.getElementById("root");
 
-import { PlayerComponent } from "./components/MediaPlayer/Player";
+const main = new MainComponent(root);
 
-const media = new PlayerComponent(root);
-media.mount();
-
-window.media = media;
+main.mount();
