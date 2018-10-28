@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p",
-    "start": "webpack-dev-server --mode=development"
+    "start": "webpack-dev-server --mode=development",
+    "deploy": "npm run build && firebase deploy",
+    "firebase": "node_modules/.bin/firebase"
   },
   "keywords": [],
   "license": "ISC",
@@ -45,5 +47,8 @@
       "js-beautify -r -s 2",
       "git add"
     ]
+  },
+  "dependencies": {
+    "firebase-tools": "6.0.0"
   }
 }
