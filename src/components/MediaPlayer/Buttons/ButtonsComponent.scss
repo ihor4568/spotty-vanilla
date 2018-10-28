@@ -4,14 +4,14 @@
     align-items: center;
   }
 }
-.mdc-fab {
+.mediaPlayer__button {
   @include mdc-fab-icon-size(50px);
   @include mdc-fab-shape-radius(100%);
   @include mdc-fab-container-color(#6200ee);
   width: 70px;
   height: 70px;
   margin: 0 20px;
-  &--mini {
+  &_navigateButton {
     margin: 0;
     width: 40px;
     height: 30px;

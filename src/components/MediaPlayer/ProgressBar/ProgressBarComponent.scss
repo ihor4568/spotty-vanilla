@@ -1,26 +1,17 @@
-.mediaPlayer {
-  &__progressBar {
-    flex-basis: 100%;
-  }
-}
-.mdc-linear-progress {
-  height: 1.2rem;
+.progressBar {
   padding-top: 0.5rem;
-  width: 80%;
-  margin: 1.5rem auto 0;
   overflow: visible;
+  z-index: 2;
   &__buffer {
     height: 0.5rem;
   }
-  &__bar {
-    &-inner {
-      border-radius: 5rem;
-      height: 0.5rem;
-    }
-  }
-  &__primary-bar {
+  &__played {
     transform: none;
     width: 0;
+    height: 0.5rem;
+  }
+  &__playedRange {
+    border-radius: 5rem;
     height: 0.5rem;
   }
   &__circle {
@@ -31,5 +22,15 @@
     background-color: #6200ee;
     transform: translateX(calc(-15px / 2)) translateY(calc(-10px / 2));
     cursor: pointer;
+    z-index: 2;
+  }
+  &__moveCircle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 1;
+    opacity: 0;
+    background-color: #000;
   }
 }

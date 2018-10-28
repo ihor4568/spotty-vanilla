@@ -8,17 +8,27 @@
 @import "./Rating/RatingComponent";
 
 .mediaPlayer {
-  max-width: 1440px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  background-color: #fefefe;
+  &__progressBar {
+    flex-basis: 100%;
+  }
   &__mainControl {
     display: flex;
     flex-basis: 50%;
     justify-content: center;
   }
+  &__volumeBar {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    margin-left: 5rem;
+  }
   &__audioInfo {
+    display: flex;
     flex-basis: 22%;
   }
   &__audioRating {

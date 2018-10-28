@@ -4,7 +4,7 @@ import { VolumeBarComponent } from "./VolumeBar/VolumeBarComponent";
 import { AudioInfoComponent } from "./AudioInfo/AudioInfoComponent";
 import { RatingComponent } from "./Rating/RatingComponent";
 
-import playerHTML from "./PlayerComponent.html";
+import playerTemplate from "./PlayerComponent.html";
 
 export class PlayerComponent {
   constructor(mountPoint) {
@@ -49,6 +49,6 @@ export class PlayerComponent {
   }
 
   render() {
-    return playerHTML();
+    return playerTemplate();
   }
 }

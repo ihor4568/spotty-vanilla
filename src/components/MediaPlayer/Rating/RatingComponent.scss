@@ -1,16 +1,24 @@
 .audioRating {
-  margin-right: auto;
   &__stars {
-    user-select: none;
+    vertical-align: top;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
   }
   &__star {
-    color: #a3a3a3;
+    padding: 2px;
+    color: orange;
     cursor: pointer;
-    &:hover {
-      color: orange;
-    }
-    &_selected {
-      color: orange;
-    }
+  }
+  &__star:before {
+    content: "\e83a";
+  }
+  &__star:hover:before,
+  &__star.selected:before {
+    content: "\e838";
+  }
+  &__star:hover ~ &__star:before,
+  &__star.selected ~ &__star:before {
+    content: "\e838";
   }
 }

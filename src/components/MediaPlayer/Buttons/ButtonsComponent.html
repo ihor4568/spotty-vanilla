@@ -1,13 +1,13 @@
-<audio id="music" src="<%= src %>"></audio>
+<audio class="mediaPlayer__music" src="<%= src %>"></audio>
 
-<button class="mdc-fab mdc-fab_prevButton mdc-fab--mini" aria-label="Favorite">
+<button class="mdc-fab mdc-fab--mini mediaPlayer__button mediaPlayer__button_navigateButton mediaPlayer__button_prevButton" aria-label="Favorite">
   <span class="mdc-fab__icon material-icons">skip_previous</span>
 </button>
 
-<button class="mdc-fab mdc-fab_playButton pause" aria-label="Favorite" id="pButton">
+<button class="mdc-fab mediaPlayer__button mediaPlayer__button_playButton" aria-label="Favorite" id="pButton">
   <span class="mdc-fab__icon mdc-fab__icon_playBtn material-icons">play_arrow</span>
 </button>
 
-<button class="mdc-fab mdc-fab_nextButton mdc-fab--mini" aria-label="Favorite">
+<button class="mdc-fab mdc-fab--mini mediaPlayer__button mediaPlayer__button_navigateButton mediaPlayer__button_nextButton" aria-label="Favorite">
   <span class="mdc-fab__icon material-icons">skip_next</span>
 </button>

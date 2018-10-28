@@ -1,26 +1,26 @@
-.mediaPlayer {
-  &__volumeBar {
-    user-select: none;
-    display: flex;
-    align-items: center;
-    margin-left: 5rem;
+.volumeBar {
+  width: 9rem;
+  margin: 0;
+  overflow: visible;
+  &__icon {
+    cursor: pointer;
+    margin-right: 1rem;
+    margin-bottom: 0.2rem;
+    color: #838383;
+    font-size: 2.9rem;
   }
-}
-
-.mdc-linear-progress {
-  &_volume {
-    width: 9rem;
-    margin: 0;
-  }
-  &__primary-bar_volume {
+  &__volume {
     transform: none;
     width: 0;
     height: 0.5rem;
   }
-}
-
-.volume__icon {
-  cursor: pointer;
-  margin-right: 1rem;
-  margin-bottom: 0.2rem;
+  &__circle {
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: #6200ee;
+    transform: translateX(calc(-15px / 2)) translateY(calc(-10px / 2));
+    cursor: pointer;
+  }
 }

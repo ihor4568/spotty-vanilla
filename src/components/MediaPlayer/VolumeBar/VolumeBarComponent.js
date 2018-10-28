@@ -1,4 +1,4 @@
-import VolumeBarHTML from "./VolumeBarComponent.html";
+import VolumeBarTemplate from "./VolumeBarComponent.html";
 
 export class VolumeBarComponent {
   constructor(mountPoint) {
@@ -7,27 +7,21 @@ export class VolumeBarComponent {
   }
 
   querySelectors() {
-    this.audio = document.getElementById("music");
-    this.progressBar = this.mountPoint.querySelector(
-      ".mdc-linear-progress__primary-bar_volume"
-    );
-    this.progressBarMain = this.mountPoint.querySelector(
-      ".mdc-linear-progress_volume"
-    );
-    this.progressBarCircle = this.mountPoint.querySelector(
-      ".mdc-linear-progress__circle_volume"
-    );
-    this.volumeIcon = this.mountPoint.querySelector(".volume__icon");
+    this.audio = document.querySelector(".mediaPlayer__music");
+    this.volumeBar = this.mountPoint.querySelector(".volumeBar__volume");
+    this.volumeBarContainer = this.mountPoint.querySelector(".volumeBar");
+    this.volumeBarCircle = this.mountPoint.querySelector(".volumeBar__circle");
+    this.volumeIcon = this.mountPoint.querySelector(".volumeBar__icon");
   }
 
   parameters() {
     this.audio.volume = this.volumeDefault;
-    this.progressBar.style.width = `${this.audio.volume * 100}%`;
-    this.progressBarCircle.style.left = `100%`;
+    this.volumeBar.style.width = `${this.audio.volume * 100}%`;
+    this.volumeBarCircle.style.left = `100%`;
 
     this.volumeUpdate = () => {
-      this.progressBar.style.width = `${this.audio.volume * 100}%`;
-      this.progressBarCircle.style.left = `100%`;
+      this.volumeBar.style.width = `${this.audio.volume * 100}%`;
+      this.volumeBarCircle.style.left = `100%`;
       this.audio.muted = false;
       this.toggleVolume();
     };
@@ -35,12 +29,13 @@ export class VolumeBarComponent {
     this.moveVolume = e => {
       let a = e.target;
       if (
-        a !== this.progressBarCircle &&
-        e.offsetX / this.progressBarMain.clientWidth < 1
+        a !== this.volumeBarCircle &&
+        e.offsetX / this.volumeBarContainer.clientWidth < 1
       ) {
-        this.audio.volume = `${e.offsetX / this.progressBarMain.clientWidth}`;
-        this.progressBar.style.width = `${this.audio.volume * 100}%`;
-        this.progressBarCircle.style.left = `100%`;
+        this.audio.volume = `${e.offsetX /
+          this.volumeBarContainer.clientWidth}`;
+        this.volumeBar.style.width = `${this.audio.volume * 100}%`;
+        this.volumeBarCircle.style.left = `100%`;
         this.audio.muted = false;
         this.toggleVolume();
       }
@@ -60,23 +55,27 @@ export class VolumeBarComponent {
   }
 
   addEventListeners() {
-    this.progressBarMain.addEventListener("click", this.moveVolume);
+    this.volumeBarContainer.addEventListener("click", this.moveVolume);
 
-    this.progressBarCircle.addEventListener("mousedown", () => {
-      this.progressBarMain.addEventListener("mousemove", this.moveVolume);
+    this.volumeBarContainer.addEventListener("mousedown", () => {
+      this.volumeBarContainer.addEventListener("mousemove", this.moveVolume);
     });
 
-    window.addEventListener("mouseup", () => {
-      this.progressBarMain.removeEventListener("mousemove", this.moveVolume);
+    this.volumeBarCircle.addEventListener("mousedown", () => {
+      this.volumeBarContainer.addEventListener("mousemove", this.moveVolume);
+    });
+
+    document.addEventListener("mouseup", () => {
+      this.volumeBarContainer.removeEventListener("mousemove", this.moveVolume);
     });
 
     this.volumeIcon.addEventListener("click", () => {
       if (this.audio.muted) {
-        this.progressBar.style.width = `${this.audio.volume * 100}%`;
+        this.volumeBar.style.width = `${this.audio.volume * 100}%`;
         this.audio.muted = false;
       } else {
         this.audio.muted = true;
-        this.progressBar.style.width = 0;
+        this.volumeBar.style.width = 0;
       }
       this.toggleVolume();
     });
@@ -91,6 +90,6 @@ export class VolumeBarComponent {
   }
 
   render() {
-    return VolumeBarHTML();
+    return VolumeBarTemplate();
   }
 }

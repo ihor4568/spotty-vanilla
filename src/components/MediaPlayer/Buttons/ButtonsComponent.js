@@ -1,5 +1,5 @@
 import { MDCRipple } from "@material/ripple";
-import buttonsComponentHTML from "./ButtonsComponent.html";
+import buttonsComponentTemplate from "./ButtonsComponent.html";
 import db from "../tempDB.json";
 
 export class ButtonsComponent {
@@ -10,13 +10,19 @@ export class ButtonsComponent {
   }
 
   querySelectors() {
-    this.playButton = this.mountPoint.querySelector(".mdc-fab_playButton");
-    this.prevButton = this.mountPoint.querySelector(".mdc-fab_prevButton");
-    this.nextButton = this.mountPoint.querySelector(".mdc-fab_nextButton");
-    this.audio = document.getElementById("music");
+    this.playButton = this.mountPoint.querySelector(
+      ".mediaPlayer__button_playButton"
+    );
+    this.prevButton = this.mountPoint.querySelector(
+      ".mediaPlayer__button_prevButton"
+    );
+    this.nextButton = this.mountPoint.querySelector(
+      ".mediaPlayer__button_nextButton"
+    );
+    this.audio = this.mountPoint.querySelector(".mediaPlayer__music");
   }
 
-  animateTouch(button) {
+  initMaterial(button) {
     this.fabRipple = new MDCRipple(button);
   }
 
@@ -34,16 +40,16 @@ export class ButtonsComponent {
 
   addEventListeners() {
     this.playButton.addEventListener("click", () => {
-      this.animateTouch(this.playButton);
+      this.initMaterial(this.playButton);
       this.togglePlay();
     });
 
     this.prevButton.addEventListener("click", () => {
-      this.animateTouch(this.prevButton);
+      this.initMaterial(this.prevButton);
     });
 
     this.nextButton.addEventListener("click", () => {
-      this.animateTouch(this.nextButton);
+      this.initMaterial(this.nextButton);
     });
   }
 
@@ -54,6 +60,6 @@ export class ButtonsComponent {
   }
 
   render() {
-    return buttonsComponentHTML({ src: db.songs[0].src });
+    return buttonsComponentTemplate({ src: db.songs[0].src });
   }
 }
