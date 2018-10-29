@@ -13,6 +13,9 @@
 # vscode settings
 .vscode/
 
+# firebase hosting cache folder
+.firebase/
+
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
