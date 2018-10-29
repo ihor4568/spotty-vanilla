@@ -17,7 +17,8 @@ export class MainComponent {
     this.headerPoint = this.mountPoint.querySelector(".main__header");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
-    this.artistView = this.mountPoint.querySelector(".main__artist");
+    this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
+    this.artistsLink = this.mountPoint.querySelector(".main__artists");
   }
 
   initMaterial() {
@@ -26,11 +27,24 @@ export class MainComponent {
     );
   }
 
+  addEventListeners() {
+    this.artistsLink.addEventListener(
+      "click",
+      this.handleArtistsView.bind(this)
+    );
+  }
+
+  handleArtistsView() {
+    this.artist = new ArtistComponent(this.mainPoint);
+    this.artist.mount();
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
     this.mountChildren();
+    this.addEventListeners();
   }
 
   handleOpen() {
@@ -49,9 +63,6 @@ export class MainComponent {
 
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
-
-    this.artist = new ArtistComponent(this.artistView);
-    this.artist.mount();
   }
 
   render() {
