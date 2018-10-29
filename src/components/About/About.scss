@@ -1,13 +1,15 @@
 .about {
-  max-width: 45rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &__text {
     color: #5f6368;
   }
   &__subtitle {
-    font-weight: 600;
     color: #5f6368;
   }
   &__links {
+    max-width: 45rem;
     margin: 50px 0;
     display: flex;
     flex-wrap: wrap;
