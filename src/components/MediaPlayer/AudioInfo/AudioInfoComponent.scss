@@ -1,4 +1,7 @@
 .audioInfo {
+  &__imageContainer {
+    line-height: 0;
+  }
   &__image {
     width: 10rem;
     height: 10rem;

@@ -27,7 +27,6 @@ export class RatingComponent {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.addEventListeners();
-    console.log(this.audioRating);
   }
 
   render() {
