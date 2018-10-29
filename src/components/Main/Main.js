@@ -3,6 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
+import { About } from "../About/About";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -16,6 +17,8 @@ export class MainComponent {
     this.headerPoint = this.mountPoint.querySelector(".main__header");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
+    this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
+    this.aboutLink = this.mountPoint.querySelector(".main__about-link");
   }
 
   initMaterial() {
@@ -24,11 +27,25 @@ export class MainComponent {
     );
   }
 
+  addEventListeners() {
+    this.aboutLink.addEventListener(
+      "click",
+      this.handleAboutLinkClick.bind(this)
+    );
+  }
+
+  handleAboutLinkClick(e) {
+    e.preventDefault();
+    this.activeView = new About(this.mainPoint);
+    this.activeView.mount();
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
     this.mountChildren();
+    this.addEventListeners();
   }
 
   handleOpen() {
