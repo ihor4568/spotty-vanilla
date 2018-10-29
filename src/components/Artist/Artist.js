@@ -1,5 +1,5 @@
 import { MDCRipple } from "@material/ripple";
-import artistComponentTemplate from "./ArtistComponent.html";
+import artistComponentTemplate from "./Artist.html";
 
 export class ArtistComponent {
   constructor(mountPoint) {
