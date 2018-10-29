@@ -1,7 +1,16 @@
+@import "@material/typography/mdc-typography";
+@import "@material/drawer/mdc-drawer";
+@import "@material/list/mdc-list";
+@import "@material/textfield/mdc-text-field";
+@import "@material/top-app-bar/mdc-top-app-bar";
 @import "@material/icon-button/mdc-icon-button";
 @import "@material/list/mdc-list";
 @import "@material/menu-surface/mdc-menu-surface";
 @import "@material/menu/mdc-menu";
-@import "@material/typography/mdc-typography";
 
+@import "./components/Header/Header";
+@import "./components/Search/Search";
+@import "./components/Main/Main";
+@import "./components/Player/Player";
+@import "./components/Page/Page";
 @import "./components/DotsMenu/DotsMenu";
