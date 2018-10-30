@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production webpack -p",
     "start": "webpack-dev-server --mode=development",
     "deploy": "npm run build && firebase deploy",
-    "firebase": "node_modules/.bin/firebase"
+    "firebase": "firebase"
   },
   "keywords": [],
   "license": "ISC",
