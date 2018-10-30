@@ -3,7 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-import { About } from "../About/About";
+import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -34,7 +34,7 @@ export class MainComponent {
   handleListClick(e) {
     e.preventDefault();
     if (e.target.closest(".main__about-link")) {
-      this.activeView = new About(this.mainPoint);
+      this.activeView = new AboutComponent(this.mainPoint);
       this.activeView.mount();
     }
   }

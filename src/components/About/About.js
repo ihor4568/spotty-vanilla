@@ -1,6 +1,6 @@
 import aboutTemplate from "./About.html";
 
-export class About {
+export class AboutComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
   }
