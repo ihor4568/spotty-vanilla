@@ -1,11 +1,15 @@
 import { MDCRipple } from "@material/ripple";
-import albumListItemTemplate from "./AlbumCard.html";
+import albumCardTemplate from "./AlbumCard.html";
 
 export class AlbumCard {
   constructor(
     mountPoint,
     props = {
-      album: {}
+      album: {
+        albumName: "",
+        albumArtist: "",
+        sourceImage: ""
+      }
     }
   ) {
     this.mountPoint = mountPoint;
@@ -21,18 +25,21 @@ export class AlbumCard {
     });
   }
 
+  setAlbumsDescriptions() {
+    this.props = {
+      albumName: this.props.album.albumName,
+      artistName: this.props.album.artistName,
+      sourceImage: this.props.album.sourceImage
+    };
+  }
+
   mount() {
     this.mountPoint.innerHTML += this.render();
     this.initMaterial();
   }
 
   render() {
-    return albumListItemTemplate(
-      (this.props = {
-        albumName: this.props.albumName,
-        artistName: this.props.artistName,
-        sourceImage: this.props.sourceImage
-      })
-    );
+    this.setAlbumsDescriptions();
+    return albumCardTemplate(this.props);
   }
 }

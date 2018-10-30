@@ -2,8 +2,9 @@ import { AlbumCard } from "../AlbumCard/AlbumCard";
 import albumListTemplate from "./AlbumList.html";
 
 export class AlbumList {
-  constructor(mountPoint) {
+  constructor(mountPoint, props = []) {
     this.mountPoint = mountPoint;
+    this.props = props;
   }
 
   querySelectors() {
@@ -78,7 +79,7 @@ export class AlbumList {
       }
     ];
     albums.forEach(album => {
-      this.albumItem = new AlbumCard(this.albumsList, album);
+      this.albumItem = new AlbumCard(this.albumsList, { album });
       this.albumItem.mount();
     });
   }
