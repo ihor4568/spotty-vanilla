@@ -1,13 +1,14 @@
 .main {
   &__sidebar {
     z-index: 2;
+    position: fixed;
   }
   &__wrapper {
     z-index: 1;
   }
   &__section {
     height: 100%;
-    max-width: 100rem;
+    max-width: 80rem;
     overflow: hidden;
     box-sizing: border-box;
     margin: 0 auto;
@@ -18,8 +19,8 @@
   }
   &__search {
     position: fixed;
-    right: 2rem;
-    top: 1.2rem;
+    right: 1.8rem;
+    top: 0.72rem;
     z-index: 1;
   }
   &__player {
