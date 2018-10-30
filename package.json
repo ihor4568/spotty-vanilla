@@ -56,9 +56,5 @@
       "js-beautify -r -s 2",
       "git add"
     ]
-  },
-  "dependencies": {
-    "@material/icon-button": "^0.40.1",
-    "@material/menu": "^0.40.1"
   }
 }
