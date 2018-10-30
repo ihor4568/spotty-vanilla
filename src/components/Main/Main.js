@@ -4,6 +4,7 @@ import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
 import { AlbumList } from "../Albums/AlbumList/AlbumList";
+import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -18,7 +19,7 @@ export class MainComponent {
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
-    this.albumsLink = this.mountPoint.querySelector(".main__albums-link");
+    this.sidebarList = this.mountPoint.querySelector(".main__list");
   }
 
   initMaterial() {
@@ -28,15 +29,17 @@ export class MainComponent {
   }
 
   addEventListeners() {
-    this.albumsLink.addEventListener(
-      "click",
-      this.handleAlbumsLinkClick.bind(this)
-    );
+    this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
   }
 
-  handleAlbumsLinkClick() {
-    this.albums = new AlbumList(this.mainPoint);
-    this.albums.mount();
+  handleListClick(e) {
+    e.preventDefault();
+    if (e.target.closest(".main__about-link")) {
+      this.about.mount();
+    }
+    if (e.target.closest(".main__albums-link")) {
+      this.albums.mount();
+    }
   }
 
   mount() {
@@ -63,6 +66,10 @@ export class MainComponent {
 
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
+
+    this.about = new AboutComponent(this.mainPoint);
+
+    this.albums = new AlbumList(this.mainPoint);
   }
 
   render() {
