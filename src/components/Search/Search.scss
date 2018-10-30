@@ -3,12 +3,8 @@
   @include mdc-text-field-fill-color(white);
   border-radius: 2rem;
   height: 2.5rem;
-  width: 14rem;
-  &__input {
-    font-size: 1.5rem;
-  }
+  width: 13rem;
   &__icon {
-    height: 1.2rem;
-    font-size: 2rem;
+    height: 1rem;
   }
 }
