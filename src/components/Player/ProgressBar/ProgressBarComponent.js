@@ -7,11 +7,11 @@ export class ProgressBarComponent {
   }
 
   querySelectors() {
-    this.audio = document.querySelector(".mediaPlayer__music");
-    this.progressBar = this.mountPoint.querySelector(".progressBar__played");
-    this.progressBarContainer = this.mountPoint.querySelector(".progressBar");
+    this.audio = document.querySelector(".buttons__main-audio");
+    this.progressBar = this.mountPoint.querySelector(".progress-bar__played");
+    this.progressBarMain = this.mountPoint.querySelector(".progress-bar__main");
     this.progressBarCircle = this.mountPoint.querySelector(
-      ".progressBar__circle"
+      ".progress-bar__circle"
     );
   }
 
@@ -26,7 +26,7 @@ export class ProgressBarComponent {
 
     this.modal = () => {
       this.moveCircle = document.createElement("div");
-      this.moveCircle.className = "progressBar__moveCircle";
+      this.moveCircle.className = "progress-bar__move-circle";
       this.mountPoint.appendChild(this.moveCircle);
     };
 
@@ -34,8 +34,7 @@ export class ProgressBarComponent {
       let a = e.target;
       if (a !== this.progressBarCircle) {
         this.audio.currentTime =
-          this.audio.duration *
-          (e.offsetX / this.progressBarContainer.clientWidth);
+          this.audio.duration * (e.offsetX / this.progressBarMain.clientWidth);
       }
     };
   }
@@ -43,9 +42,9 @@ export class ProgressBarComponent {
   addEventListeners() {
     this.audio.addEventListener("timeupdate", this.timeUpdate);
 
-    this.progressBarContainer.addEventListener("click", this.movePlayTime);
+    this.progressBarMain.addEventListener("click", this.movePlayTime);
 
-    this.progressBarContainer.addEventListener("mousedown", () => {
+    this.progressBarMain.addEventListener("mousedown", () => {
       this.audio.removeEventListener("timeupdate", this.timeUpdate);
       document.addEventListener("mousemove", this.movePlayTime);
       document.addEventListener("mousemove", this.timeUpdate);

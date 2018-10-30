@@ -1,25 +1,24 @@
 import { MDCRipple } from "@material/ripple";
 import buttonsComponentTemplate from "./ButtonsComponent.html";
-import db from "../tempDB.json";
 
 export class ButtonsComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
     this.ifPlayNow = false;
     this.audioDuration = 0;
+    this.songSrc =
+      "http://drivemusic.me/dl/ar8_BdKPhBpvPyoPFMdryQ/1540528751/download_music/2013/06/jazzamor-way-back.mp3";
   }
 
   querySelectors() {
-    this.playButton = this.mountPoint.querySelector(
-      ".mediaPlayer__button_playButton"
-    );
+    this.playButton = this.mountPoint.querySelector(".buttons__play-button");
     this.prevButton = this.mountPoint.querySelector(
-      ".mediaPlayer__button_prevButton"
+      ".buttons__navigate-button_previous"
     );
     this.nextButton = this.mountPoint.querySelector(
-      ".mediaPlayer__button_nextButton"
+      ".buttons__navigate-button_next"
     );
-    this.audio = this.mountPoint.querySelector(".mediaPlayer__music");
+    this.audio = this.mountPoint.querySelector(".buttons__main-audio");
   }
 
   initMaterial(button) {
@@ -60,6 +59,6 @@ export class ButtonsComponent {
   }
 
   render() {
-    return buttonsComponentTemplate({ src: db.songs[0].src });
+    return buttonsComponentTemplate({ src: this.songSrc });
   }
 }

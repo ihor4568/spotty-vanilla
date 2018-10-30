@@ -1,5 +1,8 @@
-.audioInfo {
-  &__imageContainer {
+.audio-info {
+  &__container {
+    display: flex;
+  }
+  &__image-container {
     line-height: 0;
   }
   &__image {
@@ -12,11 +15,10 @@
     flex-direction: column;
     margin-left: 1.56rem;
   }
-  &__songName {
-    font-size: 1.06rem;
+  &__song-name {
+    font-weight: bold;
   }
-  &__albumArtistName {
+  &__album-artist {
     margin-top: 0.93rem;
-    font-size: 1.06rem;
   }
 }

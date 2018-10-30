@@ -7,8 +7,8 @@ export class RatingComponent {
   }
 
   querySelectors() {
-    this.starsContainer = document.querySelector(".audioRating__stars");
-    this.stars = this.mountPoint.getElementsByClassName("audioRating__star");
+    this.starsContainer = document.querySelector(".audio-rating__stars");
+    this.stars = this.mountPoint.getElementsByClassName("audio-rating__star");
     this.arr = Array.from(this.stars);
   }
 

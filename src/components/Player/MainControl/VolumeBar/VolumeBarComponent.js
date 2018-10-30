@@ -1,4 +1,4 @@
-import VolumeBarTemplate from "./VolumeBarComponent.html";
+import volumeBarTemplate from "./VolumeBarComponent.html";
 
 export class VolumeBarComponent {
   constructor(mountPoint) {
@@ -7,11 +7,11 @@ export class VolumeBarComponent {
   }
 
   querySelectors() {
-    this.audio = document.querySelector(".mediaPlayer__music");
-    this.volumeBar = this.mountPoint.querySelector(".volumeBar__volume");
-    this.volumeBarContainer = this.mountPoint.querySelector(".volumeBar");
-    this.volumeBarCircle = this.mountPoint.querySelector(".volumeBar__circle");
-    this.volumeIcon = this.mountPoint.querySelector(".volumeBar__icon");
+    this.audio = document.querySelector(".buttons__main-audio");
+    this.volumeBar = this.mountPoint.querySelector(".volume-bar__volume");
+    this.volumeBarMain = this.mountPoint.querySelector(".volume-bar__main");
+    this.volumeBarCircle = this.mountPoint.querySelector(".volume-bar__circle");
+    this.volumeIcon = this.mountPoint.querySelector(".volume-bar__icon");
   }
 
   parameters() {
@@ -30,10 +30,9 @@ export class VolumeBarComponent {
       let a = e.target;
       if (
         a !== this.volumeBarCircle &&
-        e.offsetX / this.volumeBarContainer.clientWidth < 1
+        e.offsetX / this.volumeBarMain.clientWidth < 1
       ) {
-        this.audio.volume = `${e.offsetX /
-          this.volumeBarContainer.clientWidth}`;
+        this.audio.volume = `${e.offsetX / this.volumeBarMain.clientWidth}`;
         this.volumeBar.style.width = `${this.audio.volume * 100}%`;
         this.volumeBarCircle.style.left = `100%`;
         this.audio.muted = false;
@@ -55,18 +54,18 @@ export class VolumeBarComponent {
   }
 
   addEventListeners() {
-    this.volumeBarContainer.addEventListener("click", this.moveVolume);
+    this.volumeBarMain.addEventListener("click", this.moveVolume);
 
-    this.volumeBarContainer.addEventListener("mousedown", () => {
-      this.volumeBarContainer.addEventListener("mousemove", this.moveVolume);
+    this.volumeBarMain.addEventListener("mousedown", () => {
+      this.volumeBarMain.addEventListener("mousemove", this.moveVolume);
     });
 
     this.volumeBarCircle.addEventListener("mousedown", () => {
-      this.volumeBarContainer.addEventListener("mousemove", this.moveVolume);
+      this.volumeBarMain.addEventListener("mousemove", this.moveVolume);
     });
 
     document.addEventListener("mouseup", () => {
-      this.volumeBarContainer.removeEventListener("mousemove", this.moveVolume);
+      this.volumeBarMain.removeEventListener("mousemove", this.moveVolume);
     });
 
     this.volumeIcon.addEventListener("click", () => {
@@ -90,6 +89,6 @@ export class VolumeBarComponent {
   }
 
   render() {
-    return VolumeBarTemplate();
+    return volumeBarTemplate();
   }
 }

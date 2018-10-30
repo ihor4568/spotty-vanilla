@@ -1,7 +1,9 @@
-.progressBar {
-  padding-top: 0.31rem;
-  overflow: visible;
-  z-index: 2;
+.progress-bar {
+  &__main {
+    padding-top: 0.31rem;
+    overflow: visible;
+    z-index: 2;
+  }
   &__buffer {
     height: 0.31rem;
   }
@@ -10,7 +12,7 @@
     width: 0;
     height: 0.31rem;
   }
-  &__playedRange {
+  &__played-range {
     border-radius: 3.1rem;
     height: 0.31rem;
   }
@@ -24,7 +26,7 @@
     cursor: pointer;
     z-index: 2;
   }
-  &__moveCircle {
+  &__move-circle {
     position: absolute;
     width: 100%;
     height: 100%;

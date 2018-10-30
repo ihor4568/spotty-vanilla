@@ -1,37 +1,18 @@
-@import "@material/linear-progress/mdc-linear-progress";
-@import "@material/fab/mdc-fab";
-@import "@material/typography/mdc-typography";
-@import "./Buttons/ButtonsComponent";
+@import "./MainControl/MainControlComponent";
 @import "./ProgressBar/ProgressBarComponent";
-@import "./VolumeBar/VolumeBarComponent";
 @import "./AudioInfo/AudioInfoComponent";
 @import "./Rating/RatingComponent";
 
-.mediaPlayer {
+.media-player {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   background-color: #fefefe;
-  &__progressBar {
+  &__progress-bar {
     flex-basis: 100%;
   }
-  &__mainControl {
-    display: flex;
-    justify-content: space-around;
-  }
-  &__buttons {
-    margin-right: 2.5rem;
-  }
-  &__volumeBar {
-    user-select: none;
-    display: flex;
-    align-items: center;
-  }
-  &__audioInfo {
-    display: flex;
-  }
-  &__audioRating {
+  &__audio-rating {
     flex-basis: 22%;
   }
 }

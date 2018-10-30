@@ -1,7 +1,15 @@
-.volumeBar {
-  width: 5.625rem;
-  margin: 0;
-  overflow: visible;
+.volume-bar {
+  &__container {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+  }
+  &__main {
+    width: 5.625rem;
+    margin: 0;
+    overflow: visible;
+  }
   &__icon {
     cursor: pointer;
     margin-right: 0.625rem;

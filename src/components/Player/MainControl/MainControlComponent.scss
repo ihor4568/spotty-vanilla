@@ -1,0 +1,10 @@
+@import "./Buttons/ButtonsComponent";
+@import "./VolumeBar/VolumeBarComponent";
+
+.main-control {
+  &__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

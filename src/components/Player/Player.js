@@ -1,8 +1,7 @@
-import { ButtonsComponent } from "./Buttons/ButtonsComponent";
 import { ProgressBarComponent } from "./ProgressBar/ProgressBarComponent";
-import { VolumeBarComponent } from "./VolumeBar/VolumeBarComponent";
 import { AudioInfoComponent } from "./AudioInfo/AudioInfoComponent";
 import { RatingComponent } from "./Rating/RatingComponent";
+import { MainControlComponent } from "./MainControl/MainControlComponent";
 
 import playerTemplate from "./Player.html";
 
@@ -18,24 +17,25 @@ export class PlayerComponent {
   }
 
   querySelectors() {
-    this.buttons = this.mountPoint.querySelector(".mediaPlayer__buttons");
+    this.buttons = this.mountPoint.querySelector(".media-player__buttons");
     this.progressBar = this.mountPoint.querySelector(
-      ".mediaPlayer__progressBar"
+      ".media-player__progress-bar"
     );
-    this.volumeBar = this.mountPoint.querySelector(".mediaPlayer__volumeBar");
-    this.audioInfo = this.mountPoint.querySelector(".mediaPlayer__audioInfo");
+    this.mainControl = this.mountPoint.querySelector(
+      ".media-player__main-control"
+    );
+    this.volumeBar = this.mountPoint.querySelector(".media-player__volume-bar");
+    this.audioInfo = this.mountPoint.querySelector(".media-player__audio-info");
     this.audioRating = this.mountPoint.querySelector(
-      ".mediaPlayer__audioRating"
+      ".media-player__audio-rating"
     );
   }
 
   mountChildren() {
-    this.audioButtons = new ButtonsComponent(this.buttons);
-    this.audioButtons.mount();
+    this.mainControlPannel = new MainControlComponent(this.mainControl);
+    this.mainControlPannel.mount();
     this.audioProgressBar = new ProgressBarComponent(this.progressBar);
     this.audioProgressBar.mount();
-    this.audioVolumeBar = new VolumeBarComponent(this.volumeBar);
-    this.audioVolumeBar.mount();
     this.audioInfoComponent = new AudioInfoComponent(this.audioInfo);
     this.audioInfoComponent.mount();
     this.audioRatingComponent = new RatingComponent(this.audioRating);
