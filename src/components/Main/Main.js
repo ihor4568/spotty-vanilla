@@ -3,6 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
+import { AboutComponent } from "../About/About";
 import { ArtistListComponent } from "../Artists/ArtistsList/ArtistList";
 import mainTemplate from "./Main.html";
 
@@ -18,6 +19,7 @@ export class MainComponent {
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
+    this.sidebarList = this.mountPoint.querySelector(".main__list");
     this.artistsLink = this.mountPoint.querySelector(".main__artists");
   }
 
@@ -28,15 +30,25 @@ export class MainComponent {
   }
 
   addEventListeners() {
+    this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
     this.artistsLink.addEventListener(
       "click",
       this.handleArtistsView.bind(this)
     );
   }
 
-  handleArtistsView() {
-    this.artist = new ArtistListComponent(this.mainPoint);
-    this.artist.mount();
+  handleListClick(e) {
+    e.preventDefault();
+    if (e.target.closest(".main__about-link")) {
+      this.about.mount();
+    }
+  }
+
+  handleArtistsView(e) {
+    e.preventDefault();
+    if (e.target.closest(".main__artists")) {
+      this.artist.mount();
+    }
   }
 
   mount() {
@@ -63,6 +75,10 @@ export class MainComponent {
 
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
+
+    this.about = new AboutComponent(this.mainPoint);
+
+    this.artist = new ArtistListComponent(this.mainPoint);
   }
 
   render() {
