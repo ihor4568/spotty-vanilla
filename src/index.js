@@ -8,6 +8,4 @@ const main = new MainComponent(root);
 
 main.mount();
 
-// const table = new MySongsViewTableComponent(root);
 
-// table.mount();
