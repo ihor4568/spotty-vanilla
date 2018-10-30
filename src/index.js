@@ -1,8 +1,9 @@
 import "./index.scss";
-import { MySongsViewTableComponent } from "./Components/MySongsView/MySongsViewTable/MySongsViewTable";
+
+import { MainComponent } from "./components/Main/Main";
 
 const root = document.getElementById("root");
 
-const table = new MySongsViewTableComponent(root);
+const main = new MainComponent(root);
 
-table.mount();
+main.mount();
