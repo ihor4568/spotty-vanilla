@@ -13,7 +13,11 @@ export class PlayerComponent {
 
   mountChildren() {
     this.dotsMenu = new DotsMenuComponent(this.dotsMenuPoint, {
-      items: ["Add to my songs", "Lyrics", "Share"]
+      items: [
+        { name: "Add to my songs", handler: () => {} },
+        { name: "Lyrics", handler: () => {} },
+        { name: "Share", handler: () => {} }
+      ]
     });
     this.dotsMenu.mount();
   }

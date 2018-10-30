@@ -22,10 +22,19 @@ export class DotsMenuComponent {
       "click",
       this.handleMenuBtnClick.bind(this)
     );
+    this.menu.addEventListener("click", this.handleMenuItemClick.bind(this));
   }
 
   handleMenuBtnClick() {
     this.uiMenu.open = !this.uiMenu.open;
+  }
+
+  handleMenuItemClick(e) {
+    const activeMenuItem = e.target.closest(".dots-menu__item");
+    if (activeMenuItem) {
+      const id = parseInt(activeMenuItem.dataset.id);
+      this.props.items[id].handler();
+    }
   }
 
   mount() {

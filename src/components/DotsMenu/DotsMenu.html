@@ -2,10 +2,10 @@
   <div class="mdc-menu-surface--anchor">
     <div class="mdc-menu mdc-menu-surface dots-menu__holder" tabindex="-1">
       <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
-        <% items.forEach(item => { %>
-        <li class="mdc-list-item mdc-typography--body1" role="menuitem">
+        <% items.forEach((item, i) => { %>
+        <li class="mdc-list-item mdc-typography--body1 dots-menu__item" role="menuitem" data-id="<%= i %>">
           <span class="mdc-list-item__text">
-            <%= item %></span>
+            <%= item.name %></span>
         </li>
         <% }) %>
       </ul>
