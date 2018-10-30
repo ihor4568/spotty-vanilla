@@ -3,20 +3,20 @@
     line-height: 0;
   }
   &__image {
-    width: 10rem;
-    height: 10rem;
+    width: 6.25rem;
+    height: 6.25rem;
   }
   &__text {
     justify-content: center;
     display: flex;
     flex-direction: column;
-    margin-left: 2.5rem;
+    margin-left: 1.56rem;
   }
   &__songName {
-    font-size: 1.7rem;
+    font-size: 1.06rem;
   }
   &__albumArtistName {
-    margin-top: 1.5rem;
-    font-size: 1.7rem;
+    margin-top: 0.93rem;
+    font-size: 1.06rem;
   }
 }

@@ -5,18 +5,18 @@
   }
 }
 .mediaPlayer__button {
-  @include mdc-fab-icon-size(50px);
+  @include mdc-fab-icon-size(3.125rem);
   @include mdc-fab-shape-radius(100%);
   @include mdc-fab-container-color(#6200ee);
-  width: 70px;
-  height: 70px;
-  margin: 0 20px;
+  width: 4.375rem;
+  height: 4.375rem;
+  margin: 0 1.25rem;
   &_navigateButton {
     margin: 0;
-    width: 40px;
-    height: 30px;
-    @include mdc-fab-icon-size(30px);
-    @include mdc-fab-shape-radius(5px);
+    width: 2.5rem;
+    height: 1.875rem;
+    @include mdc-fab-icon-size(1.875rem);
+    @include mdc-fab-shape-radius(0.31rem);
     @include mdc-fab-container-color(#838383);
   }
 }

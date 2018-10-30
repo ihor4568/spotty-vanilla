@@ -1,6 +1,6 @@
 import { MDCDrawer } from "@material/drawer";
 
-import { PlayerComponent } from "../MediaPlayer/PlayerComponent";
+import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
 import mainTemplate from "./Main.html";

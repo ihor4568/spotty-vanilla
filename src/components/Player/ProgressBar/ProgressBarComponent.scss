@@ -1,26 +1,26 @@
 .progressBar {
-  padding-top: 0.5rem;
+  padding-top: 0.31rem;
   overflow: visible;
   z-index: 2;
   &__buffer {
-    height: 0.5rem;
+    height: 0.31rem;
   }
   &__played {
     transform: none;
     width: 0;
-    height: 0.5rem;
+    height: 0.31rem;
   }
   &__playedRange {
-    border-radius: 5rem;
-    height: 0.5rem;
+    border-radius: 3.1rem;
+    height: 0.31rem;
   }
   &__circle {
     position: relative;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 0.937rem;
+    height: 0.937rem;
     border-radius: 50%;
     background-color: #6200ee;
-    transform: translateX(calc(-15px / 2)) translateY(calc(-10px / 2));
+    transform: translateX(calc(-0.937rem / 2)) translateY(calc(-0.625rem / 2));
     cursor: pointer;
     z-index: 2;
   }
