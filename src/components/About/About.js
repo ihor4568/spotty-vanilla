@@ -3,6 +3,16 @@ import aboutTemplate from "./About.html";
 export class AboutComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
+    this.developers = [
+      "WOLFRIEND",
+      "lubovgribiniyk",
+      "yevheniiIvanise",
+      "pavelbaranchuk",
+      "gamesminer",
+      "IYeskov",
+      "kozak-iz-kh",
+      "OlegShynkarenko"
+    ];
   }
 
   mount() {
@@ -10,6 +20,6 @@ export class AboutComponent {
   }
 
   render() {
-    return aboutTemplate();
+    return aboutTemplate({ developers: this.developers });
   }
 }

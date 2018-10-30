@@ -34,8 +34,7 @@ export class MainComponent {
   handleListClick(e) {
     e.preventDefault();
     if (e.target.closest(".main__about-link")) {
-      this.activeView = new AboutComponent(this.mainPoint);
-      this.activeView.mount();
+      this.about.mount();
     }
   }
 
@@ -63,6 +62,8 @@ export class MainComponent {
 
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
+
+    this.about = new AboutComponent(this.mainPoint);
   }
 
   render() {
