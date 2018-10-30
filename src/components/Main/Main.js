@@ -17,7 +17,7 @@ export class MainComponent {
     this.headerPoint = this.mountPoint.querySelector(".main__header");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
-    this.albumsView = this.mountPoint.querySelector(".main__album-list");
+    this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
     this.albumsLink = this.mountPoint.querySelector(".main__albums-link");
   }
 
@@ -35,7 +35,7 @@ export class MainComponent {
   }
 
   handleAlbumsLinkClick() {
-    this.albums = new AlbumList(this.albumsView);
+    this.albums = new AlbumList(this.mainPoint);
     this.albums.mount();
   }
 

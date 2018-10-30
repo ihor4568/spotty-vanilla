@@ -2,8 +2,14 @@ import { MDCRipple } from "@material/ripple";
 import albumListItemTemplate from "./AlbumCard.html";
 
 export class AlbumCard {
-  constructor(mountPoint) {
+  constructor(
+    mountPoint,
+    props = {
+      album: {}
+    }
+  ) {
     this.mountPoint = mountPoint;
+    this.props = props;
   }
 
   initMaterial() {
@@ -16,11 +22,17 @@ export class AlbumCard {
   }
 
   mount() {
-    this.mountPoint.innerHTML = this.render();
+    this.mountPoint.innerHTML += this.render();
     this.initMaterial();
   }
 
   render() {
-    return albumListItemTemplate();
+    return albumListItemTemplate(
+      (this.props = {
+        albumName: this.props.albumName,
+        artistName: this.props.artistName,
+        sourceImage: this.props.sourceImage
+      })
+    );
   }
 }
