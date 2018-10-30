@@ -1,12 +1,12 @@
 {
-  "name": "Spotty",
+  "name": "spotty",
   "version": "1.0.0",
   "description": "Simple music streaming service",
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p",
     "start": "webpack-dev-server --mode=development",
-    "eslint": "node_modules/.bin/eslint src/"
+    "lint": "eslint src/"
   },
   "keywords": [],
   "license": "ISC",
@@ -43,7 +43,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "node_modules/.bin/eslint --max-warnings=0",
+      "eslint --max-warnings=0",
       "prettier --write",
       "git add"
     ],
