@@ -5,7 +5,10 @@
     "es6": true
   },
   "rules": {
-    "no-console": "2",
-    "no-debugger": "2"
+    "no-console": "error",
+    "no-debugger": "error",
+    "class-methods-use-this": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off"
   }
 }
