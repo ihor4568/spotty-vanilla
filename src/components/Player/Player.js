@@ -1,5 +1,4 @@
 import playerTemplate from "./Player.html";
-import { SearchComponent } from "../Search/Search";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
 export class PlayerComponent {
