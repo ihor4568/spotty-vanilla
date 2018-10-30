@@ -3,6 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
+import { MySongsViewTableComponent } from "../MySongsView/MySongsViewTable/MySongsViewTable";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -16,6 +17,8 @@ export class MainComponent {
     this.headerPoint = this.mountPoint.querySelector(".main__header");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
+    this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
+    this.mySongsLink = this.mountPoint.querySelector(".main__mySongs-link");
   }
 
   initMaterial() {
@@ -24,11 +27,25 @@ export class MainComponent {
     );
   }
 
+  addEventListeners() {
+    this.mySongsLink.addEventListener(
+      "click",
+      this.mySongsClickHandler.bind(this)
+    );
+  }
+
+  mySongsClickHandler(event) {
+    event.preventDefault();
+    this.activeView = new MySongsViewTableComponent(this.mainPoint);
+    this.activeView.mount();
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
     this.mountChildren();
+    this.addEventListeners();
   }
 
   handleOpen() {
