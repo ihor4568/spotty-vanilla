@@ -2,7 +2,7 @@ import { MDCMenu } from "@material/menu";
 
 import dotsMenuTemplate from "./DotsMenu.html";
 
-export class DotsMenu {
+export class DotsMenuComponent {
   constructor(mountPoint, props = { items: [] }) {
     this.mountPoint = mountPoint;
     this.props = props;

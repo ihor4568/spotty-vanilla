@@ -1,6 +1,6 @@
 import playerTemplate from "./Player.html";
 import { SearchComponent } from "../Search/Search";
-import { DotsMenu } from "../DotsMenu/DotsMenu";
+import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
 export class PlayerComponent {
   constructor(mountPoint) {
@@ -12,7 +12,7 @@ export class PlayerComponent {
   }
 
   mountChildren() {
-    this.dotsMenu = new DotsMenu(this.dotsMenuPoint, {
+    this.dotsMenu = new DotsMenuComponent(this.dotsMenuPoint, {
       items: ["Add to playlist", "Lyrics", "Share"]
     });
     this.dotsMenu.mount();
