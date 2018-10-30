@@ -9,8 +9,8 @@ export class DotsMenuComponent {
   }
 
   querySelectors() {
-    this.menu = this.mountPoint.querySelector(".overflow-menu__holder");
-    this.menuButton = this.mountPoint.querySelector(".overflow-menu__button");
+    this.menu = this.mountPoint.querySelector(".dots-menu__holder");
+    this.menuButton = this.mountPoint.querySelector(".dots-menu__button");
   }
 
   initMaterial() {

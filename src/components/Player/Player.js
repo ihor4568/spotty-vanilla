@@ -13,7 +13,7 @@ export class PlayerComponent {
 
   mountChildren() {
     this.dotsMenu = new DotsMenuComponent(this.dotsMenuPoint, {
-      items: ["Add to playlist", "Lyrics", "Share"]
+      items: ["Add to my songs", "Lyrics", "Share"]
     });
     this.dotsMenu.mount();
   }
