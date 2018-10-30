@@ -10,8 +10,9 @@
 # KDE directory preferences
 .directory
 
-# vscode settings
+# ides
 .vscode/
+.idea/
 
 # firebase hosting cache folder
 .firebase/
@@ -136,3 +137,4 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/node,linux,macos,windows
 
 dist/
+.idea
