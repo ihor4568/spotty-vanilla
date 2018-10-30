@@ -4,16 +4,11 @@ import { RatingComponent } from "./Rating/RatingComponent";
 import { MainControlComponent } from "./MainControl/MainControlComponent";
 
 import playerTemplate from "./Player.html";
+import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
 export class PlayerComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
-    this.playList = [
-      "./src/audio-test/audio.mp3",
-      "./src/audio-test/audio1.mp3"
-    ];
-    this.playSong = this.playList[0];
-    this.playNext = this.playList[1];
   }
 
   querySelectors() {
@@ -29,6 +24,7 @@ export class PlayerComponent {
     this.audioRating = this.mountPoint.querySelector(
       ".media-player__audio-rating"
     );
+    this.dotsMenuPoint = this.mountPoint.querySelector(".dots-menu-container");
   }
 
   mountChildren() {
@@ -40,6 +36,14 @@ export class PlayerComponent {
     this.audioInfoComponent.mount();
     this.audioRatingComponent = new RatingComponent(this.audioRating);
     this.audioRatingComponent.mount();
+    this.dotsMenu = new DotsMenuComponent(this.dotsMenuPoint, {
+      items: [
+        { name: "Add to my songs", handler: () => {} },
+        { name: "Lyrics", handler: () => {} },
+        { name: "Share", handler: () => {} }
+      ]
+    });
+    this.dotsMenu.mount();
   }
 
   mount() {
