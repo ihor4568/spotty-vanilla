@@ -4,29 +4,34 @@
       <div class="mdc-list">
         <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
           <i class="material-icons mdc-list-item__graphic" aria-hidden="true">library_music</i>
-          <span class="mdc-list-item__text mdc-typography--headline4">My Songs</span>
+          <span class="mdc-list-item__text">My Songs</span>
         </a>
         <a class="mdc-list-item" href="#">
           <i class="material-icons mdc-list-item__graphic" aria-hidden="true">album</i>
-          <span class="mdc-list-item__text mdc-typography--headline4">Albums</span>
+          <span class="mdc-list-item__text">Albums</span>
         </a>
         <a class="main__artists mdc-list-item" href="#">
           <i class="material-icons mdc-list-item__graphic" aria-hidden="true">person_outline</i>
-          <span class="mdc-list-item__text mdc-typography--headline4">Artists</span>
+          <span class="mdc-list-item__text">Artists</span>
         </a>
         <a class="mdc-list-item" href="#">
           <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
-          <span class="mdc-list-item__text mdc-typography--headline4">About</span>
+          <span class="mdc-list-item__text">About</span>
         </a>
       </div>
     </div>
   </aside>
   <div class="main__wrapper mdc-drawer-app-content">
-    <header class="main__header mdc-top-app-bar app-bar"></header>
+    <header class="mdc-top-app-bar app-bar">
+      <div class="main__header"></div>
+      <div class="main__search"></div>
+    </header>
     <main class="main__section main-content">
-      <div class="main__content-mount mdc-top-app-bar--fixed-adjust"></div>
+      <div class="main__content-mount mdc-top-app-bar--fixed-adjust">
+        <h3 class="mdc-typography--headline4">Albums</h3>
+      </div>
     </main>
   </div>
-  <div class="main__search"></div>
+
   <div class="main__player"></div>
 </div>

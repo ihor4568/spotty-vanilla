@@ -3,7 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-import { ArtistComponent } from "../Artist/Artist";
+import { ArtistListComponent } from "../Artists/ArtistsList/ArtistList";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -35,7 +35,7 @@ export class MainComponent {
   }
 
   handleArtistsView() {
-    this.artist = new ArtistComponent(this.mainPoint);
+    this.artist = new ArtistListComponent(this.mainPoint);
     this.artist.mount();
   }
 
