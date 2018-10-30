@@ -14,10 +14,10 @@ export class RatingComponent {
 
   addEventListeners() {
     this.starsContainer.addEventListener("click", e => {
-      let a = e.target;
-      for (let item in this.arr) {
-        this.arr[item].classList.remove("selected");
-      }
+      const a = e.target;
+      this.arr.forEach((item, i) => {
+        this.arr[i].classList.remove("selected");
+      });
       a.classList.add("selected");
       this.audioRating = a.getAttribute("about");
     });
