@@ -3,7 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-import { SharingSongComponent } from "../SharingSong/SharingSong";
+import { ShareViewComponent } from "../ShareView/ShareView";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -50,8 +50,8 @@ export class MainComponent {
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
 
-    this.sharingSong = new SharingSongComponent(this.shareViewPoint);
-    this.sharingSong.mount();
+    this.shareView = new ShareViewComponent(this.shareViewPoint);
+    this.shareView.mount();
   }
 
   render() {
