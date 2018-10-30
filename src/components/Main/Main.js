@@ -18,7 +18,7 @@ export class MainComponent {
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
-    this.aboutLink = this.mountPoint.querySelector(".main__about-link");
+    this.sidebarList = this.mountPoint.querySelector(".main__list");
   }
 
   initMaterial() {
@@ -28,16 +28,15 @@ export class MainComponent {
   }
 
   addEventListeners() {
-    this.aboutLink.addEventListener(
-      "click",
-      this.handleAboutLinkClick.bind(this)
-    );
+    this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
   }
 
-  handleAboutLinkClick(e) {
+  handleListClick(e) {
     e.preventDefault();
-    this.activeView = new About(this.mainPoint);
-    this.activeView.mount();
+    if (e.target.closest(".main__about-link")) {
+      this.activeView = new About(this.mainPoint);
+      this.activeView.mount();
+    }
   }
 
   mount() {

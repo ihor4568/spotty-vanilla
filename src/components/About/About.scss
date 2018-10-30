@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   &__text {
+    max-width: 55rem;
     color: #5f6368;
   }
   &__subtitle {
