@@ -1,18 +1,7 @@
-.albums {
-  padding-top: 0.6rem;
-  max-width: 100rem;
-  margin: 0 auto;
-
-  &__heading {
-    margin-left: 2rem;
-  }
-
-  &__list {
-    //padding-left: 0.6rem;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
+.album-card {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 
   &__card {
     margin: 0 0 2.5rem 1.9rem;

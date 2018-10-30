@@ -1,14 +1,14 @@
 import { MDCRipple } from "@material/ripple";
-import albumListItemTemplate from "./AlbumListItem.html";
+import albumListItemTemplate from "./AlbumCard.html";
 
-export class AlbumListItemComponent {
+export class AlbumCard {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
   }
 
-  initMaterialCard() {
+  initMaterial() {
     const cardRipple = this.mountPoint.querySelectorAll(
-      ".albums__card-ripple-effect"
+      ".album-card__card-ripple-effect"
     );
     Array.from(cardRipple).forEach(el => {
       new MDCRipple(el);
@@ -17,7 +17,7 @@ export class AlbumListItemComponent {
 
   mount() {
     this.mountPoint.innerHTML = this.render();
-    this.initMaterialCard();
+    this.initMaterial();
   }
 
   render() {

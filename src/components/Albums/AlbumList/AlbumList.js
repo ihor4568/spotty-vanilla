@@ -1,17 +1,17 @@
-import { AlbumListItemComponent } from "../AlbumListItemComponent/AlbumListItemComponent";
+import { AlbumCard } from "../AlbumListItem/AlbumCard";
 import albumListTemplate from "./AlbumList.html";
 
-export class AlbumListComponent {
+export class AlbumList {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
   }
 
   querySelectors() {
-    this.albumsList = this.mountPoint.querySelector(".albums__list");
+    this.albumsList = this.mountPoint.querySelector(".album-list__container");
   }
 
   mountChildren() {
-    this.albumItem = new AlbumListItemComponent(this.albumsList);
+    this.albumItem = new AlbumCard(this.albumsList);
     this.albumItem.mount();
   }
 
