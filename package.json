@@ -1,11 +1,12 @@
 {
-  "name": "Spotty",
+  "name": "spotty",
   "version": "1.0.0",
   "description": "Simple music streaming service",
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p",
-    "start": "webpack-dev-server --mode=development"
+    "start": "webpack-dev-server --mode=development",
+    "lint": "eslint src/"
   },
   "keywords": [],
   "license": "ISC",
@@ -15,6 +16,10 @@
     "cross-env": "5.2.0",
     "css-loader": "1.0.0",
     "ejs-loader": "0.3.1",
+    "eslint": "5.8.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-config-prettier": "3.1.0",
+    "eslint-plugin-import": "2.14.0",
     "file-loader": "2.0.0",
     "html-webpack-plugin": "3.2.0",
     "husky": "1.0.0-rc.14",
@@ -37,7 +42,12 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,scss}": [
+    "*.js": [
+      "eslint --max-warnings=0",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{json,scss}": [
       "prettier --write",
       "git add"
     ],
