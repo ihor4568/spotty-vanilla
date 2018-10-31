@@ -4,6 +4,7 @@ import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
 import { ShareViewComponent } from "../ShareView/ShareView";
+import { DialogComponent } from "../Dialog/Dialog";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -18,6 +19,7 @@ export class MainComponent {
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.shareViewPoint = this.mountPoint.querySelector(".main__share-view");
+    this.dialogPoint = this.mountPoint.querySelector(".main__dialog");
   }
 
   initMaterial() {
@@ -38,6 +40,9 @@ export class MainComponent {
   }
 
   mountChildren() {
+    this.dialog = new DialogComponent(this.dialogPoint);
+    this.dialog.mount();
+
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
       scrollTarget: this.scrollTarget

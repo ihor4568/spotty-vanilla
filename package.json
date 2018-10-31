@@ -1,10 +1,10 @@
 {
-  "name": "Spotty",
+  "name": "spotty",
   "version": "1.0.0",
   "description": "Simple music streaming service",
   "private": true,
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack -p",
+    "build": "NODE_ENV=production webpack -p",
     "start": "webpack-dev-server --mode=development"
   },
   "keywords": [],
@@ -12,7 +12,6 @@
   "devDependencies": {
     "autoprefixer": "9.1.5",
     "clean-webpack-plugin": "0.1.19",
-    "cross-env": "5.2.0",
     "css-loader": "1.0.0",
     "ejs-loader": "0.3.1",
     "file-loader": "2.0.0",
@@ -37,7 +36,11 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,scss}": [
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{json,scss}": [
       "prettier --write",
       "git add"
     ],

@@ -14,7 +14,7 @@ export class ShareViewComponent {
   }
 
   initMaterial() {
-    const cardRipple = new MDCRipple(this.shareViewRiplePoint);
+    this.cardRipple = new MDCRipple(this.shareViewRiplePoint);
   }
 
   mount() {
