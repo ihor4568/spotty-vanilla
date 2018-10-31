@@ -3,7 +3,7 @@
   <h2 class="mdc-typography mdc-typography--headline4 artist__heading">Artists</h2>
 
   <div class="artist__container">
-    <% artistsData.forEach((item, i) => { %>
+    <% artistsData.forEach(item => { %>
     <div class="mdc-card artist__card">
       <div class="artist__card_shaped">
         <div class="mdc-card mdc-card__primary-action mdc-ripple artist__ripple">
@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="artist__name">
-        <a class="mdc-typography mdc-typography--headline5 artist__link link" href="https://www.instagram.com/nickiminaj/">
+        <a class="mdc-typography mdc-typography--headline5 artist__link link" href="<%= item.link %>">
           <%= item.name %></a>
       </div>
     </div>
