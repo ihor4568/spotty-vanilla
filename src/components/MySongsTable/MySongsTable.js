@@ -1,4 +1,5 @@
 import mySongsTableTemplate from "./MySongsTable.html";
+
 export class MySongsTableComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
@@ -10,6 +11,6 @@ export class MySongsTableComponent {
   }
 
   render() {
-    return mySongsTableTemplate(this.props);
+    return mySongsTableTemplate({ tableData: this.props.tableData });
   }
 }

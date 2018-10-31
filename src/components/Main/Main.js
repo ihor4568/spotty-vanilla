@@ -7,19 +7,21 @@ import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
 import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
+const TABLE_DATA = [
+  {
+    cover: "./src/img/alibaba.jpg",
+    name: "Alibaba",
+    duration: "9:15",
+    artist: "Folk",
+    album: "Super"
+  }
+];
+
 export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.tableData = [
-      {
-        cover: "./src/img/alibaba.jpg",
-        name: "Alibaba",
-        duration: "9:15",
-        artist: "Folk",
-        album: "Super"
-      }
-    ];
+    this.tableData = TABLE_DATA;
   }
 
   querySelectors() {
@@ -45,7 +47,7 @@ export class MainComponent {
     e.preventDefault();
     if (e.target.closest(".main__about-link")) {
       this.about.mount();
-    } else if (e.target.closest(".main__mySongs-link")) {
+    } else if (e.target.closest(".main__my-songs-link")) {
       this.table.mount();
     }
   }
