@@ -4,14 +4,14 @@ import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
 import { ShareViewComponent } from "../ShareView/ShareView";
-import { DialogComponent } from "../Dialog/Dialog";
 import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
-  constructor(mountPoint, props = {}) {
+  constructor(mountPoint, props = {}, status = false) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.status = status;
   }
 
   querySelectors() {
@@ -22,7 +22,15 @@ export class MainComponent {
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.shareViewPoint = this.mountPoint.querySelector(".main__share-view");
-    this.dialogPoint = this.mountPoint.querySelector(".main__dialog");
+    this.title = this.mountPoint.querySelector(".main__content-title");
+    this.appBar = this.mountPoint.querySelector(".main__app-bar");
+  }
+
+  setShareView() {
+    this.title.style = "display: none";
+    this.playerPoint.style = "display: none";
+    this.searchPoint.style = "display: none";
+    this.appBar.className += " main__app-bar_disable";
   }
 
   initMaterial() {
@@ -48,6 +56,9 @@ export class MainComponent {
     this.initMaterial();
     this.mountChildren();
     this.addEventListeners();
+    if (this.status) {
+      this.setShareView();
+    }
   }
 
   handleOpen() {
@@ -55,9 +66,6 @@ export class MainComponent {
   }
 
   mountChildren() {
-    this.dialog = new DialogComponent(this.dialogPoint);
-    this.dialog.mount();
-
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
       scrollTarget: this.scrollTarget
