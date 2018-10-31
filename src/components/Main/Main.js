@@ -8,7 +8,7 @@ import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
-  constructor(mountPoint, props = {}, status = false) {
+  constructor(mountPoint, props = {}, status = true) {
     this.mountPoint = mountPoint;
     this.props = props;
     this.status = status;
@@ -27,10 +27,10 @@ export class MainComponent {
   }
 
   setShareView() {
-    this.title.style = "display: none";
-    this.playerPoint.style = "display: none";
-    this.searchPoint.style = "display: none";
-    this.appBar.className += " main__app-bar_disable";
+    this.title.style.display = "none";
+    this.playerPoint.style.display = "none";
+    this.searchPoint.style.display = "none";
+    this.appBar.classList.add("main__app-bar_disable");
   }
 
   initMaterial() {
