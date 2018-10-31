@@ -29,12 +29,32 @@ export class MainComponent {
 
   addEventListeners() {
     this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
+    window.addEventListener("popstate", this.handleStatePath.bind(this));
   }
 
   handleListClick(e) {
     e.preventDefault();
     if (e.target.closest(".main__about-link")) {
+      this.routeNavigate("/about");
+    }
+    if (e.target.closest(".main__songs-link")) {
+      this.routeNavigate("/songs");
+    }
+  }
+
+  routeNavigate(url) {
+    window.history.pushState(null, null, url);
+    this.handleStatePath();
+  }
+
+  handleStatePath() {
+    const pathname = window.location.pathname;
+    if (pathname === "/about") {
       this.about.mount();
+    }
+
+    if (pathname === "/songs") {
+      this.songs.mount();
     }
   }
 
@@ -44,6 +64,7 @@ export class MainComponent {
     this.initMaterial();
     this.mountChildren();
     this.addEventListeners();
+    this.handleStatePath();
   }
 
   handleOpen() {
@@ -64,6 +85,7 @@ export class MainComponent {
     this.search.mount();
 
     this.about = new AboutComponent(this.mainPoint);
+    this.songs = new SearchComponent(this.mainPoint);
   }
 
   render() {

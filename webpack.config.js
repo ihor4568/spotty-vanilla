@@ -11,6 +11,9 @@ module.exports = {
     filename: "[name].[hash].js"
   },
   devtool: devMode ? "initial-source-map" : "none",
+  devServer: {
+    historyApiFallback: true
+  },
   module: {
     rules: [
       {
