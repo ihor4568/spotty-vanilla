@@ -5,7 +5,6 @@ export class DialogComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.status = false;
   }
 
   querySelectors() {
@@ -28,9 +27,9 @@ export class DialogComponent {
 
   handleDialogClosing(e) {
     if (
-      e.detail.action != "accept" ||
-      this.login.value != "admin" ||
-      this.password.value != "admin"
+      e.detail.action !== "accept" ||
+      this.login.value !== "admin" ||
+      this.password.value !== "admin"
     ) {
       this.dialog.open();
     }

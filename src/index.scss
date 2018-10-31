@@ -6,10 +6,15 @@
 @import "@material/card/mdc-card";
 @import "@material/button/mdc-button";
 @import "@material/dialog/mdc-dialog";
+@import "@material/icon-button/mdc-icon-button";
+@import "@material/menu-surface/mdc-menu-surface";
+@import "@material/menu/mdc-menu";
 
 @import "./components/Header/Header";
 @import "./components/Search/Search";
 @import "./components/Main/Main";
 @import "./components/Player/Player";
 @import "./components/Page/Page";
+@import "./components/About/About";
+@import "./components/DotsMenu/DotsMenu";
 @import "./components/ShareView/ShareView";

@@ -5,6 +5,7 @@ import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
 import { ShareViewComponent } from "../ShareView/ShareView";
 import { DialogComponent } from "../Dialog/Dialog";
+import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -15,6 +16,8 @@ export class MainComponent {
 
   querySelectors() {
     this.scrollTarget = this.mountPoint.querySelector(".main__sidebar");
+    this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
+    this.sidebarList = this.mountPoint.querySelector(".main__list");
     this.headerPoint = this.mountPoint.querySelector(".main__header");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
@@ -28,11 +31,23 @@ export class MainComponent {
     );
   }
 
+  addEventListeners() {
+    this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
+  }
+
+  handleListClick(e) {
+    e.preventDefault();
+    if (e.target.closest(".main__about-link")) {
+      this.about.mount();
+    }
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
     this.mountChildren();
+    this.addEventListeners();
   }
 
   handleOpen() {
@@ -57,6 +72,8 @@ export class MainComponent {
 
     this.shareView = new ShareViewComponent(this.shareViewPoint);
     this.shareView.mount();
+
+    this.about = new AboutComponent(this.mainPoint);
   }
 
   render() {
