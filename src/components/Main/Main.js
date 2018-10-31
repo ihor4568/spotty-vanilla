@@ -8,7 +8,7 @@ import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
-  constructor(mountPoint, props = {}, status = false) {
+  constructor(mountPoint, props = {}, status = true) {
     this.mountPoint = mountPoint;
     this.props = props;
     this.status = status;
