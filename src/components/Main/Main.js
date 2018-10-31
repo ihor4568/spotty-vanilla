@@ -3,13 +3,22 @@ import { MDCDrawer } from "@material/drawer";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-import { MySongsViewTableComponent } from "../MySongsView/MySongsViewTable/MySongsViewTable";
+import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.tableData = [
+      {
+        cover: "./src/img/alibaba.jpg",
+        name: "Alibaba",
+        duration: "9:15",
+        artist: "Folk",
+        album: "Super"
+      }
+    ];
   }
 
   querySelectors() {
@@ -36,7 +45,9 @@ export class MainComponent {
 
   mySongsClickHandler(event) {
     event.preventDefault();
-    this.activeView = new MySongsViewTableComponent(this.mainPoint);
+    this.activeView = new MySongsTableComponent(this.mainPoint, {
+      tableData: this.tableData
+    });
     this.activeView.mount();
   }
 

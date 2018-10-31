@@ -1,0 +1,126 @@
+.my-songs-table {
+  width: calc(100% - 5rem);
+  border: 0.06rem solid rgba(0, 0, 0, 0.12);
+  border-collapse: collapse;
+  border-spacing: 0.12rem;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  background-color: #fff;
+  color: #757575;
+  display: table;
+  margin: 2rem 2.5rem 0 2.5rem;
+  box-shadow: 0 0.1rem 0.1rem 0 rgba(0, 0, 0, 0.14),
+    0 0.2rem 0.1rem -0.15rem rgba(0, 0, 0, 0.2),
+    0 0.1rem 0.3rem 0 rgba(0, 0, 0, 0.12);
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+
+  &__caption {
+    text-align: left;
+    margin-bottom: 2rem;
+    color: black;
+  }
+
+  &__row:hover {
+    background-color: #dee6e3;
+  }
+  &__th {
+    vertical-align: bottom;
+    text-overflow: ellipsis;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0;
+    height: 48px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.54);
+    padding-bottom: 8px;
+    box-sizing: border-box;
+
+    &_name {
+      text-align: left;
+    }
+
+    &_duration {
+      text-align: right;
+      padding-right: 0.2rem;
+      &-icon {
+        vertical-align: middle;
+      }
+    }
+
+    &_artist {
+      text-align: left;
+      padding-left: 0.3rem;
+    }
+
+    &_album {
+      text-align: left;
+    }
+  }
+
+  &__td {
+    position: relative;
+    height: 3rem;
+    border-top: 0.062rem solid rgba(0, 0, 0, 0.12);
+    border-bottom: 0.062rem solid rgba(0, 0, 0, 0.12);
+    padding: 0.75rem 1.125rem;
+    box-sizing: border-box;
+
+    &_play {
+      width: 2rem;
+      text-align: center;
+      padding: 0 0.5rem;
+      &-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+      }
+    }
+
+    &_cover {
+      text-align: left;
+      padding: 0.1rem 0.1rem;
+      width: 3rem;
+      &-img {
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.3rem;
+      }
+    }
+
+    &_name {
+      text-align: left;
+      padding: 0.1rem 0.1rem;
+      width: 30%;
+    }
+    &_duration {
+      text-align: right;
+      padding: 0.1rem 0.3rem;
+      width: 50px;
+    }
+    &_artist {
+      text-align: left;
+      padding-left: 0.3rem;
+      width: 20%;
+    }
+
+    &_album {
+      text-align: left;
+      padding: 0.1rem 0.1rem;
+      width: auto;
+    }
+
+    &_more {
+      width: 32px;
+      text-align: right;
+      padding: 0.1rem 0.1rem;
+      &-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+}
