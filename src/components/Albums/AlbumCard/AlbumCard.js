@@ -16,30 +16,25 @@ export class AlbumCard {
     this.props = props;
   }
 
-  initMaterial() {
-    const cardRipple = this.mountPoint.querySelectorAll(
+  querySelectors() {
+    this.albumRipplePoint = this.mountPoint.querySelectorAll(
       ".album-card__card-ripple-effect"
     );
-    Array.from(cardRipple).forEach(el => {
+  }
+
+  initMaterial() {
+    Array.from(this.albumRipplePoint).forEach(el => {
       new MDCRipple(el);
     });
   }
 
-  setAlbumsDescriptions() {
-    this.props = {
-      albumName: this.props.album.albumName,
-      artistName: this.props.album.artistName,
-      sourceImage: this.props.album.sourceImage
-    };
-  }
-
   mount() {
     this.mountPoint.innerHTML += this.render();
+    this.querySelectors();
     this.initMaterial();
   }
 
   render() {
-    this.setAlbumsDescriptions();
-    return albumCardTemplate(this.props);
+    return albumCardTemplate(this.props.album);
   }
 }

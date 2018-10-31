@@ -36,8 +36,7 @@ export class MainComponent {
     e.preventDefault();
     if (e.target.closest(".main__about-link")) {
       this.about.mount();
-    }
-    if (e.target.closest(".main__albums-link")) {
+    } else if (e.target.closest(".main__albums-link")) {
       this.albums.mount();
     }
   }
