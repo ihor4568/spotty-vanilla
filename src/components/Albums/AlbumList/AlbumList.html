@@ -1,4 +1,22 @@
 <div class="album-list">
   <h2 class="album-list__heading mdc-typography--headline4">Albums</h2>
-  <div class="album-list__container"></div>
-</div>
+  <div class="album-list__container">
+    <%  forEach() {}%>
+    <div class="album-card mdc-card mdc-card-album">
+      <div class="album-card__card-ripple-effect mdc-card__primary-action mdc-ripple-upgraded">
+        <div class="album-card__card-media mdc-card__media mdc-card__media-first mdc-card__media--square">
+          <div class="mdc-card__media-content">
+            <img class="album-card__images" src=<%=sourceImage %>>
+          </div>
+        </div>
+        <div class="album-card__description">
+          <h2 class="album-card__card-album mdc-typography--headline6">
+            <%= albumName %>
+          </h2>
+          <h3 class="album-card__card-artist mdc-typography--subtitle2">
+            <%= artistName %>
+          </h3>
+        </div>
+      </div>
+    </div>
+    < </div> </div>
