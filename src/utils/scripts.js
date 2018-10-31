@@ -19,3 +19,15 @@ export function createAlbum(album) {
     }
   });
 }
+
+export function addSong(albumTitle, song) {
+  getAlbumIdByTitle(albumTitle).once("value", snapshot => {
+    if (snapshot.exists()) {
+      const albumId = Object.keys(snapshot.val())[0];
+      database
+        .ref(`songs/${albumId}/`)
+        .push()
+        .set(song);
+    }
+  });
+}
