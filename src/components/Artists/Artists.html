@@ -1,0 +1,23 @@
+<div class="artist">
+
+  <h2 class="mdc-typography mdc-typography--headline4 artist__heading">Artists</h2>
+
+  <div class="artist__container">
+    <% artistsData.forEach((item, i) => { %>
+    <div class="mdc-card artist__card">
+      <div class="artist__card_shaped">
+        <div class="mdc-card mdc-card__primary-action mdc-ripple artist__ripple">
+          <div class="mdc-card__media mdc-card__media--square artist__media">
+            <img class="artist__image" src="<%= item.cover %>" alt="artist image">
+          </div>
+        </div>
+      </div>
+      <div class="artist__name">
+        <a class="mdc-typography mdc-typography--headline5 artist__link link" href="https://www.instagram.com/nickiminaj/">
+          <%= item.name %></a>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+
+</div>
