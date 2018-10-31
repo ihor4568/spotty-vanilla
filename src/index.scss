@@ -3,6 +3,10 @@
 @import "@material/list/mdc-list";
 @import "@material/textfield/mdc-text-field";
 @import "@material/top-app-bar/mdc-top-app-bar";
+@import "@material/icon-button/mdc-icon-button";
+@import "@material/list/mdc-list";
+@import "@material/menu-surface/mdc-menu-surface";
+@import "@material/menu/mdc-menu";
 
 @import "./components/Header/Header";
 @import "./components/Search/Search";
@@ -11,3 +15,5 @@
 @import "./components/Page/Page";
 
 @import "./components/MySongsTable/MySongsTable";
+@import "./components/About/About";
+@import "./components/DotsMenu/DotsMenu";

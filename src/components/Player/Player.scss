@@ -1,5 +1,7 @@
 .player {
+  display: flex;
+  justify-content: space-between;
   background: #5b50ff;
   color: white;
-  padding: 4rem;
+  padding: 3rem;
 }
