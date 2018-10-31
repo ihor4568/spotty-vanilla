@@ -8,7 +8,7 @@ import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
-  constructor(mountPoint, props = {}, status = false) {
+  constructor(mountPoint, props = {}, status = true) {
     this.mountPoint = mountPoint;
     this.props = props;
     this.status = status;
@@ -31,6 +31,7 @@ export class MainComponent {
     this.playerPoint.classList.add("main__elem_disable");
     this.searchPoint.classList.add("main__elem_disable");
     this.appBar.classList.add("main__app-bar_disable");
+    this.shareView.mount();
   }
 
   initMaterial() {
@@ -79,7 +80,6 @@ export class MainComponent {
     this.search.mount();
 
     this.shareView = new ShareViewComponent(this.shareViewPoint);
-    this.shareView.mount();
 
     this.about = new AboutComponent(this.mainPoint);
   }
