@@ -4,6 +4,7 @@ import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
 import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
+import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -28,6 +29,8 @@ export class MainComponent {
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
     this.mySongsLink = this.mountPoint.querySelector(".main__mySongs-link");
+    this.sidebarList = this.mountPoint.querySelector(".main__list");
+
   }
 
   initMaterial() {
@@ -41,6 +44,7 @@ export class MainComponent {
       "click",
       this.mySongsClickHandler.bind(this)
     );
+    this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
   }
 
   mySongsClickHandler(event) {
@@ -48,7 +52,14 @@ export class MainComponent {
     this.activeView = new MySongsTableComponent(this.mainPoint, {
       tableData: this.tableData
     });
-    this.activeView.mount();
+    this.activeView.mount();    
+  }
+
+  handleListClick(e) {
+    e.preventDefault();
+    if (e.target.closest(".main__about-link")) {
+      this.about.mount();
+    }
   }
 
   mount() {
@@ -75,6 +86,8 @@ export class MainComponent {
 
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
+
+    this.about = new AboutComponent(this.mainPoint);
   }
 
   render() {
