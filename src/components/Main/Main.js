@@ -9,7 +9,7 @@ import mainTemplate from "./Main.html";
 
 const TABLE_DATA = [
   {
-    cover: "./src/img/alibaba.jpg",
+    cover: "https://images.unian.net/photos/2017_09/1505748424-6475.jpg",
     name: "Alibaba",
     duration: "9:15",
     artist: "Folk",
