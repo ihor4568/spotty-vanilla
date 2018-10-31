@@ -21,8 +21,10 @@ export class ButtonsComponent {
     this.audio = this.mountPoint.querySelector(".buttons__main-audio");
   }
 
-  initMaterial(button) {
-    this.fabRipple = new MDCRipple(button);
+  initMaterial() {
+    this.fabRipplePlay = new MDCRipple(this.playButton);
+    this.fabRipplePrev = new MDCRipple(this.prevButton);
+    this.fabRippleNext = new MDCRipple(this.nextButton);
   }
 
   togglePlay() {
@@ -39,22 +41,14 @@ export class ButtonsComponent {
 
   addEventListeners() {
     this.playButton.addEventListener("click", () => {
-      this.initMaterial(this.playButton);
       this.togglePlay();
-    });
-
-    this.prevButton.addEventListener("click", () => {
-      this.initMaterial(this.prevButton);
-    });
-
-    this.nextButton.addEventListener("click", () => {
-      this.initMaterial(this.nextButton);
     });
   }
 
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
+    this.initMaterial();
     this.addEventListeners();
   }
 
