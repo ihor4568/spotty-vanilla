@@ -27,9 +27,9 @@ export class MainComponent {
   }
 
   setShareView() {
-    this.title.style.display = "none";
-    this.playerPoint.style.display = "none";
-    this.searchPoint.style.display = "none";
+    this.title.classList.add("main__elem_disable");
+    this.playerPoint.classList.add("main__elem_disable");
+    this.searchPoint.classList.add("main__elem_disable");
     this.appBar.classList.add("main__app-bar_disable");
   }
 

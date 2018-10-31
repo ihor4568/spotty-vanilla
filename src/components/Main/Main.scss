@@ -29,6 +29,9 @@
     width: 100%;
     z-index: 3;
   }
+  &__elem_disable {
+    display: none;
+  }
   &__app-bar_disable {
     pointer-events: none;
     @include mdc-top-app-bar-icon-ink-color(#ccc);
