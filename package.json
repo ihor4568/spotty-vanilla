@@ -6,7 +6,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p",
     "start": "webpack-dev-server --mode=development",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "fix": "eslint --fix src/"
   },
   "keywords": [],
   "license": "ISC",

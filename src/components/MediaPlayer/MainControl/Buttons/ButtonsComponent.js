@@ -2,12 +2,11 @@ import { MDCRipple } from "@material/ripple";
 import buttonsComponentTemplate from "./ButtonsComponent.html";
 
 export class ButtonsComponent {
-  constructor(mountPoint) {
+  constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.isPlayNow = false;
     this.audioDuration = 0;
-    this.songSrc =
-      "http://drivemusic.me/dl/ar8_BdKPhBpvPyoPFMdryQ/1540528751/download_music/2013/06/jazzamor-way-back.mp3";
+    this.props = props;
   }
 
   querySelectors() {
@@ -55,6 +54,6 @@ export class ButtonsComponent {
   }
 
   render() {
-    return buttonsComponentTemplate({ src: this.songSrc });
+    return buttonsComponentTemplate({ src: this.props.song });
   }
 }

@@ -2,11 +2,11 @@ import { ProgressBarComponent } from "./ProgressBar/ProgressBarComponent";
 import { AudioInfoComponent } from "./AudioInfo/AudioInfoComponent";
 import { RatingComponent } from "./Rating/RatingComponent";
 import { MainControlComponent } from "./MainControl/MainControlComponent";
-
-import playerTemplate from "./Player.html";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
-export class PlayerComponent {
+import playerTemplate from "./MediaPlayerComponent.html";
+
+export class MediaPlayerComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
   }
@@ -24,15 +24,26 @@ export class PlayerComponent {
     this.audioRating = this.mountPoint.querySelector(
       ".media-player__audio-rating"
     );
-    this.dotsMenuPoint = this.mountPoint.querySelector(".dots-menu-container");
+    this.dotsMenuPoint = this.mountPoint.querySelector(
+      ".media-player__dots-menu"
+    );
   }
 
   mountChildren() {
-    this.mainControlPannel = new MainControlComponent(this.mainControl);
+    this.mainControlPannel = new MainControlComponent(this.mainControl, {
+      song:
+        "http://drivemusic.me/dl/ar8_BdKPhBpvPyoPFMdryQ/1540528751/download_music/2013/06/jazzamor-way-back.mp3"
+    });
     this.mainControlPannel.mount();
     this.audioProgressBar = new ProgressBarComponent(this.progressBar);
     this.audioProgressBar.mount();
-    this.audioInfoComponent = new AudioInfoComponent(this.audioInfo);
+    this.audioInfoComponent = new AudioInfoComponent(this.audioInfo, {
+      image:
+        "https://s-media-cache-ak0.pinimg.com/originals/0e/f8/fd/0ef8fd42bb061ede2c2b6d1a9689782b.jpg",
+      songName: "Way Back",
+      album: "Lazy Sunday",
+      artistName: "Jazzamor"
+    });
     this.audioInfoComponent.mount();
     this.audioRatingComponent = new RatingComponent(this.audioRating);
     this.audioRatingComponent.mount();

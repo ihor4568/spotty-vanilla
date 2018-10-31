@@ -7,7 +7,7 @@ export class ProgressBarComponent {
   }
 
   querySelectors() {
-    this.audio = document.querySelector(".buttons__main-audio");
+    this.audio = document.querySelector(".player-buttons__main-audio");
     this.progressBar = this.mountPoint.querySelector(".progress-bar__played");
     this.progressBarMain = this.mountPoint.querySelector(".progress-bar__main");
     this.progressBarCircle = this.mountPoint.querySelector(
@@ -31,7 +31,7 @@ export class ProgressBarComponent {
     };
 
     this.movePlayTime = e => {
-      let a = e.target;
+      const a = e.target;
       if (a !== this.progressBarCircle) {
         this.audio.currentTime =
           this.audio.duration * (e.offsetX / this.progressBarMain.clientWidth);

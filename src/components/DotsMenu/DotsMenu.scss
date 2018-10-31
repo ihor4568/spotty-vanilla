@@ -1,7 +1,4 @@
 .dots-menu {
-  &-container {
-    margin-right: 1rem;
-  }
   &__button {
     @include mdc-icon-button-size(2.5rem, 2.5rem, 0);
     font-size: 2rem;

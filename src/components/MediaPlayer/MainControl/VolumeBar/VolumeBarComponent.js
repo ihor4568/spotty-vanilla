@@ -14,31 +14,31 @@ export class VolumeBarComponent {
     this.volumeIcon = this.mountPoint.querySelector(".volume-bar__icon");
   }
 
-  parameters() {
+  defaultView() {
     this.audio.volume = this.volumeDefault;
     this.volumeBar.style.width = `${this.audio.volume * 100}%`;
     this.volumeBarCircle.style.left = `100%`;
+  }
 
-    this.volumeUpdate = () => {
+  volumeUpdate() {
+    this.volumeBar.style.width = `${this.audio.volume * 100}%`;
+    this.volumeBarCircle.style.left = `100%`;
+    this.audio.muted = false;
+    this.toggleVolume();
+  }
+
+  moveVolume(e) {
+    const { target } = e;
+    if (
+      target !== this.volumeBarCircle &&
+      e.offsetX / this.volumeBarMain.clientWidth < 1
+    ) {
+      this.audio.volume = `${e.offsetX / this.volumeBarMain.clientWidth}`;
       this.volumeBar.style.width = `${this.audio.volume * 100}%`;
       this.volumeBarCircle.style.left = `100%`;
       this.audio.muted = false;
       this.toggleVolume();
-    };
-
-    this.moveVolume = e => {
-      const a = e.target;
-      if (
-        a !== this.volumeBarCircle &&
-        e.offsetX / this.volumeBarMain.clientWidth < 1
-      ) {
-        this.audio.volume = `${e.offsetX / this.volumeBarMain.clientWidth}`;
-        this.volumeBar.style.width = `${this.audio.volume * 100}%`;
-        this.volumeBarCircle.style.left = `100%`;
-        this.audio.muted = false;
-        this.toggleVolume();
-      }
-    };
+    }
   }
 
   toggleVolume() {
@@ -53,37 +53,46 @@ export class VolumeBarComponent {
     }
   }
 
+  mouseDownHandler() {
+    this.volumeBarMain.addEventListener("mousemove", this.moveVolume);
+  }
+
+  mouseUpHandler() {
+    this.volumeBarMain.removeEventListener("mousemove", this.moveVolume);
+  }
+
+  volumeIconHandler() {
+    if (this.audio.muted) {
+      this.volumeBar.style.width = `${this.audio.volume * 100}%`;
+      this.audio.muted = false;
+    } else {
+      this.audio.muted = true;
+      this.volumeBar.style.width = 0;
+    }
+    this.toggleVolume();
+  }
+
+  bindThis() {
+    this.volumeUpdate = this.volumeUpdate.bind(this);
+    this.moveVolume = this.moveVolume.bind(this);
+    this.mouseDownHandler = this.mouseDownHandler.bind(this);
+    this.mouseUpHandler = this.mouseUpHandler.bind(this);
+    this.volumeIconHandler = this.volumeIconHandler.bind(this);
+  }
+
   addEventListeners() {
     this.volumeBarMain.addEventListener("click", this.moveVolume);
-
-    this.volumeBarMain.addEventListener("mousedown", () => {
-      this.volumeBarMain.addEventListener("mousemove", this.moveVolume);
-    });
-
-    this.volumeBarCircle.addEventListener("mousedown", () => {
-      this.volumeBarMain.addEventListener("mousemove", this.moveVolume);
-    });
-
-    document.addEventListener("mouseup", () => {
-      this.volumeBarMain.removeEventListener("mousemove", this.moveVolume);
-    });
-
-    this.volumeIcon.addEventListener("click", () => {
-      if (this.audio.muted) {
-        this.volumeBar.style.width = `${this.audio.volume * 100}%`;
-        this.audio.muted = false;
-      } else {
-        this.audio.muted = true;
-        this.volumeBar.style.width = 0;
-      }
-      this.toggleVolume();
-    });
+    this.volumeBarMain.addEventListener("mousedown", this.mouseDownHandler);
+    this.volumeBarCircle.addEventListener("mousedown", this.mouseDownHandler);
+    document.addEventListener("mouseup", this.mouseUpHandler);
+    this.volumeIcon.addEventListener("click", this.volumeIconHandler);
   }
 
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
-    this.parameters();
+    this.defaultView();
+    this.bindThis();
     this.addEventListeners();
     this.toggleVolume();
   }
