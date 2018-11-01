@@ -1,5 +1,5 @@
 import { VolumeBarComponent } from "./VolumeBar/VolumeBar";
-import { ButtonsComponent } from "./Buttons/Buttons";
+import { PlayerButtonsComponent } from "./PlayerButtons/PlayerButtons";
 import mainControlTemplate from "./MainControl.html";
 
 export class MainControlComponent {
@@ -17,7 +17,7 @@ export class MainControlComponent {
   }
 
   mountChildren() {
-    this.audioButtons = new ButtonsComponent(this.buttons, {
+    this.audioButtons = new PlayerButtonsComponent(this.buttons, {
       song: this.props.song
     });
     this.audioButtons.mount();

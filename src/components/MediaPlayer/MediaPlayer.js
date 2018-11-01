@@ -64,6 +64,9 @@ export class MediaPlayerComponent {
   }
 
   render() {
-    return playerTemplate();
+    return playerTemplate({
+      src:
+        "http://drivemusic.me/dl/ar8_BdKPhBpvPyoPFMdryQ/1540528751/download_music/2013/06/jazzamor-way-back.mp3"
+    });
   }
 }

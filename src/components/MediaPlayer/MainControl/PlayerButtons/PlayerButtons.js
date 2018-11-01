@@ -1,7 +1,7 @@
 import { MDCRipple } from "@material/ripple";
-import buttonsComponentTemplate from "./Buttons.html";
+import buttonsComponentTemplate from "./PlayerButtons.html";
 
-export class ButtonsComponent {
+export class PlayerButtonsComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.isPlayNow = false;
