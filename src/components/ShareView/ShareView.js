@@ -1,10 +1,17 @@
 import { MDCRipple } from "@material/ripple";
 import shareViewTemplate from "./ShareView.html";
 
+const SONG = {
+  albumName: "Loud",
+  artistName: "by Rihanna",
+  imageSource: "https://image.ibb.co/k4Qc8L/rihanna-loud.jpg"
+};
+
 export class ShareViewComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.song = SONG;
   }
 
   querySelectors() {
@@ -24,6 +31,6 @@ export class ShareViewComponent {
   }
 
   render() {
-    return shareViewTemplate();
+    return shareViewTemplate(this.song);
   }
 }

@@ -4,6 +4,7 @@ import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
 import { ShareViewComponent } from "../ShareView/ShareView";
+import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
@@ -21,12 +22,10 @@ export class MainComponent {
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.shareViewPoint = this.mountPoint.querySelector(".main__share-view");
-    this.title = this.mountPoint.querySelector(".main__content-title");
     this.appBar = this.mountPoint.querySelector(".main__app-bar");
   }
 
   setShareView() {
-    this.title.classList.add("main__elem_disable");
     this.playerPoint.classList.add("main__elem_disable");
     this.searchPoint.classList.add("main__elem_disable");
     this.appBar.classList.add("main__app-bar_disable");
@@ -48,6 +47,8 @@ export class MainComponent {
     e.preventDefault();
     if (e.target.closest(".main__about-link")) {
       this.about.mount();
+    } else if (e.target.closest(".main__albums-link")) {
+      this.albums.mount();
     }
   }
 
@@ -79,6 +80,9 @@ export class MainComponent {
     this.shareView = new ShareViewComponent(this.shareViewPoint);
 
     this.about = new AboutComponent(this.mainPoint);
+
+    this.albums = new AlbumsComponent(this.mainPoint);
+    this.albums.mount();
   }
 
   render() {
