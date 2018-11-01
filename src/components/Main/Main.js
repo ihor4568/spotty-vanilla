@@ -69,6 +69,7 @@ export class MainComponent {
     this.about = new AboutComponent(this.mainPoint);
 
     this.albums = new Albums(this.mainPoint);
+    this.albums.mount();
   }
 
   render() {
