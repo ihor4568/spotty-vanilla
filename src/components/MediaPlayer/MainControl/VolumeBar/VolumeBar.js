@@ -8,7 +8,6 @@ export class VolumeBarComponent {
   }
 
   querySelectors() {
-    this.audio = this.props.audio;
     this.volumeBar = this.mountPoint.querySelector(".volume-bar__volume");
     this.volumeBarMain = this.mountPoint.querySelector(".volume-bar__main");
     this.volumeBarCircle = this.mountPoint.querySelector(".volume-bar__circle");
@@ -16,15 +15,15 @@ export class VolumeBarComponent {
   }
 
   defaultView() {
-    this.audio.volume = this.volumeDefault;
-    this.volumeBar.style.width = `${this.audio.volume * 100}%`;
+    this.props.audio.volume = this.volumeDefault;
+    this.volumeBar.style.width = `${this.props.audio.volume * 100}%`;
     this.volumeBarCircle.style.left = `100%`;
   }
 
   volumeUpdate() {
-    this.volumeBar.style.width = `${this.audio.volume * 100}%`;
+    this.volumeBar.style.width = `${this.props.audio.volume * 100}%`;
     this.volumeBarCircle.style.left = `100%`;
-    this.audio.muted = false;
+    this.props.audio.muted = false;
     this.toggleVolume();
   }
 
@@ -34,20 +33,26 @@ export class VolumeBarComponent {
       target !== this.volumeBarCircle &&
       e.offsetX / this.volumeBarMain.clientWidth < 1
     ) {
-      this.audio.volume = `${e.offsetX / this.volumeBarMain.clientWidth}`;
-      this.volumeBar.style.width = `${this.audio.volume * 100}%`;
+      this.props.audio.volume = `${e.offsetX / this.volumeBarMain.clientWidth}`;
+      this.volumeBar.style.width = `${this.props.audio.volume * 100}%`;
       this.volumeBarCircle.style.left = `100%`;
-      this.audio.muted = false;
+      this.props.audio.muted = false;
       this.toggleVolume();
     }
   }
 
   toggleVolume() {
-    if (this.audio.volume > 0.6 && this.audio.muted === false) {
+    if (this.props.audio.volume > 0.6 && this.props.audio.muted === false) {
       this.volumeIcon.innerText = "volume_up";
-    } else if (this.audio.volume > 0.3 && this.audio.muted === false) {
+    } else if (
+      this.props.audio.volume > 0.3 &&
+      this.props.audio.muted === false
+    ) {
       this.volumeIcon.innerText = "volume_down";
-    } else if (this.audio.volume > 0 && this.audio.muted === false) {
+    } else if (
+      this.props.audio.volume > 0 &&
+      this.props.audio.muted === false
+    ) {
       this.volumeIcon.innerText = "volume_mute";
     } else {
       this.volumeIcon.innerText = "volume_off";
@@ -63,11 +68,11 @@ export class VolumeBarComponent {
   }
 
   volumeIconHandler() {
-    if (this.audio.muted) {
-      this.volumeBar.style.width = `${this.audio.volume * 100}%`;
-      this.audio.muted = false;
+    if (this.props.audio.muted) {
+      this.volumeBar.style.width = `${this.props.audio.volume * 100}%`;
+      this.props.audio.muted = false;
     } else {
-      this.audio.muted = true;
+      this.props.audio.muted = true;
       this.volumeBar.style.width = 0;
     }
     this.toggleVolume();

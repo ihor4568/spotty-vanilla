@@ -9,9 +9,6 @@ export class MainControlComponent {
   }
 
   querySelectors() {
-    this.mainControl = this.mountPoint.querySelector(
-      ".main-control__container"
-    );
     this.buttons = this.mountPoint.querySelector(".main-control__buttons");
     this.volumeBar = this.mountPoint.querySelector(".main-control__volume-bar");
   }

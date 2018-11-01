@@ -12,15 +12,17 @@ export class RatingComponent {
     this.starsArray = Array.from(this.stars);
   }
 
-  addEventListeners() {
-    this.starsContainer.addEventListener("click", e => {
-      const { target } = e;
-      this.starsArray.forEach((item, i) => {
-        this.starsArray[i].classList.remove("audio-rating__star_selected");
-      });
-      target.classList.add("audio-rating__star_selected");
-      this.audioRating = target.getAttribute("data-about");
+  getRating(e) {
+    const { target } = e;
+    this.starsArray.forEach((item, i) => {
+      this.starsArray[i].classList.remove("audio-rating__star_selected");
     });
+    target.classList.add("audio-rating__star_selected");
+    this.audioRating = target.getAttribute("data-about");
+  }
+
+  addEventListeners() {
+    this.starsContainer.addEventListener("click", this.getRating.bind(this));
   }
 
   mount() {

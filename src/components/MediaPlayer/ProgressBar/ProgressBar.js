@@ -13,7 +13,6 @@ export class ProgressBarComponent {
   }
 
   querySelectors() {
-    this.audio = this.props.audio;
     this.progressBar = this.mountPoint.querySelector(".progress-bar__played");
     this.progressBarMain = this.mountPoint.querySelector(".progress-bar__main");
     this.progressBarCircle = this.mountPoint.querySelector(
@@ -23,8 +22,9 @@ export class ProgressBarComponent {
   }
 
   timeUpdate() {
-    this.audioDuration = (this.audio.currentTime / this.audio.duration) * 100;
-    this.progressBar.style.width = `${this.audioDuration}%`;
+    this.props.audioDuration =
+      (this.props.audio.currentTime / this.props.audio.duration) * 100;
+    this.progressBar.style.width = `${this.props.audioDuration}%`;
     this.progressBarCircle.style.left = `100%`;
   }
 
@@ -40,20 +40,21 @@ export class ProgressBarComponent {
   movePlayTime(e) {
     const { target } = e;
     if (target !== this.progressBarCircle) {
-      this.audio.currentTime =
-        this.audio.duration * (e.offsetX / this.progressBarMain.clientWidth);
+      this.props.audio.currentTime =
+        this.props.audio.duration *
+        (e.offsetX / this.progressBarMain.clientWidth);
     }
   }
 
   mouseDownHandler() {
-    this.audio.removeEventListener("timeupdate", this.timeUpdate);
+    this.props.audio.removeEventListener("timeupdate", this.timeUpdate);
     document.addEventListener("mousemove", this.movePlayTime);
     document.addEventListener("mousemove", this.timeUpdate);
     this.showModal();
   }
 
   mouseUpHandler() {
-    this.audio.addEventListener("timeupdate", this.timeUpdate);
+    this.props.audio.addEventListener("timeupdate", this.timeUpdate);
     document.removeEventListener("mousemove", this.movePlayTime);
     document.removeEventListener("mousemove", this.timeUpdate);
     if (this.moveCircle) {
@@ -62,7 +63,7 @@ export class ProgressBarComponent {
   }
 
   addEventListeners() {
-    this.audio.addEventListener("timeupdate", this.timeUpdate);
+    this.props.audio.addEventListener("timeupdate", this.timeUpdate);
     this.progressBarMain.addEventListener("click", this.movePlayTime);
     this.progressBarMain.addEventListener("mousedown", this.mouseDownHandler);
     this.progressBarCircle.addEventListener("mousedown", this.mouseDownHandler);

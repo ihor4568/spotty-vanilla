@@ -19,7 +19,6 @@ export class PlayerButtonsComponent {
     this.nextButton = this.mountPoint.querySelector(
       ".player-buttons__navigate-button_next"
     );
-    this.audio = this.props.audio;
   }
 
   initMaterial() {
@@ -30,11 +29,11 @@ export class PlayerButtonsComponent {
 
   togglePlay() {
     if (this.isPlayNow === false) {
-      this.audio.play();
+      this.props.audio.play();
       this.isPlayNow = true;
       this.playButton.children[0].innerText = "pause";
     } else {
-      this.audio.pause();
+      this.props.audio.pause();
       this.isPlayNow = false;
       this.playButton.children[0].innerText = "play_arrow";
     }
