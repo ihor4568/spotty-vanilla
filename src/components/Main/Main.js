@@ -14,6 +14,22 @@ const TABLE_DATA = [
     duration: "9:15",
     artist: "Folk",
     album: "Super"
+  },
+  {
+    cover:
+      "https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/6b2ef062-6913-4a94-a265-7d75f4f91854/64.jpg",
+    name: "Alibaba",
+    duration: "9:15",
+    artist: "Folk",
+    album: "Super"
+  },
+  {
+    cover:
+      "https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930",
+    name: "Alibaba",
+    duration: "9:15",
+    artist: "Folk",
+    album: "Super"
   }
 ];
 
