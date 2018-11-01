@@ -51,6 +51,16 @@ const ARTISTS_DATA = [
     name: "Dizaster",
     cover: "https://bit.ly/2RpRDgk",
     link: "https://www.instagram.com/mrdizaster/"
+  },
+  {
+    name: "Machine Gun Kelly",
+    cover: "https://bit.ly/2PyW0bA",
+    link: "https://www.instagram.com/machinegunkelly/"
+  },
+  {
+    name: "Snow Tha Product",
+    cover: "https://bit.ly/2qkMUB2",
+    link: "https://www.instagram.com/snowthaproduct/"
   }
 ];
 
