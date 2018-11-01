@@ -65,7 +65,7 @@ const ALBUMS = [
   }
 ];
 
-export class Albums {
+export class AlbumsComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
