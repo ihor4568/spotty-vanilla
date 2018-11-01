@@ -16,6 +16,10 @@
   &__content-mount {
     padding: 5rem 1rem 12rem 1rem;
     z-index: 1;
+
+    &_disable {
+      padding-bottom: 1rem;
+    }
   }
   &__search {
     position: fixed;

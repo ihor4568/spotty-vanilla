@@ -31,6 +31,7 @@ export class MainComponent {
     this.playerPoint.classList.add("main__elem_disable");
     this.searchPoint.classList.add("main__elem_disable");
     this.appBar.classList.add("main__app-bar_disable");
+    this.mainPoint.classList.add("main__content-mount_disable");
     this.shareView.mount();
   }
 
