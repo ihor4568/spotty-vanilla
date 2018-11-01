@@ -8,7 +8,7 @@ import playerTemplate from "./MediaPlayer.html";
 
 const SONG_INFO = {
   songSrc:
-    "http://drivemusic.me/dl/ar8_BdKPhBpvPyoPFMdryQ/1540528751/download_music/2013/06/jazzamor-way-back.mp3",
+    "https://storage.mp3cc.biz/download/89035703/U2hXUUsxUTVxellvRHcrQTNaNUdIM0drb2J3dWhaNjNacXRmdGU5bGZtN3pMcHdUNnhicmozMDlHcHBnRHNZRTZoSEJzMldvQTl1SGk1TjU2VFJyK0dHOUFiMUZVZzBYVTQ2NU8xVEwxZjlLbmZtaWlZQk1TVE1MVDBleThqdVg/jazzamor-jazzamor-je-t-aime_(mp3CC.biz).mp3",
   songImageSrc:
     "https://s-media-cache-ak0.pinimg.com/originals/0e/f8/fd/0ef8fd42bb061ede2c2b6d1a9689782b.jpg",
   songName: "Way Back",
@@ -65,7 +65,6 @@ export class MediaPlayerComponent {
     this.dotsMenu = new DotsMenuComponent(this.dotsMenuPoint, {
       items: [
         { name: "Add to my songs", handler: () => {} },
-        { name: "Lyrics", handler: () => {} },
         { name: "Share", handler: () => {} }
       ]
     });
