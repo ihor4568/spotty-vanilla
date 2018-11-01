@@ -1,5 +1,5 @@
 import { MDCRipple } from "@material/ripple";
-import buttonsComponentTemplate from "./ButtonsComponent.html";
+import buttonsComponentTemplate from "./Buttons.html";
 
 export class ButtonsComponent {
   constructor(mountPoint, props = {}) {

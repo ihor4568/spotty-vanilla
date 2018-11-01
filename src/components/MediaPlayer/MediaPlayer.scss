@@ -1,7 +1,7 @@
-@import "./MainControl/MainControlComponent";
-@import "./ProgressBar/ProgressBarComponent";
-@import "./AudioInfo/AudioInfoComponent";
-@import "./Rating/RatingComponent";
+@import "./MainControl/MainControl";
+@import "./ProgressBar/ProgressBar";
+@import "./AudioInfo/AudioInfo";
+@import "./Rating/Rating";
 
 .media-player {
   display: flex;

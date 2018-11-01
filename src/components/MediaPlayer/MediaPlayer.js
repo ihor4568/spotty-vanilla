@@ -1,10 +1,10 @@
-import { ProgressBarComponent } from "./ProgressBar/ProgressBarComponent";
-import { AudioInfoComponent } from "./AudioInfo/AudioInfoComponent";
-import { RatingComponent } from "./Rating/RatingComponent";
-import { MainControlComponent } from "./MainControl/MainControlComponent";
+import { ProgressBarComponent } from "./ProgressBar/ProgressBar";
+import { AudioInfoComponent } from "./AudioInfo/AudioInfo";
+import { RatingComponent } from "./Rating/Rating";
+import { MainControlComponent } from "./MainControl/MainControl";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
-import playerTemplate from "./MediaPlayerComponent.html";
+import playerTemplate from "./MediaPlayer.html";
 
 export class MediaPlayerComponent {
   constructor(mountPoint) {

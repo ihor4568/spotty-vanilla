@@ -1,4 +1,4 @@
-import volumeBarTemplate from "./VolumeBarComponent.html";
+import volumeBarTemplate from "./VolumeBar.html";
 
 export class VolumeBarComponent {
   constructor(mountPoint) {

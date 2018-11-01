@@ -1,4 +1,4 @@
-import audioInfoComponentHTML from "./AudioInfoComponent.html";
+import audioInfoComponentHTML from "./AudioInfo.html";
 
 export class AudioInfoComponent {
   constructor(mountPoint, props = {}) {

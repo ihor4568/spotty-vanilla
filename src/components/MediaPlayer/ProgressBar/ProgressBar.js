@@ -1,4 +1,4 @@
-import progressBarTemplate from "./ProgressBarComponent.html";
+import progressBarTemplate from "./ProgressBar.html";
 
 export class ProgressBarComponent {
   constructor(mountPoint) {

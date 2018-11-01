@@ -1,4 +1,4 @@
-import ratingTemplate from "./RatingComponent.html";
+import ratingTemplate from "./Rating.html";
 
 export class RatingComponent {
   constructor(mountPoint) {

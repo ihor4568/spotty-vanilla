@@ -1,6 +1,6 @@
-import { VolumeBarComponent } from "./VolumeBar/VolumeBarComponent";
-import { ButtonsComponent } from "./Buttons/ButtonsComponent";
-import mainControlTemplate from "./MainControlComponent.html";
+import { VolumeBarComponent } from "./VolumeBar/VolumeBar";
+import { ButtonsComponent } from "./Buttons/Buttons";
+import mainControlTemplate from "./MainControl.html";
 
 export class MainControlComponent {
   constructor(mountPoint, props = {}) {
