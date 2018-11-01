@@ -1,3 +1,6 @@
+@import "@material/card/mdc-card";
+@import "@material/button/mdc-button";
+@import "@material/typography/mdc-typography";
 @import "@material/typography/mdc-typography";
 @import "@material/drawer/mdc-drawer";
 @import "@material/list/mdc-list";
@@ -15,6 +18,7 @@
 @import "./components/Main/Main";
 @import "./components/Player/Player";
 @import "./components/Page/Page";
+@import "./components/Albums/Albums";
 @import "./components/About/About";
 @import "./components/DotsMenu/DotsMenu";
 @import "./components/Artists/Artists";

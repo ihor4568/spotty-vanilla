@@ -3,6 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
+import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
 import mainTemplate from "./Main.html";
@@ -41,6 +42,8 @@ export class MainComponent {
     e.preventDefault();
     if (e.target.closest(".main__about-link")) {
       this.about.mount();
+    } else if (e.target.closest(".main__albums-link")) {
+      this.albums.mount();
     }
   }
 
@@ -77,6 +80,9 @@ export class MainComponent {
     this.search.mount();
 
     this.about = new AboutComponent(this.mainPoint);
+
+    this.albums = new AlbumsComponent(this.mainPoint);
+    this.albums.mount();
 
     this.artist = new ArtistsComponent(this.mainPoint);
   }
