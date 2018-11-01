@@ -1,5 +1,5 @@
-import { firebase } from "./utils/firebase";
-import { MusicStorage } from "./services/MusicStorage";
+// import { firebase } from "./utils/firebase";
+// import { MusicStorage } from "./services/MusicStorage";
 import { MainComponent } from "./components/Main/Main";
 import "./index.scss";
 
@@ -8,9 +8,12 @@ const main = new MainComponent(root);
 
 main.mount();
 
-const database = firebase.database();
-const musicStorage = new MusicStorage(database);
+// const database = firebase.database();
+// const musicStorage = new MusicStorage(database);
 
-musicStorage.getAlbums().then(albums => albums);
-musicStorage.getAuthors().then(authors => authors);
-musicStorage.getAuthorSongs("BJ Block").then(songs => songs);
+// Usage example.
+
+// musicStorage.getAlbums().then(albums => console.log(albums));
+// musicStorage.getAuthors().then(authors => console.log(authors));
+// musicStorage.getAuthorSongs("BJ Block").then(songs => console.log(songs));
+// musicStorage.getAlbumSongs("||").then(songs => console.log(songs));

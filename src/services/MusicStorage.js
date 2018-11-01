@@ -5,6 +5,13 @@ function getAuthorByName(name, databaseRef) {
     .equalTo(name);
 }
 
+function getAlbumByTitle(title, databaseRef) {
+  return databaseRef
+    .ref("albums")
+    .orderByChild("title")
+    .equalTo(title);
+}
+
 export class MusicStorage {
   constructor(database) {
     this.database = database;
@@ -30,6 +37,21 @@ export class MusicStorage {
       .then(author => {
         const songs = [];
         Object.values(author.val())[0].songs.forEach(songId =>
+          this.database
+            .ref(`songs/${songId}`)
+            .once("value")
+            .then(song => songs.push(song.val()))
+        );
+        return songs;
+      });
+  }
+
+  getAlbumSongs(albumTitle) {
+    return getAlbumByTitle(albumTitle, this.database)
+      .once("value")
+      .then(album => {
+        const songs = [];
+        Object.values(album.val())[0].songs.forEach(songId =>
           this.database
             .ref(`songs/${songId}`)
             .once("value")
