@@ -4,6 +4,7 @@ import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
 import { AboutComponent } from "../About/About";
+import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -37,9 +38,6 @@ export class MainComponent {
     if (e.target.closest(".main__about-link")) {
       this.routeNavigate("/about");
     }
-    if (e.target.closest(".main__songs-link")) {
-      this.routeNavigate("/songs");
-    }
   }
 
   routeNavigate(url) {
@@ -48,14 +46,23 @@ export class MainComponent {
   }
 
   handleStatePath() {
-    const pathname = window.location.pathname;
-    if (pathname === "/about") {
+    const pathname = window.location.pathname.replace(/^\/|\/$/g, "");
+    if (pathname === "about" || pathname === "") {
       this.about.mount();
+      return;
     }
 
-    if (pathname === "/songs") {
-      this.songs.mount();
+    const urlParts = pathname.split("/");
+
+    if (urlParts[0] === "songs" && urlParts[1] && urlParts.length === 2) {
+      // songId will be used for the data request
+      // eslint-disable-next-line no-unused-vars
+      const songId = urlParts[1];
+      // ShareView will be mounted here...
+      return;
     }
+
+    this.notFound.mount();
   }
 
   mount() {
@@ -85,7 +92,8 @@ export class MainComponent {
     this.search.mount();
 
     this.about = new AboutComponent(this.mainPoint);
-    this.songs = new SearchComponent(this.mainPoint);
+
+    this.notFound = new NotFoundComponent(this.mainPoint);
   }
 
   render() {

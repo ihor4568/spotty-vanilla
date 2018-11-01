@@ -2,11 +2,14 @@ const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const autoprefixer = require("autoprefixer");
+
 const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
   entry: "./src/index.js",
   output: {
+    publicPath: "/",
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].[hash].js"
   },
@@ -25,7 +28,7 @@ module.exports = {
             loader: "postcss-loader",
             options: {
               indent: "postcss",
-              plugins: [require("autoprefixer")]
+              plugins: [autoprefixer]
             }
           },
           {
