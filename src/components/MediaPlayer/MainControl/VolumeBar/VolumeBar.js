@@ -5,6 +5,11 @@ export class VolumeBarComponent {
     this.mountPoint = mountPoint;
     this.volumeDefault = 0.6;
     this.props = props;
+    this.volumeUpdate = this.volumeUpdate.bind(this);
+    this.moveVolume = this.moveVolume.bind(this);
+    this.mouseDownHandler = this.mouseDownHandler.bind(this);
+    this.mouseUpHandler = this.mouseUpHandler.bind(this);
+    this.volumeIconHandler = this.volumeIconHandler.bind(this);
   }
 
   querySelectors() {
@@ -78,14 +83,6 @@ export class VolumeBarComponent {
     this.toggleVolume();
   }
 
-  bindThis() {
-    this.volumeUpdate = this.volumeUpdate.bind(this);
-    this.moveVolume = this.moveVolume.bind(this);
-    this.mouseDownHandler = this.mouseDownHandler.bind(this);
-    this.mouseUpHandler = this.mouseUpHandler.bind(this);
-    this.volumeIconHandler = this.volumeIconHandler.bind(this);
-  }
-
   addEventListeners() {
     this.volumeBarMain.addEventListener("click", this.moveVolume);
     this.volumeBarMain.addEventListener("mousedown", this.mouseDownHandler);
@@ -98,7 +95,6 @@ export class VolumeBarComponent {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.defaultView();
-    this.bindThis();
     this.addEventListeners();
     this.toggleVolume();
   }
