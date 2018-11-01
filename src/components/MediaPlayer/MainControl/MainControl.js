@@ -18,10 +18,13 @@ export class MainControlComponent {
 
   mountChildren() {
     this.audioButtons = new PlayerButtonsComponent(this.buttons, {
-      song: this.props.song
+      song: this.props.song,
+      audio: this.props.audio
     });
     this.audioButtons.mount();
-    this.audioVolumeBar = new VolumeBarComponent(this.volumeBar);
+    this.audioVolumeBar = new VolumeBarComponent(this.volumeBar, {
+      audio: this.props.audio
+    });
     this.audioVolumeBar.mount();
   }
 

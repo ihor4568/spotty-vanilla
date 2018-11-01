@@ -1,13 +1,14 @@
 import volumeBarTemplate from "./VolumeBar.html";
 
 export class VolumeBarComponent {
-  constructor(mountPoint) {
+  constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.volumeDefault = 0.6;
+    this.props = props;
   }
 
   querySelectors() {
-    this.audio = document.querySelector(".player-buttons__main-audio");
+    this.audio = this.props.audio;
     this.volumeBar = this.mountPoint.querySelector(".volume-bar__volume");
     this.volumeBarMain = this.mountPoint.querySelector(".volume-bar__main");
     this.volumeBarCircle = this.mountPoint.querySelector(".volume-bar__circle");

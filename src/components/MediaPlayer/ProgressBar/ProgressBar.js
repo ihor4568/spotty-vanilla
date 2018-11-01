@@ -1,13 +1,19 @@
 import progressBarTemplate from "./ProgressBar.html";
 
 export class ProgressBarComponent {
-  constructor(mountPoint) {
+  constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.audioDuration = 0;
+    this.props = props;
+    this.timeUpdate = this.timeUpdate.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.movePlayTime = this.movePlayTime.bind(this);
+    this.mouseUpHandler = this.mouseUpHandler.bind(this);
+    this.mouseDownHandler = this.mouseDownHandler.bind(this);
   }
 
   querySelectors() {
-    this.audio = document.querySelector(".player-buttons__main-audio");
+    this.audio = this.props.audio;
     this.progressBar = this.mountPoint.querySelector(".progress-bar__played");
     this.progressBarMain = this.mountPoint.querySelector(".progress-bar__main");
     this.progressBarCircle = this.mountPoint.querySelector(
@@ -55,14 +61,6 @@ export class ProgressBarComponent {
     }
   }
 
-  bindThis() {
-    this.timeUpdate = this.timeUpdate.bind(this);
-    this.showModal = this.showModal.bind(this);
-    this.movePlayTime = this.movePlayTime.bind(this);
-    this.mouseUpHandler = this.mouseUpHandler.bind(this);
-    this.mouseDownHandler = this.mouseDownHandler.bind(this);
-  }
-
   addEventListeners() {
     this.audio.addEventListener("timeupdate", this.timeUpdate);
     this.progressBarMain.addEventListener("click", this.movePlayTime);
@@ -74,7 +72,6 @@ export class ProgressBarComponent {
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
-    this.bindThis();
     this.addEventListeners();
   }
 

@@ -6,12 +6,23 @@ import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
 import playerTemplate from "./MediaPlayer.html";
 
+const SONG_INFO = {
+  songSrc:
+    "http://drivemusic.me/dl/ar8_BdKPhBpvPyoPFMdryQ/1540528751/download_music/2013/06/jazzamor-way-back.mp3",
+  songImageSrc:
+    "https://s-media-cache-ak0.pinimg.com/originals/0e/f8/fd/0ef8fd42bb061ede2c2b6d1a9689782b.jpg",
+  songName: "Way Back",
+  album: "Lazy Sunday",
+  artistName: "Jazzamor"
+};
+
 export class MediaPlayerComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
   }
 
   querySelectors() {
+    this.audio = this.mountPoint.querySelector(".media-player__main-audio");
     this.buttons = this.mountPoint.querySelector(".media-player__buttons");
     this.progressBar = this.mountPoint.querySelector(
       ".media-player__progress-bar"
@@ -29,20 +40,25 @@ export class MediaPlayerComponent {
     );
   }
 
+  set audioTime(val) {
+    this.audio.currentTime = val;
+  }
+
   mountChildren() {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
-      song:
-        "http://drivemusic.me/dl/ar8_BdKPhBpvPyoPFMdryQ/1540528751/download_music/2013/06/jazzamor-way-back.mp3"
+      song: SONG_INFO.songSrc,
+      audio: this.audio
     });
     this.mainControlPannel.mount();
-    this.audioProgressBar = new ProgressBarComponent(this.progressBar);
+    this.audioProgressBar = new ProgressBarComponent(this.progressBar, {
+      audio: this.audio
+    });
     this.audioProgressBar.mount();
     this.audioInfoComponent = new AudioInfoComponent(this.audioInfo, {
-      image:
-        "https://s-media-cache-ak0.pinimg.com/originals/0e/f8/fd/0ef8fd42bb061ede2c2b6d1a9689782b.jpg",
-      songName: "Way Back",
-      album: "Lazy Sunday",
-      artistName: "Jazzamor"
+      image: SONG_INFO.songImageSrc,
+      songName: SONG_INFO.songName,
+      album: SONG_INFO.album,
+      artistName: SONG_INFO.artistName
     });
     this.audioInfoComponent.mount();
     this.audioRatingComponent = new RatingComponent(this.audioRating);
@@ -65,8 +81,7 @@ export class MediaPlayerComponent {
 
   render() {
     return playerTemplate({
-      src:
-        "http://drivemusic.me/dl/ar8_BdKPhBpvPyoPFMdryQ/1540528751/download_music/2013/06/jazzamor-way-back.mp3"
+      src: SONG_INFO.songSrc
     });
   }
 }

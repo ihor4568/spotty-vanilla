@@ -19,7 +19,7 @@ export class PlayerButtonsComponent {
     this.nextButton = this.mountPoint.querySelector(
       ".player-buttons__navigate-button_next"
     );
-    this.audio = this.mountPoint.querySelector(".player-buttons__main-audio");
+    this.audio = this.props.audio;
   }
 
   initMaterial() {
