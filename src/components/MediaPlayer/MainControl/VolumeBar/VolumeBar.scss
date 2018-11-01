@@ -1,0 +1,32 @@
+.volume-bar {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+  &__main {
+    width: 5.625rem;
+    margin: 0;
+    overflow: visible;
+  }
+  &__icon {
+    cursor: pointer;
+    margin-right: 0.625rem;
+    margin-bottom: 0.125rem;
+    color: #838383;
+    font-size: 1.81rem;
+  }
+  &__volume {
+    transform: none;
+    width: 0;
+    height: 0.31rem;
+  }
+  &__circle {
+    position: relative;
+    width: 0.937rem;
+    height: 0.937rem;
+    border-radius: 50%;
+    background-color: #6200ee;
+    transform: translateX(calc(-0.937rem / 2)) translateY(calc(-0.625rem / 2));
+    cursor: pointer;
+  }
+}

@@ -1,8 +1,9 @@
 import { MDCDrawer } from "@material/drawer";
 
-import { PlayerComponent } from "../Player/Player";
+import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
+import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
@@ -35,6 +36,8 @@ export class MainComponent {
     e.preventDefault();
     if (e.target.closest(".main__about-link")) {
       this.about.mount();
+    } else if (e.target.closest(".main__albums-link")) {
+      this.albums.mount();
     }
   }
 
@@ -57,13 +60,16 @@ export class MainComponent {
     });
     this.header.mount();
 
-    this.player = new PlayerComponent(this.playerPoint);
+    this.player = new MediaPlayerComponent(this.playerPoint);
     this.player.mount();
 
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
 
     this.about = new AboutComponent(this.mainPoint);
+
+    this.albums = new AlbumsComponent(this.mainPoint);
+    this.albums.mount();
   }
 
   render() {

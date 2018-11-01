@@ -14,6 +14,12 @@
 .vscode/
 .idea/
 
+# Webstorm IDE settings
+.idea/
+
+# firebase hosting cache folder
+.firebase/
+
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
@@ -130,8 +136,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+dist/
 
 # End of https://www.gitignore.io/api/node,linux,macos,windows
 
-dist/
-.idea
+
