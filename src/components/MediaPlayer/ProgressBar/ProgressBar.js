@@ -73,7 +73,7 @@ export class ProgressBarComponent {
     this.progressBarMain.addEventListener("click", this.movePlayTime);
     this.progressBarMain.addEventListener("mousedown", this.mouseDownHandler);
     this.progressBarCircle.addEventListener("mousedown", this.mouseDownHandler);
-    document.addEventListener("click", this.mouseUpHandler);
+    document.addEventListener("mouseup", this.mouseUpHandler);
   }
 
   mount() {
