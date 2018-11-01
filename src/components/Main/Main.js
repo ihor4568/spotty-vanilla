@@ -37,10 +37,10 @@ export class MainComponent {
   handleListClick(e) {
     e.preventDefault();
     const { target } = e;
-    if (target.closest(".main__albums-link")) {
-      this.routeNavigate("/albums");
-    } else if (target.closest(".main__about-link")) {
-      this.routeNavigate("/about");
+    const listItem = target.closest(".main__list-item");
+
+    if (listItem) {
+      this.routeNavigate(listItem.href);
     }
   }
 
@@ -50,7 +50,9 @@ export class MainComponent {
   }
 
   handleStatePath() {
-    const pathname = window.location.pathname.replace(/^\/|\/$/g, "");
+    const pathname = window.location.pathname
+      .replace(/^\/|\/$/g, "")
+      .replace(/\/+/g, "/");
 
     if (pathname === "albums" || pathname === "") {
       this.albums.mount();
@@ -64,11 +66,16 @@ export class MainComponent {
 
     const urlParts = pathname.split("/");
 
-    if (urlParts[0] === "songs" && urlParts[1] && urlParts.length === 2) {
-      // songId will be used for the data request
-      // eslint-disable-next-line no-unused-vars
-      const songId = urlParts[1];
-      // ShareView will be mounted here...
+    if (
+      urlParts[0] === "album" &&
+      urlParts[2] === "song" &&
+      urlParts.length === 4
+    ) {
+      // albumId & songId will be used for the data request
+      /* eslint-disable no-unused-vars */
+      const albumId = urlParts[1];
+      const songId = urlParts[3];
+      /* eslint-enable no-unused-vars */
       return;
     }
 
