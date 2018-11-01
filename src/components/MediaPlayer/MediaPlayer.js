@@ -46,7 +46,6 @@ export class MediaPlayerComponent {
 
   mountChildren() {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
-      song: SONG_INFO.songSrc,
       audio: this.audio
     });
     this.mainControlPannel.mount();
