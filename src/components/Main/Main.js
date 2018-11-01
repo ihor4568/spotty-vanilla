@@ -3,6 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { PlayerComponent } from "../Player/Player";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
+import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
@@ -92,6 +93,8 @@ export class MainComponent {
     this.search.mount();
 
     this.about = new AboutComponent(this.mainPoint);
+
+    this.albums = new AlbumsComponent(this.mainPoint);
 
     this.notFound = new NotFoundComponent(this.mainPoint);
   }
