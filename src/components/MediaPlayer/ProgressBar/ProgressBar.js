@@ -10,6 +10,7 @@ export class ProgressBarComponent {
     this.movePlayTime = this.movePlayTime.bind(this);
     this.mouseUpHandler = this.mouseUpHandler.bind(this);
     this.mouseDownHandler = this.mouseDownHandler.bind(this);
+    this.finishPlay = this.finishPlay.bind(this);
   }
 
   querySelectors() {
@@ -22,9 +23,9 @@ export class ProgressBarComponent {
   }
 
   timeUpdate() {
-    this.props.audioDuration =
+    this.audioDuration =
       (this.props.audio.currentTime / this.props.audio.duration) * 100;
-    this.progressBar.style.width = `${this.props.audioDuration}%`;
+    this.progressBar.style.width = `${this.audioDuration}%`;
     this.progressBarCircle.style.left = `100%`;
   }
 
@@ -46,6 +47,10 @@ export class ProgressBarComponent {
     }
   }
 
+  finishPlay() {
+    this.props.audio.currentTime = 0;
+  }
+
   mouseDownHandler() {
     this.props.audio.removeEventListener("timeupdate", this.timeUpdate);
     document.addEventListener("mousemove", this.movePlayTime);
@@ -64,6 +69,7 @@ export class ProgressBarComponent {
 
   addEventListeners() {
     this.props.audio.addEventListener("timeupdate", this.timeUpdate);
+    this.props.audio.addEventListener("ended", this.finishPlay);
     this.progressBarMain.addEventListener("click", this.movePlayTime);
     this.progressBarMain.addEventListener("mousedown", this.mouseDownHandler);
     this.progressBarCircle.addEventListener("mousedown", this.mouseDownHandler);
