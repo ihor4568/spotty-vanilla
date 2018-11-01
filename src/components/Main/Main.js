@@ -36,7 +36,10 @@ export class MainComponent {
 
   handleListClick(e) {
     e.preventDefault();
-    if (e.target.closest(".main__about-link")) {
+    const { target } = e;
+    if (target.closest(".main__albums-link")) {
+      this.routeNavigate("/albums");
+    } else if (target.closest(".main__about-link")) {
       this.routeNavigate("/about");
     }
   }
@@ -48,7 +51,13 @@ export class MainComponent {
 
   handleStatePath() {
     const pathname = window.location.pathname.replace(/^\/|\/$/g, "");
-    if (pathname === "about" || pathname === "") {
+
+    if (pathname === "albums" || pathname === "") {
+      this.albums.mount();
+      return;
+    }
+
+    if (pathname === "about") {
       this.about.mount();
       return;
     }
