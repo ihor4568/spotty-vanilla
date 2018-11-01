@@ -8,10 +8,9 @@ import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
-  constructor(mountPoint, props = {}, status = true) {
+  constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.status = status;
   }
 
   querySelectors() {
@@ -58,9 +57,6 @@ export class MainComponent {
     this.initMaterial();
     this.mountChildren();
     this.addEventListeners();
-    if (this.status) {
-      this.setShareView();
-    }
   }
 
   handleOpen() {
