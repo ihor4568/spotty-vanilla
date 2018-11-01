@@ -1,0 +1,8 @@
+@import "./PlayerButtons/PlayerButtons";
+@import "./VolumeBar/VolumeBar";
+
+.main-control {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
