@@ -1,5 +1,5 @@
 import { firebase } from "./utils/firebase";
-import { FirebaseDatabase } from "./services/FirebaseDatabase";
+import { MusicStorage } from "./services/MusicStorage";
 import { MainComponent } from "./components/Main/Main";
 import "./index.scss";
 
@@ -8,5 +8,9 @@ const main = new MainComponent(root);
 
 main.mount();
 
-const firebaseDatabase = new FirebaseDatabase(firebase.database());
-firebaseDatabase.getAlbums(albums => albums);
+const database = firebase.database();
+const musicStorage = new MusicStorage(database);
+
+musicStorage.getAlbums().then(albums => albums);
+musicStorage.getAuthors().then(authors => authors);
+musicStorage.getAuthorSongs("BJ Block").then(songs => songs);
