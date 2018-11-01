@@ -14,4 +14,16 @@ export class FirebaseDatabase {
       })
       .then(retriveDataCb(albums));
   }
+
+  getAuthors(retriveDataCb) {
+    const authors = [];
+    this.database
+      .ref("authors")
+      .once("value", snapshot => {
+        snapshot.forEach(childSnapshot => {
+          authors.push(childSnapshot.val());
+        });
+      })
+      .then(retriveDataCb(authors));
+  }
 }
