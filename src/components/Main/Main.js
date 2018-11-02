@@ -3,8 +3,10 @@ import { MDCDrawer } from "@material/drawer";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
+import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
+import { ArtistsComponent } from "../Artists/Artists";
 import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
 
@@ -64,17 +66,22 @@ export class MainComponent {
       return;
     }
 
+    if (pathname === "artists") {
+      this.artist.mount();
+      return;
+    }
+
+    if (pathname === "songs") {
+      this.table.mount();
+      return;
+    }
+
     const urlParts = pathname.split("/");
 
-    if (
-      urlParts[0] === "album" &&
-      urlParts[2] === "song" &&
-      urlParts.length === 4
-    ) {
-      // albumId & songId will be used for the data request
+    if (urlParts[0] === "song" && urlParts[1] && urlParts.length === 2) {
+      // & songId will be used for the data request
       /* eslint-disable no-unused-vars */
-      const albumId = urlParts[1];
-      const songId = urlParts[3];
+      const songId = urlParts[1];
       /* eslint-enable no-unused-vars */
       return;
     }
@@ -109,10 +116,13 @@ export class MainComponent {
     this.search.mount();
 
     this.about = new AboutComponent(this.mainPoint);
+    this.table = new MySongsTableComponent(this.mainPoint);
 
     this.albums = new AlbumsComponent(this.mainPoint);
 
     this.notFound = new NotFoundComponent(this.mainPoint);
+
+    this.artist = new ArtistsComponent(this.mainPoint);
   }
 
   render() {
