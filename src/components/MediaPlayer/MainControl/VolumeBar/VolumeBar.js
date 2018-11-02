@@ -11,6 +11,7 @@ export class VolumeBarComponent {
     this.mouseDownHandler = this.mouseDownHandler.bind(this);
     this.mouseUpHandler = this.mouseUpHandler.bind(this);
     this.volumeIconHandler = this.volumeIconHandler.bind(this);
+    // this.volumeBarGradient = this.volumeBarGradient.bind(this);
   }
 
   querySelectors() {
@@ -18,19 +19,19 @@ export class VolumeBarComponent {
     this.volumeIcon = this.mountPoint.querySelector(".volume-bar__icon");
   }
 
+  volumeBarGradient(val) {
+    this.volumeBar.style.background = `linear-gradient(to right, #6200ee 0%, #6200ee ${val}%, #e6e6e6 ${val}%, #e6e6e6 100%`;
+  }
+
   defaultView() {
     this.volumeBar.value = this.volumeDefault * 100;
-    this.volumeBar.style.background = `linear-gradient(to right, #6200ee 0%, #6200ee ${
-      this.volumeBar.value
-    }%, #e6e6e6 ${this.volumeBar.value}%, #e6e6e6 100%`;
+    this.volumeBarGradient(this.volumeBar.value);
   }
 
   changeVolumeLevel() {
     this.props.audio.muted = false;
     this.props.audio.volume = this.volumeBar.value / 100;
-    this.volumeBar.style.background = `linear-gradient(to right, #6200ee 0%, #6200ee ${
-      this.volumeBar.value
-    }%, #e6e6e6 ${this.volumeBar.value}%, #e6e6e6 100%`;
+    this.volumeBarGradient(this.volumeBar.value);
     this.toggleVolume();
     this.currentVolume = this.props.audio.volume;
   }
@@ -65,15 +66,11 @@ export class VolumeBarComponent {
     if (this.props.audio.muted) {
       this.volumeBar.value = this.currentVolume * 100;
       this.props.audio.muted = false;
-      this.volumeBar.style.background = `linear-gradient(to right, #6200ee 0%, #6200ee ${
-        this.volumeBar.value
-      }%, #e6e6e6 ${this.volumeBar.value}%, #e6e6e6 100%`;
+      this.volumeBarGradient(this.volumeBar.value);
     } else {
       this.props.audio.muted = true;
       this.volumeBar.value = 0;
-      this.volumeBar.style.background = `linear-gradient(to right, #6200ee 0%, #6200ee ${
-        this.volumeBar.value
-      }%, #e6e6e6 ${this.volumeBar.value}%, #e6e6e6 100%`;
+      this.volumeBarGradient(this.volumeBar.value);
     }
     this.toggleVolume();
   }
