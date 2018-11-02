@@ -3,21 +3,21 @@ import { FirebaseService } from "./FirebaseService";
 const database = FirebaseService.database();
 
 export class MusicService {
-  getAlbums() {
+  static getAlbums() {
     return database
       .ref("albums")
       .once("value")
       .then(snapshot => Object.values(snapshot.val()).map(child => child));
   }
 
-  getAuthors() {
+  static getAuthors() {
     return database
       .ref("authors")
       .once("value")
       .then(snapshot => Object.values(snapshot.val()).map(child => child));
   }
 
-  getAuthorSongs(authorId) {
+  static getAuthorSongs(authorId) {
     return database
       .ref(`authors/${authorId}`)
       .once("value")
@@ -33,7 +33,7 @@ export class MusicService {
       });
   }
 
-  getAlbumSongs(albumId) {
+  static getAlbumSongs(albumId) {
     return database
       .ref(`albums/${albumId}`)
       .once("value")
