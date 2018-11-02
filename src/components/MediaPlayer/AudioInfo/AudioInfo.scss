@@ -1,0 +1,19 @@
+.audio-info {
+  display: flex;
+  &__image-container {
+    line-height: 0;
+  }
+  &__image {
+    width: 6.25rem;
+    height: 6.25rem;
+  }
+  &__text {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.56rem;
+  }
+  &__song-name {
+    font-weight: bold;
+  }
+}
