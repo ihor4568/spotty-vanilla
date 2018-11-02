@@ -7,7 +7,7 @@
     <thead>
       <tr>
         <th class=" my-songs-table__th"></th>
-        <th class=" my-songs-table__th"></th>
+        <th class=" my-songs-table__th my-songs-table__th_number">#</th>
         <th class="my-songs-table__th"></th>
         <th class="my-songs-table__th my-songs-table__th_name">Name</th>
         <th class="my-songs-table__th my-songs-table__th_duration">
@@ -19,15 +19,13 @@
       </tr>
     </thead>
     <tbody class="my-songs-table__body">
-
-      <!-- rows getting from the array -->
       <% tableData.forEach((item, i) => { %>
       <tr class="my-songs-table__row data-id=" <%=i+1 %>">
-        <td class="my-songs-table__td my-songs-table__td_number">
-          <%=i+1 %>
-        </td>
         <td class="my-songs-table__td my-songs-table__td_play">
           <button class="mdc-icon-button material-icons my-songs-table__td_play-btn">play_arrow</button>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_number">
+          <%=i+1 %>
         </td>
         <td class="my-songs-table__td my-songs-table__td_cover">
           <img class="my-songs-table__td_cover-img" src="<%= item.cover %>" alt="">

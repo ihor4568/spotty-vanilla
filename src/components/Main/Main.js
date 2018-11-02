@@ -8,37 +8,10 @@ import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import mainTemplate from "./Main.html";
 
-const TABLE_DATA = [
-  {
-    cover: "https://images.unian.net/photos/2017_09/1505748424-6475.jpg",
-    name: "Alibaba",
-    duration: "9:15",
-    artist: "Folk",
-    album: "Super"
-  },
-  {
-    cover:
-      "https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/6b2ef062-6913-4a94-a265-7d75f4f91854/64.jpg",
-    name: "Alibaba",
-    duration: "9:15",
-    artist: "Folk",
-    album: "Super"
-  },
-  {
-    cover:
-      "https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930",
-    name: "Alibaba",
-    duration: "9:15",
-    artist: "Folk",
-    album: "Super"
-  }
-];
-
 export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.tableData = TABLE_DATA;
   }
 
   querySelectors() {
@@ -97,9 +70,7 @@ export class MainComponent {
     this.search.mount();
 
     this.about = new AboutComponent(this.mainPoint);
-    this.table = new MySongsTableComponent(this.mainPoint, {
-      tableData: this.tableData
-    });
+    this.table = new MySongsTableComponent(this.mainPoint);
 
     this.albums = new AlbumsComponent(this.mainPoint);
     this.albums.mount();
