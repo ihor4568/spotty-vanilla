@@ -1,4 +1,4 @@
-import { MDCMenu } from "@material/menu";
+import { MDCMenuSurface } from "@material/menu-surface";
 
 import dotsMenuTemplate from "./DotsMenu.html";
 
@@ -14,7 +14,7 @@ export class DotsMenuComponent {
   }
 
   initMaterial() {
-    this.uiMenu = new MDCMenu(this.menu);
+    this.uiMenu = new MDCMenuSurface(this.menu);
   }
 
   addEventListeners() {
@@ -34,6 +34,7 @@ export class DotsMenuComponent {
     if (activeMenuItem) {
       const id = parseInt(activeMenuItem.dataset.id, 10);
       this.props.items[id].handler();
+      this.uiMenu.open = false;
     }
   }
 

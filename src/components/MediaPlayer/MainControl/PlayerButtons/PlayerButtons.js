@@ -7,6 +7,7 @@ export class PlayerButtonsComponent {
     this.isPlayNow = false;
     this.audioDuration = 0;
     this.props = props;
+    this.finishPlay = this.finishPlay.bind(this);
   }
 
   querySelectors() {
@@ -19,6 +20,11 @@ export class PlayerButtonsComponent {
     this.nextButton = this.mountPoint.querySelector(
       ".player-buttons__navigate-button_next"
     );
+  }
+
+  finishPlay() {
+    this.isPlayNow = false;
+    this.playButton.children[0].innerText = "play_arrow";
   }
 
   initMaterial() {
@@ -40,6 +46,7 @@ export class PlayerButtonsComponent {
   }
 
   addEventListeners() {
+    this.props.audio.addEventListener("ended", this.finishPlay);
     this.playButton.addEventListener("click", () => {
       this.togglePlay();
     });
