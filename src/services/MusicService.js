@@ -1,18 +1,4 @@
-function getAuthorByName(name, databaseRef) {
-  return databaseRef
-    .ref("authors")
-    .orderByChild("name")
-    .equalTo(name);
-}
-
-function getAlbumByTitle(title, databaseRef) {
-  return databaseRef
-    .ref("albums")
-    .orderByChild("title")
-    .equalTo(title);
-}
-
-export class MusicStorage {
+export class MusicService {
   constructor(database) {
     this.database = database;
   }
@@ -31,12 +17,13 @@ export class MusicStorage {
       .then(snapshot => Object.values(snapshot.val()).map(child => child));
   }
 
-  getAuthorSongs(authorName) {
-    return getAuthorByName(authorName, this.database)
+  getAuthorSongs(authorId) {
+    return this.database
+      .ref(`authors/${authorId}`)
       .once("value")
       .then(author => {
         const songs = [];
-        Object.values(author.val())[0].songs.forEach(songId =>
+        author.val().songs.forEach(songId =>
           this.database
             .ref(`songs/${songId}`)
             .once("value")
@@ -46,12 +33,13 @@ export class MusicStorage {
       });
   }
 
-  getAlbumSongs(albumTitle) {
-    return getAlbumByTitle(albumTitle, this.database)
+  getAlbumSongs(albumId) {
+    return this.database
+      .ref(`albums/${albumId}`)
       .once("value")
       .then(album => {
         const songs = [];
-        Object.values(album.val())[0].songs.forEach(songId =>
+        album.val().songs.forEach(songId =>
           this.database
             .ref(`songs/${songId}`)
             .once("value")
