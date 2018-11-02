@@ -11,7 +11,6 @@ export class ShareViewComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.song = SONG;
   }
 
   querySelectors() {
@@ -31,6 +30,6 @@ export class ShareViewComponent {
   }
 
   render() {
-    return shareViewTemplate(this.song);
+    return shareViewTemplate(SONG);
   }
 }
