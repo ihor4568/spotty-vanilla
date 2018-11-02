@@ -37,11 +37,6 @@ export class MainComponent {
     this.shareView.mount();
   }
 
-  handleShareModeEnable() {
-    this.setShareView();
-    window.open();
-  }
-
   initMaterial() {
     this.drawer = MDCDrawer.attachTo(
       this.mountPoint.querySelector(".main__sidebar")
