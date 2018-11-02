@@ -7,6 +7,7 @@ import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
+import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -32,19 +33,60 @@ export class MainComponent {
 
   addEventListeners() {
     this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
+    window.addEventListener("popstate", this.handleStatePath.bind(this));
   }
 
   handleListClick(e) {
     e.preventDefault();
-    if (e.target.closest(".main__about-link")) {
-      this.about.mount();
-    } else if (e.target.closest(".main__my-songs-link")) {
-      this.table.mount();
-    } else if (e.target.closest(".main__albums-link")) {
-      this.albums.mount();
-    } else if (e.target.closest(".main__artists-link")) {
-      this.artist.mount();
+    const { target } = e;
+    const listItem = target.closest(".main__list-item");
+
+    if (listItem) {
+      this.routeNavigate(listItem.href);
     }
+  }
+
+  routeNavigate(url) {
+    window.history.pushState(null, null, url);
+    this.handleStatePath();
+  }
+
+  handleStatePath() {
+    const pathname = window.location.pathname
+      .replace(/^\/|\/$/g, "")
+      .replace(/\/+/g, "/");
+
+    if (pathname === "albums" || pathname === "") {
+      this.albums.mount();
+      return;
+    }
+
+    if (pathname === "about") {
+      this.about.mount();
+      return;
+    }
+
+    if (pathname === "artists") {
+      this.artist.mount();
+      return;
+    }
+
+    if (pathname === "songs") {
+      this.table.mount();
+      return;
+    }
+
+    const urlParts = pathname.split("/");
+
+    if (urlParts[0] === "song" && urlParts[1] && urlParts.length === 2) {
+      // & songId will be used for the data request
+      /* eslint-disable no-unused-vars */
+      const songId = urlParts[1];
+      /* eslint-enable no-unused-vars */
+      return;
+    }
+
+    this.notFound.mount();
   }
 
   mount() {
@@ -53,6 +95,7 @@ export class MainComponent {
     this.initMaterial();
     this.mountChildren();
     this.addEventListeners();
+    this.handleStatePath();
   }
 
   handleOpen() {
@@ -76,7 +119,8 @@ export class MainComponent {
     this.table = new MySongsTableComponent(this.mainPoint);
 
     this.albums = new AlbumsComponent(this.mainPoint);
-    this.albums.mount();
+
+    this.notFound = new NotFoundComponent(this.mainPoint);
 
     this.artist = new ArtistsComponent(this.mainPoint);
   }
