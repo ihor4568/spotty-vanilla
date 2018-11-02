@@ -21,31 +21,31 @@ export class MusicService {
     return database
       .ref(`authors/${authorId}`)
       .once("value")
-      .then(author => {
-        const songs = [];
-        author.val().songs.forEach(songId =>
-          database
-            .ref(`songs/${songId}`)
-            .once("value")
-            .then(song => songs.push(song.val()))
-        );
-        return songs;
-      });
+      .then(author =>
+        Promise.all(
+          author.val().songs.map(songId =>
+            database
+              .ref(`songs/${songId}`)
+              .once("value")
+              .then(song => song.val())
+          )
+        )
+      );
   }
 
   static getAlbumSongs(albumId) {
     return database
       .ref(`albums/${albumId}`)
       .once("value")
-      .then(album => {
-        const songs = [];
-        album.val().songs.forEach(songId =>
-          database
-            .ref(`songs/${songId}`)
-            .once("value")
-            .then(song => songs.push(song.val()))
-        );
-        return songs;
-      });
+      .then(album =>
+        Promise.all(
+          album.val().songs.map(songId =>
+            database
+              .ref(`songs/${songId}`)
+              .once("value")
+              .then(song => song.val())
+          )
+        )
+      );
   }
 }
