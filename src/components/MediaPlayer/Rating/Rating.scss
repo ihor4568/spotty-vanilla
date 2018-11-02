@@ -4,6 +4,10 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
+    user-select: none;
+  }
+  &__stars::before {
+    display: none;
   }
   &__star {
     padding: 0.125rem;
