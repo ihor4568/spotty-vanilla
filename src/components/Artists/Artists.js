@@ -72,7 +72,7 @@ export class ArtistsComponent {
   }
 
   querySelectors() {
-    this.cardRipple = this.mountPoint.querySelectorAll(".artist__ripple");
+    this.cardRipple = this.mountPoint.querySelectorAll(".artists__ripple");
   }
 
   initMaterial() {

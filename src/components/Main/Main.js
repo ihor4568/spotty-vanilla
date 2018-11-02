@@ -21,7 +21,6 @@ export class MainComponent {
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
     this.sidebarList = this.mountPoint.querySelector(".main__list");
-    this.artistsLink = this.mountPoint.querySelector(".main__artists");
   }
 
   initMaterial() {
@@ -32,10 +31,6 @@ export class MainComponent {
 
   addEventListeners() {
     this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
-    this.artistsLink.addEventListener(
-      "click",
-      this.handleArtistsView.bind(this)
-    );
   }
 
   handleListClick(e) {
@@ -44,12 +39,7 @@ export class MainComponent {
       this.about.mount();
     } else if (e.target.closest(".main__albums-link")) {
       this.albums.mount();
-    }
-  }
-
-  handleArtistsView(e) {
-    e.preventDefault();
-    if (e.target.closest(".main__artists")) {
+    } else if (e.target.closest(".main__artists-link")) {
       this.artist.mount();
     }
   }
