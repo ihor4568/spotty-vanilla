@@ -11,7 +11,6 @@ export class VolumeBarComponent {
     this.mouseDownHandler = this.mouseDownHandler.bind(this);
     this.mouseUpHandler = this.mouseUpHandler.bind(this);
     this.volumeIconHandler = this.volumeIconHandler.bind(this);
-    // this.volumeBarGradient = this.volumeBarGradient.bind(this);
   }
 
   querySelectors() {
@@ -78,6 +77,7 @@ export class VolumeBarComponent {
   addEventListeners() {
     this.volumeBar.addEventListener("mousedown", this.mouseDownHandler);
     this.volumeBar.addEventListener("mouseup", this.mouseUpHandler);
+    this.volumeBar.addEventListener("click", this.changeVolumeLevel);
     this.volumeIcon.addEventListener("click", this.volumeIconHandler);
   }
 
