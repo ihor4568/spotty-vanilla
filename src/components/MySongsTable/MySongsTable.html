@@ -1,49 +1,54 @@
-<table class="my-songs-table">
-  <caption class="mdc-typography--headline4 my-songs-table__caption">My Songs</caption>
-  <thead>
-    <tr>
-      <th class="my-songs-table__th"></th>
-      <th class="my-songs-table__th"></th>
-      <th class="my-songs-table__th my-songs-table__th_name">Name</th>
-      <th class="my-songs-table__th my-songs-table__th_duration">
-        <i class="material-icons my-songs-table__th_duration-icon">watch_later</i>
-      </th>
-      <th class="my-songs-table__th my-songs-table__th_artist">Artist</th>
-      <th class="my-songs-table__th my-songs-table__th_album">Album</th>
-      <th class="my-songs-table__th my-songs-table__th_3dots"></th>
-    </tr>
-  </thead>
-  <tbody class="my-songs-table__body">
+<div class="my-songs-table">
+  <h2 class="mdc-typography--headline4 my-songs-table__heading">
+    My Songs
+  </h2>
 
-    <!-- rows getting from the array -->
-    <% tableData.forEach((item, i) => { %>
-    <tr class="my-songs-table__row data-id=" <%=i %>">
-      <td class="my-songs-table__td my-songs-table__td_play">
-        <button class="my-songs-table__td_play-btn ">
-          <i class="material-icons">play_arrow</i>
-        </button>
-      </td>
-      <td class="my-songs-table__td my-songs-table__td_cover">
-        <img class="my-songs-table__td_cover-img" src="<%= item.cover %>" alt="">
-      </td>
-      <td class="my-songs-table__td my-songs-table__td_name">
-        <%= item.name %>
-      </td>
-      <td class="my-songs-table__td my-songs-table__td_duration">
-        <%= item.duration%>
-      </td>
-      <td class="my-songs-table__td my-songs-table__td_artist">
-        <%= item.artist %>
-      </td>
-      <td class="my-songs-table__td my-songs-table__td_album">
-        <%= item.album %>
-      </td>
-      <td class="my-songs-table__td my-songs-table__td_more">
-        <button class="my-songs-table__td_more-btn ">
-          <i class="material-icons">more_vert</i>
-        </button>
-      </td>
-    </tr>
-    <% }) %>
-  </tbody>
-</table>
+  <table class="my-songs-table__table">
+    <thead>
+      <tr>
+        <th class=" my-songs-table__th"></th>
+        <th class=" my-songs-table__th"></th>
+        <th class="my-songs-table__th"></th>
+        <th class="my-songs-table__th my-songs-table__th_name">Name</th>
+        <th class="my-songs-table__th my-songs-table__th_duration">
+          <i class="material-icons my-songs-table__th_duration_icon">watch_later</i>
+        </th>
+        <th class="my-songs-table__th my-songs-table__th_artist">Artist</th>
+        <th class="my-songs-table__th my-songs-table__th_album">Album</th>
+        <th class="my-songs-table__th my-songs-table__th_3dots"></th>
+      </tr>
+    </thead>
+    <tbody class="my-songs-table__body">
+
+      <!-- rows getting from the array -->
+      <% tableData.forEach((item, i) => { %>
+      <tr class="my-songs-table__row data-id=" <%=i+1 %>">
+        <td class="my-songs-table__td my-songs-table__td_number">
+          <%=i+1 %>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_play">
+          <button class="mdc-icon-button material-icons my-songs-table__td_play-btn">play_arrow</button>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_cover">
+          <img class="my-songs-table__td_cover-img" src="<%= item.cover %>" alt="">
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_name">
+          <%= item.name %>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_duration">
+          <%= item.duration%>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_artist">
+          <%= item.artist %>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_album">
+          <%= item.album %>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_more">
+          <button class="mdc-icon-button material-icons my-songs-table__td_more-btn">more_vert</button>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
