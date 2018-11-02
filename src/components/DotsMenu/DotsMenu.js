@@ -44,7 +44,6 @@ export class DotsMenuComponent {
     this.querySelectors();
     this.initMaterial();
     this.addEventListeners();
-    // console.dir(this.shareDot[this.shareDot]);
   }
 
   render() {
