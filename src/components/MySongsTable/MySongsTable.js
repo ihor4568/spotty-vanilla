@@ -1,5 +1,6 @@
 import { MDCRipple } from "@material/ripple";
 import mySongsTableTemplate from "./MySongsTable.html";
+import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
 export class MySongsTableComponent {
   constructor(mountPoint, props = {}) {
@@ -11,6 +12,21 @@ export class MySongsTableComponent {
     this.iconButtonRipple = this.mountPoint.querySelectorAll(
       ".mdc-icon-button"
     );
+    this.dotsMenuPoints = this.mountPoint.querySelectorAll(
+      ".my-songs-table__td_more"
+    );
+  }
+
+  mountChildren() {
+    Array.from(this.dotsMenuPoints).forEach(item => {
+      this.dotsMenuPoints = new DotsMenuComponent(item, {
+        items: [
+          { name: "Remove from my songs", handler: () => {} },
+          { name: "Share", handler: () => {} }
+        ]
+      });
+      this.dotsMenuPoints.mount();
+    });
   }
 
   initMaterial() {
@@ -24,6 +40,7 @@ export class MySongsTableComponent {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
+    this.mountChildren();
   }
 
   render() {
