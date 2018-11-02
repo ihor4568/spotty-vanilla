@@ -49,11 +49,15 @@ export class MySongsTableComponent {
       this.dotsMenuPoints = new DotsMenuComponent(item, {
         items: [
           { name: "Remove from my songs", handler: () => {} },
-          { name: "Share", handler: () => {} }
+          { name: "Share", handler: this.handleShare.bind(this) }
         ]
       });
       this.dotsMenuPoints.mount();
     });
+  }
+
+  handleShare() {
+    window.open("/song/awdklawj");
   }
 
   initMaterial() {

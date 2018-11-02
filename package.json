@@ -8,8 +8,8 @@
     "start": "webpack-dev-server --mode=development",
     "deploy": "npm run build && firebase deploy",
     "firebase": "firebase",
-    "fix": "eslint --fix src/",
-    "lint": "eslint src/"
+    "fix": "eslint --fix .",
+    "lint": "eslint ."
   },
   "keywords": [],
   "license": "ISC",

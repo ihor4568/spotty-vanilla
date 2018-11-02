@@ -1,4 +1,5 @@
 .main {
+  height: 100%;
   &__sidebar {
     z-index: 2;
     position: fixed;
@@ -14,6 +15,7 @@
     margin: 0 auto;
   }
   &__content-mount {
+    height: calc(100% - 109px);
     padding: 5rem 1rem 12rem 1rem;
     z-index: 1;
 

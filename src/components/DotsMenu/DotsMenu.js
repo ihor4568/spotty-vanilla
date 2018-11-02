@@ -11,6 +11,7 @@ export class DotsMenuComponent {
   querySelectors() {
     this.menu = this.mountPoint.querySelector(".dots-menu__holder");
     this.menuButton = this.mountPoint.querySelector(".dots-menu__button");
+    this.shareDot = this.mountPoint.querySelectorAll("[data-id]");
   }
 
   initMaterial() {
@@ -43,6 +44,7 @@ export class DotsMenuComponent {
     this.querySelectors();
     this.initMaterial();
     this.addEventListeners();
+    // console.dir(this.shareDot[this.shareDot]);
   }
 
   render() {

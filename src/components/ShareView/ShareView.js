@@ -19,6 +19,10 @@ export class ShareViewComponent {
     );
   }
 
+  setSongId(songId) {
+    this.songId = songId;
+  }
+
   initMaterial() {
     this.cardRipple = new MDCRipple(this.shareViewRiplePoint);
   }
