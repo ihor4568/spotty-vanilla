@@ -3,6 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
+import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
 import { ShareViewComponent } from "../ShareView/ShareView";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
@@ -47,6 +48,8 @@ export class MainComponent {
     e.preventDefault();
     if (e.target.closest(".main__about-link")) {
       this.about.mount();
+    } else if (e.target.closest(".main__my-songs-link")) {
+      this.table.mount();
     } else if (e.target.closest(".main__albums-link")) {
       this.albums.mount();
     }
@@ -80,6 +83,7 @@ export class MainComponent {
     this.shareView = new ShareViewComponent(this.shareViewPoint);
 
     this.about = new AboutComponent(this.mainPoint);
+    this.table = new MySongsTableComponent(this.mainPoint);
 
     this.albums = new AlbumsComponent(this.mainPoint);
     this.albums.mount();

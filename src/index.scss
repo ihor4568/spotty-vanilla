@@ -10,7 +10,6 @@
 @import "@material/button/mdc-button";
 @import "@material/icon-button/mdc-icon-button";
 @import "@material/menu-surface/mdc-menu-surface";
-@import "@material/menu/mdc-menu";
 @import "@material/linear-progress/mdc-linear-progress";
 @import "@material/fab/mdc-fab";
 
@@ -19,6 +18,8 @@
 @import "./components/Main/Main";
 @import "./components/MediaPlayer/MediaPlayer";
 @import "./components/Page/Page";
+
+@import "./components/MySongsTable/MySongsTable";
 @import "./components/Albums/Albums";
 @import "./components/About/About";
 @import "./components/DotsMenu/DotsMenu";
