@@ -1,30 +1,30 @@
-export class MusicService {
-  constructor(database) {
-    this.database = database;
-  }
+import { FirebaseService } from "./FirebaseService";
 
+const database = FirebaseService.database();
+
+export class MusicService {
   getAlbums() {
-    return this.database
+    return database
       .ref("albums")
       .once("value")
       .then(snapshot => Object.values(snapshot.val()).map(child => child));
   }
 
   getAuthors() {
-    return this.database
+    return database
       .ref("authors")
       .once("value")
       .then(snapshot => Object.values(snapshot.val()).map(child => child));
   }
 
   getAuthorSongs(authorId) {
-    return this.database
+    return database
       .ref(`authors/${authorId}`)
       .once("value")
       .then(author => {
         const songs = [];
         author.val().songs.forEach(songId =>
-          this.database
+          database
             .ref(`songs/${songId}`)
             .once("value")
             .then(song => songs.push(song.val()))
@@ -34,13 +34,13 @@ export class MusicService {
   }
 
   getAlbumSongs(albumId) {
-    return this.database
+    return database
       .ref(`albums/${albumId}`)
       .once("value")
       .then(album => {
         const songs = [];
         album.val().songs.forEach(songId =>
-          this.database
+          database
             .ref(`songs/${songId}`)
             .once("value")
             .then(song => songs.push(song.val()))
