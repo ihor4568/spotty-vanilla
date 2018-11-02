@@ -6,6 +6,7 @@ import { SearchComponent } from "../Search/Search";
 import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
+import { ArtistsComponent } from "../Artists/Artists";
 import mainTemplate from "./Main.html";
 
 export class MainComponent {
@@ -41,6 +42,8 @@ export class MainComponent {
       this.table.mount();
     } else if (e.target.closest(".main__albums-link")) {
       this.albums.mount();
+    } else if (e.target.closest(".main__artists-link")) {
+      this.artist.mount();
     }
   }
 
@@ -74,6 +77,8 @@ export class MainComponent {
 
     this.albums = new AlbumsComponent(this.mainPoint);
     this.albums.mount();
+
+    this.artist = new ArtistsComponent(this.mainPoint);
   }
 
   render() {
