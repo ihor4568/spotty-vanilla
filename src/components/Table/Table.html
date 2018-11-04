@@ -1,0 +1,70 @@
+<table class="table">
+  <thead class="table__head">
+    <tr>
+      <th class="table__th"></th>
+      <th class="table__th table__th_number">#</th>
+      <th class="table__th"></th>
+      <th class="table__th table__th_name">
+        <button class="mdc-button table__th-button">
+          name
+          <svg data="name" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_name" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" />
+            <path d="M0 0h24v24H0z" fill="none" />
+          </svg>
+        </button>
+      </th>
+      <th class="table__th table__th_duration">
+        <i class="material-icons table__th_duration_icon">watch_later</i>
+      </th>
+      <th class="table__th table__th_author">
+        <button class="mdc-button table__th-button">
+          author
+          <svg data="author" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_author" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" />
+            <path d="M0 0h24v24H0z" fill="none" />
+          </svg>
+        </button>
+      </th>
+      <th class="table__th table__th_album">
+        <button class="mdc-button table__th-button">
+          album
+          <svg data="album" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_album" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" />
+            <path d="M0 0h24v24H0z" fill="none" />
+          </svg>
+        </button>
+      </th>
+      <th class="table__th table__th_3dots"></th>
+    </tr>
+  </thead>
+  <tbody class="table__body">
+    <% data.forEach((item, i) => { %>
+    <tr class="table__row data-id=" <%=i+1 %>">
+      <td class="table__td table__td_play">
+        <button class="mdc-icon-button material-icons table__td_play-btn">play_arrow</button>
+      </td>
+      <td class="table__td table__td_number">
+        <%=i+1 %>
+      </td>
+      <td class="table__td table__td_cover">
+        <img class="table__td_cover-img" src="<%= item.cover %>" alt="">
+      </td>
+      <td class="table__td table__td_name">
+        <%= item.name %>
+      </td>
+      <td class="table__td table__td_duration">
+        <%= item.duration%>
+      </td>
+      <td class="table__td table__td_author">
+        <%= item.author %>
+      </td>
+      <td class="table__td table__td_album">
+        <%= item.album %>
+      </td>
+      <td class="table__td table__td_more">
+        <button class="mdc-icon-button material-icons table__td_more-btn">more_vert</button>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>

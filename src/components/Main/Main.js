@@ -3,7 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
+import { MySongsComponent } from "../MySongs/MySongs";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
@@ -116,7 +116,7 @@ export class MainComponent {
     this.search.mount();
 
     this.about = new AboutComponent(this.mainPoint);
-    this.table = new MySongsTableComponent(this.mainPoint);
+    this.table = new MySongsComponent(this.mainPoint);
 
     this.albums = new AlbumsComponent(this.mainPoint);
 
