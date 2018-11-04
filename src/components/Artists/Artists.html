@@ -3,17 +3,17 @@
   <h2 class="mdc-typography mdc-typography--headline4 artists__heading">Artists</h2>
 
   <div class="artists__container">
-    <% artistsData.forEach(item => { %>
+    <% artists.forEach(item => { %>
     <div class="mdc-card artists__card">
       <div class="artists__card_shaped">
         <div class="mdc-card mdc-card__primary-action mdc-ripple artists__ripple">
           <div class="mdc-card__media mdc-card__media--square artists__media">
-            <img class="artists__image" src="<%= item.cover %>" alt="artist image">
+            <img class="artists__image" src="<%= item.imageURL %>" alt="artist image">
           </div>
         </div>
       </div>
       <div class="artists__name">
-        <a class="mdc-typography mdc-typography--headline5 artists__link link" href="<%= item.link %>">
+        <a class="mdc-typography mdc-typography--headline5 artists__link link" href=#>
           <%= item.name %></a>
       </div>
     </div>
