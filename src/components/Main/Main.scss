@@ -43,4 +43,14 @@
     @include mdc-top-app-bar-icon-ink-color(#ccc);
     @include mdc-top-app-bar-fill-color(#ccc);
   }
+  @media screen and (max-width: 1280px) {
+    &__sidebar {
+      @include mdc-drawer-width(224px);
+    }
+  }
+  @media screen and (max-width: 1152px) {
+    &__sidebar {
+      @include mdc-drawer-width(192px);
+    }
+  }
 }
