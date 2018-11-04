@@ -8,6 +8,7 @@ import { ShareViewComponent } from "../ShareView/ShareView";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
+import { AlbumsSongTableComponent } from "../AlbumSongsTable/AlbumSongTable";
 import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
 
@@ -73,6 +74,11 @@ export class MainComponent {
       return;
     }
 
+    if (/albums\/\w+/.test(pathname)) {
+      this.albumSongs.mount();
+      return;
+    }
+
     if (pathname === "about") {
       this.about.mount();
       return;
@@ -135,6 +141,8 @@ export class MainComponent {
     this.notFound = new NotFoundComponent(this.mainPoint);
 
     this.artist = new ArtistsComponent(this.mainPoint);
+
+    this.albumSongs = new AlbumsSongTableComponent(this.mainPoint);
   }
 
   render() {

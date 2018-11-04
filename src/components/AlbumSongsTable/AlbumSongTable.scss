@@ -1,0 +1,21 @@
+.album-songs-table {
+  &__progressbar {
+    margin-top: 20rem;
+  }
+
+  &__album-description {
+    padding: 1rem 1rem 1rem 0;
+  }
+
+  &__card-container {
+    margin: 0 1.8rem 2.5rem 0;
+  }
+
+  &__card {
+    width: 22.5rem;
+  }
+
+  &__card-images {
+    width: 22.5rem;
+  }
+}

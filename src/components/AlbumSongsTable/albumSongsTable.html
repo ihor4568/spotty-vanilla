@@ -1,0 +1,86 @@
+<div class="album-songs-table">
+  <div class="album-songs-table">
+    <% if (isFetching) { %>
+    <div class="album-songs-table__progressbar">
+      <div class="album-songs-table__progressbar-title mdc-typography--headline4">The songs are loading, please wait...</div>
+      <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+        <div class="mdc-linear-progress__buffering-dots"></div>
+        <div class="mdc-linear-progress__buffer"></div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
+      </div>
+    </div>
+    <% } else { %>
+    <div class="album-songs-table__album-description">
+      <h2 class="albums__card-album mdc-typography--headline6">
+        <%= title %>
+      </h2>
+      <h3 class="albums__card-artist mdc-typography--subtitle2">
+        by
+        <%= authors %>
+      </h3>
+    </div>
+    <div class="album-songs-table__card-container">
+      <div class="album-songs-table__card mdc-card mdc-card-album">
+        <div class="albums__card-ripple-effect mdc-card__primary-action mdc-ripple-upgraded">
+          <div class="albums__card-media mdc-card__media mdc-card__media-first mdc-card__media--square">
+            <div class="mdc-card__media-content">
+              <img class="album-songs-table__card-images" src=<%=imageURL %>>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="my-songs-table__table">
+    <thead>
+      <tr>
+        <th class=" my-songs-table__th"></th>
+        <th class=" my-songs-table__th my-songs-table__th_number">#</th>
+        <th class="my-songs-table__th"></th>
+        <th class="my-songs-table__th my-songs-table__th_name">Name</th>
+        <th class="my-songs-table__th my-songs-table__th_duration">
+          <i class="material-icons my-songs-table__th_duration_icon">watch_later</i>
+        </th>
+        <th class="my-songs-table__th my-songs-table__th_artist">Artist</th>
+        <th class="my-songs-table__th my-songs-table__th_album">Album</th>
+        <th class="my-songs-table__th my-songs-table__th_3dots"></th>
+      </tr>
+    </thead>
+    <tbody class="my-songs-table__body">
+      <% songs.forEach((item, i) => { %>
+      <tr class="my-songs-table__row data-id=" <%=i+1 %>">
+        <td class="my-songs-table__td my-songs-table__td_play">
+          <button class="mdc-icon-button material-icons my-songs-table__td_play-btn">play_arrow</button>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_number">
+          <%=i+1 %>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_cover">
+          <img class="my-songs-table__td_cover-img" src="<%= item.imageURL %>" alt="">
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_name">
+          <%= item.name %>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_duration">
+          <%= item.duration%>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_artist">
+          <%= authors %>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_album">
+          <%= title %>
+        </td>
+        <td class="my-songs-table__td my-songs-table__td_more">
+          <button class="mdc-icon-button material-icons my-songs-table__td_more-btn">more_vert</button>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } %>
+</div>
