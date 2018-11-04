@@ -3,6 +3,7 @@ import { AudioInfoComponent } from "./AudioInfo/AudioInfo";
 import { RatingComponent } from "./Rating/Rating";
 import { MainControlComponent } from "./MainControl/MainControl";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
+import { DialogComponent } from "../Dialog/Dialog";
 
 import playerTemplate from "./MediaPlayer.html";
 
@@ -13,7 +14,10 @@ const SONG_INFO = {
     "https://s-media-cache-ak0.pinimg.com/originals/0e/f8/fd/0ef8fd42bb061ede2c2b6d1a9689782b.jpg",
   songName: "Way Back",
   album: "Lazy Sunday",
-  artistName: "Jazzamor"
+  artistName: "Jazzamor",
+  songId: "song1",
+  licenseInfo:
+    "BJ Block & Dawn Pemberton is licensed under a Attribution-NonCommercial-NoDerivatives (aka Music Sharing) 3.0 International License."
 };
 
 export class MediaPlayerComponent {
@@ -39,6 +43,8 @@ export class MediaPlayerComponent {
     this.dotsMenuPoint = this.mountPoint.querySelector(
       ".media-player__dots-menu"
     );
+    this.dialogPoint = this.mountPoint.querySelector(".media-player__dialog");
+    this.dialogList = this.mountPoint.querySelector(".mdc-button-dialog");
   }
 
   set audioTime(val) {
@@ -65,6 +71,7 @@ export class MediaPlayerComponent {
     this.audioRatingComponent.mount();
     this.dotsMenu = new DotsMenuComponent(this.dotsMenuPoint, {
       items: [
+        { name: "Legal info", handler: this.handleLegal.bind(this) },
         { name: "Add to my songs", handler: () => {} },
         { name: "Share", handler: this.handleShare.bind(this) }
       ]
@@ -73,7 +80,14 @@ export class MediaPlayerComponent {
   }
 
   handleShare() {
-    window.open("/song/awdklawj");
+    window.open(`/song/${SONG_INFO.songId}`);
+  }
+
+  handleLegal() {
+    this.dialogComponent = new DialogComponent(this.dialogPoint, {
+      licenseInfo: SONG_INFO.licenseInfo
+    });
+    this.dialogComponent.mount();
   }
 
   mount() {
