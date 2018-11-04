@@ -17,8 +17,9 @@ const SONG_INFO = {
 };
 
 export class MediaPlayerComponent {
-  constructor(mountPoint) {
+  constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
+    this.props = props;
   }
 
   querySelectors() {
@@ -65,10 +66,14 @@ export class MediaPlayerComponent {
     this.dotsMenu = new DotsMenuComponent(this.dotsMenuPoint, {
       items: [
         { name: "Add to my songs", handler: () => {} },
-        { name: "Share", handler: () => {} }
+        { name: "Share", handler: this.handleShare.bind(this) }
       ]
     });
     this.dotsMenu.mount();
+  }
+
+  handleShare() {
+    window.open("/song/awdklawj");
   }
 
   mount() {

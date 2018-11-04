@@ -18,6 +18,10 @@
     height: calc(100% - 109px);
     padding: 5rem 1rem 12rem 1rem;
     z-index: 1;
+
+    &_disable {
+      padding-bottom: 1rem;
+    }
   }
   &__search {
     position: fixed;
@@ -30,5 +34,13 @@
     bottom: 0;
     width: 100%;
     z-index: 3;
+  }
+  &__elem_disable {
+    display: none;
+  }
+  &__app-bar_disable {
+    pointer-events: none;
+    @include mdc-top-app-bar-icon-ink-color(#ccc);
+    @include mdc-top-app-bar-fill-color(#ccc);
   }
 }
