@@ -27,18 +27,16 @@ export class AlbumsComponent {
   fetchAlbumsCollectionData() {
     this.state.isFetching = true;
     MusicService.getAlbums().then(albums => {
-      this.state.albums = albums.map(album =>
-        Object.assign(album, { authors: album.authors.join(", ") })
-      );
+      this.state.albums = albums;
       this.state.isFetching = false;
-      this.mountPoint.innerHTML = this.render();
-      this.querySelectors();
-      this.initMaterial();
+      this.mount(false);
     });
   }
 
-  mount() {
-    this.fetchAlbumsCollectionData();
+  mount(shouldFetchData = true) {
+    if (shouldFetchData) {
+      this.fetchAlbumsCollectionData();
+    }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
