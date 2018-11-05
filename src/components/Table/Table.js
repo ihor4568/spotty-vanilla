@@ -58,7 +58,7 @@ export class TableComponent {
       this.state.data = _.orderBy(
         data,
         this.state.columnName,
-        ORDER_TYPES[currentOrderTypeIndex].toLowerCase()
+        ORDER_TYPES[currentOrderTypeIndex]
       );
     }
 
