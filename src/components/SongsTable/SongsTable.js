@@ -103,13 +103,12 @@ export class SongsTableComponent {
 
   mountChildren() {
     Array.from(this.dotsMenu).forEach(item => {
-      this.dotsMenu = new DotsMenuComponent(item, {
+      new DotsMenuComponent(item, {
         items: [
           { name: "Remove from my songs", handler: () => {} },
           { name: "Share", handler: () => {} }
         ]
-      });
-      this.dotsMenu.mount();
+      }).mount();
     });
   }
 
