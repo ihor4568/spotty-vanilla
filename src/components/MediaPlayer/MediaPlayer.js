@@ -17,7 +17,8 @@ const SONG_INFO = {
   artistName: "Jazzamor",
   songId: "song1",
   licenseInfo:
-    "BJ Block & Dawn Pemberton is licensed under a Attribution-NonCommercial-NoDerivatives (aka Music Sharing) 3.0 International License."
+    "BJ Block & Dawn Pemberton is licensed under a Attribution-NonCommercial-NoDerivatives (aka Music Sharing) 3.0 International License.",
+  licenseURL: "https://creativecommons.org/licenses/by-nc-nd/3.0/"
 };
 
 export class MediaPlayerComponent {
@@ -85,7 +86,8 @@ export class MediaPlayerComponent {
 
   handleLegal() {
     this.dialogComponent = new DialogComponent(this.dialogPoint, {
-      licenseInfo: SONG_INFO.licenseInfo
+      licenseInfo: SONG_INFO.licenseInfo,
+      licenseURL: SONG_INFO.licenseURL
     });
     this.dialogComponent.mount();
   }

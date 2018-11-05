@@ -8,7 +8,7 @@ export class DialogComponent {
   }
 
   querySelectors() {
-    this.dialogPopup = this.mountPoint.querySelector(".mdc-dialog");
+    this.dialogPopup = this.mountPoint.querySelector(".dialog");
   }
 
   initMaterial() {
