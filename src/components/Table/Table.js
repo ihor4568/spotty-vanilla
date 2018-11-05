@@ -4,19 +4,33 @@ import { MDCRipple } from "@material/ripple";
 import tableTemplate from "./Table.html";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
+const ORDER_TYPES = {
+  0: "INITIAL",
+  1: "ASC",
+  2: "DESC"
+};
+
 export class TableComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
     this.state = {
-      data: this.props.data,
-      initialData: Array.from(this.props.data),
-      orderTypes: ["initial", "asc", "desc"],
+      data: this.fillObjectsWithNumbersIsIndices(this.props.data),
+      initialData: this.fillObjectsWithNumbersIsIndices(this.props.data),
       currentOrderTypeIndex: 1,
       columnName: ""
     };
 
     this.handleOrderClick = this.handleOrderClick.bind(this);
+  }
+
+  fillObjectsWithNumbersIsIndices(array) {
+    const newArray = [];
+    const indices = Object.keys(array);
+    indices.forEach(index => {
+      newArray.push(Object.assign({}, array[index], { number: index }));
+    });
+    return newArray;
   }
 
   getColumnName(target) {
@@ -30,20 +44,20 @@ export class TableComponent {
   }
 
   handleOrderClick(e) {
-    const { data, initialData, orderTypes, currentOrderTypeIndex } = this.state;
+    const { data, initialData, currentOrderTypeIndex } = this.state;
 
     this.state.columnName = this.getColumnName(e.target);
     if (!this.state.columnName) {
       return;
     }
 
-    if (currentOrderTypeIndex === 0) {
+    if (ORDER_TYPES[currentOrderTypeIndex] === "INITIAL") {
       this.state.data = initialData;
     } else {
       this.state.data = _.orderBy(
         data,
         this.state.columnName,
-        orderTypes[currentOrderTypeIndex]
+        ORDER_TYPES[currentOrderTypeIndex].toLowerCase()
       );
     }
 
@@ -53,7 +67,7 @@ export class TableComponent {
   querySelectors() {
     const { mountPoint } = this;
     this.tableHead = mountPoint.querySelector(".table__head");
-    this.iconButtonRipple = mountPoint.querySelectorAll(".mdc-icon-button");
+    this.iconButtonRipples = mountPoint.querySelectorAll(".material-icons");
     this.dotsMenu = mountPoint.querySelectorAll(".table__td_more");
     this.orderIcon = mountPoint.querySelector(
       `.table__th-icon_${this.state.columnName}`
@@ -71,9 +85,9 @@ export class TableComponent {
       return;
     }
 
-    if (currentOrderTypeIndex === 1) {
+    if (ORDER_TYPES[currentOrderTypeIndex] === "ASC") {
       this.orderIcon.classList.add("table__th-icon_order_asc");
-    } else if (currentOrderTypeIndex === 2) {
+    } else if (ORDER_TYPES[currentOrderTypeIndex] === "DESC") {
       this.orderIcon.classList.add("table__th-icon_order_desc");
     }
 
@@ -101,9 +115,9 @@ export class TableComponent {
   }
 
   initMaterial() {
-    Array.from(this.iconButtonRipple).forEach(item => {
-      this.iconButtonRipple = new MDCRipple(item);
-      this.iconButtonRipple.unbounded = true;
+    Array.from(this.iconButtonRipples).forEach(item => {
+      const iconButtonRipple = new MDCRipple(item);
+      iconButtonRipple.unbounded = true;
     });
   }
 

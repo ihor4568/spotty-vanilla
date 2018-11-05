@@ -37,6 +37,7 @@
       }
     }
     &-button {
+      text-transform: capitalize;
       display: flex;
       justify-content: flex-start;
       @include mdc-button-filled-accessible(white);

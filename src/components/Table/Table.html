@@ -2,15 +2,21 @@
   <thead class="table__head">
     <tr>
       <th class="table__th"></th>
-      <th class="table__th table__th_number">#</th>
+      <th class="table__th table__th_number">
+        <button class="mdc-button table__th-button">
+          No.
+          <svg data="number" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_number" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
+        </button>
+      </th>
       <th class="table__th"></th>
       <th class="table__th table__th_name">
         <button class="mdc-button table__th-button">
           name
           <svg data="name" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_name" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" />
-            <path d="M0 0h24v24H0z" fill="none" />
-          </svg>
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
         </button>
       </th>
       <th class="table__th table__th_duration">
@@ -20,31 +26,29 @@
         <button class="mdc-button table__th-button">
           author
           <svg data="author" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_author" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" />
-            <path d="M0 0h24v24H0z" fill="none" />
-          </svg>
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
         </button>
       </th>
       <th class="table__th table__th_album">
         <button class="mdc-button table__th-button">
           album
           <svg data="album" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_album" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" />
-            <path d="M0 0h24v24H0z" fill="none" />
-          </svg>
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
         </button>
       </th>
       <th class="table__th table__th_3dots"></th>
     </tr>
   </thead>
   <tbody class="table__body">
-    <% data.forEach((item, i) => { %>
-    <tr class="table__row data-id=" <%=i+1 %>">
+    <% data.forEach(item => { %>
+    <tr class="table__row data-id=" <%=parseInt(item.number) + 1 %>">
       <td class="table__td table__td_play">
         <button class="mdc-icon-button material-icons table__td_play-btn">play_arrow</button>
       </td>
       <td class="table__td table__td_number">
-        <%=i+1 %>
+        <%= parseInt(item.number) + 1 %>
       </td>
       <td class="table__td table__td_cover">
         <img class="table__td_cover-img" src="<%= item.cover %>" alt="">
