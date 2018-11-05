@@ -3,7 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
+import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
@@ -143,7 +143,7 @@ export class MainComponent {
     this.shareView = new ShareViewComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
-    this.table = new MySongsTableComponent(this.mainPoint);
+    this.table = new MySongsComponent(this.mainPoint);
 
     this.albums = new AlbumsComponent(this.mainPoint);
 
