@@ -31,6 +31,14 @@ export class MySongsComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.state = {
+      initialData: TABLE_DATA,
+      filteredData: TABLE_DATA
+    };
+  }
+
+  retrieveAllSongNames(array) {
+    return array.map(item => item.name);
   }
 
   querySelectors() {
@@ -39,17 +47,17 @@ export class MySongsComponent {
     );
   }
 
-  mountChildren() {
+  mountChildren(data) {
     this.table = new SongsTableComponent(this.tableContainer, {
-      data: TABLE_DATA
+      data
     });
     this.table.mount();
   }
 
-  mount() {
+  mount(data = [...this.state.initialData]) {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
-    this.mountChildren();
+    this.mountChildren(data);
   }
 
   render() {
