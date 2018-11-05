@@ -28,8 +28,8 @@ export class AlbumsSongTableComponent {
         albums.forEach(album => {
           if (album.id === albumId) {
             this.state.title = album.title;
-            this.state.imageURL = album.imageURL;
             this.state.authors = album.authors.join(", ");
+            this.state.imageURL = album.imageURL;
           }
         });
         this.state.songs = songs;

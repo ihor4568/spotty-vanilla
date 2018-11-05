@@ -1,20 +1,5 @@
 <div class="album-songs-table">
   <div class="album-songs-table">
-    <% if (isFetching) { %>
-    <div class="album-songs-table__progressbar">
-      <div class="album-songs-table__progressbar-title mdc-typography--headline4">The songs are loading, please wait...</div>
-      <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
-        <div class="mdc-linear-progress__buffering-dots"></div>
-        <div class="mdc-linear-progress__buffer"></div>
-        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-          <span class="mdc-linear-progress__bar-inner"></span>
-        </div>
-        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-          <span class="mdc-linear-progress__bar-inner"></span>
-        </div>
-      </div>
-    </div>
-    <% } else { %>
     <div class="album-songs-table__album-description">
       <h2 class="albums__card-album mdc-typography--headline6">
         <%= title %>
@@ -82,5 +67,4 @@
       <% }) %>
     </tbody>
   </table>
-  <% } %>
 </div>
