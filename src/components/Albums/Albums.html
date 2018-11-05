@@ -1,19 +1,4 @@
 <div class="albums">
-  <% if (isFetching) { %>
-  <div class="albums__progressbar">
-    <div class="albums__progressbar-title mdc-typography--headline4">The list of albums is loading, please wait...</div>
-    <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
-      <div class="mdc-linear-progress__buffering-dots"></div>
-      <div class="mdc-linear-progress__buffer"></div>
-      <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
-        <span class="mdc-linear-progress__bar-inner"></span>
-      </div>
-      <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-        <span class="mdc-linear-progress__bar-inner"></span>
-      </div>
-    </div>
-  </div>
-  <% } else { %>
   <h2 class="albums__heading mdc-typography--headline4">Albums</h2>
   <div class="albums__container">
     <%  albums.forEach( album => {%>
@@ -42,4 +27,3 @@
     <% }) %>
   </div>
 </div>
-<% } %>
