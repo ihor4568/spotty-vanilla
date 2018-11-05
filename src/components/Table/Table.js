@@ -4,10 +4,14 @@ import { MDCRipple } from "@material/ripple";
 import tableTemplate from "./Table.html";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
+const INITIAL_ORDER = 0;
+const ASC_ORDER = 1;
+const DESC_ORDER = 2;
+
 const ORDER_TYPES = {
-  0: "INITIAL",
-  1: "ASC",
-  2: "DESC"
+  [INITIAL_ORDER]: "initial",
+  [ASC_ORDER]: "asc",
+  [DESC_ORDER]: "desc"
 };
 
 export class TableComponent {
@@ -48,7 +52,7 @@ export class TableComponent {
       return;
     }
 
-    if (ORDER_TYPES[currentOrderTypeIndex] === "INITIAL") {
+    if (currentOrderTypeIndex === INITIAL_ORDER) {
       this.state.data = initialData;
     } else {
       this.state.data = _.orderBy(
@@ -82,9 +86,9 @@ export class TableComponent {
       return;
     }
 
-    if (ORDER_TYPES[currentOrderTypeIndex] === "ASC") {
+    if (currentOrderTypeIndex === ASC_ORDER) {
       this.orderIcon.classList.add("table__th-icon_order_asc");
-    } else if (ORDER_TYPES[currentOrderTypeIndex] === "DESC") {
+    } else if (currentOrderTypeIndex === DESC_ORDER) {
       this.orderIcon.classList.add("table__th-icon_order_desc");
     }
 
