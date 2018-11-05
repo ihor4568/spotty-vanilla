@@ -25,19 +25,16 @@ export class TableComponent {
   }
 
   fillObjectsWithNumbersAsIndices(array) {
-    const newArray = [];
-    const indices = Object.keys(array);
-    indices.forEach(index => {
-      newArray.push(Object.assign({}, array[index], { number: index }));
-    });
-    return newArray;
+    return array.map((item, index) =>
+      Object.assign({}, array[index], { number: index })
+    );
   }
 
   getColumnName(target) {
-    if (target.tagName === "BUTTON") {
+    if (target.tagName === "SPAN") {
       return target.firstElementChild.attributes.data.value;
     }
-    if (target.tagName === "svg") {
+    if (target.tagName === "I") {
       return target.attributes.data.value;
     }
     return null;

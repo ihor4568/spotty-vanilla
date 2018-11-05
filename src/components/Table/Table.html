@@ -3,40 +3,32 @@
     <tr>
       <th class="table__th"></th>
       <th class="table__th table__th_number">
-        <button class="mdc-button table__th-button">
+        <span class="table__th-field">
           No.
-          <svg data="number" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_number" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="none" d="M0 0h24v24H0V0z" />
-            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
-        </button>
+          <i data="number" class="fas fa-arrow-up table__th-icon table__th-icon_number"></i>
+        </span>
       </th>
       <th class="table__th"></th>
       <th class="table__th table__th_name">
-        <button class="mdc-button table__th-button">
-          name
-          <svg data="name" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_name" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="none" d="M0 0h24v24H0V0z" />
-            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
-        </button>
+        <span class="table__th-field">
+          Name
+          <i data="name" class="fas fa-arrow-up table__th-icon table__th-icon_name"></i>
+        </span>
       </th>
       <th class="table__th table__th_duration">
         <i class="material-icons table__th_duration_icon">watch_later</i>
       </th>
-      <th class="table__th table__th_author">
-        <button class="mdc-button table__th-button">
-          author
-          <svg data="author" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_author" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="none" d="M0 0h24v24H0V0z" />
-            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
-        </button>
+      <th class="table__th table__th_artist">
+        <span class="table__th-field">
+          Author
+          <i data="author" class="fas fa-arrow-up table__th-icon table__th-icon_author"></i>
+        </span>
       </th>
       <th class="table__th table__th_album">
-        <button class="mdc-button table__th-button">
-          album
-          <svg data="album" aria-hidden="true" class="mdc-button__icon table__th-icon table__th-icon_album" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="none" d="M0 0h24v24H0V0z" />
-            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
-        </button>
+        <span class="table__th-field">
+          Album
+          <i data="album" class="fas fa-arrow-up table__th-icon table__th-icon_album"></i>
+        </span>
       </th>
       <th class="table__th table__th_3dots"></th>
     </tr>
@@ -59,7 +51,7 @@
       <td class="table__td table__td_duration">
         <%= item.duration%>
       </td>
-      <td class="table__td table__td_author">
+      <td class="table__td table__td_Author">
         <%= item.author %>
       </td>
       <td class="table__td table__td_album">
