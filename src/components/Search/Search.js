@@ -2,8 +2,17 @@ import { MDCTextField } from "@material/textfield";
 import searchTemplate from "./Search.html";
 
 export class SearchComponent {
-  constructor(mountPoint) {
+  constructor(mountPoint, props) {
     this.mountPoint = mountPoint;
+    this.props = props;
+  }
+
+  querySelectors() {
+    this.searchIcon = this.mountPoint.querySelector(".search__icon");
+  }
+
+  addEventListeners() {
+    this.searchIcon.addEventListener("click", this.props.onSearchQuery);
   }
 
   initMaterial() {
@@ -12,6 +21,8 @@ export class SearchComponent {
 
   mount() {
     this.mountPoint.innerHTML = this.render();
+    this.querySelectors();
+    this.addEventListeners();
     this.initMaterial();
   }
 

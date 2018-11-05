@@ -29,6 +29,10 @@ export class SongsTableComponent {
   }
 
   fillObjectsWithNumbersAsIndices(array) {
+    if (!array) {
+      return [];
+    }
+
     return array.map((item, index) => ({ ...item, number: index }));
   }
 

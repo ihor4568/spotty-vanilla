@@ -1,5 +1,6 @@
 import { MDCDrawer } from "@material/drawer";
 
+import * as Helpers from "./Helpers";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
@@ -45,6 +46,22 @@ export class MainComponent {
   addEventListeners() {
     this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
     window.addEventListener("popstate", this.handleStatePath.bind(this));
+  }
+
+  handleSearchQuery(e) {
+    const searchQuery = e.target.nextElementSibling.value;
+    const { initialData, filteredData } = this.state;
+
+    const names = this.retrieveAllSongNames(initialData);
+    const indices = Helpers.findAllOccurrences(names, searchQuery);
+    const nextFilteredData =
+      (!searchQuery && initialData) || indices.map(item => initialData[item]);
+
+    const componentShouldUpdate = filteredData !== nextFilteredData;
+    if (componentShouldUpdate) {
+      this.state.filteredData = nextFilteredData;
+      this.mount(nextFilteredData);
+    }
   }
 
   handleListClick(e) {
@@ -137,9 +154,6 @@ export class MainComponent {
     this.player = new MediaPlayerComponent(this.playerPoint);
     this.player.mount();
 
-    this.search = new SearchComponent(this.searchPoint);
-    this.search.mount();
-
     this.shareView = new ShareViewComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
@@ -150,6 +164,11 @@ export class MainComponent {
     this.notFound = new NotFoundComponent(this.mainPoint);
 
     this.artist = new ArtistsComponent(this.mainPoint);
+
+    this.search = new SearchComponent(this.searchPoint, {
+      onSearchQuery: this.handleSearchQuery.bind(this.table)
+    });
+    this.search.mount();
   }
 
   render() {
