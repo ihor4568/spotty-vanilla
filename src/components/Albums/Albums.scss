@@ -25,24 +25,19 @@
     color: rgba(0, 0, 0, 0.54);
     margin: 0;
   }
+
   @media screen and (max-width: 1780px) {
     &__card-container {
       width: calc(100% / 5 - 2rem);
     }
   }
+
   @media screen and (max-width: 1600px) {
     &__card-container {
       width: calc(100% / 4 - 2rem);
     }
-    &__card-album {
-      font-size: 1.2rem;
-    }
   }
-  @media screen and (max-width: 1280px) {
-    &__card-album {
-      font-size: 1rem;
-    }
-  }
+
   @media screen and (max-width: 1152px) {
     &__card-container {
       width: calc(100% / 4 - 1rem);

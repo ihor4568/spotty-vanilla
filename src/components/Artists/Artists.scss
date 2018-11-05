@@ -46,14 +46,6 @@
     &__card {
       width: calc(100% / 4 - 2rem);
     }
-    &__link {
-      font-size: 1.2rem;
-    }
-  }
-  @media screen and (max-width: 1280px) {
-    &__link {
-      font-size: 1rem;
-    }
   }
   @media screen and (max-width: 1152px) {
     &__card {

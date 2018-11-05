@@ -1,6 +1,6 @@
 .my-songs-table {
   &__table {
-    width: 100%;
+    width: calc(100% - 2rem);
     border: 0.06rem solid rgba(0, 0, 0, 0.12);
     border-collapse: collapse;
     border-spacing: 0.12rem;
@@ -9,6 +9,7 @@
     background-color: #fff;
     color: #757575;
     display: table;
+    margin: 2rem 1rem;
 
     box-shadow: 0 0.1rem 0.1rem 0 rgba(0, 0, 0, 0.14),
       0 0.2rem 0.1rem -0.15rem rgba(0, 0, 0, 0.2),
@@ -121,6 +122,12 @@
         cursor: pointer;
         outline: none;
       }
+    }
+  }
+  @media screen and (max-width: 1152px) {
+    &__table {
+      width: calc(100% - 1rem);
+      margin: 2rem 0.5rem;
     }
   }
 }
