@@ -1,5 +1,5 @@
 import mySongs from "./MySongs.html";
-import { TableComponent } from "../Table/Table";
+import { SongsTableComponent } from "../SongsTable/SongsTable";
 
 const TABLE_DATA = [
   {
@@ -40,7 +40,9 @@ export class MySongsComponent {
   }
 
   mountChildren() {
-    this.table = new TableComponent(this.tableContainer, { data: TABLE_DATA });
+    this.table = new SongsTableComponent(this.tableContainer, {
+      data: TABLE_DATA
+    });
     this.table.mount();
   }
 

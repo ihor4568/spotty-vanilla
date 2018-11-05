@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { MDCRipple } from "@material/ripple";
 
-import tableTemplate from "./Table.html";
+import songsTableTemplate from "./SongsTable.html";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
 const INITIAL_ORDER = 0;
@@ -14,7 +14,7 @@ const ORDER_TYPES = {
   [DESC_ORDER]: "desc"
 };
 
-export class TableComponent {
+export class SongsTableComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
@@ -29,9 +29,7 @@ export class TableComponent {
   }
 
   fillObjectsWithNumbersAsIndices(array) {
-    return array.map((item, index) =>
-      Object.assign({}, array[index], { number: index })
-    );
+    return array.map((item, index) => ({ ...array[index], number: index }));
   }
 
   getColumnName(target) {
@@ -67,11 +65,11 @@ export class TableComponent {
 
   querySelectors() {
     const { mountPoint } = this;
-    this.tableHead = mountPoint.querySelector(".table__head");
+    this.tableHead = mountPoint.querySelector(".songs-table__head");
     this.iconButtonRipples = mountPoint.querySelectorAll(".material-icons");
-    this.dotsMenu = mountPoint.querySelectorAll(".table__td_more");
+    this.dotsMenu = mountPoint.querySelectorAll(".songs-table__td_more");
     this.orderIcon = mountPoint.querySelector(
-      `.table__th-icon_${this.state.columnName}`
+      `.songs-table__th-icon_${this.state.columnName}`
     );
   }
 
@@ -87,17 +85,17 @@ export class TableComponent {
     }
 
     if (currentOrderTypeIndex === ASC_ORDER) {
-      this.orderIcon.classList.add("table__th-icon_order_asc");
+      this.orderIcon.classList.add("songs-table__th-icon_order_asc");
     } else if (currentOrderTypeIndex === DESC_ORDER) {
-      this.orderIcon.classList.add("table__th-icon_order_desc");
+      this.orderIcon.classList.add("songs-table__th-icon_order_desc");
     }
 
     this.changeCurrentOrderTypeIndex();
   }
 
   changeCurrentOrderTypeIndex() {
-    if (this.state.currentOrderTypeIndex === 2) {
-      this.state.currentOrderTypeIndex = 0;
+    if (this.state.currentOrderTypeIndex === DESC_ORDER) {
+      this.state.currentOrderTypeIndex = INITIAL_ORDER;
       return;
     }
     this.state.currentOrderTypeIndex += 1;
@@ -132,6 +130,6 @@ export class TableComponent {
   }
 
   render() {
-    return tableTemplate({ data: this.state.data });
+    return songsTableTemplate({ data: this.state.data });
   }
 }
