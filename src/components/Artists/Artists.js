@@ -24,16 +24,16 @@ export class ArtistsComponent {
   fetchArtistsData() {
     this.state.isFetching = true;
     MusicService.getAuthors().then(artists => {
-      this.state.artists = artists.map(artist => Object.assign(artist));
+      this.state.artists = artists;
       this.state.isFetching = false;
-      this.mountPoint.innerHTML = this.render();
-      this.querySelectors();
-      this.initMaterial();
+      this.mount(false);
     });
   }
 
-  mount() {
-    this.fetchArtistsData();
+  mount(shouldFetchData = true) {
+    if (shouldFetchData) {
+      this.fetchArtistsData();
+    }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();

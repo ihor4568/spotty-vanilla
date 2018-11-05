@@ -1,6 +1,14 @@
 .artists {
   width: 100%;
 
+  &__progressbar {
+    margin-top: 20rem;
+  }
+
+  &__progressbar-title {
+    text-align: center;
+  }
+
   &__container {
     display: flex;
     flex-wrap: wrap;
