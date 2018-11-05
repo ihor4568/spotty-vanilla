@@ -8,7 +8,7 @@ export class LicenseDialogComponent {
   }
 
   querySelectors() {
-    this.dialogPopup = this.mountPoint.querySelector(".dialog");
+    this.dialogPopup = this.mountPoint.querySelector(".license-dialog");
   }
 
   initMaterial() {
