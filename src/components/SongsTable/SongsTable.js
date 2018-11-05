@@ -29,7 +29,7 @@ export class SongsTableComponent {
   }
 
   fillObjectsWithNumbersAsIndices(array) {
-    return array.map((item, index) => ({ ...array[index], number: index }));
+    return array.map((item, index) => ({ ...item, number: index }));
   }
 
   getColumnName(target) {
