@@ -20,15 +20,15 @@
     </thead>
     <tbody class="my-songs-table__body">
       <% tableData.forEach((item, i) => { %>
-      <tr class="my-songs-table__row data-id=" <%=i+1 %>">
+      <tr class="my-songs-table__row" id="<%= item.id %>" draggable="true">
         <td class="my-songs-table__td my-songs-table__td_play">
           <button class="mdc-icon-button material-icons my-songs-table__td_play-btn">play_arrow</button>
         </td>
         <td class="my-songs-table__td my-songs-table__td_number">
-          <%=i+1 %>
+          <%= i+1 %>
         </td>
         <td class="my-songs-table__td my-songs-table__td_cover">
-          <img class="my-songs-table__td_cover-img" src="<%= item.cover %>" alt="">
+          <img class="my-songs-table__td_cover-img" src="<%= item.cover %>" alt="album-cover">
         </td>
         <td class="my-songs-table__td my-songs-table__td_name">
           <%= item.name %>
