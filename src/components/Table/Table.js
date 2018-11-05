@@ -15,8 +15,8 @@ export class TableComponent {
     this.mountPoint = mountPoint;
     this.props = props;
     this.state = {
-      data: this.fillObjectsWithNumbersIsIndices(this.props.data),
-      initialData: this.fillObjectsWithNumbersIsIndices(this.props.data),
+      data: this.fillObjectsWithNumbersAsIndices(this.props.data),
+      initialData: this.fillObjectsWithNumbersAsIndices(this.props.data),
       currentOrderTypeIndex: 1,
       columnName: ""
     };
@@ -24,7 +24,7 @@ export class TableComponent {
     this.handleOrderClick = this.handleOrderClick.bind(this);
   }
 
-  fillObjectsWithNumbersIsIndices(array) {
+  fillObjectsWithNumbersAsIndices(array) {
     const newArray = [];
     const indices = Object.keys(array);
     indices.forEach(index => {
