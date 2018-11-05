@@ -24,7 +24,6 @@ export class MainComponent {
     this.headerPoint = this.mountPoint.querySelector(".main__header");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
-    this.shareViewPoint = this.mountPoint.querySelector(".main__share-view");
     this.appBar = this.mountPoint.querySelector(".main__app-bar");
   }
 
@@ -63,10 +62,26 @@ export class MainComponent {
     this.handleStatePath();
   }
 
+  changeActiveMenuItem(path) {
+    const prevActiveItem = this.mountPoint.querySelector(
+      ".mdc-list-item--activated"
+    );
+    if (prevActiveItem) {
+      prevActiveItem.classList.remove("mdc-list-item--activated");
+    }
+
+    const currActiveItem = this.mountPoint.querySelector(`[href="${path}"]`);
+    if (currActiveItem) {
+      currActiveItem.classList.add("mdc-list-item--activated");
+    }
+  }
+
   handleStatePath() {
     const pathname = window.location.pathname
       .replace(/^\/|\/$/g, "")
       .replace(/\/+/g, "/");
+
+    this.changeActiveMenuItem(`/${pathname}`);
 
     if (pathname === "albums" || pathname === "") {
       this.albums.mount();
@@ -126,7 +141,7 @@ export class MainComponent {
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
 
-    this.shareView = new ShareViewComponent(this.shareViewPoint);
+    this.shareView = new ShareViewComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
     this.table = new MySongsTableComponent(this.mainPoint);

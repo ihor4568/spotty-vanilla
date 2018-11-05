@@ -12,6 +12,7 @@
 @import "@material/menu-surface/mdc-menu-surface";
 @import "@material/linear-progress/mdc-linear-progress";
 @import "@material/fab/mdc-fab";
+@import "@material/dialog/mdc-dialog";
 
 @import "./components/Header/Header";
 @import "./components/Search/Search";
@@ -26,3 +27,4 @@
 @import "./components/ShareView/ShareView";
 @import "./components/Artists/Artists";
 @import "./components/NotFound/NotFound";
+@import "./components/LicenseDialog/LicenseDialog";
