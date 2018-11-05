@@ -1,20 +1,16 @@
 <div class="mdc-dialog dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
   <div class="mdc-dialog__container">
     <div class="mdc-dialog__surface">
-      <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
-      <h2 class="mdc-dialog__title" id="my-dialog-title">
-        <!--
-     -->License information
-        <!--
-   -->
-      </h2>
+      <h2 class="mdc-dialog__title" id="my-dialog-title">License information</h2>
       <div class="mdc-dialog__content" id="my-dialog-content">
         <p>
           <%= licenseInfo %>
         </p>
-        <a href="<%= licenseURL %>">License URL</a>
       </div>
       <footer class="mdc-dialog__actions">
+        <a href="<%= licenseURL %>" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no" target="_blank"> Read
+          more
+        </a>
         <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">Close</button>
       </footer>
     </div>

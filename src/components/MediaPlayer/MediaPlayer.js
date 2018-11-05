@@ -3,7 +3,7 @@ import { AudioInfoComponent } from "./AudioInfo/AudioInfo";
 import { RatingComponent } from "./Rating/Rating";
 import { MainControlComponent } from "./MainControl/MainControl";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
-import { DialogComponent } from "../Dialog/Dialog";
+import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
 
 import playerTemplate from "./MediaPlayer.html";
 
@@ -45,7 +45,6 @@ export class MediaPlayerComponent {
       ".media-player__dots-menu"
     );
     this.dialogPoint = this.mountPoint.querySelector(".media-player__dialog");
-    this.dialogList = this.mountPoint.querySelector(".mdc-button-dialog");
   }
 
   set audioTime(val) {
@@ -85,11 +84,11 @@ export class MediaPlayerComponent {
   }
 
   handleLegal() {
-    this.dialogComponent = new DialogComponent(this.dialogPoint, {
+    this.licenseDialogComponent = new LicenseDialogComponent(this.dialogPoint, {
       licenseInfo: SONG_INFO.licenseInfo,
       licenseURL: SONG_INFO.licenseURL
     });
-    this.dialogComponent.mount();
+    this.licenseDialogComponent.mount();
   }
 
   mount() {

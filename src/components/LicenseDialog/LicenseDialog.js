@@ -1,7 +1,7 @@
 import { MDCDialog } from "@material/dialog";
-import dialogTemplate from "./Dialog.html";
+import licenseDialogTemplate from "./LicenseDialog.html";
 
-export class DialogComponent {
+export class LicenseDialogComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
@@ -27,6 +27,6 @@ export class DialogComponent {
   }
 
   render() {
-    return dialogTemplate(this.props);
+    return licenseDialogTemplate(this.props);
   }
 }
