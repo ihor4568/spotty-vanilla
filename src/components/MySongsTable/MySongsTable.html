@@ -20,7 +20,7 @@
     </thead>
     <tbody class="my-songs-table__body">
       <% tableData.forEach((item, i) => { %>
-      <tr class="my-songs-table__row data-id=" <%=i+1 %>">
+      <tr class="my-songs-table__row" data-id="<%= item.id %>">
         <td class="my-songs-table__td my-songs-table__td_play">
           <button class="mdc-icon-button material-icons my-songs-table__td_play-btn">play_arrow</button>
         </td>

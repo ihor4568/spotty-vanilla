@@ -3,6 +3,7 @@ import { AudioInfoComponent } from "./AudioInfo/AudioInfo";
 import { RatingComponent } from "./Rating/Rating";
 import { MainControlComponent } from "./MainControl/MainControl";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
+import { MusicService } from "../../services/MusicService";
 
 import playerTemplate from "./MediaPlayer.html";
 
@@ -74,6 +75,25 @@ export class MediaPlayerComponent {
 
   handleShare() {
     window.open("/song/awdklawj");
+  }
+
+  setNewSong(song) {
+    const albumPromise = MusicService.getAlbumById(song.albumId);
+    const authorsPromise = Promise.all(
+      song.authors.map(authorId => MusicService.getAuthorById(authorId))
+    );
+
+    Promise.all([albumPromise, authorsPromise]).then(([album, authors]) => {
+      this.audioInfoComponent.updateInfo({
+        imageSrc: album.imageURL,
+        songName: song.name,
+        album: album.title,
+        artistName: authors.map(author => author.name).join(", ")
+      });
+    });
+
+    this.audio.src = song.songURL;
+    this.mainControlPannel.play();
   }
 
   mount() {

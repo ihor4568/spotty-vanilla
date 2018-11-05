@@ -99,6 +99,10 @@ export class MainComponent {
     this.notFound.mount();
   }
 
+  handlePlaySong(song) {
+    this.player.setNewSong(song);
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -128,7 +132,9 @@ export class MainComponent {
     this.shareView = new ShareViewComponent(this.shareViewPoint);
 
     this.about = new AboutComponent(this.mainPoint);
-    this.table = new MySongsTableComponent(this.mainPoint);
+    this.table = new MySongsTableComponent(this.mainPoint, {
+      handlePlaySong: this.handlePlaySong.bind(this)
+    });
 
     this.albums = new AlbumsComponent(this.mainPoint);
 

@@ -1,47 +1,35 @@
 import { MDCRipple } from "@material/ripple";
 import mySongsTableTemplate from "./MySongsTable.html";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
-
-const TABLE_DATA = [
-  {
-    cover: "https://images.unian.net/photos/2017_09/1505748424-6475.jpg",
-    name: "Alibaba",
-    duration: "9:15",
-    artist: "Jazz",
-    album: "Super"
-  },
-  {
-    cover:
-      "https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/6b2ef062-6913-4a94-a265-7d75f4f91854/64.jpg",
-    name: "Timon and Pumba",
-    duration: "9:15",
-    artist: "Folk",
-    album: "Nice"
-  },
-  {
-    cover:
-      "https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930",
-    name: "Alibaba",
-    duration: "9:15",
-    artist: "Sympho",
-    album: "The very best"
-  }
-];
+import { MusicService } from "../../services/MusicService";
 
 export class MySongsTableComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.tableData = TABLE_DATA;
   }
 
   querySelectors() {
+    this.table = this.mountPoint.querySelector(".my-songs-table__table");
     this.iconButtonRipple = this.mountPoint.querySelectorAll(
       ".mdc-icon-button"
     );
     this.dotsMenuPoints = this.mountPoint.querySelectorAll(
       ".my-songs-table__td_more"
     );
+  }
+
+  addEventListeners() {
+    this.table.addEventListener("click", this.handlePlayClick.bind(this));
+  }
+
+  handlePlayClick(e) {
+    const target = e.target.closest(".my-songs-table__td_play-btn");
+    if (target) {
+      const songId = target.closest(".my-songs-table__row").dataset.id;
+      const song = this.songs.find(songItem => songItem.id === songId);
+      this.props.handlePlaySong(song);
+    }
   }
 
   mountChildren() {
@@ -68,13 +56,17 @@ export class MySongsTableComponent {
   }
 
   mount() {
-    this.mountPoint.innerHTML = this.render();
-    this.querySelectors();
-    this.initMaterial();
-    this.mountChildren();
+    MusicService.getAlbumSongs("album1").then(songs => {
+      this.songs = songs;
+      this.mountPoint.innerHTML = this.render();
+      this.querySelectors();
+      this.initMaterial();
+      this.mountChildren();
+      this.addEventListeners();
+    });
   }
 
   render() {
-    return mySongsTableTemplate({ tableData: this.tableData });
+    return mySongsTableTemplate({ tableData: this.songs });
   }
 }
