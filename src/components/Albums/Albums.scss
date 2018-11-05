@@ -1,3 +1,5 @@
+@import "../Responsive/Responsive";
+
 .albums {
   &__container {
     display: flex;
@@ -6,7 +8,8 @@
 
   &__card-container {
     width: calc(100% / 6 - 2rem);
-    margin: 1rem;
+    margin: $basic-container-gap;
+    @include responsive-card;
   }
 
   &__card-images {
@@ -14,7 +17,7 @@
   }
 
   &__card-description {
-    padding: 1rem;
+    padding: $basic-container-gap;
   }
 
   &__card-album {
@@ -24,24 +27,5 @@
   &__card-artist {
     color: rgba(0, 0, 0, 0.54);
     margin: 0;
-  }
-
-  @media screen and (max-width: 1780px) {
-    &__card-container {
-      width: calc(100% / 5 - 2rem);
-    }
-  }
-
-  @media screen and (max-width: 1600px) {
-    &__card-container {
-      width: calc(100% / 4 - 2rem);
-    }
-  }
-
-  @media screen and (max-width: 1152px) {
-    &__card-container {
-      width: calc(100% / 4 - 1rem);
-      margin: 0.5rem;
-    }
   }
 }

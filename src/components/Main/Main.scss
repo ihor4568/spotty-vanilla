@@ -15,11 +15,11 @@
   }
   &__content-mount {
     height: calc(100% - 109px);
-    padding: 4rem 1rem 0;
+    padding: 4rem $basic-container-gap 0;
     z-index: 1;
 
     &_disable {
-      padding-bottom: 1rem;
+      padding-bottom: $basic-container-gap;
     }
   }
   &__app-bar {
@@ -49,7 +49,7 @@
     @include mdc-top-app-bar-icon-ink-color(#ccc);
     @include mdc-top-app-bar-fill-color(#ccc);
   }
-  @media screen and (max-width: 1280px) {
+  @media screen and (max-width: $small-break-point) {
     &__sidebar {
       @include mdc-drawer-width(224px);
     }
@@ -59,7 +59,7 @@
       }
     }
   }
-  @media screen and (max-width: 1152px) {
+  @media screen and (max-width: $smallest-break-point) {
     &__sidebar {
       @include mdc-drawer-width(192px);
     }
