@@ -48,4 +48,18 @@ export class MusicService {
         )
       );
   }
+
+  static getAlbumById(id) {
+    return database
+      .ref(`albums/${id}`)
+      .once("value")
+      .then(album => album.val());
+  }
+
+  static getAuthorById(id) {
+    return database
+      .ref(`authors/${id}`)
+      .once("value")
+      .then(author => author.val());
+  }
 }
