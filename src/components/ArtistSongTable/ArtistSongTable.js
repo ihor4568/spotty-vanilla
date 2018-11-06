@@ -6,6 +6,10 @@ export class ArtistSongTableComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.state = {
+      artist: [],
+      imageUrl: []
+    };
     this.songs = [];
   }
 
@@ -52,6 +56,15 @@ export class ArtistSongTableComponent {
       });
   }
 
+  fetchArtist() {
+    const artistId = this.getArtistFromUrl();
+    MusicService.getAuthorById(artistId).then(artist => {
+      this.state.artist = artist.name;
+      this.state.imageUrl = artist.imageURL;
+      this.mount(false);
+    });
+  }
+
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
@@ -62,6 +75,7 @@ export class ArtistSongTableComponent {
 
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
+      this.fetchArtist();
       this.fetchSongs();
     }
     this.mountPoint.innerHTML = this.render();
@@ -70,6 +84,6 @@ export class ArtistSongTableComponent {
   }
 
   render() {
-    return artistSongTable();
+    return artistSongTable(this.state);
   }
 }
