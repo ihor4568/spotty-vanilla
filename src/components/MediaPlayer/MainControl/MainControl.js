@@ -8,6 +8,10 @@ export class MainControlComponent {
     this.props = props;
   }
 
+  play() {
+    this.audioButtons.play();
+  }
+
   querySelectors() {
     this.buttons = this.mountPoint.querySelector(".main-control__buttons");
     this.volumeBar = this.mountPoint.querySelector(".main-control__volume-bar");
