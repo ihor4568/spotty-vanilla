@@ -56,6 +56,7 @@
       &_icon {
         vertical-align: middle;
         font-size: 1.2rem;
+        line-height: inherit;
       }
     }
     &_artist {
@@ -84,6 +85,8 @@
         &:after,
         &:before {
           background-color: rgba(0, 0, 0, 0.42);
+          height: 0;
+          top: inherit;
         }
         &-icon {
           color: rgba(0, 0, 0, 0.54);

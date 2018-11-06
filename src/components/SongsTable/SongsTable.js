@@ -164,7 +164,7 @@ export class SongsTableComponent {
 
   initMaterial() {
     Array.from(this.iconButtonRipples).forEach(item => {
-      new MDCRipple(item); // eslint-disable-line
+      new MDCRipple(item); // eslint-disable-line no-new
     });
   }
 
