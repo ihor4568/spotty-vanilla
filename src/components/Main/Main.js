@@ -3,7 +3,7 @@ import { MDCDrawer } from "@material/drawer";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
+import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
@@ -62,10 +62,26 @@ export class MainComponent {
     this.handleStatePath();
   }
 
+  changeActiveMenuItem(path) {
+    const prevActiveItem = this.mountPoint.querySelector(
+      ".mdc-list-item--activated"
+    );
+    if (prevActiveItem) {
+      prevActiveItem.classList.remove("mdc-list-item--activated");
+    }
+
+    const currActiveItem = this.mountPoint.querySelector(`[href="${path}"]`);
+    if (currActiveItem) {
+      currActiveItem.classList.add("mdc-list-item--activated");
+    }
+  }
+
   handleStatePath() {
     const pathname = window.location.pathname
       .replace(/^\/|\/$/g, "")
       .replace(/\/+/g, "/");
+
+    this.changeActiveMenuItem(`/${pathname}`);
 
     if (pathname === "albums" || pathname === "") {
       this.albums.mount();
@@ -131,7 +147,7 @@ export class MainComponent {
     this.shareView = new ShareViewComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
-    this.table = new MySongsTableComponent(this.mainPoint, {
+    this.table = new MySongsComponent(this.mainPoint, {
       onSongPlay: this.handleSongPlay.bind(this)
     });
 
