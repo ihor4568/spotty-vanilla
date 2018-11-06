@@ -15,29 +15,36 @@ export class MySongsComponent {
     );
   }
 
+  fetchAuthors(authorsIds) {
+    return Promise.all(
+      authorsIds.map(authorId => MusicService.getAuthorById(authorId))
+    );
+  }
+
+  fetchInfoBySong(song) {
+    const albumPromise = MusicService.getAlbumById(song.albumId);
+    const authorsPromise = this.fetchAuthors(song.authors);
+
+    return Promise.all([albumPromise, authorsPromise]);
+  }
+
   fetchSongs() {
-    MusicService.getAlbumSongs("album1").then(songs => {
-      this.songs = songs;
+    MusicService.getAlbumSongs("album1")
+      .then(songs => {
+        this.songs = songs;
 
-      Promise.all(
-        this.songs.map(song => {
-          const albumPromise = MusicService.getAlbumById(song.albumId);
-          const authorsPromise = Promise.all(
-            song.authors.map(authorId => MusicService.getAuthorById(authorId))
-          );
+        return Promise.all(this.songs.map(song => this.fetchInfoBySong(song)));
+      })
+      .then(songsInfo => {
+        songsInfo.forEach((item, i) => {
+          const [album, authorsInfo] = item;
 
-          const songInfoPromises = Promise.all([albumPromise, authorsPromise]);
-          songInfoPromises.then(([album, authors]) => {
-            /* eslint-disable no-param-reassign */
-            song.album = album;
-            song.authorsInfo = authors;
-            /* eslint-enable no-param-reassign */
-          });
+          this.songs[i].album = album;
+          this.songs[i].authorsInfo = authorsInfo;
+        });
 
-          return songInfoPromises;
-        })
-      ).then(() => this.mount(false));
-    });
+        this.mount(false);
+      });
   }
 
   mountChildren() {
