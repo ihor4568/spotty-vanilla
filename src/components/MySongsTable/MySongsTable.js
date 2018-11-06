@@ -8,9 +8,7 @@ const TABLE_DATA = [
     name: "Alibaba",
     duration: "9:15",
     artist: "Jazz",
-    album: "Super",
-    id: 1,
-    position: 20
+    album: "Super"
   },
   {
     cover:
@@ -18,19 +16,15 @@ const TABLE_DATA = [
     name: "Timon and Pumba",
     duration: "9:15",
     artist: "Folk",
-    album: "Nice",
-    id: 2,
-    position: 10
+    album: "Nice"
   },
   {
     cover:
       "https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930",
-    name: "baba",
+    name: "Alibaba",
     duration: "9:15",
     artist: "Sympho",
-    album: "The very best",
-    id: 3,
-    position: 30
+    album: "The very best"
   }
 ];
 
@@ -39,9 +33,7 @@ export class MySongsTableComponent {
     this.mountPoint = mountPoint;
     this.props = props;
     this.tableData = TABLE_DATA;
-
-    this.cur = null;
-    this.selected = null;
+    this.dragElement = null;
   }
 
   querySelectors() {
@@ -51,7 +43,6 @@ export class MySongsTableComponent {
     this.dotsMenuPoints = this.mountPoint.querySelectorAll(
       ".my-songs-table__td_more"
     );
-    this.rows = this.mountPoint.querySelectorAll(".my-songs-table__row");
     this.tableBody = this.mountPoint.querySelector(".my-songs-table__body");
   }
 
@@ -71,47 +62,42 @@ export class MySongsTableComponent {
     window.open("/song/awdklawj");
   }
 
-  // //
   addEventListeners() {
-    Array.from(this.rows).forEach(row => {
-      row.addEventListener("dragstart", this.dragstart.bind(this));
-    });
-    this.tableBody.addEventListener("dragover", this.dragover.bind(this));
-    this.tableBody.addEventListener("drop", this.drop.bind(this));
+    this.tableBody.addEventListener("dragover", this.onDragOver.bind(this));
+    this.tableBody.addEventListener("dragstart", this.onDragStart.bind(this));
   }
 
-  dragstart(e) {
-    this.cur = parseInt(e.target.id, 10);
+  isBefore(el1, el2) {
+    if (el2.parentNode === el1.parentNode) {
+      for (
+        let currentDragElement = el1.previousSibling;
+        currentDragElement;
+        currentDragElement = currentDragElement.previousSibling
+      ) {
+        if (currentDragElement === el2) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
-  dragover(e) {
+  onDragStart(e) {
+    this.dragElement = e.target;
+  }
+
+  onDragOver(e) {
     e.preventDefault();
-    const row = e.target.closest(".my-songs-table__row");
-    if (row.id) {
-      this.selected = parseInt(row.id, 10);
+    const dragOverRow = e.target.closest(".my-songs-table__row");
+    if (this.isBefore(this.dragElement, dragOverRow)) {
+      dragOverRow.parentNode.insertBefore(this.dragElement, dragOverRow);
+    } else {
+      dragOverRow.parentNode.insertBefore(
+        this.dragElement,
+        dragOverRow.nextSibling
+      );
     }
   }
-
-  drop(e) {
-    e.preventDefault();
-
-    const curSongId = this.tableData.findIndex(el => el.id === this.cur);
-    const selectedSongId = this.tableData.findIndex(
-      el => el.id === this.selected
-    );
-
-    if (curSongId !== -1 && selectedSongId !== -1) {
-      const curPos = this.tableData[curSongId].position;
-      this.tableData[curSongId].position = this.tableData[
-        selectedSongId
-      ].position;
-      this.tableData[selectedSongId].position = curPos;
-
-      this.mount();
-    }
-  }
-
-  // //
 
   initMaterial() {
     Array.from(this.iconButtonRipple).forEach(item => {
@@ -129,9 +115,6 @@ export class MySongsTableComponent {
   }
 
   render() {
-    // return mySongsTableTemplate({ tableData: this.tableData });
-    return mySongsTableTemplate({
-      tableData: this.tableData.sort((a, b) => a.position - b.position)
-    });
+    return mySongsTableTemplate({ tableData: this.tableData });
   }
 }
