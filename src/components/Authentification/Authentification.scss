@@ -1,0 +1,33 @@
+.auth {
+  margin: 8% auto 0;
+  padding: 0;
+  width: 20rem;
+
+  &__scroll {
+    display: flex;
+  }
+
+  &__email,
+  &__name,
+  &__second-name,
+  &__password {
+    display: block;
+    width: 18.75rem;
+    margin: 1.25rem auto;
+  }
+
+  &__name_disable {
+    display: none;
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 18.75rem;
+    margin: auto;
+  }
+
+  &__button {
+    margin: 3px;
+  }
+}

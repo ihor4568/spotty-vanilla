@@ -1,5 +1,8 @@
 import { MDCDrawer } from "@material/drawer";
 
+import { AuthentificationService } from "../../services/AuthentificationService";
+
+import { AuthentificationComponent } from "../Authentification/Authentification";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
@@ -24,7 +27,6 @@ export class MainComponent {
     this.headerPoint = this.mountPoint.querySelector(".main__header");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
-    this.shareViewPoint = this.mountPoint.querySelector(".main__share-view");
     this.appBar = this.mountPoint.querySelector(".main__app-bar");
   }
 
@@ -35,6 +37,21 @@ export class MainComponent {
     this.mainPoint.classList.add("main__content-mount_disable");
     this.shareView.setSongId(songId);
     this.shareView.mount();
+  }
+
+  setAuthentificationView() {
+    this.playerPoint.classList.add("main__elem_disable");
+    this.searchPoint.classList.add("main__elem_disable");
+    this.appBar.classList.add("main__app-bar_disable");
+    this.mainPoint.classList.add("main__content-mount_disable");
+    this.auth.mount();
+  }
+
+  normalizePageView() {
+    this.playerPoint.classList.remove("main__elem_disable");
+    this.searchPoint.classList.remove("main__elem_disable");
+    this.appBar.classList.remove("main__app-bar_disable");
+    this.mainPoint.classList.remove("main__content-mount_disable");
   }
 
   initMaterial() {
@@ -68,32 +85,47 @@ export class MainComponent {
       .replace(/^\/|\/$/g, "")
       .replace(/\/+/g, "/");
 
-    if (pathname === "albums" || pathname === "") {
-      this.albums.mount();
-      return;
-    }
-
-    if (pathname === "about") {
-      this.about.mount();
-      return;
-    }
-
-    if (pathname === "artists") {
-      this.artist.mount();
-      return;
-    }
-
-    if (pathname === "songs") {
-      this.table.mount();
-      return;
-    }
-
     const urlParts = pathname.split("/");
-
     if (urlParts[0] === "song" && urlParts[1] && urlParts.length === 2) {
       const songId = urlParts[1];
       this.setShareView(songId);
       return;
+    }
+
+    if (AuthentificationService.check(res => res) !== "") {
+      if (pathname !== "login") {
+        window.location.pathname = "login";
+      } else {
+        this.setAuthentificationView();
+        return;
+      }
+    }
+
+    if (AuthentificationService.check(res => res) === "") {
+      if (pathname === "login") {
+        window.location.pathname = "";
+      }
+      this.normalizePageView();
+
+      if (pathname === "albums" || pathname === "") {
+        this.albums.mount();
+        return;
+      }
+
+      if (pathname === "about") {
+        this.about.mount();
+        return;
+      }
+
+      if (pathname === "artists") {
+        this.artist.mount();
+        return;
+      }
+
+      if (pathname === "songs") {
+        this.table.mount();
+        return;
+      }
     }
 
     this.notFound.mount();
@@ -125,9 +157,12 @@ export class MainComponent {
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
 
-    this.shareView = new ShareViewComponent(this.shareViewPoint);
+    this.auth = new AuthentificationComponent(this.mainPoint);
+
+    this.shareView = new ShareViewComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
+
     this.table = new MySongsTableComponent(this.mainPoint);
 
     this.albums = new AlbumsComponent(this.mainPoint);
