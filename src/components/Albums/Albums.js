@@ -28,13 +28,12 @@ export class AlbumsComponent {
     this.state.isFetching = true;
     Promise.all([MusicService.getAlbums(), MusicService.getAuthors()]).then(
       ([albums, authors]) => {
-        this.state.albums = albums.map(album =>
-          Object.assign(album, {
-            authors: album.authors
-              .map(author => this.getArtistNameById(authors, author))
-              .join(", ")
-          })
-        );
+        this.state.albums = albums.map(album => ({
+          ...album,
+          authors: album.authors
+            .map(author => this.getArtistNameById(authors, author))
+            .join(", ")
+        }));
         this.state.isFetching = false;
         this.mount(false);
       }
@@ -42,7 +41,7 @@ export class AlbumsComponent {
   }
 
   getArtistNameById(authors, id) {
-    return authors.filter(author => author.id === id)[0].name;
+    return authors.find(author => author.id === id).name;
   }
 
   mount(shouldFetchData = true) {
