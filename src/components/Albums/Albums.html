@@ -2,7 +2,7 @@
   <h2 class="albums__heading mdc-typography--headline4">Albums</h2>
   <div class="albums__container">
     <%  albums.forEach( album => {%>
-    <div class="albums__card-container">
+    <div class="albums__card-container responsive-grid">
       <a class="albums__link" href="/albums/<%= album.id %>">
         <div class="albums__card mdc-card mdc-card-album">
           <div class="albums__card-ripple-effect mdc-card__primary-action mdc-ripple-upgraded">

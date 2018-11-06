@@ -1,5 +1,5 @@
 .songs-table {
-  width: 100%;
+  width: calc(100% - 2rem);
   border: 0.06rem solid rgba(0, 0, 0, 0.12);
   border-collapse: collapse;
   border-spacing: 0.12rem;
@@ -8,6 +8,7 @@
   background-color: #fff;
   color: #757575;
   display: table;
+  margin: 2rem 1rem;
   box-shadow: 0 0.1rem 0.1rem 0 rgba(0, 0, 0, 0.14),
     0 0.2rem 0.1rem -0.15rem rgba(0, 0, 0, 0.2),
     0 0.1rem 0.3rem 0 rgba(0, 0, 0, 0.12);
@@ -43,17 +44,18 @@
       }
     }
     &_number {
-      text-align: center;
+      text-align: end;
       width: 1rem;
     }
     &_name {
       text-align: left;
     }
     &_duration {
-      text-align: right;
+      text-align: center;
       padding-right: 0.2rem;
       &_icon {
         vertical-align: middle;
+        font-size: 1.2rem;
       }
     }
     &_artist {
@@ -77,8 +79,13 @@
       width: 1.5rem;
       text-align: center;
       padding: 0;
+      &-btn {
+        border-radius: 1px;
+      }
     }
-
+    &_Author {
+      padding: 0;
+    }
     &_number {
       width: 1rem;
     }
@@ -99,7 +106,7 @@
       width: 30%;
     }
     &_duration {
-      text-align: right;
+      text-align: center;
       padding: 0.1rem 0.3rem;
       width: 50px;
     }
@@ -123,6 +130,12 @@
         cursor: pointer;
         outline: none;
       }
+    }
+  }
+  @media screen and (max-width: 1152px) {
+    &__table {
+      width: calc(100% - 1rem);
+      margin: 2rem 0.5rem;
     }
   }
 }
