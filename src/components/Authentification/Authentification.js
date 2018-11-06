@@ -2,7 +2,6 @@ import { MDCTextField } from "@material/textfield";
 import { MDCRipple } from "@material/ripple";
 import { MDCTabBar } from "@material/tab-bar";
 
-import { AuthentificationService } from "../../services/AuthentificationService";
 import authentificationTemplate from "./Authentification.html";
 
 export class AuthentificationComponent {
@@ -13,7 +12,7 @@ export class AuthentificationComponent {
 
   querySelectors() {
     this.email = this.mountPoint.querySelector(".auth__email");
-    this.password = this.mountPoint.querySelector(".auth__password");
+    this.password = this.mountPoint.querySelectorAll(".auth__password");
     this.name = this.mountPoint.querySelector(".auth__name");
     this.next = this.mountPoint.querySelector(".auth__button");
     this.tabBar = this.mountPoint.querySelector(".auth__tab-bar");
@@ -24,7 +23,9 @@ export class AuthentificationComponent {
 
   initMaterial() {
     this.emailPoint = new MDCTextField(this.email);
-    this.passwordPoint = new MDCTextField(this.password);
+    Array.from(this.password).forEach(el => {
+      this.passwordPoint = new MDCTextField(el);
+    });
     this.namePoint = new MDCTextField(this.name);
     this.nextPoint = new MDCRipple(this.next);
     this.tabBarPoint = new MDCTabBar(this.tabBar);
@@ -44,45 +45,35 @@ export class AuthentificationComponent {
 
   handleSignInBtnClick() {
     if (this.tabSignIn.classList.contains("auth__input--active") === false) {
-      this.name.classList.add("auth__name_disable");
+      this.name.classList.add("auth__elem_disable");
+      this.password[1].classList.add("auth__elem_disable");
       this.tabSignIn.classList.add("auth__input--active");
       this.tabSignUp.classList.remove("auth__input--active");
       this.input[0].value = "";
       this.input[1].value = "";
       this.input[2].value = "";
+      this.input[3].value = "";
       this.next.innerText = "sign in";
     }
   }
 
   handleSignUpBtnClick() {
     if (this.tabSignUp.classList.contains("auth__input--active") === false) {
-      this.name.classList.remove("auth__name_disable");
+      this.name.classList.remove("auth__elem_disable");
+      this.password[1].classList.remove("auth__elem_disable");
       this.tabSignUp.classList.add("auth__input--active");
       this.tabSignIn.classList.remove("auth__input--active");
       this.input[0].value = "";
       this.input[1].value = "";
       this.input[2].value = "";
+      this.input[3].value = "";
+
       this.next.innerText = "sign up";
     }
   }
 
   handleNextClick() {
-    if (this.next.innerText === "SIGN IN") {
-      AuthentificationService.signIn(
-        this.input[0].value,
-        this.input[2].value,
-        res => {
-          document.write(res);
-        }
-      );
-      window.location.reload();
-    } else {
-      AuthentificationService.signUp(
-        this.input[0].value,
-        this.input[2].value,
-        this.input[1].value
-      );
-    }
+    window.location.reload();
   }
 
   mount() {

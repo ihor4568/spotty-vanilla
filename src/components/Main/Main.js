@@ -16,7 +16,6 @@ export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.status = true;
   }
 
   querySelectors() {
@@ -105,42 +104,40 @@ export class MainComponent {
       return;
     }
 
-    if (this.status === false) {
-      if (pathname !== "login") {
-        window.location.pathname = "login";
-      } else {
-        this.setAuthentificationView();
-        return;
-      }
+    if (pathname === "login") {
+      this.setAuthentificationView();
+      return;
+    }
+    if (pathname === "") {
+      this.routeNavigate("/albums");
+      return;
     }
 
-    if (this.status === true) {
-      if (pathname === "") {
-        this.routeNavigate("/albums");
-        return;
-      }
+    if (pathname === "login") {
+      this.routeNavigate("/albums");
+      return;
+    }
 
-      this.changeActiveMenuItem(`/${pathname}`);
+    this.changeActiveMenuItem(`/${pathname}`);
 
-      if (pathname === "albums") {
-        this.albums.mount();
-        return;
-      }
+    if (pathname === "albums") {
+      this.albums.mount();
+      return;
+    }
 
-      if (pathname === "about") {
-        this.about.mount();
-        return;
-      }
+    if (pathname === "about") {
+      this.about.mount();
+      return;
+    }
 
-      if (pathname === "artists") {
-        this.artist.mount();
-        return;
-      }
+    if (pathname === "artists") {
+      this.artist.mount();
+      return;
+    }
 
-      if (pathname === "songs") {
-        this.table.mount();
-        return;
-      }
+    if (pathname === "songs") {
+      this.table.mount();
+      return;
     }
 
     this.notFound.mount();

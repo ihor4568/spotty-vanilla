@@ -3,32 +3,27 @@ import { FirebaseService } from "./FirebaseService";
 const auth = FirebaseService.auth();
 
 export class AuthentificationService {
-  static signIn(email, pass, cbf) {
-    auth.createUserWithEmailAndPassword(email, pass).catch(err => {
-      cbf(err);
-    });
+  static signIn(email, pass) {
+    auth.signInWithEmailAndPassword(email, pass);
   }
 
-  static signUp(email, pass, name, cbf) {
-    auth
-      .createUserWithEmailAndPassword(email, pass)
-      .then(
-        auth.currentUser.updateProfile({
-          displayName: name
-        })
-      )
-      .catch(err => {
-        cbf(err);
-      });
+  static signUp(email, pass) {
+    auth.createUserWithEmailAndPassword(email, pass);
   }
 
   static signOut() {
     auth.signOut();
   }
 
-  static check(cb) {
-    auth.onAuthStateChanged(user => {
-      cb(user);
+  static check() {
+    return new Promise((resolve, reject) => {
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          resolve(user);
+        } else {
+          reject(user);
+        }
+      });
     });
   }
 }
