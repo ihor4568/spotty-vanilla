@@ -1,13 +1,13 @@
 export function findAllOccurrences(array, string) {
   const indices = [];
-  let index = array.indexOf(string);
-  while (index !== -1) {
-    indices.push(index);
-    index = array.indexOf(string, index + 1);
-  }
+  array.forEach((item, index) => {
+    if (item.indexOf(string) !== -1) {
+      indices.push(index);
+    }
+  });
   return indices;
 }
 
 export function retrieveArrayObjectsFields(array, field) {
-  return array.map(item => item[field]);
+  return array.map(item => item[field].toLowerCase());
 }

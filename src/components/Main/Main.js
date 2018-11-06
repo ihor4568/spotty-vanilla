@@ -50,7 +50,7 @@ export class MainComponent {
   }
 
   handleSearchQuery(e) {
-    const searchQuery = e.target.value;
+    const searchQuery = e.target.value.toLowerCase();
     const { currentTab } = this.state;
 
     if (
