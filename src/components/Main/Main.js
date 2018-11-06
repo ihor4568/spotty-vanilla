@@ -143,6 +143,10 @@ export class MainComponent {
     this.notFound.mount();
   }
 
+  handleSongPlay(song) {
+    this.player.setNewSong(song);
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -174,7 +178,9 @@ export class MainComponent {
     this.auth = new AuthentificationComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
-    this.table = new MySongsComponent(this.mainPoint);
+    this.table = new MySongsComponent(this.mainPoint, {
+      onSongPlay: this.handleSongPlay.bind(this)
+    });
 
     this.albums = new AlbumsComponent(this.mainPoint);
 

@@ -63,6 +63,15 @@ export class SongsTableComponent {
     this.mount();
   }
 
+  handlePlayClick(e) {
+    const target = e.target.closest(".songs-table__td_play-btn");
+    if (target) {
+      const songId = target.closest(".songs-table__row").dataset.id;
+      const song = this.props.data.find(songItem => songItem.id === songId);
+      this.props.onSongPlay(song);
+    }
+  }
+
   querySelectors() {
     const { mountPoint } = this;
     this.tableHead = mountPoint.querySelector(".songs-table__head");
@@ -81,6 +90,7 @@ export class SongsTableComponent {
       "dragstart",
       this.handleDragStart.bind(this)
     );
+    this.tableBody.addEventListener("click", this.handlePlayClick.bind(this));
   }
 
   isBefore(el1, el2) {
