@@ -2,7 +2,7 @@ import { FirebaseService } from "./FirebaseService";
 
 const auth = FirebaseService.auth();
 
-export class AuthentificationService {
+export class AuthService {
   static signIn(email, pass) {
     auth.signInWithEmailAndPassword(email, pass);
   }

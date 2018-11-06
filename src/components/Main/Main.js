@@ -5,7 +5,7 @@ import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
 import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
-import { AuthentificationComponent } from "../Authentification/Authentification";
+import { AuthComponent } from "../Auth/Auth";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
@@ -37,7 +37,7 @@ export class MainComponent {
     this.shareView.mount();
   }
 
-  setAuthentificationView() {
+  setAuthView() {
     this.playerPoint.classList.add("main__elem_disable");
     this.searchPoint.classList.add("main__elem_disable");
     this.appBar.classList.add("main__app-bar_disable");
@@ -105,7 +105,7 @@ export class MainComponent {
     }
 
     if (pathname === "login") {
-      this.setAuthentificationView();
+      this.setAuthView();
       return;
     }
     if (pathname === "") {
@@ -176,7 +176,7 @@ export class MainComponent {
 
     this.shareView = new ShareViewComponent(this.mainPoint);
 
-    this.auth = new AuthentificationComponent(this.mainPoint);
+    this.auth = new AuthComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
     this.table = new MySongsComponent(this.mainPoint, {

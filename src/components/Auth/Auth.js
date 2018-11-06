@@ -2,9 +2,9 @@ import { MDCTextField } from "@material/textfield";
 import { MDCRipple } from "@material/ripple";
 import { MDCTabBar } from "@material/tab-bar";
 
-import authentificationTemplate from "./Authentification.html";
+import authTemplate from "./Auth.html";
 
-export class AuthentificationComponent {
+export class AuthComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
@@ -84,6 +84,6 @@ export class AuthentificationComponent {
   }
 
   render() {
-    return authentificationTemplate();
+    return authTemplate();
   }
 }
