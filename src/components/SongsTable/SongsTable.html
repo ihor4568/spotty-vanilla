@@ -20,7 +20,7 @@
       </th>
       <th class="songs-table__th songs-table__th_artist">
         <span class="songs-table__th-field">
-          Author
+          Artist
           <i data="author" class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_author"></i>
         </span>
       </th>
@@ -37,7 +37,9 @@
     <% data.forEach(item => { %>
     <tr class="songs-table__row" data-id="<%= item.id %>" draggable="true">
       <td class="songs-table__td songs-table__td_play">
-        <button class="mdc-icon-button material-icons songs-table__td_play-btn">play_arrow</button>
+        <button class="mdc-button songs-table__td_play-btn">
+          <span class="mdc-fab__icon material-icons songs-table__td_play-btn-icon">play_arrow</span>
+        </button>
       </td>
       <td class="songs-table__td songs-table__td_number">
         <%= parseInt(item.number) + 1 %>
