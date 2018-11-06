@@ -1,7 +1,7 @@
 import { MDCDrawer } from "@material/drawer";
 
 import * as HelperService from "../../services/HelperService";
-import { SearchContainer } from "../../containers/SearchContainer";
+import { SearchService } from "../../services/SearchService";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
@@ -183,7 +183,7 @@ export class MainComponent {
 
     this.artists = new ArtistsComponent(this.mainPoint);
 
-    this.searchContainer = new SearchContainer();
+    this.searchContainer = new SearchService();
 
     this.search = new SearchComponent(this.searchPoint, {
       onSearchQuery: this.handleSearchQuery.bind(this.searchContainer)

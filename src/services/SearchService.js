@@ -1,4 +1,4 @@
-export class SearchContainer {
+export class SearchService {
   constructor(props) {
     this.props = props;
     this.state = {
