@@ -7,7 +7,6 @@ export class AlbumsComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
     this.state = {
-      isFetching: false,
       albums: []
     };
   }
@@ -25,7 +24,6 @@ export class AlbumsComponent {
   }
 
   fetchAlbumsCollectionData() {
-    this.state.isFetching = true;
     Promise.all([MusicService.getAlbums(), MusicService.getAuthors()]).then(
       ([albums, authors]) => {
         this.state.albums = albums.map(album => ({
@@ -34,7 +32,6 @@ export class AlbumsComponent {
             .map(author => this.getArtistNameById(authors, author))
             .join(", ")
         }));
-        this.state.isFetching = false;
         this.mount(false);
       }
     );
