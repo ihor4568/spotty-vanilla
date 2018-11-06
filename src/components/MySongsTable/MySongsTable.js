@@ -7,6 +7,7 @@ export class MySongsTableComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.songs = [];
   }
 
   querySelectors() {
@@ -28,7 +29,7 @@ export class MySongsTableComponent {
     if (target) {
       const songId = target.closest(".my-songs-table__row").dataset.id;
       const song = this.songs.find(songItem => songItem.id === songId);
-      this.props.handlePlaySong(song);
+      this.props.onSongPlay(song);
     }
   }
 
@@ -55,15 +56,40 @@ export class MySongsTableComponent {
     });
   }
 
-  mount() {
+  fetchSongs() {
     MusicService.getAlbumSongs("album1").then(songs => {
       this.songs = songs;
-      this.mountPoint.innerHTML = this.render();
-      this.querySelectors();
-      this.initMaterial();
-      this.mountChildren();
-      this.addEventListeners();
+
+      Promise.all(
+        this.songs.map(song => {
+          const albumPromise = MusicService.getAlbumById(song.albumId);
+          const authorsPromise = Promise.all(
+            song.authors.map(authorId => MusicService.getAuthorById(authorId))
+          );
+
+          const songInfoPromises = Promise.all([albumPromise, authorsPromise]);
+          songInfoPromises.then(([album, authors]) => {
+            /* eslint-disable no-param-reassign */
+            song.album = album;
+            song.authorsInfo = authors;
+            /* eslint-enable no-param-reassign */
+          });
+
+          return songInfoPromises;
+        })
+      ).then(() => this.mount(false));
     });
+  }
+
+  mount(shouldFetchData = true) {
+    if (shouldFetchData) {
+      this.fetchSongs();
+    }
+    this.mountPoint.innerHTML = this.render();
+    this.querySelectors();
+    this.initMaterial();
+    this.mountChildren();
+    this.addEventListeners();
   }
 
   render() {

@@ -98,7 +98,7 @@ export class MainComponent {
     this.notFound.mount();
   }
 
-  handlePlaySong(song) {
+  handleSongPlay(song) {
     this.player.setNewSong(song);
   }
 
@@ -132,7 +132,7 @@ export class MainComponent {
 
     this.about = new AboutComponent(this.mainPoint);
     this.table = new MySongsTableComponent(this.mainPoint, {
-      handlePlaySong: this.handlePlaySong.bind(this)
+      onSongPlay: this.handleSongPlay.bind(this)
     });
 
     this.albums = new AlbumsComponent(this.mainPoint);
