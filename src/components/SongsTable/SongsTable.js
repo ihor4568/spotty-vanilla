@@ -75,7 +75,9 @@ export class SongsTableComponent {
   querySelectors() {
     const { mountPoint } = this;
     this.tableHead = mountPoint.querySelector(".songs-table__head");
-    this.iconButtonRipples = mountPoint.querySelectorAll(".material-icons");
+    this.iconButtonRipples = mountPoint.querySelectorAll(
+      ".songs-table__td_play-btn"
+    );
     this.dotsMenu = mountPoint.querySelectorAll(".songs-table__td_more");
     this.orderIcon = mountPoint.querySelector(
       `.songs-table__th-icon_${this.state.columnName}`
@@ -162,8 +164,7 @@ export class SongsTableComponent {
 
   initMaterial() {
     Array.from(this.iconButtonRipples).forEach(item => {
-      const iconButtonRipple = new MDCRipple(item);
-      iconButtonRipple.unbounded = true;
+      new MDCRipple(item); // eslint-disable-line no-new
     });
   }
 
