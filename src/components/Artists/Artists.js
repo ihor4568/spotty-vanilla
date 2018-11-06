@@ -1,6 +1,6 @@
 import { MDCRipple } from "@material/ripple";
 
-import authorsTemplate from "./Artists.html";
+import artistsTemplate from "./Artists.html";
 
 const TABLE_DATA = [
   {
@@ -93,6 +93,6 @@ export class ArtistsComponent {
   }
 
   render() {
-    return authorsTemplate({ data: this.state.filteredData });
+    return artistsTemplate({ data: this.state.filteredData });
   }
 }
