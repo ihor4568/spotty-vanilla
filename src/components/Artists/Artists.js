@@ -1,5 +1,6 @@
 import { MDCRipple } from "@material/ripple";
-import authorsTemplate from "./Authors.html";
+
+import authorsTemplate from "./Artists.html";
 
 const TABLE_DATA = [
   {
@@ -64,7 +65,7 @@ const TABLE_DATA = [
   }
 ];
 
-export class AuthorsComponent {
+export class ArtistsComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
@@ -75,7 +76,7 @@ export class AuthorsComponent {
   }
 
   querySelectors() {
-    this.cardRipple = this.mountPoint.querySelectorAll(".authors__ripple");
+    this.cardRipple = this.mountPoint.querySelectorAll(".artists__ripple");
   }
 
   initMaterial() {
@@ -92,6 +93,6 @@ export class AuthorsComponent {
   }
 
   render() {
-    return authorsTemplate({ authors: this.state.filteredData });
+    return authorsTemplate({ data: this.state.filteredData });
   }
 }

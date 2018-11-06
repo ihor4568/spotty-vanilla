@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import { MDCDrawer } from "@material/drawer";
 
 import * as HelperService from "../../services/HelperService";
@@ -10,7 +9,7 @@ import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
-import { AuthorsComponent } from "../Authors/Authors";
+import { ArtistsComponent } from "../Artists/Artists";
 import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
 
@@ -126,9 +125,9 @@ export class MainComponent {
       return;
     }
 
-    if (pathname === "authors") {
-      this.authors.mount();
-      this.searchContainer.changeCurrentTab(this.authors);
+    if (pathname === "artists") {
+      this.artists.mount();
+      this.searchContainer.changeCurrentTab(this.artists);
       return;
     }
 
@@ -182,7 +181,7 @@ export class MainComponent {
 
     this.notFound = new NotFoundComponent(this.mainPoint);
 
-    this.authors = new AuthorsComponent(this.mainPoint);
+    this.artists = new ArtistsComponent(this.mainPoint);
 
     this.searchContainer = new SearchContainer();
 
