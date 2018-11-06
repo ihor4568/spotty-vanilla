@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
+
 import { MDCDrawer } from "@material/drawer";
 
 import * as Helpers from "./Helpers";
+import { SearchContainer } from "../../containers/SearchContainer";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
@@ -49,19 +52,25 @@ export class MainComponent {
   }
 
   handleSearchQuery(e) {
-    const searchQuery = e.target.nextElementSibling.value;
-    const { initialData, filteredData } = this.state;
+    const searchQuery = e.target.value;
+    const { songs, albums, authors } = this.props;
 
-    const names = this.retrieveAllSongNames(initialData);
-    const indices = Helpers.findAllOccurrences(names, searchQuery);
-    const nextFilteredData =
-      (!searchQuery && initialData) || indices.map(item => initialData[item]);
+    const pathname = window.location.pathname
+      .replace(/^\/|\/$/g, "")
+      .replace(/\/+/g, "/");
 
-    const componentShouldUpdate = filteredData !== nextFilteredData;
-    if (componentShouldUpdate) {
-      this.state.filteredData = nextFilteredData;
-      this.mount(nextFilteredData);
-    }
+    // const { initialData, filteredData } = this.state;
+    //
+    // const names = this.retrieveAllSongNames(initialData);
+    // const indices = Helpers.findAllOccurrences(names, searchQuery);
+    // const nextFilteredData =
+    //   (!searchQuery && initialData) || indices.map(item => initialData[item]);
+    //
+    // const componentShouldUpdate = filteredData !== nextFilteredData;
+    // if (componentShouldUpdate) {
+    //   this.state.filteredData = nextFilteredData;
+    //   this.mount(nextFilteredData);
+    // }
   }
 
   handleListClick(e) {
@@ -111,12 +120,12 @@ export class MainComponent {
     }
 
     if (pathname === "artists") {
-      this.artist.mount();
+      this.authors.mount();
       return;
     }
 
     if (pathname === "songs") {
-      this.table.mount();
+      this.songs.mount();
       return;
     }
 
@@ -157,16 +166,22 @@ export class MainComponent {
     this.shareView = new ShareViewComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
-    this.table = new MySongsComponent(this.mainPoint);
+    this.songs = new MySongsComponent(this.mainPoint);
 
     this.albums = new AlbumsComponent(this.mainPoint);
 
     this.notFound = new NotFoundComponent(this.mainPoint);
 
-    this.artist = new ArtistsComponent(this.mainPoint);
+    this.authors = new ArtistsComponent(this.mainPoint);
+
+    this.searchContainer = new SearchContainer({
+      songs: this.songs,
+      albums: this.albums,
+      authors: this.authors
+    });
 
     this.search = new SearchComponent(this.searchPoint, {
-      onSearchQuery: this.handleSearchQuery.bind(this.table)
+      onSearchQuery: this.handleSearchQuery.bind(this.searchContainer)
     });
     this.search.mount();
   }
