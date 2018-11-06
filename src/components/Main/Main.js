@@ -158,6 +158,7 @@ export class MainComponent {
 
   handleOpen() {
     this.drawer.open = !this.drawer.open;
+    this.searchPoint.classList.toggle("main__search_drawer-open");
   }
 
   mountChildren() {
