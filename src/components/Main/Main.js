@@ -81,9 +81,14 @@ export class MainComponent {
       .replace(/^\/|\/$/g, "")
       .replace(/\/+/g, "/");
 
+    if (pathname === "") {
+      this.routeNavigate("/albums");
+      return;
+    }
+
     this.changeActiveMenuItem(`/${pathname}`);
 
-    if (pathname === "albums" || pathname === "") {
+    if (pathname === "albums") {
       this.albums.mount();
       return;
     }
