@@ -72,14 +72,14 @@ export class AlbumsSongTableComponent {
   }
 
   getArtistNameById(authors, id) {
-    return authors.filter(author => author.id === id)[0].name;
+    return authors.find(author => author.id === id).name;
   }
 
   mountChildren() {
-    this.table = new SongsTableComponent(this.albumSongsTable, {
+    this.albumSongs = new SongsTableComponent(this.albumSongsTable, {
       data: this.songs
     });
-    this.table.mount();
+    this.albumSongs.mount();
   }
 
   mount(shouldFetchData = true) {
