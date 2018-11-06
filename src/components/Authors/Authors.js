@@ -1,7 +1,7 @@
 import { MDCRipple } from "@material/ripple";
-import artistsTemplate from "./Artists.html";
+import authorsTemplate from "./Authors.html";
 
-const ARTISTS_DATA = [
+const AUTHORS_DATA = [
   {
     name: "Nicki Minaj",
     cover: "https://bit.ly/2Q4xgEZ",
@@ -64,15 +64,15 @@ const ARTISTS_DATA = [
   }
 ];
 
-export class ArtistsComponent {
+export class AuthorsComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.artistsData = ARTISTS_DATA;
+    this.authors = AUTHORS_DATA;
   }
 
   querySelectors() {
-    this.cardRipple = this.mountPoint.querySelectorAll(".artists__ripple");
+    this.cardRipple = this.mountPoint.querySelectorAll(".authors__ripple");
   }
 
   initMaterial() {
@@ -88,6 +88,6 @@ export class ArtistsComponent {
   }
 
   render() {
-    return artistsTemplate({ artistsData: this.artistsData });
+    return authorsTemplate({ authors: this.authors });
   }
 }

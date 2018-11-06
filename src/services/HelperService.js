@@ -7,3 +7,7 @@ export function findAllOccurrences(array, string) {
   }
   return indices;
 }
+
+export function getPathname(object) {
+  return object.location.pathname.replace(/^\/|\/$/g, "").replace(/\/+/g, "/");
+}
