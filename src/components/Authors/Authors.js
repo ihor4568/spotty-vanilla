@@ -1,7 +1,7 @@
 import { MDCRipple } from "@material/ripple";
 import authorsTemplate from "./Authors.html";
 
-const AUTHORS_DATA = [
+const TABLE_DATA = [
   {
     name: "Nicki Minaj",
     cover: "https://bit.ly/2Q4xgEZ",
@@ -68,7 +68,10 @@ export class AuthorsComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.authors = AUTHORS_DATA;
+    this.state = {
+      initialData: TABLE_DATA,
+      filteredData: TABLE_DATA
+    };
   }
 
   querySelectors() {
@@ -77,7 +80,8 @@ export class AuthorsComponent {
 
   initMaterial() {
     Array.from(this.cardRipple).forEach(item => {
-      this.cardRipple = new MDCRipple(item);
+      // eslint-disable-next-line no-new
+      new MDCRipple(item);
     });
   }
 
@@ -88,6 +92,6 @@ export class AuthorsComponent {
   }
 
   render() {
-    return authorsTemplate({ authors: this.authors });
+    return authorsTemplate({ authors: this.state.filteredData });
   }
 }

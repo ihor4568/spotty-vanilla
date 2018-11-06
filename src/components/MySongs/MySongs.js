@@ -37,10 +37,6 @@ export class MySongsComponent {
     };
   }
 
-  retrieveAllSongNames(array) {
-    return array.map(item => item.name);
-  }
-
   querySelectors() {
     this.tableContainer = this.mountPoint.querySelector(
       ".my-songs__table-container"

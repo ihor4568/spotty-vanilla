@@ -8,6 +8,10 @@ export function findAllOccurrences(array, string) {
   return indices;
 }
 
+export function retrieveArrayObjectsFields(array, field) {
+  return array.map(item => item[field]);
+}
+
 export function getPathname(object) {
   return object.location.pathname.replace(/^\/|\/$/g, "").replace(/\/+/g, "/");
 }

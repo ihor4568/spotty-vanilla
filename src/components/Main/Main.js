@@ -54,20 +54,30 @@ export class MainComponent {
     const searchQuery = e.target.value;
     const { currentTab } = this.state;
 
-    console.log(currentTab);
+    if (
+      currentTab instanceof AboutComponent ||
+      currentTab instanceof NotFoundComponent
+    ) {
+      return;
+    }
 
-    // const { initialData, filteredData } = this.state;
-    //
-    // const names = this.retrieveAllSongNames(initialData);
-    // const indices = Helpers.findAllOccurrences(names, searchQuery);
-    // const nextFilteredData =
-    //   (!searchQuery && initialData) || indices.map(item => initialData[item]);
-    //
-    // const componentShouldUpdate = filteredData !== nextFilteredData;
-    // if (componentShouldUpdate) {
-    //   this.state.filteredData = nextFilteredData;
-    //   this.mount(nextFilteredData);
-    // }
+    const { initialData, filteredData } = currentTab.state;
+    const searchableData = HelperService.retrieveArrayObjectsFields(
+      initialData,
+      "name"
+    );
+    const indices = HelperService.findAllOccurrences(
+      searchableData,
+      searchQuery
+    );
+    const nextFilteredData =
+      (!searchQuery && initialData) || indices.map(item => initialData[item]);
+
+    const componentShouldUpdate = filteredData !== nextFilteredData;
+    if (componentShouldUpdate) {
+      currentTab.state.filteredData = nextFilteredData;
+      currentTab.mount(nextFilteredData);
+    }
   }
 
   handleListClick(e) {
@@ -112,6 +122,7 @@ export class MainComponent {
 
     if (pathname === "about") {
       this.about.mount();
+      this.searchContainer.changeCurrentTab(this.about);
       return;
     }
 
@@ -136,6 +147,7 @@ export class MainComponent {
     }
 
     this.notFound.mount();
+    this.searchContainer.changeCurrentTab(this.notFound);
   }
 
   mount() {
