@@ -26,8 +26,15 @@ export class ArtistSongTableComponent {
     return Promise.all([albumPromise, authorsPromise]);
   }
 
+  getArtistFromUrl() {
+    const pathNameParts = window.location.href.split("/");
+    return pathNameParts[pathNameParts.length - 1];
+  }
+
   fetchSongs() {
-    MusicService.getAuthorSongs("author4")
+    const artistId = this.getArtistFromUrl();
+
+    MusicService.getAuthorSongs(artistId)
       .then(songs => {
         this.songs = songs;
 
