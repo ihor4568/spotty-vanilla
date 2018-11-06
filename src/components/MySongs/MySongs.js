@@ -1,40 +1,19 @@
 import mySongs from "./MySongs.html";
 import { SongsTableComponent } from "../SongsTable/SongsTable";
-
-const TABLE_DATA = [
-  {
-    cover: "https://images.unian.net/photos/2017_09/1505748424-6475.jpg",
-    name: "Alibaba",
-    duration: "9:11",
-    author: "Jazz",
-    album: "Super"
-  },
-  {
-    cover:
-      "https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/6b2ef062-6913-4a94-a265-7d75f4f91854/64.jpg",
-    name: "Timon and Pumba",
-    duration: "9:17",
-    author: "Folk",
-    album: "Nice"
-  },
-  {
-    cover:
-      "https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/Stargroves-album-cover.png?auto=format&q=60&fit=max&w=930",
-    name: "Alibaba",
-    duration: "9:12",
-    author: "Sympho",
-    album: "The very best"
-  }
-];
+import { MusicService } from "../../services/MusicService";
 
 export class MySongsComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+<<<<<<< HEAD
     this.state = {
       initialData: TABLE_DATA,
       filteredData: TABLE_DATA
     };
+=======
+    this.songs = [];
+>>>>>>> master
   }
 
   querySelectors() {
@@ -43,14 +22,60 @@ export class MySongsComponent {
     );
   }
 
+<<<<<<< HEAD
   mountChildren(data) {
     this.table = new SongsTableComponent(this.tableContainer, {
       data
+=======
+  fetchAuthors(authorsIds) {
+    return Promise.all(
+      authorsIds.map(authorId => MusicService.getAuthorById(authorId))
+    );
+  }
+
+  fetchInfoBySong(song) {
+    const albumPromise = MusicService.getAlbumById(song.albumId);
+    const authorsPromise = this.fetchAuthors(song.authors);
+
+    return Promise.all([albumPromise, authorsPromise]);
+  }
+
+  fetchSongs() {
+    MusicService.getAlbumSongs("album1")
+      .then(songs => {
+        this.songs = songs;
+
+        return Promise.all(this.songs.map(song => this.fetchInfoBySong(song)));
+      })
+      .then(songsInfo => {
+        songsInfo.forEach((item, i) => {
+          const [album, authorsInfo] = item;
+
+          this.songs[i].album = album;
+          this.songs[i].authorsInfo = authorsInfo;
+        });
+
+        this.mount(false);
+      });
+  }
+
+  mountChildren() {
+    this.table = new SongsTableComponent(this.tableContainer, {
+      data: this.songs,
+      onSongPlay: this.props.onSongPlay
+>>>>>>> master
     });
     this.table.mount();
   }
 
+<<<<<<< HEAD
   mount(data = [...this.state.initialData]) {
+=======
+  mount(shouldFetchData = true) {
+    if (shouldFetchData) {
+      this.fetchSongs();
+    }
+>>>>>>> master
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.mountChildren(data);

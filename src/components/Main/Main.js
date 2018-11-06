@@ -5,9 +5,9 @@ import { SearchService } from "../../services/SearchService";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-import { MySongsComponent } from "../MySongs/MySongs";
+// import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
-import { AlbumsComponent } from "../Albums/Albums";
+// import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
 import { NotFoundComponent } from "../NotFound/NotFound";
@@ -75,7 +75,7 @@ export class MainComponent {
     const componentShouldUpdate = filteredData !== nextFilteredData;
     if (componentShouldUpdate) {
       currentTab.state.filteredData = nextFilteredData;
-      currentTab.mount(nextFilteredData);
+      currentTab.mount(false);
     }
   }
 
@@ -113,29 +113,34 @@ export class MainComponent {
       .replace(/^\/|\/$/g, "")
       .replace(/\/+/g, "/");
 
+    if (pathname === "") {
+      this.routeNavigate("/albums");
+      return;
+    }
+
     this.changeActiveMenuItem(`/${pathname}`);
 
-    if (pathname === "albums" || pathname === "") {
+    if (pathname === "albums") {
       this.albums.mount();
-      this.searchContainer.changeCurrentTab(this.albums);
+      this.searchService.changeCurrentTab(this.albums);
       return;
     }
 
     if (pathname === "about") {
       this.about.mount();
-      this.searchContainer.changeCurrentTab(this.about);
+      this.searchService.changeCurrentTab(this.about);
       return;
     }
 
     if (pathname === "artists") {
       this.artists.mount();
-      this.searchContainer.changeCurrentTab(this.artists);
+      this.searchService.changeCurrentTab(this.artists);
       return;
     }
 
     if (pathname === "songs") {
       this.songs.mount();
-      this.searchContainer.changeCurrentTab(this.songs);
+      this.searchService.changeCurrentTab(this.songs);
       return;
     }
 
@@ -148,7 +153,11 @@ export class MainComponent {
     }
 
     this.notFound.mount();
-    this.searchContainer.changeCurrentTab(this.notFound);
+    this.searchService.changeCurrentTab(this.notFound);
+  }
+
+  handleSongPlay(song) {
+    this.player.setNewSong(song);
   }
 
   mount() {
@@ -162,6 +171,7 @@ export class MainComponent {
 
   handleOpen() {
     this.drawer.open = !this.drawer.open;
+    this.searchPoint.classList.toggle("main__search_drawer-open");
   }
 
   mountChildren() {
@@ -177,18 +187,20 @@ export class MainComponent {
     this.shareView = new ShareViewComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
-    this.songs = new MySongsComponent(this.mainPoint);
+    // this.songs = new MySongsComponent(this.mainPoint, {
+    //   onSongPlay: this.handleSongPlay.bind(this)
+    // });
 
-    this.albums = new AlbumsComponent(this.mainPoint);
+    // this.albums = new AlbumsComponent(this.mainPoint);
 
     this.notFound = new NotFoundComponent(this.mainPoint);
 
     this.artists = new ArtistsComponent(this.mainPoint);
 
-    this.searchContainer = new SearchService();
+    this.searchService = new SearchService();
 
     this.search = new SearchComponent(this.searchPoint, {
-      onSearchQuery: this.handleSearchQuery.bind(this.searchContainer)
+      onSearchQuery: this.handleSearchQuery.bind(this.searchService)
     });
     this.search.mount();
   }

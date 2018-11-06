@@ -1,6 +1,7 @@
 import { MDCRipple } from "@material/ripple";
 
 import albumsTemplate from "./Albums.html";
+<<<<<<< HEAD
 
 const TABLE_DATA = [
   {
@@ -64,14 +65,22 @@ const TABLE_DATA = [
     imageSource: "https://image.ibb.co/iKPha0/edsheeran-divide.jpg"
   }
 ];
+=======
+import { MusicService } from "../../services/MusicService";
+>>>>>>> master
 
 export class AlbumsComponent {
-  constructor(mountPoint, props = {}) {
+  constructor(mountPoint) {
     this.mountPoint = mountPoint;
+<<<<<<< HEAD
     this.props = props;
     this.state = {
       initialData: TABLE_DATA,
       filteredData: TABLE_DATA
+=======
+    this.state = {
+      albums: []
+>>>>>>> master
     };
   }
 
@@ -87,13 +96,38 @@ export class AlbumsComponent {
     });
   }
 
-  mount() {
+  fetchAlbumsCollectionData() {
+    Promise.all([MusicService.getAlbums(), MusicService.getAuthors()]).then(
+      ([albums, authors]) => {
+        this.state.albums = albums.map(album => ({
+          ...album,
+          authors: album.authors
+            .map(author => this.getArtistNameById(authors, author))
+            .join(", ")
+        }));
+        this.mount(false);
+      }
+    );
+  }
+
+  getArtistNameById(authors, id) {
+    return authors.find(author => author.id === id).name;
+  }
+
+  mount(shouldFetchData = true) {
+    if (shouldFetchData) {
+      this.fetchAlbumsCollectionData();
+    }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
   }
 
   render() {
+<<<<<<< HEAD
     return albumsTemplate({ data: this.state.filteredData });
+=======
+    return albumsTemplate(this.state);
+>>>>>>> master
   }
 }
