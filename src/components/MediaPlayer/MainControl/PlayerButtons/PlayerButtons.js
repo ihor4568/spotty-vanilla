@@ -33,15 +33,23 @@ export class PlayerButtonsComponent {
     this.fabRippleNext = new MDCRipple(this.nextButton);
   }
 
+  play() {
+    this.props.audio.play();
+    this.isPlayNow = true;
+    this.playButton.children[0].innerText = "pause";
+  }
+
+  stop() {
+    this.props.audio.pause();
+    this.isPlayNow = false;
+    this.playButton.children[0].innerText = "play_arrow";
+  }
+
   togglePlay() {
-    if (this.isPlayNow === false) {
-      this.props.audio.play();
-      this.isPlayNow = true;
-      this.playButton.children[0].innerText = "pause";
+    if (this.isPlayNow) {
+      this.stop();
     } else {
-      this.props.audio.pause();
-      this.isPlayNow = false;
-      this.playButton.children[0].innerText = "play_arrow";
+      this.play();
     }
   }
 

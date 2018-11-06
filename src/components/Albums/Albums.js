@@ -7,7 +7,6 @@ export class AlbumsComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
     this.state = {
-      isFetching: false,
       albums: []
     };
   }
@@ -25,20 +24,27 @@ export class AlbumsComponent {
   }
 
   fetchAlbumsCollectionData() {
-    this.state.isFetching = true;
-    MusicService.getAlbums().then(albums => {
-      this.state.albums = albums.map(album =>
-        Object.assign(album, { authors: album.authors.join(", ") })
-      );
-      this.state.isFetching = false;
-      this.mountPoint.innerHTML = this.render();
-      this.querySelectors();
-      this.initMaterial();
-    });
+    Promise.all([MusicService.getAlbums(), MusicService.getAuthors()]).then(
+      ([albums, authors]) => {
+        this.state.albums = albums.map(album => ({
+          ...album,
+          authors: album.authors
+            .map(author => this.getArtistNameById(authors, author))
+            .join(", ")
+        }));
+        this.mount(false);
+      }
+    );
   }
 
-  mount() {
-    this.fetchAlbumsCollectionData();
+  getArtistNameById(authors, id) {
+    return authors.find(author => author.id === id).name;
+  }
+
+  mount(shouldFetchData = true) {
+    if (shouldFetchData) {
+      this.fetchAlbumsCollectionData();
+    }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();

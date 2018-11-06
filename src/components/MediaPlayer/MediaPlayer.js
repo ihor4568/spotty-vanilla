@@ -91,6 +91,18 @@ export class MediaPlayerComponent {
     this.licenseDialogComponent.mount();
   }
 
+  setNewSong(song) {
+    this.audioInfoComponent.updateInfo({
+      imageSrc: song.album.imageURL,
+      songName: song.name,
+      album: song.album.title,
+      artistName: song.authorsInfo.map(author => author.name).join(", ")
+    });
+
+    this.audio.src = song.songURL;
+    this.mainControlPannel.play();
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
