@@ -6,7 +6,6 @@ export class ArtistsComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
     this.state = {
-      isFetching: false,
       artists: []
     };
   }
@@ -22,10 +21,8 @@ export class ArtistsComponent {
   }
 
   fetchArtistsData() {
-    this.state.isFetching = true;
     MusicService.getAuthors().then(artists => {
       this.state.artists = artists;
-      this.state.isFetching = false;
       this.mount(false);
     });
   }
