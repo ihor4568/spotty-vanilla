@@ -7,8 +7,8 @@ export class AlbumsSongTableComponent {
 
     this.state = {
       title: null,
-      imageURL: null,
       authors: null,
+      imageURL: null,
       songs: [],
       isFetching: false
     };
@@ -23,22 +23,28 @@ export class AlbumsSongTableComponent {
     const albumId = this.getAlbumIdFromUrl();
     this.state.isFetching = true;
 
-    Promise.all([MusicService.getAlbums(), MusicService.getAlbumSongs(albumId)])
-      .then(([albums, songs]) => {
-        albums.forEach(album => {
-          if (album.id === albumId) {
-            this.state.title = album.title;
-            this.state.authors = album.authors.join(", ");
-            this.state.imageURL = album.imageURL;
-          }
-        });
-        this.state.songs = songs;
-        this.state.isFetching = false;
-        this.mountPoint.innerHTML = this.render();
-      })
-      .catch(() => {
-        this.state.isFetching = false;
+    Promise.all([
+      MusicService.getAlbums(),
+      MusicService.getAlbumSongs(albumId),
+      MusicService.getAuthors()
+    ]).then(([albums, songs, authors]) => {
+      albums.forEach(album => {
+        if (album.id === albumId) {
+          this.state = Object.assign(album, {
+            authors: album.authors
+              .map(author => this.getArtistNameById(authors, author))
+              .join(", ")
+          });
+        }
       });
+      this.state.songs = songs;
+      this.state.isFetching = false;
+      this.mountPoint.innerHTML = this.render();
+    });
+  }
+
+  getArtistNameById(authors, id) {
+    return authors.filter(author => author.id === id)[0].name;
   }
 
   mount() {
