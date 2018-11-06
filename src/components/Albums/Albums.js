@@ -87,13 +87,13 @@ export class AlbumsComponent {
     });
   }
 
-  mount(data = [...this.state.initialData]) {
-    this.mountPoint.innerHTML = this.render(data);
+  mount() {
+    this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
   }
 
-  render(data) {
-    return albumsTemplate({ data });
+  render() {
+    return albumsTemplate({ data: this.state.filteredData });
   }
 }
