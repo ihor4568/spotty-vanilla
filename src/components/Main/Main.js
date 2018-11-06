@@ -7,7 +7,7 @@ import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
 // import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
-// import { AlbumsComponent } from "../Albums/Albums";
+import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
 import { NotFoundComponent } from "../NotFound/NotFound";
@@ -191,7 +191,7 @@ export class MainComponent {
     //   onSongPlay: this.handleSongPlay.bind(this)
     // });
 
-    // this.albums = new AlbumsComponent(this.mainPoint);
+    this.albums = new AlbumsComponent(this.mainPoint);
 
     this.notFound = new NotFoundComponent(this.mainPoint);
 
