@@ -5,9 +5,11 @@
   &__text {
     max-width: 55rem;
     color: #5f6368;
+    margin: 0 $basic-container-gap;
   }
   &__subtitle {
     color: #5f6368;
+    margin: 0 $basic-container-gap;
   }
   &__links {
     max-width: 45rem;
@@ -18,7 +20,7 @@
   &__link {
     margin-bottom: 30px;
     display: flex;
-    width: 180px;
+    width: 25%;
     color: #6200ee;
     align-items: center;
     flex-direction: column;

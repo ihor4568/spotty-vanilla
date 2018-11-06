@@ -3,7 +3,8 @@ import { MDCDrawer } from "@material/drawer";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
+import { MySongsComponent } from "../MySongs/MySongs";
+import { ShareViewComponent } from "../ShareView/ShareView";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
@@ -18,11 +19,21 @@ export class MainComponent {
 
   querySelectors() {
     this.scrollTarget = this.mountPoint.querySelector(".main__sidebar");
+    this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
+    this.sidebarList = this.mountPoint.querySelector(".main__list");
     this.headerPoint = this.mountPoint.querySelector(".main__header");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
-    this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
-    this.sidebarList = this.mountPoint.querySelector(".main__list");
+    this.appBar = this.mountPoint.querySelector(".main__app-bar");
+  }
+
+  setShareView(songId) {
+    this.playerPoint.classList.add("main__elem_disable");
+    this.searchPoint.classList.add("main__elem_disable");
+    this.appBar.classList.add("main__app-bar_disable");
+    this.mainPoint.classList.add("main__content-mount_disable");
+    this.shareView.setSongId(songId);
+    this.shareView.mount();
   }
 
   initMaterial() {
@@ -51,10 +62,26 @@ export class MainComponent {
     this.handleStatePath();
   }
 
+  changeActiveMenuItem(path) {
+    const prevActiveItem = this.mountPoint.querySelector(
+      ".mdc-list-item--activated"
+    );
+    if (prevActiveItem) {
+      prevActiveItem.classList.remove("mdc-list-item--activated");
+    }
+
+    const currActiveItem = this.mountPoint.querySelector(`[href="${path}"]`);
+    if (currActiveItem) {
+      currActiveItem.classList.add("mdc-list-item--activated");
+    }
+  }
+
   handleStatePath() {
     const pathname = window.location.pathname
       .replace(/^\/|\/$/g, "")
       .replace(/\/+/g, "/");
+
+    this.changeActiveMenuItem(`/${pathname}`);
 
     if (pathname === "albums" || pathname === "") {
       this.albums.mount();
@@ -79,10 +106,8 @@ export class MainComponent {
     const urlParts = pathname.split("/");
 
     if (urlParts[0] === "song" && urlParts[1] && urlParts.length === 2) {
-      // & songId will be used for the data request
-      /* eslint-disable no-unused-vars */
       const songId = urlParts[1];
-      /* eslint-enable no-unused-vars */
+      this.setShareView(songId);
       return;
     }
 
@@ -100,6 +125,7 @@ export class MainComponent {
 
   handleOpen() {
     this.drawer.open = !this.drawer.open;
+    this.searchPoint.classList.toggle("main__search_drawer-open");
   }
 
   mountChildren() {
@@ -115,8 +141,10 @@ export class MainComponent {
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
 
+    this.shareView = new ShareViewComponent(this.mainPoint);
+
     this.about = new AboutComponent(this.mainPoint);
-    this.table = new MySongsTableComponent(this.mainPoint);
+    this.table = new MySongsComponent(this.mainPoint);
 
     this.albums = new AlbumsComponent(this.mainPoint);
 

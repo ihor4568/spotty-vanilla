@@ -1,21 +1,18 @@
-.my-songs-table {
-  &__table {
-    width: 100%;
-    border: 0.06rem solid rgba(0, 0, 0, 0.12);
-    border-collapse: collapse;
-    border-spacing: 0.12rem;
-    white-space: nowrap;
-    font-size: 0.8rem;
-    background-color: #fff;
-    color: #757575;
-    display: table;
-
-    box-shadow: 0 0.1rem 0.1rem 0 rgba(0, 0, 0, 0.14),
-      0 0.2rem 0.1rem -0.15rem rgba(0, 0, 0, 0.2),
-      0 0.1rem 0.3rem 0 rgba(0, 0, 0, 0.12);
-    font-family: "Roboto", sans-serif;
-  }
-
+.songs-table {
+  width: calc(100% - 2rem);
+  border: 0.06rem solid rgba(0, 0, 0, 0.12);
+  border-collapse: collapse;
+  border-spacing: 0.12rem;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  background-color: #fff;
+  color: #757575;
+  display: table;
+  margin: 2rem 1rem;
+  box-shadow: 0 0.1rem 0.1rem 0 rgba(0, 0, 0, 0.14),
+    0 0.2rem 0.1rem -0.15rem rgba(0, 0, 0, 0.2),
+    0 0.1rem 0.3rem 0 rgba(0, 0, 0, 0.12);
+  font-family: "Roboto", sans-serif;
   &__row:hover {
     background-color: #eeeeee;
   }
@@ -30,16 +27,29 @@
     color: rgba(0, 0, 0, 0.54);
     padding-bottom: 8px;
     box-sizing: border-box;
-
+    &-field:hover {
+      opacity: 0.9;
+      cursor: pointer;
+      transition: opacity 0.1s;
+    }
+    &-icon {
+      opacity: 0;
+      &_order_asc {
+        opacity: 1;
+        transform: scaleY(-1);
+      }
+      &_order_desc {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+    }
     &_number {
       text-align: center;
       width: 1rem;
     }
-
     &_name {
       text-align: left;
     }
-
     &_duration {
       text-align: right;
       padding-right: 0.2rem;
@@ -47,7 +57,6 @@
         vertical-align: middle;
       }
     }
-
     &_artist {
       text-align: left;
       padding-left: 0.3rem;
@@ -57,7 +66,6 @@
       text-align: left;
     }
   }
-
   &__td {
     position: relative;
     border-top: 0.062rem solid rgba(0, 0, 0, 0.12);
@@ -66,7 +74,6 @@
     box-sizing: border-box;
     vertical-align: middle;
     height: 3rem;
-
     &_play {
       width: 1.5rem;
       text-align: center;
@@ -76,7 +83,6 @@
     &_number {
       width: 1rem;
     }
-
     &_cover {
       text-align: left;
       padding: 0.1rem 0.1rem;
@@ -88,7 +94,6 @@
         border-radius: 0.3rem;
       }
     }
-
     &_name {
       text-align: left;
       padding: 0.1rem 0.1rem;
@@ -104,13 +109,11 @@
       padding-left: 0.3rem;
       width: 20%;
     }
-
     &_album {
       text-align: left;
       padding: 0.1rem 0.1rem;
       width: auto;
     }
-
     &_more {
       width: 32px;
       text-align: right;
@@ -121,6 +124,12 @@
         cursor: pointer;
         outline: none;
       }
+    }
+  }
+  @media screen and (max-width: 1152px) {
+    &__table {
+      width: calc(100% - 1rem);
+      margin: 2rem 0.5rem;
     }
   }
 }

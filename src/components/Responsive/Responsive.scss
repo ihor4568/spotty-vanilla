@@ -1,0 +1,12 @@
+@mixin responsive-card {
+  @media screen and (max-width: $large-break-point) {
+    width: calc(100% / 5 - 2rem);
+  }
+  @media screen and (max-width: $medium-break-point) {
+    width: calc(100% / 4 - 2rem);
+  }
+  @media screen and (max-width: $smallest-break-point) {
+    width: calc(100% / 4 - $basic-container-gap);
+    margin: 0.5rem;
+  }
+}
