@@ -24,7 +24,7 @@ export class SongsTableComponent {
       currentOrderTypeIndex: 1,
       columnName: ""
     };
-
+    this.dragElement = null;
     this.handleOrderClick = this.handleOrderClick.bind(this);
   }
 
@@ -63,6 +63,15 @@ export class SongsTableComponent {
     this.mount();
   }
 
+  handlePlayClick(e) {
+    const target = e.target.closest(".songs-table__td_play-btn");
+    if (target) {
+      const songId = target.closest(".songs-table__row").dataset.id;
+      const song = this.props.data.find(songItem => songItem.id === songId);
+      this.props.onSongPlay(song);
+    }
+  }
+
   querySelectors() {
     const { mountPoint } = this;
     this.tableHead = mountPoint.querySelector(".songs-table__head");
@@ -71,10 +80,49 @@ export class SongsTableComponent {
     this.orderIcon = mountPoint.querySelector(
       `.songs-table__th-icon_${this.state.columnName}`
     );
+    this.tableBody = this.mountPoint.querySelector(".songs-table__body");
   }
 
   addEventListeners() {
     this.tableHead.addEventListener("click", this.handleOrderClick);
+    this.tableBody.addEventListener("dragover", this.handleDragOver.bind(this));
+    this.tableBody.addEventListener(
+      "dragstart",
+      this.handleDragStart.bind(this)
+    );
+    this.tableBody.addEventListener("click", this.handlePlayClick.bind(this));
+  }
+
+  isBefore(el1, el2) {
+    if (el2.parentNode === el1.parentNode) {
+      for (
+        let currentDragElement = el1.previousSibling;
+        currentDragElement;
+        currentDragElement = currentDragElement.previousSibling
+      ) {
+        if (currentDragElement === el2) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  handleDragStart(e) {
+    this.dragElement = e.target;
+  }
+
+  handleDragOver(e) {
+    e.preventDefault();
+    const dragOverRow = e.target.closest(".songs-table__row");
+    if (this.isBefore(this.dragElement, dragOverRow)) {
+      dragOverRow.parentNode.insertBefore(this.dragElement, dragOverRow);
+    } else {
+      dragOverRow.parentNode.insertBefore(
+        this.dragElement,
+        dragOverRow.nextSibling
+      );
+    }
   }
 
   setupOrderIconDisplay() {

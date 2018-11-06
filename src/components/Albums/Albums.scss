@@ -6,6 +6,11 @@
     flex-wrap: wrap;
   }
 
+  &__link {
+    text-decoration: none;
+    color: #000;
+  }
+
   &__card-container {
     width: calc(100% / 6 - 2rem);
     margin: $basic-container-gap;
@@ -26,5 +31,8 @@
   &__card-artist {
     color: rgba(0, 0, 0, 0.54);
     margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }

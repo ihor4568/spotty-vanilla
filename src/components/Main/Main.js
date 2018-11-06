@@ -81,9 +81,14 @@ export class MainComponent {
       .replace(/^\/|\/$/g, "")
       .replace(/\/+/g, "/");
 
+    if (pathname === "") {
+      this.routeNavigate("/albums");
+      return;
+    }
+
     this.changeActiveMenuItem(`/${pathname}`);
 
-    if (pathname === "albums" || pathname === "") {
+    if (pathname === "albums") {
       this.albums.mount();
       return;
     }
@@ -112,6 +117,10 @@ export class MainComponent {
     }
 
     this.notFound.mount();
+  }
+
+  handleSongPlay(song) {
+    this.player.setNewSong(song);
   }
 
   mount() {
@@ -144,7 +153,9 @@ export class MainComponent {
     this.shareView = new ShareViewComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
-    this.table = new MySongsComponent(this.mainPoint);
+    this.table = new MySongsComponent(this.mainPoint, {
+      onSongPlay: this.handleSongPlay.bind(this)
+    });
 
     this.albums = new AlbumsComponent(this.mainPoint);
 

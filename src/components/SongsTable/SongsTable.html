@@ -35,7 +35,7 @@
   </thead>
   <tbody class="songs-table__body">
     <% data.forEach(item => { %>
-    <tr class="songs-table__row data-id=" <%=parseInt(item.number) + 1 %>">
+    <tr class="songs-table__row" data-id="<%= item.id %>" draggable="true">
       <td class="songs-table__td songs-table__td_play">
         <button class="mdc-icon-button material-icons songs-table__td_play-btn">play_arrow</button>
       </td>
@@ -43,7 +43,7 @@
         <%= parseInt(item.number) + 1 %>
       </td>
       <td class="songs-table__td songs-table__td_cover">
-        <img class="songs-table__td_cover-img" src="<%= item.cover %>" alt="">
+        <img class="songs-table__td_cover-img" src="<%= item.album.imageURL %>" alt="">
       </td>
       <td class="songs-table__td songs-table__td_name">
         <%= item.name %>
@@ -52,10 +52,10 @@
         <%= item.duration%>
       </td>
       <td class="songs-table__td songs-table__td_Author">
-        <%= item.author %>
+        <%= item.authorsInfo.map(author => author.name).join(", ") %>
       </td>
       <td class="songs-table__td songs-table__td_album">
-        <%= item.album %>
+        <%= item.album.title %>
       </td>
       <td class="songs-table__td songs-table__td_more">
         <button class="mdc-icon-button material-icons songs-table__td_more-btn">more_vert</button>
