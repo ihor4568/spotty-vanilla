@@ -1,4 +1,4 @@
-@import "../Responsive/Responsive";
+@import "../ResponsiveGrid/ResponsiveGrid";
 
 .albums {
   &__container {
@@ -9,7 +9,6 @@
   &__card-container {
     width: calc(100% / 6 - 2rem);
     margin: $basic-container-gap;
-    @include responsive-card;
   }
 
   &__card-images {
