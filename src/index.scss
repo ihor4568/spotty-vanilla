@@ -15,13 +15,14 @@
 @import "@material/tab-bar/mdc-tab-bar";
 @import "@material/tab-indicator/mdc-tab-indicator";
 @import "@material/tab/mdc-tab";
+@import "@material/dialog/mdc-dialog";
 
 @import "./components/Header/Header";
 @import "./components/Search/Search";
 @import "./components/Main/Main";
 @import "./components/MediaPlayer/MediaPlayer";
 @import "./components/Page/Page";
-@import "./components/MySongsTable/MySongsTable";
+@import "./components/SongsTable/SongsTable";
 @import "./components/Albums/Albums";
 @import "./components/About/About";
 @import "./components/DotsMenu/DotsMenu";
@@ -29,3 +30,5 @@
 @import "./components/Artists/Artists";
 @import "./components/NotFound/NotFound";
 @import "./components/Authentification/Authentification";
+@import "./components/SongsTable/SongsTable";
+@import "./components/LicenseDialog/LicenseDialog";

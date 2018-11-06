@@ -1,13 +1,11 @@
 import { MDCDrawer } from "@material/drawer";
 
-import { AuthentificationService } from "../../services/AuthentificationService";
-
-import { AuthentificationComponent } from "../Authentification/Authentification";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-import { MySongsTableComponent } from "../MySongsTable/MySongsTable";
+import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
+import { AuthentificationComponent } from "../Authentification/Authentification";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
@@ -18,6 +16,7 @@ export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.status = true;
   }
 
   querySelectors() {
@@ -80,6 +79,20 @@ export class MainComponent {
     this.handleStatePath();
   }
 
+  changeActiveMenuItem(path) {
+    const prevActiveItem = this.mountPoint.querySelector(
+      ".mdc-list-item--activated"
+    );
+    if (prevActiveItem) {
+      prevActiveItem.classList.remove("mdc-list-item--activated");
+    }
+
+    const currActiveItem = this.mountPoint.querySelector(`[href="${path}"]`);
+    if (currActiveItem) {
+      currActiveItem.classList.add("mdc-list-item--activated");
+    }
+  }
+
   handleStatePath() {
     const pathname = window.location.pathname
       .replace(/^\/|\/$/g, "")
@@ -92,7 +105,7 @@ export class MainComponent {
       return;
     }
 
-    if (AuthentificationService.check(res => res) !== "") {
+    if (this.status === false) {
       if (pathname !== "login") {
         window.location.pathname = "login";
       } else {
@@ -101,13 +114,15 @@ export class MainComponent {
       }
     }
 
-    if (AuthentificationService.check(res => res) === "") {
-      if (pathname === "login") {
-        window.location.pathname = "";
+    if (this.status === true) {
+      if (pathname === "") {
+        this.routeNavigate("/albums");
+        return;
       }
-      this.normalizePageView();
 
-      if (pathname === "albums" || pathname === "") {
+      this.changeActiveMenuItem(`/${pathname}`);
+
+      if (pathname === "albums") {
         this.albums.mount();
         return;
       }
@@ -157,13 +172,12 @@ export class MainComponent {
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
 
-    this.auth = new AuthentificationComponent(this.mainPoint);
-
     this.shareView = new ShareViewComponent(this.mainPoint);
 
-    this.about = new AboutComponent(this.mainPoint);
+    this.auth = new AuthentificationComponent(this.mainPoint);
 
-    this.table = new MySongsTableComponent(this.mainPoint);
+    this.about = new AboutComponent(this.mainPoint);
+    this.table = new MySongsComponent(this.mainPoint);
 
     this.albums = new AlbumsComponent(this.mainPoint);
 
