@@ -109,7 +109,9 @@ export class MainComponent {
   }
 
   handleStatePath() {
-    const pathname = HelperService.getPathname(window);
+    const pathname = window.location.pathname
+      .replace(/^\/|\/$/g, "")
+      .replace(/\/+/g, "/");
 
     this.changeActiveMenuItem(`/${pathname}`);
 

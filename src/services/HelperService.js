@@ -11,7 +11,3 @@ export function findAllOccurrences(array, string) {
 export function retrieveArrayObjectsFields(array, field) {
   return array.map(item => item[field]);
 }
-
-export function getPathname(object) {
-  return object.location.pathname.replace(/^\/|\/$/g, "").replace(/\/+/g, "/");
-}
