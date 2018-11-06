@@ -1,4 +1,7 @@
 .responsive-grid {
+  width: calc(100% / 6 - 2rem);
+  margin: $basic-container-gap;
+
   @media screen and (max-width: $large-break-point) {
     width: calc(100% / 5 - 2rem);
   }

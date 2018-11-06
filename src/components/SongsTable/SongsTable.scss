@@ -44,17 +44,18 @@
       }
     }
     &_number {
-      text-align: center;
+      text-align: end;
       width: 1rem;
     }
     &_name {
       text-align: left;
     }
     &_duration {
-      text-align: right;
+      text-align: center;
       padding-right: 0.2rem;
       &_icon {
         vertical-align: middle;
+        font-size: 1.2rem;
       }
     }
     &_artist {
@@ -78,8 +79,13 @@
       width: 1.5rem;
       text-align: center;
       padding: 0;
+      &-btn {
+        border-radius: 1px;
+      }
     }
-
+    &_Author {
+      padding: 0;
+    }
     &_number {
       width: 1rem;
     }
@@ -100,7 +106,7 @@
       width: 30%;
     }
     &_duration {
-      text-align: right;
+      text-align: center;
       padding: 0.1rem 0.3rem;
       width: 50px;
     }
