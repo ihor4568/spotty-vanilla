@@ -1,16 +1,8 @@
+@import "../ResponsiveGrid/ResponsiveGrid";
+
 .albums {
-  max-width: 100rem;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-
-  &__progressbar {
-    margin-top: 20rem;
-  }
-
   &__container {
     display: flex;
-    justify-content: flex-start;
     flex-wrap: wrap;
   }
 
@@ -19,24 +11,19 @@
     color: #000;
   }
 
-  &__card-container {
-    margin: 0 1.8rem 2.5rem 0;
-  }
-
-  &__card {
-    width: 22.5rem;
-  }
-
   &__card-images {
-    width: 22.5rem;
+    width: 100%;
   }
 
   &__card-description {
-    padding: 1rem;
+    padding: $basic-container-gap;
   }
 
   &__card-album {
     margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__card-artist {
