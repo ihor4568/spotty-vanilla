@@ -1,6 +1,6 @@
 import { MDCDrawer } from "@material/drawer";
 
-import * as Helpers from "./Helpers";
+import * as HelperService from "../../services/HelperService";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
@@ -53,7 +53,7 @@ export class MainComponent {
     const { initialData, filteredData } = this.state;
 
     const names = this.retrieveAllSongNames(initialData);
-    const indices = Helpers.findAllOccurrences(names, searchQuery);
+    const indices = HelperService.findAllOccurrences(names, searchQuery);
     const nextFilteredData =
       (!searchQuery && initialData) || indices.map(item => initialData[item]);
 
