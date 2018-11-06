@@ -26,7 +26,7 @@ export class ArtistsComponent {
   fetchArtistsData() {
     MusicService.getAuthors().then(artists => {
       this.state.initialData = artists;
-      this.state.filteredData = artists;
+      this.state.filteredData = [...this.state.initialData];
       this.mount(false);
     });
   }

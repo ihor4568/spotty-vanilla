@@ -6,14 +6,10 @@ export class MySongsComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-<<<<<<< HEAD
     this.state = {
-      initialData: TABLE_DATA,
-      filteredData: TABLE_DATA
+      initialData: null,
+      filteredData: null
     };
-=======
-    this.songs = [];
->>>>>>> master
   }
 
   querySelectors() {
@@ -22,11 +18,6 @@ export class MySongsComponent {
     );
   }
 
-<<<<<<< HEAD
-  mountChildren(data) {
-    this.table = new SongsTableComponent(this.tableContainer, {
-      data
-=======
   fetchAuthors(authorsIds) {
     return Promise.all(
       authorsIds.map(authorId => MusicService.getAuthorById(authorId))
@@ -43,39 +34,38 @@ export class MySongsComponent {
   fetchSongs() {
     MusicService.getAlbumSongs("album1")
       .then(songs => {
-        this.songs = songs;
+        this.state.initialData = songs;
 
-        return Promise.all(this.songs.map(song => this.fetchInfoBySong(song)));
+        return Promise.all(
+          this.state.initialData.map(song => this.fetchInfoBySong(song))
+        );
       })
       .then(songsInfo => {
         songsInfo.forEach((item, i) => {
           const [album, authorsInfo] = item;
-
-          this.songs[i].album = album;
-          this.songs[i].authorsInfo = authorsInfo;
+          this.state.initialData[i].album = album;
+          this.state.initialData[i].authorsInfo = authorsInfo;
         });
-
+        this.state.filteredData = [...this.state.initialData];
         this.mount(false);
       });
   }
 
-  mountChildren() {
+  mountChildren(data) {
     this.table = new SongsTableComponent(this.tableContainer, {
-      data: this.songs,
+      data,
       onSongPlay: this.props.onSongPlay
->>>>>>> master
     });
     this.table.mount();
   }
 
-<<<<<<< HEAD
-  mount(data = [...this.state.initialData]) {
-=======
-  mount(shouldFetchData = true) {
+  mount(
+    shouldFetchData = true,
+    data = this.state.initialData ? [...this.state.initialData] : []
+  ) {
     if (shouldFetchData) {
       this.fetchSongs();
     }
->>>>>>> master
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.mountChildren(data);

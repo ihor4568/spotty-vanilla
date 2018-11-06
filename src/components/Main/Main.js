@@ -5,7 +5,7 @@ import { SearchService } from "../../services/SearchService";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
-// import { MySongsComponent } from "../MySongs/MySongs";
+import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
@@ -75,7 +75,12 @@ export class MainComponent {
     const componentShouldUpdate = filteredData !== nextFilteredData;
     if (componentShouldUpdate) {
       currentTab.state.filteredData = nextFilteredData;
-      currentTab.mount(false);
+
+      if (currentTab instanceof MySongsComponent) {
+        currentTab.mount(false, nextFilteredData);
+      } else {
+        currentTab.mount(false);
+      }
     }
   }
 
@@ -187,9 +192,9 @@ export class MainComponent {
     this.shareView = new ShareViewComponent(this.mainPoint);
 
     this.about = new AboutComponent(this.mainPoint);
-    // this.songs = new MySongsComponent(this.mainPoint, {
-    //   onSongPlay: this.handleSongPlay.bind(this)
-    // });
+    this.songs = new MySongsComponent(this.mainPoint, {
+      onSongPlay: this.handleSongPlay.bind(this)
+    });
 
     this.albums = new AlbumsComponent(this.mainPoint);
 
