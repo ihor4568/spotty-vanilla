@@ -51,8 +51,8 @@
       text-align: left;
     }
     &_duration {
-      text-align: center;
-      padding-right: 0.2rem;
+      text-align: start;
+      padding-left: 0.2rem;
       &_icon {
         vertical-align: middle;
         font-size: 1.2rem;
@@ -85,7 +85,6 @@
         &:before {
           background-color: rgba(0, 0, 0, 0.42);
         }
-        // @include mdc-button-shape-radius(.4rem, .4rem);
         &-icon {
           color: rgba(0, 0, 0, 0.54);
         }
@@ -114,7 +113,7 @@
       width: 30%;
     }
     &_duration {
-      text-align: center;
+      text-align: start;
       padding: 0.1rem 0.3rem;
       width: 50px;
     }
