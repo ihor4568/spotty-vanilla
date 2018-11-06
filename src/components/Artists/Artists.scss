@@ -35,9 +35,10 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #212121;
   }
 
   &__link {
-    color: #212121;
+    text-decoration: none;
   }
 }
