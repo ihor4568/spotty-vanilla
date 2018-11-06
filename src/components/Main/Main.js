@@ -61,6 +61,11 @@ export class MainComponent {
     }
 
     const { initialData, filteredData } = currentTab.state;
+
+    if (!initialData) {
+      return;
+    }
+
     const searchableData = HelperService.retrieveArrayObjectsFields(
       initialData,
       "name"
