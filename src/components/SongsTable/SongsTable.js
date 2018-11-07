@@ -3,6 +3,7 @@ import { MDCRipple } from "@material/ripple";
 
 import songsTableTemplate from "./SongsTable.html";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
+import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
 
 const INITIAL_ORDER = 0;
 const ASC_ORDER = 1;
@@ -149,10 +150,27 @@ export class SongsTableComponent {
     this.state.currentOrderTypeIndex += 1;
   }
 
+  handleLegal(activeMenuItem) {
+    const target = activeMenuItem;
+    if (target) {
+      const songId = target.closest(".songs-table__row").dataset.id;
+      const song = this.props.data.find(songItem => songItem.id === songId);
+      this.licenseDialogComponent = new LicenseDialogComponent(
+        this.props.dialog,
+        {
+          licenseInfo: song.album.licenseInfo,
+          licenseURL: song.album.licenseURL
+        }
+      );
+      this.licenseDialogComponent.mount();
+    }
+  }
+
   mountChildren() {
     Array.from(this.dotsMenu).forEach(item => {
       new DotsMenuComponent(item, {
         items: [
+          { name: "Legal info", handler: this.handleLegal.bind(this) },
           { name: "Remove from my songs", handler: () => {} },
           { name: "Share", handler: () => {} }
         ]

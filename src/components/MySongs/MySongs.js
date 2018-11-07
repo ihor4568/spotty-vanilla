@@ -13,6 +13,7 @@ export class MySongsComponent {
     this.tableContainer = this.mountPoint.querySelector(
       ".my-songs__table-container"
     );
+    this.dialogPoint = this.mountPoint.querySelector(".my-songs__dialog");
   }
 
   fetchAuthors(authorsIds) {
@@ -50,6 +51,7 @@ export class MySongsComponent {
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
+      dialog: this.dialogPoint,
       onSongPlay: this.props.onSongPlay
     });
     this.table.mount();
