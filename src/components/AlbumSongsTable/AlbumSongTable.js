@@ -43,7 +43,7 @@ export class AlbumsSongTableComponent {
         songsInfo.forEach((item, i) => {
           const [album, authorsInfo] = item;
           this.state.imageURL = album.imageURL;
-          this.state.title = album.title;
+          this.state.title = album.name;
           this.songs[i].album = album;
           this.songs[i].authorsInfo = authorsInfo;
         });
