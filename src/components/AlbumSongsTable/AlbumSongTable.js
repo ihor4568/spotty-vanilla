@@ -3,8 +3,9 @@ import { MusicService } from "../../services/MusicService";
 import { SongsTableComponent } from "../SongsTable/SongsTable";
 
 export class AlbumsSongTableComponent {
-  constructor(mountPoint) {
+  constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
+    this.props = props;
 
     this.state = {
       title: null,
@@ -77,7 +78,8 @@ export class AlbumsSongTableComponent {
 
   mountChildren() {
     this.albumSongs = new SongsTableComponent(this.albumSongsTable, {
-      data: this.songs
+      data: this.songs,
+      onSongPlay: this.props.onSongPlay
     });
     this.albumSongs.mount();
   }

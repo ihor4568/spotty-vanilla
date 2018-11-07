@@ -169,7 +169,9 @@ export class MainComponent {
 
     this.artist = new ArtistsComponent(this.mainPoint);
 
-    this.albumSongs = new AlbumsSongTableComponent(this.mainPoint);
+    this.albumSongs = new AlbumsSongTableComponent(this.mainPoint, {
+      onSongPlay: this.handleSongPlay.bind(this)
+    });
   }
 
   render() {
