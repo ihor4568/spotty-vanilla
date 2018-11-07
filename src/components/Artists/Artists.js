@@ -16,7 +16,8 @@ export class ArtistsComponent {
 
   initMaterial() {
     Array.from(this.cardRipple).forEach(item => {
-      this.cardRipple = new MDCRipple(item);
+      // eslint-disable-next-line no-new
+      new MDCRipple(item);
     });
   }
 

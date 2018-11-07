@@ -19,7 +19,8 @@ export class AlbumsComponent {
 
   initMaterial() {
     Array.from(this.albumRipplePoint).forEach(el => {
-      this.albumRipplePoint = new MDCRipple(el);
+      // eslint-disable-next-line no-new
+      new MDCRipple(el);
     });
   }
 
