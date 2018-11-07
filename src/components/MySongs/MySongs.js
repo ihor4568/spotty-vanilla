@@ -50,7 +50,8 @@ export class MySongsComponent {
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
-      onSongPlay: this.props.onSongPlay
+      onSongPlay: this.props.onSongPlay,
+      onSongStop: this.props.onSongStop
     });
     this.table.mount();
   }
