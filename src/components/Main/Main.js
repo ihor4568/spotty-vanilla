@@ -170,6 +170,10 @@ export class MainComponent {
     this.player.setNewSong(song);
   }
 
+  handleSongStop() {
+    this.player.stop();
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -198,7 +202,8 @@ export class MainComponent {
 
     this.about = new AboutComponent(this.mainPoint);
     this.songs = new MySongsComponent(this.mainPoint, {
-      onSongPlay: this.handleSongPlay.bind(this)
+      onSongPlay: this.handleSongPlay.bind(this),
+      onSongStop: this.handleSongStop.bind(this)
     });
 
     this.albums = new AlbumsComponent(this.mainPoint);

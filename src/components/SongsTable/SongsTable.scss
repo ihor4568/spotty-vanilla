@@ -51,16 +51,16 @@
       text-align: left;
     }
     &_duration {
-      text-align: center;
-      padding-right: 0.2rem;
+      text-align: start;
+      padding-left: 0.2rem;
       &_icon {
         vertical-align: middle;
         font-size: 1.2rem;
+        line-height: inherit;
       }
     }
     &_artist {
       text-align: left;
-      padding-left: 0.3rem;
     }
 
     &_album {
@@ -80,7 +80,17 @@
       text-align: center;
       padding: 0;
       &-btn {
-        border-radius: 1px;
+        margin-left: 0.5rem;
+        min-width: 2.5rem;
+        &:after,
+        &:before {
+          background-color: rgba(0, 0, 0, 0.42);
+          height: 0;
+          top: inherit;
+        }
+        &-icon {
+          color: rgba(0, 0, 0, 0.54);
+        }
       }
     }
     &_Author {
@@ -106,7 +116,7 @@
       width: 30%;
     }
     &_duration {
-      text-align: center;
+      text-align: start;
       padding: 0.1rem 0.3rem;
       width: 50px;
     }

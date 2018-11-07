@@ -99,8 +99,15 @@ export class MediaPlayerComponent {
       artistName: song.authorsInfo.map(author => author.name).join(", ")
     });
 
-    this.audio.src = song.songURL;
+    if (song.songURL !== this.audio.src) {
+      this.audio.src = song.songURL;
+    }
+
     this.mainControlPannel.play();
+  }
+
+  stop() {
+    this.mainControlPannel.stop();
   }
 
   mount() {
