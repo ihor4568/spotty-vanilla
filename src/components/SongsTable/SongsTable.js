@@ -26,6 +26,7 @@ export class SongsTableComponent {
     };
     this.dragElement = null;
     this.handleOrderClick = this.handleOrderClick.bind(this);
+    this.playingSong = null;
   }
 
   fillObjectsWithNumbersAsIndices(array) {
@@ -65,17 +66,38 @@ export class SongsTableComponent {
 
   handlePlayClick(e) {
     const target = e.target.closest(".songs-table__td_play-btn");
+
     if (target) {
       const songId = target.closest(".songs-table__row").dataset.id;
-      const song = this.props.data.find(songItem => songItem.id === songId);
-      this.props.onSongPlay(song);
+      const iconBtn = target.querySelector(".songs-table__td_play-btn-icon");
+
+      if (songId === this.playingSong) {
+        this.props.onSongStop();
+        this.playingSong = null;
+        iconBtn.innerHTML = "play_arrow";
+      } else {
+        const song = this.props.data.find(songItem => songItem.id === songId);
+        this.props.onSongPlay(song);
+        iconBtn.innerHTML = "pause";
+
+        if (this.playingSong) {
+          const activeRow = this.tableBody.querySelector(
+            `[data-id="${this.playingSong}"]`
+          );
+          activeRow.querySelector(".songs-table__td_play-btn-icon").innerHTML =
+            "play_arrow";
+        }
+        this.playingSong = songId;
+      }
     }
   }
 
   querySelectors() {
     const { mountPoint } = this;
     this.tableHead = mountPoint.querySelector(".songs-table__head");
-    this.iconButtonRipples = mountPoint.querySelectorAll(".material-icons");
+    this.iconButtonRipples = mountPoint.querySelectorAll(
+      ".songs-table__td_play-btn"
+    );
     this.dotsMenu = mountPoint.querySelectorAll(".songs-table__td_more");
     this.orderIcon = mountPoint.querySelector(
       `.songs-table__th-icon_${this.state.columnName}`
@@ -162,8 +184,7 @@ export class SongsTableComponent {
 
   initMaterial() {
     Array.from(this.iconButtonRipples).forEach(item => {
-      const iconButtonRipple = new MDCRipple(item);
-      iconButtonRipple.unbounded = true;
+      new MDCRipple(item); // eslint-disable-line no-new
     });
   }
 
