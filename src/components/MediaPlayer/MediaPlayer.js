@@ -13,7 +13,7 @@ const SONG_INFO = {
   songImageSrc:
     "https://s-media-cache-ak0.pinimg.com/originals/0e/f8/fd/0ef8fd42bb061ede2c2b6d1a9689782b.jpg",
   songName: "Way Back",
-  album: "Lazy Sunday",
+  name: "Lazy Sunday",
   artistName: "Jazzamor",
   songId: "song1",
   licenseInfo:
@@ -95,7 +95,7 @@ export class MediaPlayerComponent {
     this.audioInfoComponent.updateInfo({
       imageSrc: song.album.imageURL,
       songName: song.name,
-      album: song.album.title,
+      album: song.album.name,
       artistName: song.authorsInfo.map(author => author.name).join(", ")
     });
 
