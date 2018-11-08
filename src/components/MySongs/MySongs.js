@@ -1,4 +1,5 @@
-import mySongs from "./MySongs.html";
+import mySongsTemplate from "./MySongs.html";
+import loaderTemplate from "../Loader/Loader.html";
 import { SongsTableComponent } from "../SongsTable/SongsTable";
 import { MusicService } from "../../services/MusicService";
 
@@ -8,7 +9,8 @@ export class MySongsComponent {
     this.props = props;
     this.state = {
       initialData: null,
-      filteredData: null
+      filteredData: null,
+      isFetching: false
     };
   }
 
@@ -47,6 +49,7 @@ export class MySongsComponent {
           this.state.initialData[i].authorsInfo = authorsInfo;
         });
         this.state.filteredData = [...this.state.initialData];
+        this.state.isFetching = false;
         this.mount(false);
       });
   }
@@ -65,14 +68,15 @@ export class MySongsComponent {
     data = this.state.initialData ? [...this.state.initialData] : []
   ) {
     if (shouldFetchData) {
+      this.state.isFetching = shouldFetchData;
       this.fetchSongs();
     }
-    this.mountPoint.innerHTML = this.render();
+    this.mountPoint.innerHTML = this.render(this.state.isFetching);
     this.querySelectors();
     this.mountChildren(data);
   }
 
-  render() {
-    return mySongs();
+  render(dataIsFetching) {
+    return mySongsTemplate({ dataIsFetching, loader: loaderTemplate() });
   }
 }

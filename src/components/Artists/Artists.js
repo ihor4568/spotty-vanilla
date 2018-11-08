@@ -2,13 +2,15 @@ import { MDCRipple } from "@material/ripple";
 
 import artistsTemplate from "./Artists.html";
 import { MusicService } from "../../services/MusicService";
+import loaderTemplate from "../Loader/Loader.html";
 
 export class ArtistsComponent {
   constructor(mountPoint) {
     this.mountPoint = mountPoint;
     this.state = {
       initialData: null,
-      filteredData: null
+      filteredData: null,
+      isFetching: false
     };
   }
 
@@ -27,20 +29,26 @@ export class ArtistsComponent {
     MusicService.getAuthors().then(artists => {
       this.state.initialData = artists;
       this.state.filteredData = [...this.state.initialData];
+      this.state.isFetching = false;
       this.mount(false);
     });
   }
 
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
+      this.state.isFetching = shouldFetchData;
       this.fetchArtistsData();
     }
-    this.mountPoint.innerHTML = this.render();
+    this.mountPoint.innerHTML = this.render(this.state.isFetching);
     this.querySelectors();
     this.initMaterial();
   }
 
-  render() {
-    return artistsTemplate({ data: this.state.filteredData });
+  render(dataIsFetching) {
+    return artistsTemplate({
+      dataIsFetching,
+      data: this.state.filteredData,
+      loader: loaderTemplate()
+    });
   }
 }

@@ -1,5 +1,6 @@
 import { MDCRipple } from "@material/ripple";
 
+import loaderTemplate from "../Loader/Loader.html";
 import albumsTemplate from "./Albums.html";
 import { MusicService } from "../../services/MusicService";
 
@@ -8,7 +9,8 @@ export class AlbumsComponent {
     this.mountPoint = mountPoint;
     this.state = {
       initialData: null,
-      filteredData: null
+      filteredData: null,
+      isFetching: false
     };
   }
 
@@ -35,6 +37,7 @@ export class AlbumsComponent {
             .join(", ")
         }));
         this.state.filteredData = [...this.state.initialData];
+        this.state.isFetching = false;
         this.mount(false);
       }
     );
@@ -46,14 +49,19 @@ export class AlbumsComponent {
 
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
+      this.state.isFetching = shouldFetchData;
       this.fetchAlbumsCollectionData();
     }
-    this.mountPoint.innerHTML = this.render();
+    this.mountPoint.innerHTML = this.render(this.state.isFetching);
     this.querySelectors();
     this.initMaterial();
   }
 
-  render() {
-    return albumsTemplate({ data: this.state.filteredData });
+  render(dataIsFetching) {
+    return albumsTemplate({
+      dataIsFetching,
+      data: this.state.filteredData,
+      loader: loaderTemplate()
+    });
   }
 }

@@ -2,8 +2,10 @@
   <h2 class="albums__heading mdc-typography--headline4">Albums</h2>
   <div class="albums__container">
 
-    <% if (!data) { return "loading..." }%>
-    <%  data.forEach( item => {%>
+    <% if (dataIsFetching) { %>
+    <%=loader %>
+    <% } else { %>
+    <% data.forEach( item => {%>
     <div class="albums__card-container responsive-grid">
       <a class="albums__link" href="/albums/<%= item.id %>">
         <div class="albums__card mdc-card mdc-card-album">
@@ -26,6 +28,6 @@
         </div>
       </a>
     </div>
-    <% }) %>
+    <% })} %>
   </div>
 </div>

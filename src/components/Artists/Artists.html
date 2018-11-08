@@ -4,7 +4,9 @@
 
   <div class="artists__container">
 
-    <% if (!data) { return "loading..." }%>
+    <% if (dataIsFetching) { %>
+    <%=loader %>
+    <% } else { %>
     <% data.forEach(item => { %>
     <div class="mdc-card artists__card responsive-grid">
       <div class="artists__card_shaped">
@@ -19,7 +21,7 @@
           <%= item.name %></a>
       </div>
     </div>
-    <% }) %>
+    <% })} %>
   </div>
 
 </div>

@@ -2,5 +2,9 @@
   <h2 class="mdc-typography--headline4">
     My Songs
   </h2>
+  <% if (dataIsFetching) { %>
+  <%=loader %>
+  <% } else { %>
   <div class="my-songs__table-container"></div>
+  <% } %>
 </div>
