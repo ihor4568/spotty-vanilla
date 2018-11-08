@@ -29,7 +29,7 @@ export class MySongsComponent {
   }
 
   fetchSongs() {
-    MusicService.getAlbumSongs("album1")
+    MusicService.getAlbumSongs(this.props.albumId)
       .then(songs => {
         this.songs = songs;
 
@@ -57,15 +57,17 @@ export class MySongsComponent {
   }
 
   mount(shouldFetchData = true) {
-    if (shouldFetchData) {
-      this.fetchSongs();
-    }
     this.mountPoint.innerHTML = this.render();
-    this.querySelectors();
-    this.mountChildren();
+    if (this.props.albumId) {
+      if (shouldFetchData) {
+        this.fetchSongs();
+      }
+      this.querySelectors();
+      this.mountChildren();
+    }
   }
 
   render() {
-    return mySongs();
+    return mySongs(this.props);
   }
 }

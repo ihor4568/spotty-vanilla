@@ -1,6 +1,14 @@
 <div class="my-songs">
+  <% if (albumId) { %>
   <h2 class="mdc-typography--headline4">
     My Songs
   </h2>
   <div class="my-songs__table-container"></div>
+  <% } else { %>
+  <div class="my-songs__empty-library-container">
+    <i class="my-songs__material-icon material-icons">audiotrack</i>
+    <div class="my-songs__empty-list-text mdc-typography--headline4">My Songs is empty</div>
+  </div>
+
+  <% } %>
 </div>

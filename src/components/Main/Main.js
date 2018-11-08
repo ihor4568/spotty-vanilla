@@ -159,7 +159,8 @@ export class MainComponent {
     this.about = new AboutComponent(this.mainPoint);
     this.table = new MySongsComponent(this.mainPoint, {
       onSongPlay: this.handleSongPlay.bind(this),
-      onSongStop: this.handleSongStop.bind(this)
+      onSongStop: this.handleSongStop.bind(this),
+      albumId: ""
     });
 
     this.albums = new AlbumsComponent(this.mainPoint);
