@@ -52,7 +52,8 @@ export class MySongsComponent {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
       dialog: this.dialogPoint,
-      onSongPlay: this.props.onSongPlay
+      onSongPlay: this.props.onSongPlay,
+      onSongStop: this.props.onSongStop
     });
     this.table.mount();
   }
