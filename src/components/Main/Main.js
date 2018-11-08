@@ -106,7 +106,10 @@ export class MainComponent {
     }
 
     if (pathname === "songs") {
-      this.table.mount(true, this.isPlaying ? this.playingSong : null);
+      this.table.updateProps({
+        playingSong: this.player.isPlaying ? this.player.song : null
+      });
+      this.table.mount();
       return;
     }
 
@@ -123,18 +126,14 @@ export class MainComponent {
 
   handleSongPlay(song) {
     this.player.setNewSong(song);
-    this.playingSong = song;
-    this.isPlaying = true;
   }
 
   handleSongStop() {
     this.player.stop();
-    this.isPlaying = false;
   }
 
-  handlePlayerClick(songId, isPlaying) {
-    // this.table.changeStateSong(songId);
-    this.isPlaying = isPlaying;
+  handlePlayerChangeState(songId, isPlaying) {
+    this.table.changeStateSong(songId, isPlaying);
   }
 
   mount() {
@@ -159,7 +158,7 @@ export class MainComponent {
     this.header.mount();
 
     this.player = new MediaPlayerComponent(this.playerPoint, {
-      onPlayerClick: this.handlePlayerClick.bind(this)
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this)
     });
     this.player.mount();
 

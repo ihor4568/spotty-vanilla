@@ -47,8 +47,10 @@ export class MySongsComponent {
       });
   }
 
-  changeStateSong(songId) {
-    this.table.handlePlayerClick(songId);
+  changeStateSong(songId, isPlaying) {
+    if (this.mountPoint.querySelector(".my-songs")) {
+      this.table.changeStateSong(songId, isPlaying);
+    }
   }
 
   mountChildren() {
@@ -56,15 +58,19 @@ export class MySongsComponent {
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
-      playingSong: this.playingSong ? this.playingSong.id : null
+      playingSongId: this.props.playingSong ? this.props.playingSong.id : null
     });
     this.table.mount();
   }
 
-  mount(shouldFetchData = true, playingSong) {
-    if (playingSong) {
-      this.playingSong = playingSong;
-    }
+  updateProps(newProps) {
+    this.props = {
+      ...this.props,
+      ...newProps
+    };
+  }
+
+  mount(shouldFetchData = true) {
     if (shouldFetchData) {
       this.fetchSongs();
     }

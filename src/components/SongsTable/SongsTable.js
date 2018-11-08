@@ -26,7 +26,7 @@ export class SongsTableComponent {
     };
     this.dragElement = null;
     this.handleOrderClick = this.handleOrderClick.bind(this);
-    this.playingSong = this.props.playingSong;
+    this.playingSongId = this.props.playingSongId;
   }
 
   fillObjectsWithNumbersAsIndices(array) {
@@ -64,52 +64,62 @@ export class SongsTableComponent {
     this.mount();
   }
 
+  stopSong() {
+    const activeRow = this.tableBody.querySelector(
+      `[data-id="${this.playingSongId}"]`
+    );
+
+    if (activeRow) {
+      const activeIconBtn = activeRow.querySelector(
+        ".songs-table__td_play-btn-icon"
+      );
+      activeIconBtn.innerHTML = "play_arrow";
+    }
+
+    this.playingSongId = null;
+  }
+
+  startSong(songId) {
+    if (this.playingSongId) {
+      const prevActiveRow = this.tableBody.querySelector(
+        `[data-id="${this.playingSongId}"]`
+      );
+      if (prevActiveRow) {
+        prevActiveRow.querySelector(
+          ".songs-table__td_play-btn-icon"
+        ).innerHTML = "play_arrow";
+      }
+    }
+
+    const activeRow = this.tableBody.querySelector(`[data-id="${songId}"]`);
+    const activeIconBtn = activeRow.querySelector(
+      ".songs-table__td_play-btn-icon"
+    );
+
+    activeIconBtn.innerHTML = "pause";
+    this.playingSongId = songId;
+  }
+
   handlePlayClick(e) {
     const target = e.target.closest(".songs-table__td_play-btn");
 
     if (target) {
       const songId = target.closest(".songs-table__row").dataset.id;
-      this.iconBtn = target.querySelector(".songs-table__td_play-btn-icon");
 
-      if (songId === this.playingSong) {
+      if (songId === this.playingSongId) {
         this.props.onSongStop();
-        this.playingSong = null;
-        this.iconBtn.innerHTML = "play_arrow";
       } else {
         const song = this.props.data.find(songItem => songItem.id === songId);
         this.props.onSongPlay(song);
-        this.iconBtn.innerHTML = "pause";
-
-        if (this.playingSong) {
-          const activeRow = this.tableBody.querySelector(
-            `[data-id="${this.playingSong}"]`
-          );
-          activeRow.querySelector(".songs-table__td_play-btn-icon").innerHTML =
-            "play_arrow";
-        }
-        this.playingSong = songId;
       }
     }
   }
 
-  handlePlayerClick(songId) {
-    if (songId === this.playingSong) {
-      this.props.onSongStop();
-      this.playingSong = null;
-      this.iconBtn.innerHTML = "play_arrow";
+  changeStateSong(songId, isPlaying) {
+    if (isPlaying) {
+      this.startSong(songId);
     } else {
-      const song = this.props.data.find(songItem => songItem.id === songId);
-      this.props.onSongPlay(song);
-      this.iconBtn.innerHTML = "pause";
-
-      if (this.playingSong) {
-        const activeRow = this.tableBody.querySelector(
-          `[data-id="${this.playingSong}"]`
-        );
-        activeRow.querySelector(".songs-table__td_play-btn-icon").innerHTML =
-          "play_arrow";
-      }
-      this.playingSong = songId;
+      this.stopSong();
     }
   }
 
@@ -221,7 +231,7 @@ export class SongsTableComponent {
   render() {
     return songsTableTemplate({
       data: this.state.data,
-      playingSong: this.playingSong
+      playingSongId: this.playingSongId
     });
   }
 }

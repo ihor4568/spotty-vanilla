@@ -8,6 +8,7 @@ import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
 import playerTemplate from "./MediaPlayer.html";
 
 const SONG_INFO = {
+  id: "song0",
   songSrc:
     "https://storage.mp3cc.biz/download/89035703/U2hXUUsxUTVxellvRHcrQTNaNUdIM0drb2J3dWhaNjNacXRmdGU5bGZtN3pMcHdUNnhicmozMDlHcHBnRHNZRTZoSEJzMldvQTl1SGk1TjU2VFJyK0dHOUFiMUZVZzBYVTQ2NU8xVEwxZjlLbmZtaWlZQk1TVE1MVDBleThqdVg/jazzamor-jazzamor-je-t-aime_(mp3CC.biz).mp3",
   songImageSrc:
@@ -25,6 +26,9 @@ export class MediaPlayerComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+
+    this.song = SONG_INFO;
+    this.isPlaying = false;
   }
 
   querySelectors() {
@@ -54,7 +58,7 @@ export class MediaPlayerComponent {
   mountChildren() {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
       audio: this.audio,
-      onPlayerClick: this.handlePlayerClick.bind(this)
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this)
     });
     this.mainControlPannel.mount();
     this.audioProgressBar = new ProgressBarComponent(this.progressBar, {
@@ -108,8 +112,9 @@ export class MediaPlayerComponent {
     this.mainControlPannel.play();
   }
 
-  handlePlayerClick(isPlaying) {
-    this.props.onPlayerClick(this.song.id, isPlaying);
+  handlePlayerChangeState(isPlaying) {
+    this.isPlaying = isPlaying;
+    this.props.onPlayerChangeState(this.song.id, isPlaying);
   }
 
   stop() {

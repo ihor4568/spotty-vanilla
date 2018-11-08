@@ -37,21 +37,21 @@ export class PlayerButtonsComponent {
     this.props.audio.play();
     this.isPlayNow = true;
     this.playButton.children[0].innerText = "pause";
+    this.props.onPlayerChangeState(true);
   }
 
   stop() {
     this.props.audio.pause();
     this.isPlayNow = false;
     this.playButton.children[0].innerText = "play_arrow";
+    this.props.onPlayerChangeState(false);
   }
 
   togglePlay() {
     if (this.isPlayNow) {
       this.stop();
-      this.props.onPlayerClick(false);
     } else {
       this.play();
-      this.props.onPlayerClick(true);
     }
   }
 
