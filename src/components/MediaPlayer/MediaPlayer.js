@@ -9,13 +9,13 @@ import playerTemplate from "./MediaPlayer.html";
 
 const SONG_INFO = {
   songSrc:
-    "https://storage.mp3cc.biz/download/89035703/U2hXUUsxUTVxellvRHcrQTNaNUdIM0drb2J3dWhaNjNacXRmdGU5bGZtN3pMcHdUNnhicmozMDlHcHBnRHNZRTZoSEJzMldvQTl1SGk1TjU2VFJyK0dHOUFiMUZVZzBYVTQ2NU8xVEwxZjlLbmZtaWlZQk1TVE1MVDBleThqdVg/jazzamor-jazzamor-je-t-aime_(mp3CC.biz).mp3",
+    "https://firebasestorage.googleapis.com/v0/b/spotty-vanilla.appspot.com/o/Himan_-_02_-_Kids_In_Space.mp3?alt=media&token=25dbf4d9-3bb5-4797-8dee-acd9960211b6",
   songImageSrc:
     "https://s-media-cache-ak0.pinimg.com/originals/0e/f8/fd/0ef8fd42bb061ede2c2b6d1a9689782b.jpg",
   songName: "Way Back",
   album: "Lazy Sunday",
   artistName: "Jazzamor",
-  songId: "song1",
+  songId: "song12",
   licenseInfo:
     "BJ Block & Dawn Pemberton is licensed under a Attribution-NonCommercial-NoDerivatives (aka Music Sharing) 3.0 International License.",
   licenseURL: "https://creativecommons.org/licenses/by-nc-nd/3.0/"
@@ -28,6 +28,7 @@ export class MediaPlayerComponent {
   }
 
   querySelectors() {
+    this.wrapper = this.mountPoint.querySelector(".media-player");
     this.audio = this.mountPoint.querySelector(".media-player__main-audio");
     this.buttons = this.mountPoint.querySelector(".media-player__buttons");
     this.progressBar = this.mountPoint.querySelector(
@@ -79,8 +80,12 @@ export class MediaPlayerComponent {
     this.dotsMenu.mount();
   }
 
-  handleShare() {
-    window.open(`/song/${SONG_INFO.songId}`);
+  handleShare(activeMenuItem) {
+    const target = activeMenuItem;
+    if (target) {
+      const songId = target.closest(".media-player").dataset.id;
+      window.open(`/song/${songId}`);
+    }
   }
 
   handleLegal() {
@@ -95,12 +100,21 @@ export class MediaPlayerComponent {
     this.audioInfoComponent.updateInfo({
       imageSrc: song.album.imageURL,
       songName: song.name,
-      album: song.album.title,
+      album: song.album.name,
+      songId: song.id,
       artistName: song.authorsInfo.map(author => author.name).join(", ")
     });
 
-    this.audio.src = song.songURL;
+    if (song.songURL !== this.audio.src) {
+      this.audio.src = song.songURL;
+    }
+
+    this.wrapper.setAttribute("data-id", `${song.id}`);
     this.mainControlPannel.play();
+  }
+
+  stop() {
+    this.mainControlPannel.stop();
   }
 
   mount() {
@@ -111,7 +125,7 @@ export class MediaPlayerComponent {
 
   render() {
     return playerTemplate({
-      src: SONG_INFO.songSrc
+      SONG_INFO
     });
   }
 }

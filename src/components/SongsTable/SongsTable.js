@@ -174,10 +174,18 @@ export class SongsTableComponent {
         items: [
           { name: "Legal info", handler: this.handleLegal.bind(this) },
           { name: "Remove from my songs", handler: () => {} },
-          { name: "Share", handler: () => {} }
+          { name: "Share", handler: this.handleShare.bind(this) }
         ]
       }).mount();
     });
+  }
+
+  handleShare(activeMenuItem) {
+    const target = activeMenuItem;
+    if (target) {
+      const songId = target.closest(".songs-table__row").dataset.id;
+      window.open(`/song/${songId}`);
+    }
   }
 
   initMaterial() {

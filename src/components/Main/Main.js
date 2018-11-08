@@ -33,7 +33,6 @@ export class MainComponent {
     this.appBar.classList.add("main__app-bar_disable");
     this.mainPoint.classList.add("main__content-mount_disable");
     this.shareView.setSongId(songId);
-    this.shareView.mount();
   }
 
   initMaterial() {

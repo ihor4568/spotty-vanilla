@@ -30,7 +30,7 @@ export class MySongsComponent {
   }
 
   fetchSongs() {
-    MusicService.getAlbumSongs("album1")
+    MusicService.getAlbumSongs("album4")
       .then(songs => {
         this.songs = songs;
 
