@@ -1,5 +1,7 @@
 import { MDCDrawer } from "@material/drawer";
 
+import { AuthService } from "../../services/AuthService";
+
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { SearchComponent } from "../Search/Search";
@@ -26,6 +28,8 @@ export class MainComponent {
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.appBar = this.mountPoint.querySelector(".main__app-bar");
+    this.userPoint = this.mountPoint.querySelector(".main__user");
+    this.userSignOut = this.mountPoint.querySelector(".main__sign-out");
   }
 
   setShareView(songId) {
@@ -61,6 +65,7 @@ export class MainComponent {
   addEventListeners() {
     this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
     window.addEventListener("popstate", this.handleStatePath.bind(this));
+    this.userSignOut.addEventListener("click", this.handleSignOut.bind(this));
   }
 
   handleListClick(e) {
@@ -103,17 +108,16 @@ export class MainComponent {
       this.setShareView(songId);
       return;
     }
+    AuthService.check().then(
+      user => this.handleGo.call(this, pathname, user),
+      () => this.handleStop.bind(this)(pathname)
+    );
+  }
 
-    if (pathname === "login") {
-      this.setAuthView();
-      return;
-    }
-    if (pathname === "") {
-      this.routeNavigate("/albums");
-      return;
-    }
+  handleGo(pathname, user) {
+    this.userPoint.innerText = user.displayName;
 
-    if (pathname === "login") {
+    if (pathname === "" || pathname === "login") {
       this.routeNavigate("/albums");
       return;
     }
@@ -141,6 +145,17 @@ export class MainComponent {
     }
 
     this.notFound.mount();
+  }
+
+  handleStop(pathname) {
+    if (pathname !== "login") {
+      window.location.pathname = "login";
+    }
+    this.setAuthView();
+  }
+
+  handleSignOut() {
+    AuthService.signOut();
   }
 
   handleSongPlay(song) {
@@ -191,6 +206,6 @@ export class MainComponent {
   }
 
   render() {
-    return mainTemplate();
+    return mainTemplate({ currentUser: "" });
   }
 }

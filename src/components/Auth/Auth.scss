@@ -30,4 +30,10 @@
   &__button {
     margin: 3px;
   }
+
+  &__eror {
+    text-align: center;
+    color: red;
+    padding: $basic-container-gap;
+  }
 }

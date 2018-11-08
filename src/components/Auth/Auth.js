@@ -2,6 +2,8 @@ import { MDCTextField } from "@material/textfield";
 import { MDCRipple } from "@material/ripple";
 import { MDCTabBar } from "@material/tab-bar";
 
+import { AuthService } from "../../services/AuthService";
+
 import authTemplate from "./Auth.html";
 
 export class AuthComponent {
@@ -19,6 +21,7 @@ export class AuthComponent {
     this.tabSignIn = this.mountPoint.querySelector(".auth__tab-sign-in");
     this.tabSignUp = this.mountPoint.querySelector(".auth__tab-sign-up");
     this.input = this.mountPoint.querySelectorAll(".auth__input");
+    this.erorPoint = this.mountPoint.querySelector(".auth__eror");
   }
 
   initMaterial() {
@@ -34,16 +37,16 @@ export class AuthComponent {
   addEventListeners() {
     this.tabSignIn.addEventListener(
       "click",
-      this.handleSignInBtnClick.bind(this)
+      this.handleSignInTabClick.bind(this)
     );
     this.tabSignUp.addEventListener(
       "click",
-      this.handleSignUpBtnClick.bind(this)
+      this.handleSignUpTabClick.bind(this)
     );
     this.next.addEventListener("click", this.handleNextClick.bind(this));
   }
 
-  handleSignInBtnClick() {
+  handleSignInTabClick() {
     if (this.tabSignIn.classList.contains("auth__input--active") === false) {
       this.name.classList.add("auth__elem_disable");
       this.password[1].classList.add("auth__elem_disable");
@@ -53,11 +56,12 @@ export class AuthComponent {
       this.input[1].value = "";
       this.input[2].value = "";
       this.input[3].value = "";
-      this.next.innerText = "sign in";
+      this.erorPoint.innerText = "";
+      this.next.innerText = "SIGN IN";
     }
   }
 
-  handleSignUpBtnClick() {
+  handleSignUpTabClick() {
     if (this.tabSignUp.classList.contains("auth__input--active") === false) {
       this.name.classList.remove("auth__elem_disable");
       this.password[1].classList.remove("auth__elem_disable");
@@ -67,13 +71,33 @@ export class AuthComponent {
       this.input[1].value = "";
       this.input[2].value = "";
       this.input[3].value = "";
-
-      this.next.innerText = "sign up";
+      this.erorPoint.innerText = "";
+      this.next.innerText = "SIGN UP";
     }
   }
 
   handleNextClick() {
-    window.location.reload();
+    if (this.next.innerText === "SIGN IN") {
+      AuthService.signIn(this.input[0].value, this.input[2].value, err =>
+        this.handleAlert.call(this, err)
+      );
+    }
+    if (this.next.innerText === "SIGN UP") {
+      if (this.input[2].value === this.input[3].value) {
+        AuthService.signUp(
+          this.input[0].value,
+          this.input[2].value,
+          this.input[1].value,
+          err => this.handleAlert.call(this, err)
+        );
+      } else {
+        this.erorPoint.innerText = "auth/passwords must be identical";
+      }
+    }
+  }
+
+  handleAlert(err) {
+    this.erorPoint.innerText = err;
   }
 
   mount() {
