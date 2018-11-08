@@ -53,7 +53,8 @@ export class MediaPlayerComponent {
 
   mountChildren() {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
-      audio: this.audio
+      audio: this.audio,
+      onPlayerClick: this.handlePlayerClick.bind(this)
     });
     this.mainControlPannel.mount();
     this.audioProgressBar = new ProgressBarComponent(this.progressBar, {
@@ -92,15 +93,27 @@ export class MediaPlayerComponent {
   }
 
   setNewSong(song) {
+    this.song = song;
     this.audioInfoComponent.updateInfo({
       imageSrc: song.album.imageURL,
       songName: song.name,
-      album: song.album.title,
+      album: song.album.name,
       artistName: song.authorsInfo.map(author => author.name).join(", ")
     });
 
-    this.audio.src = song.songURL;
+    if (song.songURL !== this.audio.src) {
+      this.audio.src = song.songURL;
+    }
+
     this.mainControlPannel.play();
+  }
+
+  handlePlayerClick(isPlaying) {
+    this.props.onPlayerClick(this.song.id, isPlaying);
+  }
+
+  stop() {
+    this.mainControlPannel.stop();
   }
 
   mount() {

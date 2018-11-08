@@ -26,6 +26,7 @@ export class SongsTableComponent {
     };
     this.dragElement = null;
     this.handleOrderClick = this.handleOrderClick.bind(this);
+    this.playingSong = this.props.playingSong;
   }
 
   fillObjectsWithNumbersAsIndices(array) {
@@ -65,10 +66,50 @@ export class SongsTableComponent {
 
   handlePlayClick(e) {
     const target = e.target.closest(".songs-table__td_play-btn");
+
     if (target) {
       const songId = target.closest(".songs-table__row").dataset.id;
+      this.iconBtn = target.querySelector(".songs-table__td_play-btn-icon");
+
+      if (songId === this.playingSong) {
+        this.props.onSongStop();
+        this.playingSong = null;
+        this.iconBtn.innerHTML = "play_arrow";
+      } else {
+        const song = this.props.data.find(songItem => songItem.id === songId);
+        this.props.onSongPlay(song);
+        this.iconBtn.innerHTML = "pause";
+
+        if (this.playingSong) {
+          const activeRow = this.tableBody.querySelector(
+            `[data-id="${this.playingSong}"]`
+          );
+          activeRow.querySelector(".songs-table__td_play-btn-icon").innerHTML =
+            "play_arrow";
+        }
+        this.playingSong = songId;
+      }
+    }
+  }
+
+  handlePlayerClick(songId) {
+    if (songId === this.playingSong) {
+      this.props.onSongStop();
+      this.playingSong = null;
+      this.iconBtn.innerHTML = "play_arrow";
+    } else {
       const song = this.props.data.find(songItem => songItem.id === songId);
       this.props.onSongPlay(song);
+      this.iconBtn.innerHTML = "pause";
+
+      if (this.playingSong) {
+        const activeRow = this.tableBody.querySelector(
+          `[data-id="${this.playingSong}"]`
+        );
+        activeRow.querySelector(".songs-table__td_play-btn-icon").innerHTML =
+          "play_arrow";
+      }
+      this.playingSong = songId;
     }
   }
 
@@ -178,6 +219,9 @@ export class SongsTableComponent {
   }
 
   render() {
-    return songsTableTemplate({ data: this.state.data });
+    return songsTableTemplate({
+      data: this.state.data,
+      playingSong: this.playingSong
+    });
   }
 }

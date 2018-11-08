@@ -48,8 +48,10 @@ export class PlayerButtonsComponent {
   togglePlay() {
     if (this.isPlayNow) {
       this.stop();
+      this.props.onPlayerClick(false);
     } else {
       this.play();
+      this.props.onPlayerClick(true);
     }
   }
 

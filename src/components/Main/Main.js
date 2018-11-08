@@ -15,6 +15,8 @@ export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.playingSong = null;
+    this.isPlaying = false;
   }
 
   querySelectors() {
@@ -104,7 +106,7 @@ export class MainComponent {
     }
 
     if (pathname === "songs") {
-      this.table.mount();
+      this.table.mount(true, this.isPlaying ? this.playingSong : null);
       return;
     }
 
@@ -121,6 +123,18 @@ export class MainComponent {
 
   handleSongPlay(song) {
     this.player.setNewSong(song);
+    this.playingSong = song;
+    this.isPlaying = true;
+  }
+
+  handleSongStop() {
+    this.player.stop();
+    this.isPlaying = false;
+  }
+
+  handlePlayerClick(songId, isPlaying) {
+    // this.table.changeStateSong(songId);
+    this.isPlaying = isPlaying;
   }
 
   mount() {
@@ -144,7 +158,9 @@ export class MainComponent {
     });
     this.header.mount();
 
-    this.player = new MediaPlayerComponent(this.playerPoint);
+    this.player = new MediaPlayerComponent(this.playerPoint, {
+      onPlayerClick: this.handlePlayerClick.bind(this)
+    });
     this.player.mount();
 
     this.search = new SearchComponent(this.searchPoint);
@@ -154,7 +170,8 @@ export class MainComponent {
 
     this.about = new AboutComponent(this.mainPoint);
     this.table = new MySongsComponent(this.mainPoint, {
-      onSongPlay: this.handleSongPlay.bind(this)
+      onSongPlay: this.handleSongPlay.bind(this),
+      onSongStop: this.handleSongStop.bind(this)
     });
 
     this.albums = new AlbumsComponent(this.mainPoint);
