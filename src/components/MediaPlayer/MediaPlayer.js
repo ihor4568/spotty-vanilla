@@ -95,12 +95,19 @@ export class MediaPlayerComponent {
     this.audioInfoComponent.updateInfo({
       imageSrc: song.album.imageURL,
       songName: song.name,
-      album: song.album.title,
+      album: song.album.name,
       artistName: song.authorsInfo.map(author => author.name).join(", ")
     });
 
-    this.audio.src = song.songURL;
+    if (song.songURL !== this.audio.src) {
+      this.audio.src = song.songURL;
+    }
+
     this.mainControlPannel.play();
+  }
+
+  stop() {
+    this.mainControlPannel.stop();
   }
 
   mount() {
