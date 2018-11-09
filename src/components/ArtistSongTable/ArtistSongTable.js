@@ -8,8 +8,7 @@ export class ArtistSongTableComponent {
     this.props = props;
     this.state = {
       artist: [],
-      imageUrl: [],
-      id: []
+      imageUrl: []
     };
     this.songs = [];
   }
@@ -69,7 +68,6 @@ export class ArtistSongTableComponent {
     MusicService.getAuthorById(artistId).then(artist => {
       this.state.artist = artist.name;
       this.state.imageUrl = artist.imageURL;
-      this.state.id = artist.id;
       this.mount(false);
     });
   }
