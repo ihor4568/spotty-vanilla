@@ -1,0 +1,59 @@
+$background: hsla(0, 0%, 7%, 1); /*main background*/
+$dark-1: hsla(0, 0%, 14%, 1); /*top bar*/
+$dark-2: hsla(0, 0%, 11%, 1); /*left menu slider*/
+$dark-selected: hsla(0, 0%, 100%, 0.1); /*selected item*/
+$dark-hover: hsla(0, 0%, 53%, 0.4); /*hover item*/
+
+$font-white-1: hsla(0, 0%, 100%, 1); /*main white*/
+$font-white-2: hsla(0, 0%, 100%, 0.88); /*main font. video name*/
+
+$font-grey-1: hsla(0, 0%, 100%, 0.6); /*left menu heading*/
+$font-grey-2: hsla(0, 0%, 100%, 0.74); /*video description. subtitle*/
+$font-grey-3: hsla(0, 0%, 60%, 1); /*search pllaceholder*/
+$font-grey-4: hsla(0, 0%, 100, 0.5); /*search icon*/
+$font-grey-5: hsla(0, 0%, 18%, 1); /*dividers*/
+
+$color: red;
+
+.main__sidebar {
+  @include mdc-drawer-surface-fill-color($dark-2);
+  @include mdc-drawer-title-ink-color($font-grey-1);
+  @include mdc-drawer-subtitle-ink-color($font-white-2);
+  @include mdc-drawer-item-icon-ink-color($font-grey-2);
+  @include mdc-drawer-item-text-ink-color($font-white-2);
+  @include mdc-drawer-item-activated-icon-ink-color($font-grey-2);
+  @include mdc-drawer-item-activated-text-ink-color($font-white-2);
+  @include mdc-drawer-activated-overlay-color($dark-selected);
+  @include mdc-drawer-divider-color($font-grey-5);
+}
+
+.main__app-bar {
+  @include mdc-top-app-bar-ink-color($font-white-1);
+  @include mdc-top-app-bar-icon-ink-color($font-white-1);
+  @include mdc-top-app-bar-fill-color($dark-1);
+}
+
+.search {
+  @include mdc-text-field-ink-color($font-white-2);
+  @include mdc-text-field-label-color($font-grey-3);
+  @include mdc-text-field-caret-color($font-white-2);
+  @include mdc-text-field-textarea-fill-color($background);
+  @include mdc-text-field-icon-color($font-grey-4, $styleSecondIcon: false);
+}
+
+.albums__card {
+  @include mdc-card-fill-color($dark-1);
+}
+
+.dots-menu {
+  @include mdc-menu-surface-ink-color($font-grey-4);
+}
+
+.mdc-menu-surface {
+  @include mdc-menu-surface-fill-color($font-grey-5);
+}
+
+.mdc-list {
+  @include mdc-list-item-primary-text-ink-color($font-white-2);
+  @include mdc-list-group-subheader-ink-color($color);
+}
