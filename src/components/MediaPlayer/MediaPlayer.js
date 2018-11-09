@@ -80,7 +80,7 @@ export class MediaPlayerComponent {
 
   handleLegal() {
     this.licenseDialogComponent = new LicenseDialogComponent(this.dialogPoint, {
-      licenseInfo: SONG_INFO.licenseInfo,
+      licenseInfo: SONG_INFO.licenseInfo, // TODO
       licenseURL: SONG_INFO.licenseURL
     });
     this.licenseDialogComponent.mount();
@@ -120,8 +120,6 @@ export class MediaPlayerComponent {
   }
 
   render() {
-    return playerTemplate({
-      src: SONG_INFO.songSrc
-    });
+    return playerTemplate();
   }
 }
