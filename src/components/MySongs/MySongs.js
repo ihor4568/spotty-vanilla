@@ -13,7 +13,6 @@ export class MySongsComponent {
     this.tableContainer = this.mountPoint.querySelector(
       ".my-songs__table-container"
     );
-    this.dialogPoint = this.mountPoint.querySelector(".my-songs__dialog");
   }
 
   fetchAuthors(authorsIds) {

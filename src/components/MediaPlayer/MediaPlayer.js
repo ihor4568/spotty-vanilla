@@ -33,7 +33,6 @@ export class MediaPlayerComponent {
     this.dotsMenuPoint = this.mountPoint.querySelector(
       ".media-player__dots-menu"
     );
-    this.dialogPoint = this.mountPoint.querySelector(".media-player__dialog");
   }
 
   set audioTime(val) {
