@@ -6,14 +6,15 @@
   &__album-description {
     width: 22.5rem;
     margin-left: 1rem;
-    padding: 1rem 1rem 1rem 0;
+    padding: 0 1rem 1rem 0;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
   &__card-container {
-    margin: 0 1.8rem 2.5rem 1rem;
+    display: flex;
+    margin: 2rem 1.8rem 2.5rem 1rem;
   }
 
   &__card {

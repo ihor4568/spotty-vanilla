@@ -87,9 +87,10 @@ export class AlbumsSongTableComponent {
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
       this.fetchSongs();
+      this.fetchAuthorForTitle();
+      return;
     }
     this.mountPoint.innerHTML = this.render();
-    this.fetchAuthorForTitle();
     this.querySelectors();
     this.mountChildren();
   }
