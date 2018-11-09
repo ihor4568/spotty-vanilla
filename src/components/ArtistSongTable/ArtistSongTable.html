@@ -6,7 +6,9 @@
         <div class="artist__card_shaped">
           <div class="mdc-card mdc-card__primary-action mdc-ripple artist__ripple">
             <div class="mdc-card__media mdc-card__media--square artist__media">
+              <% if( imageUrl ) { %>
               <img class="artist__image" src="<%= imageUrl %>" alt="artist image">
+              <% } %>
             </div>
           </div>
         </div>

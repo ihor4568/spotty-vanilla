@@ -12,6 +12,9 @@
 @import "@material/menu-surface/mdc-menu-surface";
 @import "@material/linear-progress/mdc-linear-progress";
 @import "@material/fab/mdc-fab";
+@import "@material/tab-bar/mdc-tab-bar";
+@import "@material/tab-indicator/mdc-tab-indicator";
+@import "@material/tab/mdc-tab";
 @import "@material/dialog/mdc-dialog";
 
 @import "./variables";
@@ -22,7 +25,7 @@
 @import "./components/Main/Main";
 @import "./components/MediaPlayer/MediaPlayer";
 @import "./components/Page/Page";
-
+@import "./components/SongsTable/SongsTable";
 @import "./components/Albums/Albums";
 @import "./components/About/About";
 @import "./components/DotsMenu/DotsMenu";
@@ -30,5 +33,6 @@
 @import "./components/Artists/Artists";
 @import "./components/ArtistSongTable/ArtistSongTable";
 @import "./components/NotFound/NotFound";
+@import "./components/Auth/Auth";
 @import "./components/SongsTable/SongsTable";
 @import "./components/LicenseDialog/LicenseDialog";

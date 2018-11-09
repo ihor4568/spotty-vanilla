@@ -16,7 +16,8 @@ export class ArtistsComponent {
 
   initMaterial() {
     Array.from(this.cardRipple).forEach(item => {
-      this.cardRipple = new MDCRipple(item);
+      // eslint-disable-next-line no-new
+      new MDCRipple(item);
     });
   }
 
@@ -30,6 +31,7 @@ export class ArtistsComponent {
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
       this.fetchArtistsData();
+      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();

@@ -77,6 +77,7 @@ export class ArtistSongTableComponent {
     if (shouldFetchData) {
       this.fetchArtist();
       this.fetchSongs();
+      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
