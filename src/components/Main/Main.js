@@ -73,6 +73,10 @@ export class MainComponent {
     this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
     window.addEventListener("popstate", this.handleStatePath.bind(this));
     this.userSignOut.addEventListener("click", this.handleSignOut.bind(this));
+    this.mainContentPoint.addEventListener(
+      "click",
+      this.handleListClick.bind(this)
+    );
   }
 
   handleListClick(e) {
@@ -181,6 +185,7 @@ export class MainComponent {
   handlePlayerChangeState(songId, isPlaying) {
     if (songId) {
       this.table.changeStateSong(songId, isPlaying);
+      this.artistSongTable.changeStateSong(songId, isPlaying);
     }
   }
 
@@ -229,7 +234,8 @@ export class MainComponent {
 
     this.artist = new ArtistsComponent(this.mainContentPoint);
     this.artistSongTable = new ArtistSongTableComponent(this.mainContentPoint, {
-      onSongPlay: this.handleSongPlay.bind(this)
+      onSongPlay: this.handleSongPlay.bind(this),
+      onSongStop: this.handleSongStop.bind(this)
     });
   }
 

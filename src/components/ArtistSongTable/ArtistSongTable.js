@@ -56,6 +56,13 @@ export class ArtistSongTableComponent {
       });
   }
 
+  changeStateSong(songId, isPlaying) {
+    this.playingSongId = isPlaying ? songId : null;
+    if (this.mountPoint.querySelector(".table-container")) {
+      this.table.changeStateSong(songId, isPlaying);
+    }
+  }
+
   fetchArtist() {
     const artistId = this.getArtistFromUrl();
     MusicService.getAuthorById(artistId).then(artist => {
@@ -68,7 +75,9 @@ export class ArtistSongTableComponent {
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
-      onSongPlay: this.props.onSongPlay
+      onSongPlay: this.props.onSongPlay,
+      onSongStop: this.props.onSongStop,
+      playingSongId: this.playingSongId
     });
     this.table.mount();
   }
