@@ -68,6 +68,6 @@ export class PlayerButtonsComponent {
   }
 
   render() {
-    return buttonsComponentTemplate({ src: this.props.song });
+    return buttonsComponentTemplate();
   }
 }
