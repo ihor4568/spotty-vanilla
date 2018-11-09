@@ -27,7 +27,7 @@ export class MediaPlayerComponent {
     this.mountPoint = mountPoint;
     this.props = props;
 
-    this.song = SONG_INFO;
+    this.song = null;
     this.isPlaying = false;
   }
 
@@ -114,7 +114,7 @@ export class MediaPlayerComponent {
 
   handlePlayerChangeState(isPlaying) {
     this.isPlaying = isPlaying;
-    this.props.onPlayerChangeState(this.song.id, isPlaying);
+    this.props.onPlayerChangeState(this.song ? this.song.id : null, isPlaying);
   }
 
   stop() {
