@@ -26,7 +26,7 @@ export class SongsTableComponent {
     };
     this.dragElement = null;
     this.handleOrderClick = this.handleOrderClick.bind(this);
-    this.playingSong = null;
+    this.playingSongId = this.props.playingSongId;
   }
 
   fillObjectsWithNumbersAsIndices(array) {
@@ -64,31 +64,58 @@ export class SongsTableComponent {
     this.mount();
   }
 
+  playSong(songId) {
+    if (this.playingSongId) {
+      this.stopSong();
+    }
+
+    const activeRow = this.tableBody.querySelector(`[data-id="${songId}"]`);
+    if (activeRow) {
+      const activeIconBtn = activeRow.querySelector(
+        ".songs-table__td_play-btn-icon"
+      );
+
+      activeIconBtn.innerHTML = "pause";
+    }
+
+    this.playingSongId = songId;
+  }
+
+  stopSong() {
+    const activeRow = this.tableBody.querySelector(
+      `[data-id="${this.playingSongId}"]`
+    );
+
+    if (activeRow) {
+      const activeIconBtn = activeRow.querySelector(
+        ".songs-table__td_play-btn-icon"
+      );
+      activeIconBtn.innerHTML = "play_arrow";
+    }
+
+    this.playingSongId = null;
+  }
+
   handlePlayClick(e) {
     const target = e.target.closest(".songs-table__td_play-btn");
 
     if (target) {
       const songId = target.closest(".songs-table__row").dataset.id;
-      const iconBtn = target.querySelector(".songs-table__td_play-btn-icon");
 
-      if (songId === this.playingSong) {
+      if (songId === this.playingSongId) {
         this.props.onSongStop();
-        this.playingSong = null;
-        iconBtn.innerHTML = "play_arrow";
       } else {
         const song = this.props.data.find(songItem => songItem.id === songId);
         this.props.onSongPlay(song);
-        iconBtn.innerHTML = "pause";
-
-        if (this.playingSong) {
-          const activeRow = this.tableBody.querySelector(
-            `[data-id="${this.playingSong}"]`
-          );
-          activeRow.querySelector(".songs-table__td_play-btn-icon").innerHTML =
-            "play_arrow";
-        }
-        this.playingSong = songId;
       }
+    }
+  }
+
+  changeStateSong(songId, isPlaying) {
+    if (isPlaying) {
+      this.playSong(songId);
+    } else {
+      this.stopSong();
     }
   }
 
@@ -198,6 +225,9 @@ export class SongsTableComponent {
   }
 
   render() {
-    return songsTableTemplate({ data: this.state.data });
+    return songsTableTemplate({
+      data: this.state.data,
+      playingSongId: this.playingSongId
+    });
   }
 }
