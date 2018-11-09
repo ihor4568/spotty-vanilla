@@ -48,6 +48,7 @@ export class MySongsComponent {
   }
 
   changeStateSong(songId, isPlaying) {
+    this.playingSongId = isPlaying ? songId : null;
     if (this.mountPoint.querySelector(".my-songs")) {
       this.table.changeStateSong(songId, isPlaying);
     }
@@ -58,16 +59,9 @@ export class MySongsComponent {
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
-      playingSongId: this.props.playingSong ? this.props.playingSong.id : null
+      playingSongId: this.playingSongId
     });
     this.table.mount();
-  }
-
-  updateProps(newProps) {
-    this.props = {
-      ...this.props,
-      ...newProps
-    };
   }
 
   mount(shouldFetchData = true) {

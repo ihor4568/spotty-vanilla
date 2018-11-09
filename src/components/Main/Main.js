@@ -15,8 +15,6 @@ export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.playingSong = null;
-    this.isPlaying = false;
   }
 
   querySelectors() {
@@ -106,9 +104,6 @@ export class MainComponent {
     }
 
     if (pathname === "songs") {
-      this.table.updateProps({
-        playingSong: this.player.isPlaying ? this.player.song : null
-      });
       this.table.mount();
       return;
     }
