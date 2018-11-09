@@ -14,7 +14,7 @@ export class AuthComponent {
 
   querySelectors() {
     this.email = this.mountPoint.querySelector(".auth__email");
-    this.password = this.mountPoint.querySelectorAll(".auth__password");
+    this.passwords = this.mountPoint.querySelectorAll(".auth__password");
     this.name = this.mountPoint.querySelector(".auth__name");
     this.next = this.mountPoint.querySelector(".auth__button");
     this.tabBar = this.mountPoint.querySelector(".auth__tab-bar");
@@ -31,7 +31,7 @@ export class AuthComponent {
 
   initMaterial() {
     this.emailPoint = new MDCTextField(this.email);
-    Array.from(this.password).forEach(el => {
+    Array.from(this.passwords).forEach(el => {
       this.passwordPoint = new MDCTextField(el);
     });
     this.namePoint = new MDCTextField(this.name);
@@ -54,7 +54,7 @@ export class AuthComponent {
   handleSignInTabClick() {
     if (!this.tabSignIn.classList.contains("auth__input--active")) {
       this.name.classList.add("auth__elem_disable");
-      this.password[1].classList.add("auth__elem_disable");
+      this.passwords[1].classList.add("auth__elem_disable");
       this.tabSignIn.classList.add("auth__input--active");
       this.tabSignUp.classList.remove("auth__input--active");
       this.next.innerText = "SIGN IN";
@@ -65,7 +65,7 @@ export class AuthComponent {
   handleSignUpTabClick() {
     if (!this.tabSignUp.classList.contains("auth__input--active")) {
       this.name.classList.remove("auth__elem_disable");
-      this.password[1].classList.remove("auth__elem_disable");
+      this.passwords[1].classList.remove("auth__elem_disable");
       this.tabSignUp.classList.add("auth__input--active");
       this.tabSignIn.classList.remove("auth__input--active");
       this.next.innerText = "SIGN UP";
