@@ -12,22 +12,23 @@
 
   &__card_shaped {
     border-radius: 50%;
+    width: 14.931%;
   }
 
   &__media {
     margin: 0.25rem;
-    display: flex;
   }
 
   &__image {
     border-radius: 50%;
+    position: absolute;
+    top: 0;
     width: 100%;
     height: 100%;
   }
 
   &__name {
-    width: 100%;
-    margin: auto;
+    margin: auto 0 auto 0;
     text-align: center;
     padding: $basic-container-gap;
     white-space: nowrap;
@@ -36,8 +37,8 @@
   }
 
   &__link {
-    width: 28.67%;
     display: flex;
+    justify-content: flex-start;
     text-decoration: none;
   }
 }
