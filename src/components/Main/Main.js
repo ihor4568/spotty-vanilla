@@ -128,7 +128,9 @@ export class MainComponent {
   }
 
   handlePlayerChangeState(songId, isPlaying) {
-    this.table.changeStateSong(songId, isPlaying);
+    if (songId) {
+      this.table.changeStateSong(songId, isPlaying);
+    }
   }
 
   mount() {
