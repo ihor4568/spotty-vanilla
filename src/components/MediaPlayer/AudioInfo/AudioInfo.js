@@ -1,9 +1,8 @@
 import audioInfoComponentHTML from "./AudioInfo.html";
 
 export class AudioInfoComponent {
-  constructor(mountPoint, props = {}) {
+  constructor(mountPoint) {
     this.mountPoint = mountPoint;
-    this.props = props;
   }
 
   querySelectors() {
@@ -12,7 +11,7 @@ export class AudioInfoComponent {
     this.albumAndArtist = document.querySelector(".audio-info__album-artist");
   }
 
-  updateInfo({ imageSrc, songName, album, artistName }) {
+  setInfo({ imageSrc, songName, album, artistName }) {
     this.img.src = imageSrc;
     this.songName.innerHTML = songName;
     this.albumAndArtist.innerHTML = `${album} - ${artistName}`;
@@ -24,11 +23,6 @@ export class AudioInfoComponent {
   }
 
   render() {
-    return audioInfoComponentHTML({
-      imageSrc: this.props.image,
-      songName: this.props.songName,
-      album: this.props.album,
-      artist: this.props.artistName
-    });
+    return audioInfoComponentHTML();
   }
 }

@@ -3,7 +3,6 @@ import { MDCRipple } from "@material/ripple";
 
 import songsTableTemplate from "./SongsTable.html";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
-import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
 
 const INITIAL_ORDER = 0;
 const ASC_ORDER = 1;
@@ -172,20 +171,12 @@ export class SongsTableComponent {
     this.state.currentOrderTypeIndex += 1;
   }
 
-  handleLegal(activeMenuItem) {
-    const target = activeMenuItem;
-    if (target) {
-      const songId = target.closest(".songs-table__row").dataset.id;
-      const song = this.props.data.find(songItem => songItem.id === songId);
-      this.licenseDialogComponent = new LicenseDialogComponent(
-        this.props.dialog,
-        {
-          licenseInfo: song.album.licenseInfo,
-          licenseURL: song.album.licenseURL
-        }
-      );
-      this.licenseDialogComponent.mount();
-    }
+  handleLegal(data) {
+    this.props.licenseDialogComponent.setInfo({
+      licenseInfo: data.album.licenseInfo,
+      licenseURL: data.album.licenseURL
+    });
+    this.props.licenseDialogComponent.handleOpen();
   }
 
   mountChildren() {
@@ -197,14 +188,17 @@ export class SongsTableComponent {
             handler: this.handleLegal.bind(this, this.state.data[i])
           },
           { name: "Remove from my songs", handler: () => {} },
-          { name: "Share", handler: this.handleShare.bind(this) }
+          {
+            name: "Share",
+            handler: this.handleShare.bind(this, this.state.data[i])
+          }
         ]
       }).mount();
     });
   }
 
-  handleShare() {
-    window.open(`/song/${this.song.id}`);
+  handleShare(data) {
+    window.open(`/song/${data.id}`);
   }
 
   initMaterial() {

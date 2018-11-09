@@ -53,7 +53,8 @@ export class MySongsComponent {
       data: this.songs,
       dialog: this.dialogPoint,
       onSongPlay: this.props.onSongPlay,
-      onSongStop: this.props.onSongStop
+      onSongStop: this.props.onSongStop,
+      licenseDialogComponent: this.props.licenseDialogComponent
     });
     this.table.mount();
   }

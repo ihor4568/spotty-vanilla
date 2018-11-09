@@ -7,14 +7,14 @@ export class MusicService {
     return database
       .ref("albums")
       .once("value")
-      .then(snapshot => Object.values(snapshot.val()).map(child => child));
+      .then(snapshot => Object.values(snapshot.val()));
   }
 
   static getAuthors() {
     return database
       .ref("authors")
       .once("value")
-      .then(snapshot => Object.values(snapshot.val()).map(child => child));
+      .then(snapshot => Object.values(snapshot.val()));
   }
 
   static getAuthorSongs(authorId) {

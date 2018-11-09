@@ -1,0 +1,54 @@
+<div class="auth">
+  <div class="mdc-tab-bar auth__tab-bar" role="tablist">
+    <div class="mdc-tab-scroller">
+      <div class="mdc-tab-scroller__scroll-area">
+        <div class="mdc-tab-scroller__scroll-content auth__scroll">
+          <button class="mdc-tab mdc-tab--active auth__tab-sign-in auth__input--active auth__tab_button" role="tab" aria-selected="true" tabindex="0">
+            <span class="mdc-tab__content">
+              <span class="mdc-tab__icon material-icons" aria-hidden="true">input</span>
+              <span class="mdc-tab__text-label">Sign In</span>
+            </span>
+            <span class="mdc-tab-indicator mdc-tab-indicator--active">
+              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+            </span>
+            <span class="mdc-tab__ripple"></span>
+          </button>
+          <button class="mdc-tab auth__tab-sign-up auth__tab_button" role="tab" aria-selected="true" tabindex="0">
+            <span class="mdc-tab__content">
+              <span class="mdc-tab__icon material-icons" aria-hidden="true">assignment</span>
+              <span class="mdc-tab__text-label">Sign Up</span>
+            </span>
+            <span class="mdc-tab-indicator">
+              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+            </span>
+            <span class="mdc-tab__ripple"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mdc-text-field auth__email">
+    <input type="email" class="mdc-text-field__input auth__input auth__input_email" required>
+    <label class="mdc-floating-label">Email</label>
+    <div class="mdc-line-ripple"></div>
+  </div>
+  <div class="mdc-text-field auth__name auth__elem_disable">
+    <input type="text" class="mdc-text-field__input auth__input auth__input_name" required>
+    <label class="mdc-floating-label">Name</label>
+    <div class="mdc-line-ripple"></div>
+  </div>
+  <div class="mdc-text-field auth__password">
+    <input type="password" class="mdc-text-field__input auth__input auth__input_password" required minlength="6">
+    <label class="mdc-floating-label">Password</label>
+    <div class="mdc-line-ripple"></div>
+  </div>
+  <div class="mdc-text-field auth__password auth__elem_disable">
+    <input type="password" class="mdc-text-field__input auth__input auth__input_confirm-password" required minlength="6">
+    <label class="mdc-floating-label">Confirm Password</label>
+    <div class="mdc-line-ripple"></div>
+  </div>
+  <div class="mdc-typography--subtitle2 auth__error"></div>
+  <div class="auth__button-container">
+    <button class="mdc-button mdc-button--raised auth__button">sign in</button>
+  </div>
+</div>
