@@ -4,14 +4,20 @@
     z-index: 2;
     position: fixed;
   }
+  &__sign-out:hover {
+    text-decoration: underline;
+  }
   &__wrapper {
     z-index: 1;
   }
   &__section {
     max-width: 100rem;
     box-sizing: border-box;
-    margin: 0 auto;
-    margin-bottom: 6.5rem;
+    margin: 0 auto 6.5rem;
+
+    &_disable {
+      margin-bottom: 0;
+    }
   }
   &__content-mount {
     height: calc(100% - 109px);
