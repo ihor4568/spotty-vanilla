@@ -26,6 +26,7 @@ export class SongsTableComponent {
     };
     this.dragElement = null;
     this.handleOrderClick = this.handleOrderClick.bind(this);
+    this.playingSongId = this.props.playingSongId;
   }
 
   fillObjectsWithNumbersAsIndices(array) {
@@ -63,19 +64,67 @@ export class SongsTableComponent {
     this.mount();
   }
 
+  playSong(songId) {
+    if (this.playingSongId) {
+      this.stopSong();
+    }
+
+    const activeRow = this.tableBody.querySelector(`[data-id="${songId}"]`);
+    if (activeRow) {
+      const activeIconBtn = activeRow.querySelector(
+        ".songs-table__td_play-btn-icon"
+      );
+
+      activeIconBtn.innerHTML = "pause";
+    }
+
+    this.playingSongId = songId;
+  }
+
+  stopSong() {
+    const activeRow = this.tableBody.querySelector(
+      `[data-id="${this.playingSongId}"]`
+    );
+
+    if (activeRow) {
+      const activeIconBtn = activeRow.querySelector(
+        ".songs-table__td_play-btn-icon"
+      );
+      activeIconBtn.innerHTML = "play_arrow";
+    }
+
+    this.playingSongId = null;
+  }
+
   handlePlayClick(e) {
     const target = e.target.closest(".songs-table__td_play-btn");
+
     if (target) {
       const songId = target.closest(".songs-table__row").dataset.id;
-      const song = this.props.data.find(songItem => songItem.id === songId);
-      this.props.onSongPlay(song);
+
+      if (songId === this.playingSongId) {
+        this.props.onSongStop();
+      } else {
+        const song = this.props.data.find(songItem => songItem.id === songId);
+        this.props.onSongPlay(song);
+      }
+    }
+  }
+
+  changeStateSong(songId, isPlaying) {
+    if (isPlaying) {
+      this.playSong(songId);
+    } else {
+      this.stopSong();
     }
   }
 
   querySelectors() {
     const { mountPoint } = this;
     this.tableHead = mountPoint.querySelector(".songs-table__head");
-    this.iconButtonRipples = mountPoint.querySelectorAll(".material-icons");
+    this.iconButtonRipples = mountPoint.querySelectorAll(
+      ".songs-table__td_play-btn"
+    );
     this.dotsMenu = mountPoint.querySelectorAll(".songs-table__td_more");
     this.orderIcon = mountPoint.querySelector(
       `.songs-table__th-icon_${this.state.columnName}`
@@ -162,8 +211,7 @@ export class SongsTableComponent {
 
   initMaterial() {
     Array.from(this.iconButtonRipples).forEach(item => {
-      const iconButtonRipple = new MDCRipple(item);
-      iconButtonRipple.unbounded = true;
+      new MDCRipple(item); // eslint-disable-line no-new
     });
   }
 
@@ -177,6 +225,9 @@ export class SongsTableComponent {
   }
 
   render() {
-    return songsTableTemplate({ data: this.state.data });
+    return songsTableTemplate({
+      data: this.state.data,
+      playingSongId: this.playingSongId
+    });
   }
 }

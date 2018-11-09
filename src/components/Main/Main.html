@@ -1,8 +1,10 @@
 <div class="main">
   <aside class="main__sidebar mdc-drawer mdc-drawer--dismissible">
     <div class="mdc-drawer__header">
-      <h3 class="mdc-drawer__title">Library</h3>
-      <h6 class="mdc-drawer__subtitle">Discover & Listen</h6>
+      <h3 class="mdc-drawer__title main__user">
+        <%= currentUser %>
+      </h3>
+      <a href="/login" class="mdc-drawer__subtitle main__sign-out">Sign Out</a>
     </div>
     <div class="mdc-drawer__content">
       <div class="mdc-list main__list">
@@ -32,9 +34,8 @@
       <div class="main__search"></div>
     </header>
     <main class="main__section main-content">
-      <div class="main__content-mount mdc-top-app-bar--fixed-adjust">
-      </div>
+      <div class="main__content-mount"></div>
     </main>
   </div>
-  <div class="main__player"></div>
+  <div class="main__player main__player_hide"></div>
 </div>
