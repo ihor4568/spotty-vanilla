@@ -173,6 +173,12 @@ export class MainComponent {
     this.player.stop();
   }
 
+  handlePlayerChangeState(songId, isPlaying) {
+    if (songId) {
+      this.table.changeStateSong(songId, isPlaying);
+    }
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -200,7 +206,8 @@ export class MainComponent {
     this.licenseDialogComponent.mount();
 
     this.player = new MediaPlayerComponent(this.playerPoint, {
-      licenseDialogComponent: this.licenseDialogComponent
+      licenseDialogComponent: this.licenseDialogComponent,
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this)
     });
     this.player.mount();
 

@@ -10,6 +10,9 @@ export class MediaPlayerComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+
+    this.song = null;
+    this.isPlaying = false;
   }
 
   querySelectors() {
@@ -39,7 +42,8 @@ export class MediaPlayerComponent {
 
   mountChildren() {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
-      audio: this.audio
+      audio: this.audio,
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this)
     });
     this.mainControlPannel.mount();
     this.audioProgressBar = new ProgressBarComponent(this.progressBar, {
@@ -73,6 +77,7 @@ export class MediaPlayerComponent {
   }
 
   setNewSong(song) {
+    this.song = song;
     this.audioInfoComponent.setInfo({
       imageSrc: song.album.imageURL,
       songName: song.name,
@@ -98,6 +103,11 @@ export class MediaPlayerComponent {
 
   stop() {
     this.mainControlPannel.stop();
+  }
+
+  handlePlayerChangeState(isPlaying) {
+    this.isPlaying = isPlaying;
+    this.props.onPlayerChangeState(this.song ? this.song.id : null, isPlaying);
   }
 
   mount() {

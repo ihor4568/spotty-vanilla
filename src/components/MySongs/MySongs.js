@@ -48,13 +48,21 @@ export class MySongsComponent {
       });
   }
 
+  changeStateSong(songId, isPlaying) {
+    this.playingSongId = isPlaying ? songId : null;
+    if (this.mountPoint.querySelector(".my-songs")) {
+      this.table.changeStateSong(songId, isPlaying);
+    }
+  }
+
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
       dialog: this.dialogPoint,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
-      licenseDialogComponent: this.props.licenseDialogComponent
+      licenseDialogComponent: this.props.licenseDialogComponent,
+      playingSongId: this.playingSongId
     });
     this.table.mount();
   }
