@@ -22,7 +22,10 @@ export class MainComponent {
 
   querySelectors() {
     this.scrollTarget = this.mountPoint.querySelector(".main__sidebar");
-    this.mainPoint = this.mountPoint.querySelector(".main__content-mount");
+    this.mainContentPoint = this.mountPoint.querySelector(
+      ".main__content-mount"
+    );
+    this.mainPoint = this.mountPoint.querySelector(".main__section");
     this.sidebarList = this.mountPoint.querySelector(".main__list");
     this.headerPoint = this.mountPoint.querySelector(".main__header");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
@@ -36,7 +39,8 @@ export class MainComponent {
     this.playerPoint.classList.add("main__elem_disable");
     this.searchPoint.classList.add("main__elem_disable");
     this.appBar.classList.add("main__app-bar_disable");
-    this.mainPoint.classList.add("main__content-mount_disable");
+    this.mainPoint.classList.add("main__section_disable");
+    this.mainContentPoint.classList.add("main__content-mount_disable");
     this.shareView.setSongId(songId);
     this.shareView.mount();
   }
@@ -45,7 +49,8 @@ export class MainComponent {
     this.playerPoint.classList.add("main__elem_disable");
     this.searchPoint.classList.add("main__elem_disable");
     this.appBar.classList.add("main__app-bar_disable");
-    this.mainPoint.classList.add("main__content-mount_disable");
+    this.mainPoint.classList.add("main__section_disable");
+    this.mainContentPoint.classList.add("main__content-mount_disable");
     this.auth.mount();
   }
 
@@ -53,7 +58,8 @@ export class MainComponent {
     this.playerPoint.classList.remove("main__elem_disable");
     this.searchPoint.classList.remove("main__elem_disable");
     this.appBar.classList.remove("main__app-bar_disable");
-    this.mainPoint.classList.remove("main__content-mount_disable");
+    this.mainPoint.classList.remove("main__section_disable");
+    this.mainContentPoint.classList.remove("main__content-mount_disable");
   }
 
   initMaterial() {
@@ -109,13 +115,13 @@ export class MainComponent {
       return;
     }
     AuthService.check().then(
-      user => this.handleGo.call(this, pathname, user),
-      () => this.handleStop.bind(this)(pathname)
+      user => this.handleGo.call(this, pathname, user.displayName),
+      this.handleStop.bind(this, pathname)
     );
   }
 
-  handleGo(pathname, user) {
-    this.userPoint.innerText = user.displayName;
+  handleGo(pathname, userName) {
+    this.userPoint.innerText = userName;
 
     if (pathname === "" || pathname === "login") {
       this.routeNavigate("/albums");
@@ -193,21 +199,21 @@ export class MainComponent {
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
 
-    this.shareView = new ShareViewComponent(this.mainPoint);
+    this.shareView = new ShareViewComponent(this.mainContentPoint);
 
-    this.auth = new AuthComponent(this.mainPoint);
+    this.auth = new AuthComponent(this.mainContentPoint);
 
-    this.about = new AboutComponent(this.mainPoint);
-    this.table = new MySongsComponent(this.mainPoint, {
+    this.about = new AboutComponent(this.mainContentPoint);
+    this.table = new MySongsComponent(this.mainContentPoint, {
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)
     });
 
-    this.albums = new AlbumsComponent(this.mainPoint);
+    this.albums = new AlbumsComponent(this.mainContentPoint);
 
-    this.notFound = new NotFoundComponent(this.mainPoint);
+    this.notFound = new NotFoundComponent(this.mainContentPoint);
 
-    this.artist = new ArtistsComponent(this.mainPoint);
+    this.artist = new ArtistsComponent(this.mainContentPoint);
   }
 
   render() {

@@ -20,8 +20,13 @@ export class AuthComponent {
     this.tabBar = this.mountPoint.querySelector(".auth__tab-bar");
     this.tabSignIn = this.mountPoint.querySelector(".auth__tab-sign-in");
     this.tabSignUp = this.mountPoint.querySelector(".auth__tab-sign-up");
-    this.input = this.mountPoint.querySelectorAll(".auth__input");
-    this.erorPoint = this.mountPoint.querySelector(".auth__eror");
+    this.errorPoint = this.mountPoint.querySelector(".auth__error");
+    this.emailInput = this.mountPoint.querySelector(".auth__input_email");
+    this.nameInput = this.mountPoint.querySelector(".auth__input_email");
+    this.passwordInput = this.mountPoint.querySelector(".auth__input_password");
+    this.confirmPasswordInput = this.mountPoint.querySelector(
+      ".auth__input_confirm-password"
+    );
   }
 
   initMaterial() {
@@ -47,57 +52,56 @@ export class AuthComponent {
   }
 
   handleSignInTabClick() {
-    if (this.tabSignIn.classList.contains("auth__input--active") === false) {
+    if (!this.tabSignIn.classList.contains("auth__input--active")) {
       this.name.classList.add("auth__elem_disable");
       this.password[1].classList.add("auth__elem_disable");
       this.tabSignIn.classList.add("auth__input--active");
       this.tabSignUp.classList.remove("auth__input--active");
-      this.input[0].value = "";
-      this.input[1].value = "";
-      this.input[2].value = "";
-      this.input[3].value = "";
-      this.erorPoint.innerText = "";
       this.next.innerText = "SIGN IN";
+      this.clearInputs();
     }
   }
 
   handleSignUpTabClick() {
-    if (this.tabSignUp.classList.contains("auth__input--active") === false) {
+    if (!this.tabSignUp.classList.contains("auth__input--active")) {
       this.name.classList.remove("auth__elem_disable");
       this.password[1].classList.remove("auth__elem_disable");
       this.tabSignUp.classList.add("auth__input--active");
       this.tabSignIn.classList.remove("auth__input--active");
-      this.input[0].value = "";
-      this.input[1].value = "";
-      this.input[2].value = "";
-      this.input[3].value = "";
-      this.erorPoint.innerText = "";
       this.next.innerText = "SIGN UP";
+      this.clearInputs();
     }
+  }
+
+  clearInputs() {
+    this.emailInput.value = "";
+    this.nameInput.value = "";
+    this.passwordInput.value = "";
+    this.confirmPasswordInput.value = "";
+    this.errorPoint.innerText = "";
   }
 
   handleNextClick() {
     if (this.next.innerText === "SIGN IN") {
-      AuthService.signIn(this.input[0].value, this.input[2].value, err =>
-        this.handleAlert.call(this, err)
+      AuthService.signIn(this.emailInput.value, this.passwordInput.value).catch(
+        this.handleAlert.bind(this)
       );
     }
     if (this.next.innerText === "SIGN UP") {
-      if (this.input[2].value === this.input[3].value) {
+      if (this.passwordInput.value === this.confirmPasswordInput.value) {
         AuthService.signUp(
-          this.input[0].value,
-          this.input[2].value,
-          this.input[1].value,
-          err => this.handleAlert.call(this, err)
-        );
+          this.emailInput.value,
+          this.nameInput.value,
+          this.passwordInput.value
+        ).catch(this.handleAlert.bind(this));
       } else {
-        this.erorPoint.innerText = "auth/passwords must be identical";
+        this.errorPoint.innerText = "Error: Passwords do not match.";
       }
     }
   }
 
   handleAlert(err) {
-    this.erorPoint.innerText = err;
+    this.errorPoint.innerText = err;
   }
 
   mount() {
