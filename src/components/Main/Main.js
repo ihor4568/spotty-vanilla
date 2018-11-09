@@ -185,6 +185,7 @@ export class MainComponent {
   handlePlayerChangeState(songId, isPlaying) {
     if (songId) {
       this.table.changeStateSong(songId, isPlaying);
+      this.albumSongs.changeStateSong(songId, isPlaying);
     }
   }
 

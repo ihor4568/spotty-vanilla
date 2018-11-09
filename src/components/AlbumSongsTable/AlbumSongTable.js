@@ -76,10 +76,19 @@ export class AlbumsSongTableComponent {
     return authors.find(author => author.id === id).name;
   }
 
+  changeStateSong(songId, isPlaying) {
+    this.playingSongId = isPlaying ? songId : null;
+    if (this.mountPoint.querySelector(".album-songs-table__container")) {
+      this.albumSongs.changeStateSong(songId, isPlaying);
+    }
+  }
+
   mountChildren() {
     this.albumSongs = new SongsTableComponent(this.albumSongsTable, {
       data: this.songs,
-      onSongPlay: this.props.onSongPlay
+      onSongPlay: this.props.onSongPlay,
+      onSongStop: this.props.onSongStop,
+      playingSongId: this.playingSongId
     });
     this.albumSongs.mount();
   }
@@ -93,6 +102,7 @@ export class AlbumsSongTableComponent {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.mountChildren();
+    this.changeStateSong();
   }
 
   render() {
