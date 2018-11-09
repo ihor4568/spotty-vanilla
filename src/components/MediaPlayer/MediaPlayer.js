@@ -80,12 +80,8 @@ export class MediaPlayerComponent {
     this.dotsMenu.mount();
   }
 
-  handleShare(activeMenuItem) {
-    const target = activeMenuItem;
-    if (target) {
-      const songId = target.closest(".media-player").dataset.id;
-      window.open(`/song/${songId}`);
-    }
+  handleShare() {
+    window.open(`/song/${this.song.id}`);
   }
 
   handleLegal() {
@@ -102,14 +98,15 @@ export class MediaPlayerComponent {
       songName: song.name,
       album: song.album.name,
       songId: song.id,
+      // licenseInfo: song.album.licenseInfo,
+      // licenseURL: song.album.licenseURL,
       artistName: song.authorsInfo.map(author => author.name).join(", ")
     });
 
     if (song.songURL !== this.audio.src) {
       this.audio.src = song.songURL;
     }
-
-    this.wrapper.setAttribute("data-id", `${song.id}`);
+    this.song = song;
     this.mainControlPannel.play();
   }
 

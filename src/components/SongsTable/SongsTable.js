@@ -189,10 +189,13 @@ export class SongsTableComponent {
   }
 
   mountChildren() {
-    Array.from(this.dotsMenu).forEach(item => {
+    Array.from(this.dotsMenu).forEach((item, i) => {
       new DotsMenuComponent(item, {
         items: [
-          { name: "Legal info", handler: this.handleLegal.bind(this) },
+          {
+            name: "Legal info",
+            handler: this.handleLegal.bind(this, this.state.data[i])
+          },
           { name: "Remove from my songs", handler: () => {} },
           { name: "Share", handler: this.handleShare.bind(this) }
         ]
@@ -200,12 +203,8 @@ export class SongsTableComponent {
     });
   }
 
-  handleShare(activeMenuItem) {
-    const target = activeMenuItem;
-    if (target) {
-      const songId = target.closest(".songs-table__row").dataset.id;
-      window.open(`/song/${songId}`);
-    }
+  handleShare() {
+    window.open(`/song/${this.song.id}`);
   }
 
   initMaterial() {
