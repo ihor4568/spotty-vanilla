@@ -60,12 +60,7 @@ export class MediaPlayerComponent {
       audio: this.audio
     });
     this.audioProgressBar.mount();
-    this.audioInfoComponent = new AudioInfoComponent(this.audioInfo, {
-      image: SONG_INFO.songImageSrc,
-      songName: SONG_INFO.songName,
-      album: SONG_INFO.album,
-      artistName: SONG_INFO.artistName
-    });
+    this.audioInfoComponent = new AudioInfoComponent(this.audioInfo);
     this.audioInfoComponent.mount();
     this.audioRatingComponent = new RatingComponent(this.audioRating);
     this.audioRatingComponent.mount();
@@ -105,10 +100,10 @@ export class MediaPlayerComponent {
 
     this.mainControlPannel.play();
 
-    this.showHidePlayer();
+    this.showPlayer();
   }
 
-  showHidePlayer() {
+  showPlayer() {
     if (this.audio.play) {
       this.mountPoint.classList.remove("main__player_hide");
     }
