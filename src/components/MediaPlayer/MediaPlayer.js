@@ -104,6 +104,14 @@ export class MediaPlayerComponent {
     }
 
     this.mainControlPannel.play();
+
+    this.showHidePlayer();
+  }
+
+  showHidePlayer() {
+    if (this.audio.play) {
+      this.mountPoint.classList.remove("main__player_hide");
+    }
   }
 
   stop() {

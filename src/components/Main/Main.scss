@@ -40,6 +40,10 @@
     bottom: 0;
     width: 100%;
     z-index: 3;
+    transition: all 0.6s ease-in-out;
+    &_hide {
+      bottom: -20rem;
+    }
   }
   &__elem_disable {
     display: none;
