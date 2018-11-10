@@ -10,7 +10,6 @@ export class MediaPlayerComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-
     this.song = null;
     this.isPlaying = false;
   }

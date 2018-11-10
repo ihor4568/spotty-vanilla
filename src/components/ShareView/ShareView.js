@@ -6,7 +6,6 @@ export class ShareViewComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.title = {};
     this.tile = {
       songName: {},
       imageURL: {},
