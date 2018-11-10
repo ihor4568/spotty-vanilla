@@ -45,15 +45,14 @@ $color: red;
   @include mdc-card-fill-color($dark-1);
 }
 
-.dots-menu {
+.dots-menu__button {
   @include mdc-menu-surface-ink-color($font-grey-4);
 }
 
-.mdc-menu-surface {
+.dots-menu__list {
   @include mdc-menu-surface-fill-color($font-grey-5);
 }
 
-.mdc-list {
+.dots-menu__item {
   @include mdc-list-item-primary-text-ink-color($font-white-2);
-  @include mdc-list-group-subheader-ink-color($color);
 }
