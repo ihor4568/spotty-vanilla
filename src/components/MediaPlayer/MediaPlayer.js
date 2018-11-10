@@ -16,7 +16,6 @@ export class MediaPlayerComponent {
   }
 
   querySelectors() {
-    this.wrapper = this.mountPoint.querySelector(".media-player");
     this.audio = this.mountPoint.querySelector(".media-player__main-audio");
     this.buttons = this.mountPoint.querySelector(".media-player__buttons");
     this.progressBar = this.mountPoint.querySelector(
@@ -68,11 +67,11 @@ export class MediaPlayerComponent {
   }
 
   handleLegal() {
-    this.props.licenseDialogComponent.setInfo({
+    this.props.dialogGetInfo({
       licenseInfo: this.song.album.licenseInfo,
       licenseURL: this.song.album.licenseURL
     });
-    this.props.licenseDialogComponent.handleOpen();
+    this.props.dialogOpen();
   }
 
   setNewSong(song) {
@@ -81,7 +80,6 @@ export class MediaPlayerComponent {
       imageSrc: song.album.imageURL,
       songName: song.name,
       album: song.album.name,
-      songId: song.id,
       artistName: song.authorsInfo.map(author => author.name).join(", ")
     });
 

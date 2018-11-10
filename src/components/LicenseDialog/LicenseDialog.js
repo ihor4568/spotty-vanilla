@@ -2,9 +2,8 @@ import { MDCDialog } from "@material/dialog";
 import licenseDialogTemplate from "./LicenseDialog.html";
 
 export class LicenseDialogComponent {
-  constructor(mountPoint, props = {}) {
+  constructor(mountPoint) {
     this.mountPoint = mountPoint;
-    this.props = props;
   }
 
   querySelectors() {

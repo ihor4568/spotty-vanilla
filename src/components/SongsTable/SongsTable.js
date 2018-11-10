@@ -199,11 +199,11 @@ export class SongsTableComponent {
   }
 
   handleLegal(data) {
-    this.props.licenseDialogComponent.setInfo({
+    this.props.dialogGetInfo({
       licenseInfo: data.album.licenseInfo,
       licenseURL: data.album.licenseURL
     });
-    this.props.licenseDialogComponent.handleOpen();
+    this.props.dialogOpen();
   }
 
   mountChildren() {

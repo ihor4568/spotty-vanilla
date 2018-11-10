@@ -179,6 +179,14 @@ export class MainComponent {
     }
   }
 
+  handleDialogOpen() {
+    this.licenseDialogComponent.handleOpen();
+  }
+
+  handleSetInfo(info) {
+    this.licenseDialogComponent.setInfo(info);
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -206,8 +214,9 @@ export class MainComponent {
     this.licenseDialogComponent.mount();
 
     this.player = new MediaPlayerComponent(this.playerPoint, {
-      licenseDialogComponent: this.licenseDialogComponent,
-      onPlayerChangeState: this.handlePlayerChangeState.bind(this)
+      dialogOpen: this.handleDialogOpen.bind(this),
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
+      dialogGetInfo: this.handleSetInfo.bind(this)
     });
     this.player.mount();
 
@@ -222,7 +231,8 @@ export class MainComponent {
     this.table = new MySongsComponent(this.mainContentPoint, {
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this),
-      licenseDialogComponent: this.licenseDialogComponent
+      dialogOpen: this.handleDialogOpen.bind(this),
+      dialogGetInfo: this.handleSetInfo.bind(this)
     });
 
     this.albums = new AlbumsComponent(this.mainContentPoint);

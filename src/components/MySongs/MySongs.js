@@ -57,10 +57,10 @@ export class MySongsComponent {
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
-      dialog: this.dialogPoint,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
-      licenseDialogComponent: this.props.licenseDialogComponent,
+      dialogOpen: this.props.dialogOpen,
+      dialogGetInfo: this.props.dialogGetInfo,
       playingSongId: this.playingSongId
     });
     this.table.mount();
