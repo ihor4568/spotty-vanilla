@@ -1,5 +1,5 @@
 import { MDCDrawer } from "@material/drawer";
-
+import { MDCSwitch } from "@material/switch";
 import { AuthService } from "../../services/AuthService";
 
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
@@ -67,6 +67,7 @@ export class MainComponent {
     this.drawer = MDCDrawer.attachTo(
       this.mountPoint.querySelector(".main__sidebar")
     );
+    this.switch = new MDCSwitch(this.mountPoint.querySelector(".mdc-switch"));
   }
 
   addEventListeners() {

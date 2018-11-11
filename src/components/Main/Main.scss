@@ -4,6 +4,11 @@
     z-index: 2;
     position: fixed;
   }
+  &__switch {
+    margin-left: 2rem;
+    @include mdc-switch-toggled-on-color(#ffffff);
+    @include mdc-switch-toggled-off-color(#878787);
+  }
   &__sign-out:hover {
     text-decoration: underline;
   }
