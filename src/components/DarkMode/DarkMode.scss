@@ -35,7 +35,8 @@ $color: red;
   @include mdc-card-fill-color($dark-1);
 }
 
-.artists__card {
+.artists__card,
+.artist__card {
   @include mdc-card-fill-color($background);
 }
 

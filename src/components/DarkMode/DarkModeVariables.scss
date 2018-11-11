@@ -6,12 +6,7 @@ $dark-hover: hsla(0, 0%, 53%, 0.4); /*hover item*/
 $dark-icon: hsla(0, 0%, 53%, 1); /*slider icon*/
 
 $font-white-1: hsla(0, 0%, 100%, 1); /*main white*/
-$font-white-2: hsla(
-  0,
-  0%,
-  100%,
-  0.88
-); /*main font. video name, left slide items name*/
+$font-white-2: hsla(0, 0%, 100%, 0.88); /*video name, left slide items name*/
 
 $font-grey-1: hsla(0, 0%, 100%, 0.6); /*left menu heading*/
 $font-grey-2: hsla(0, 0%, 53%, 1); /*video description. subtitle*/
@@ -24,7 +19,7 @@ $mdc-typography-styles-headline4: (
 ); /*$font-white-2*/
 
 $mdc-typography-styles-headline6: (
-  color: $font-grey-2
+  color: green
 ); /*$font-grey-2*/
 
 $mdc-typography-styles-body1: (
