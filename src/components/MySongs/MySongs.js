@@ -29,7 +29,7 @@ export class MySongsComponent {
   }
 
   fetchSongs() {
-    MusicService.getAlbumSongs(this.props.albumId)
+    MusicService.getAlbumSongs("album3")
       .then(songs => {
         this.songs = songs;
 
@@ -47,27 +47,33 @@ export class MySongsComponent {
       });
   }
 
+  changeStateSong(songId, isPlaying) {
+    this.playingSongId = isPlaying ? songId : null;
+    if (this.mountPoint.querySelector(".my-songs")) {
+      this.table.changeStateSong(songId, isPlaying);
+    }
+  }
+
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
-      onSongStop: this.props.onSongStop
+      onSongStop: this.props.onSongStop,
+      playingSongId: this.playingSongId
     });
     this.table.mount();
   }
 
   mount(shouldFetchData = true) {
-    this.mountPoint.innerHTML = this.render();
-    if (this.props.albumId) {
-      if (shouldFetchData) {
-        this.fetchSongs();
-      }
-      this.querySelectors();
-      this.mountChildren();
+    if (shouldFetchData) {
+      this.fetchSongs();
     }
+    this.mountPoint.innerHTML = this.render();
+    this.querySelectors();
+    this.mountChildren();
   }
 
   render() {
-    return mySongs(this.props);
+    return mySongs();
   }
 }

@@ -8,6 +8,7 @@ import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
 import playerTemplate from "./MediaPlayer.html";
 
 const SONG_INFO = {
+  id: "song0",
   songSrc:
     "https://storage.mp3cc.biz/download/89035703/U2hXUUsxUTVxellvRHcrQTNaNUdIM0drb2J3dWhaNjNacXRmdGU5bGZtN3pMcHdUNnhicmozMDlHcHBnRHNZRTZoSEJzMldvQTl1SGk1TjU2VFJyK0dHOUFiMUZVZzBYVTQ2NU8xVEwxZjlLbmZtaWlZQk1TVE1MVDBleThqdVg/jazzamor-jazzamor-je-t-aime_(mp3CC.biz).mp3",
   songImageSrc:
@@ -25,6 +26,9 @@ export class MediaPlayerComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+
+    this.song = null;
+    this.isPlaying = false;
   }
 
   querySelectors() {
@@ -53,19 +57,15 @@ export class MediaPlayerComponent {
 
   mountChildren() {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
-      audio: this.audio
+      audio: this.audio,
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this)
     });
     this.mainControlPannel.mount();
     this.audioProgressBar = new ProgressBarComponent(this.progressBar, {
       audio: this.audio
     });
     this.audioProgressBar.mount();
-    this.audioInfoComponent = new AudioInfoComponent(this.audioInfo, {
-      image: SONG_INFO.songImageSrc,
-      songName: SONG_INFO.songName,
-      album: SONG_INFO.album,
-      artistName: SONG_INFO.artistName
-    });
+    this.audioInfoComponent = new AudioInfoComponent(this.audioInfo);
     this.audioInfoComponent.mount();
     this.audioRatingComponent = new RatingComponent(this.audioRating);
     this.audioRatingComponent.mount();
@@ -85,13 +85,14 @@ export class MediaPlayerComponent {
 
   handleLegal() {
     this.licenseDialogComponent = new LicenseDialogComponent(this.dialogPoint, {
-      licenseInfo: SONG_INFO.licenseInfo,
+      licenseInfo: SONG_INFO.licenseInfo, // TODO
       licenseURL: SONG_INFO.licenseURL
     });
     this.licenseDialogComponent.mount();
   }
 
   setNewSong(song) {
+    this.song = song;
     this.audioInfoComponent.updateInfo({
       imageSrc: song.album.imageURL,
       songName: song.name,
@@ -104,10 +105,23 @@ export class MediaPlayerComponent {
     }
 
     this.mainControlPannel.play();
+
+    this.showPlayer();
+  }
+
+  showPlayer() {
+    if (this.audio.play) {
+      this.mountPoint.classList.remove("main__player_hide");
+    }
   }
 
   stop() {
     this.mainControlPannel.stop();
+  }
+
+  handlePlayerChangeState(isPlaying) {
+    this.isPlaying = isPlaying;
+    this.props.onPlayerChangeState(this.song ? this.song.id : null, isPlaying);
   }
 
   mount() {
@@ -117,8 +131,6 @@ export class MediaPlayerComponent {
   }
 
   render() {
-    return playerTemplate({
-      src: SONG_INFO.songSrc
-    });
+    return playerTemplate();
   }
 }

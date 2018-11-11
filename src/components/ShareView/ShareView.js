@@ -24,7 +24,8 @@ export class ShareViewComponent {
   }
 
   initMaterial() {
-    this.cardRipple = new MDCRipple(this.shareViewRiplePoint);
+    // eslint-disable-next-line no-new
+    new MDCRipple(this.shareViewRiplePoint);
   }
 
   mount() {
