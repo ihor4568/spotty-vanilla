@@ -6,10 +6,15 @@ $dark-hover: hsla(0, 0%, 53%, 0.4); /*hover item*/
 $dark-icon: hsla(0, 0%, 53%, 1); /*slider icon*/
 
 $font-white-1: hsla(0, 0%, 100%, 1); /*main white*/
-$font-white-2: hsla(0, 0%, 100%, 0.88); /*main font. video name*/
+$font-white-2: hsla(
+  0,
+  0%,
+  100%,
+  0.88
+); /*main font. video name, left slide items name*/
 
 $font-grey-1: hsla(0, 0%, 100%, 0.6); /*left menu heading*/
-$font-grey-2: hsla(0, 0%, 100%, 0.74); /*video description. subtitle*/
+$font-grey-2: hsla(0, 0%, 53%, 1); /*video description. subtitle*/
 $font-grey-3: hsla(0, 0%, 60%, 1); /*search pllaceholder*/
 $font-grey-4: hsla(0, 0%, 100, 0.5); /*search icon*/
 $font-grey-5: hsla(0, 0%, 18%, 1); /*dividers*/

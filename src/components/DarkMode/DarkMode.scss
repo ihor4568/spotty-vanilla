@@ -16,10 +16,6 @@ $color: red;
     @include mdc-drawer-divider-color($font-grey-5);
   }
 
-  &__list-item:hover {
-    @include mdc-drawer-item-icon-ink-color(red);
-  }
-
   &__app-bar {
     @include mdc-top-app-bar-ink-color($font-white-1);
     @include mdc-top-app-bar-icon-ink-color($font-white-1);
@@ -61,19 +57,35 @@ $color: red;
   background-color: $dark-2;
 
   &__head {
-    background-color: $dark-selected; /*$dark-1*/
+    background-color: $dark-selected;
   }
 
   &__th-field {
     color: $font-white-2;
   }
 
-  /*&__th_duration_icon {
-    color: ;
-  }*/
+  &__th_duration_icon {
+    color: $dark-icon;
+  }
 
   &__row:hover {
     background-color: $dark-hover;
+  }
+
+  &__td_play-btn {
+    @include mdc-icon-button-ink-color($dark-selected);
+  }
+
+  &__td_play-btn-icon {
+    @include mdc-button-ink-color($dark-icon);
+  }
+
+  &__td_number,
+  &__td_name,
+  &__td_duration,
+  &__td_Author,
+  &__td_album {
+    color: $font-white-2;
   }
 }
 
@@ -90,7 +102,3 @@ $color: red;
     @include mdc-typography(headline6);
   }
 */
-
-.mdc-list-item__text:hover {
-  color: green;
-}
