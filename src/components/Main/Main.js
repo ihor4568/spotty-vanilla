@@ -214,8 +214,7 @@ export class MainComponent {
     this.about = new AboutComponent(this.mainContentPoint);
     this.table = new MySongsComponent(this.mainContentPoint, {
       onSongPlay: this.handleSongPlay.bind(this),
-      onSongStop: this.handleSongStop.bind(this),
-      albumId: ""
+      onSongStop: this.handleSongStop.bind(this)
     });
 
     this.albums = new AlbumsComponent(this.mainContentPoint);
