@@ -4,6 +4,19 @@
 $color: green;
 
 .auth {
+  &__email,
+  &__name,
+  &__password {
+    @include mdc-text-field-fill-color($background);
+  }
+
+  @include mdc-text-field-ink-color($font-white-2);
+  @include mdc-text-field-label-color($font-grey-3);
+  @include mdc-text-field-caret-color($font-white-2);
+  @include mdc-text-field-bottom-line-color($font-grey-5);
+  @include mdc-text-field-hover-bottom-line-color($dark-hover);
+  @include mdc-text-field-line-ripple-color($dark-selected);
+
   &__tab-bar {
     @include mdc-tab-text-label-color($font-white-2);
     @include mdc-tab-icon-color($dark-icon);
@@ -11,10 +24,15 @@ $color: green;
 
   &__tab-indicator {
     @include mdc-tab-indicator-underline-color($font-grey-5);
-    @include mdc-tab-indicator-icon-color($color);
   }
 
-  &__tab_button {
+  &__button {
+    @include mdc-button-container-fill-color($dark-selected);
+    @include mdc-button-ink-color($font-white-2);
+  }
+
+  &__ripple {
+    @include mdc-states($dark-hover);
   }
 }
 
