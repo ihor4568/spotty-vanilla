@@ -1,5 +1,5 @@
 <div class="albums">
-  <h2 class="albums__heading mdc-typography--headline4">Albums</h2>
+  <h2 class="albums__heading-4 mdc-typography--headline4">Albums</h2>
   <div class="albums__container">
     <%  albums.forEach( album => {%>
     <div class="albums__card-container responsive-grid">
@@ -12,10 +12,10 @@
               </div>
             </div>
             <div class="albums__card-description">
-              <h2 class="albums__card-album mdc-typography--headline6">
+              <h2 class="albums__card-album albums__heading-2 mdc-typography--headline6">
                 <%= album.name %>
               </h2>
-              <h3 class="albums__card-artist mdc-typography--subtitle2">
+              <h3 class="albums__card-artist albums__heading-3 mdc-typography--subtitle2">
                 by
                 <%= album.authors %>
               </h3>

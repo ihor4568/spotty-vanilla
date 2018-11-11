@@ -19,7 +19,7 @@ $color: green;
 
   &__tab-bar {
     @include mdc-tab-text-label-color($font-white-2);
-    @include mdc-tab-icon-color($dark-icon);
+    @include mdc-tab-icon-color($font-grey-2);
   }
 
   &__tab-indicator {
@@ -41,7 +41,7 @@ $color: green;
     @include mdc-drawer-surface-fill-color($dark-2);
     @include mdc-drawer-title-ink-color($font-grey-1);
     @include mdc-drawer-subtitle-ink-color($font-white-2);
-    @include mdc-drawer-item-icon-ink-color($dark-icon);
+    @include mdc-drawer-item-icon-ink-color($font-grey-2);
     @include mdc-drawer-item-text-ink-color($font-white-2);
     @include mdc-drawer-item-activated-icon-ink-color($font-grey-2);
     @include mdc-drawer-item-activated-text-ink-color($font-white-2);
@@ -64,13 +64,100 @@ $color: green;
   @include mdc-text-field-icon-color($font-grey-4, $styleSecondIcon: false);
 }
 
-.albums__card {
-  @include mdc-card-fill-color($dark-1);
+.my-songs {
+  &__heading {
+    color: $font-white-2;
+  }
 }
 
-.artists__card,
-.artist__card {
-  @include mdc-card-fill-color($background);
+.songs-table {
+  background-color: $dark-2;
+
+  &__head {
+    background-color: $dark-selected;
+  }
+
+  &__th-field {
+    color: $font-white-2;
+  }
+
+  &__th_duration_icon {
+    color: $font-grey-2;
+  }
+
+  &__row:hover {
+    background-color: $dark-hover;
+  }
+
+  &__td_play-btn {
+    @include mdc-icon-button-ink-color($dark-selected);
+  }
+
+  &__td_play-btn-icon {
+    @include mdc-button-ink-color($font-grey-2);
+  }
+
+  &__td_number,
+  &__td_name,
+  &__td_duration,
+  &__td_Author,
+  &__td_album {
+    color: $font-white-2;
+  }
+}
+
+.albums {
+  &__heading-2,
+  &__heading-4 {
+    color: $font-white-2;
+  }
+
+  &__heading-3 {
+    color: $font-grey-2;
+  }
+
+  &__card {
+    @include mdc-card-fill-color($dark-1);
+  }
+}
+
+.artists {
+  &__heading,
+  &__name {
+    color: $font-white-2;
+  }
+
+  &__card {
+    @include mdc-card-fill-color($background);
+  }
+}
+
+.about {
+  &__heading {
+    color: $font-white-2;
+  }
+
+  &__text {
+    color: $font-grey-2;
+  }
+
+  &__subtitle {
+    color: $font-white-2;
+  }
+
+  &__link {
+    color: $font-white-1;
+  }
+}
+
+.artist {
+  &__name {
+    color: $font-white-2;
+  }
+
+  &__card {
+    @include mdc-card-fill-color($background);
+  }
 }
 
 .dots-menu {
@@ -87,56 +174,6 @@ $color: green;
   }
 }
 
-.songs-table {
-  background-color: $dark-2;
-
-  &__head {
-    background-color: $dark-selected;
-  }
-
-  &__th-field {
-    color: $font-white-2;
-  }
-
-  &__th_duration_icon {
-    color: $dark-icon;
-  }
-
-  &__row:hover {
-    background-color: $dark-hover;
-  }
-
-  &__td_play-btn {
-    @include mdc-icon-button-ink-color($dark-selected);
-  }
-
-  &__td_play-btn-icon {
-    @include mdc-button-ink-color($dark-icon);
-  }
-
-  &__td_number,
-  &__td_name,
-  &__td_duration,
-  &__td_Author,
-  &__td_album {
-    color: $font-white-2;
-  }
-}
-
 .media-player {
   background-color: $dark-1;
 }
-
-/*
-.about__heading {
-  @include mdc-typography(headline4);
-}
-
-.about__text {
-  @include mdc-typography(body1);
-}
-
-.about__subtitle {
-    @include mdc-typography(headline6);
-  }
-*/

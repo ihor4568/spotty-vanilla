@@ -3,7 +3,6 @@ $dark-1: hsla(0, 0%, 14%, 1); /*top bar*/
 $dark-2: hsla(0, 0%, 11%, 1); /*left menu slider*/
 $dark-selected: hsla(0, 0%, 100%, 0.1); /*selected item*/
 $dark-hover: hsla(0, 0%, 53%, 0.4); /*hover item*/
-$dark-icon: hsla(0, 0%, 53%, 1); /*slider icon*/
 
 $font-white-1: hsla(0, 0%, 100%, 1); /*main white*/
 $font-white-2: hsla(0, 0%, 100%, 0.88); /*video name, left slide items name*/
@@ -13,19 +12,3 @@ $font-grey-2: hsla(0, 0%, 53%, 1); /*video description. subtitle*/
 $font-grey-3: hsla(0, 0%, 60%, 1); /*search pllaceholder*/
 $font-grey-4: hsla(0, 0%, 100, 0.5); /*search icon*/
 $font-grey-5: hsla(0, 0%, 18%, 1); /*dividers*/
-
-$mdc-typography-styles-headline4: (
-  color: $font-white-2
-);
-
-$mdc-typography-styles-headline6: (
-  color: $font-white-2
-);
-
-$mdc-typography-styles-body1: (
-  color: red
-);
-
-$mdc-typography-styles-subtitle2: (
-  color: blue
-);
