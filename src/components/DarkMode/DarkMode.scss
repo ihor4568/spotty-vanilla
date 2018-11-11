@@ -1,36 +1,30 @@
-$background: hsla(0, 0%, 7%, 1); /*main background*/
-$dark-1: hsla(0, 0%, 14%, 1); /*top bar*/
-$dark-2: hsla(0, 0%, 11%, 1); /*left menu slider*/
-$dark-selected: hsla(0, 0%, 100%, 0.1); /*selected item*/
-$dark-hover: hsla(0, 0%, 53%, 0.4); /*hover item*/
-
-$font-white-1: hsla(0, 0%, 100%, 1); /*main white*/
-$font-white-2: hsla(0, 0%, 100%, 0.88); /*main font. video name*/
-
-$font-grey-1: hsla(0, 0%, 100%, 0.6); /*left menu heading*/
-$font-grey-2: hsla(0, 0%, 100%, 0.74); /*video description. subtitle*/
-$font-grey-3: hsla(0, 0%, 60%, 1); /*search pllaceholder*/
-$font-grey-4: hsla(0, 0%, 100, 0.5); /*search icon*/
-$font-grey-5: hsla(0, 0%, 18%, 1); /*dividers*/
-
+.page {
+  background-color: hsla(0, 0%, 7%, 1);
+}
 $color: red;
 
-.main__sidebar {
-  @include mdc-drawer-surface-fill-color($dark-2);
-  @include mdc-drawer-title-ink-color($font-grey-1);
-  @include mdc-drawer-subtitle-ink-color($font-white-2);
-  @include mdc-drawer-item-icon-ink-color($font-grey-2);
-  @include mdc-drawer-item-text-ink-color($font-white-2);
-  @include mdc-drawer-item-activated-icon-ink-color($font-grey-2);
-  @include mdc-drawer-item-activated-text-ink-color($font-white-2);
-  @include mdc-drawer-activated-overlay-color($dark-selected);
-  @include mdc-drawer-divider-color($font-grey-5);
-}
+.main {
+  &__sidebar {
+    @include mdc-drawer-surface-fill-color($dark-2);
+    @include mdc-drawer-title-ink-color($font-grey-1);
+    @include mdc-drawer-subtitle-ink-color($font-white-2);
+    @include mdc-drawer-item-icon-ink-color($dark-icon);
+    @include mdc-drawer-item-text-ink-color($font-white-2);
+    @include mdc-drawer-item-activated-icon-ink-color($font-grey-2);
+    @include mdc-drawer-item-activated-text-ink-color($font-white-2);
+    @include mdc-drawer-activated-overlay-color($dark-selected);
+    @include mdc-drawer-divider-color($font-grey-5);
+  }
 
-.main__app-bar {
-  @include mdc-top-app-bar-ink-color($font-white-1);
-  @include mdc-top-app-bar-icon-ink-color($font-white-1);
-  @include mdc-top-app-bar-fill-color($dark-1);
+  &__list-item:hover {
+    @include mdc-drawer-item-icon-ink-color(red);
+  }
+
+  &__app-bar {
+    @include mdc-top-app-bar-ink-color($font-white-1);
+    @include mdc-top-app-bar-icon-ink-color($font-white-1);
+    @include mdc-top-app-bar-fill-color($dark-1);
+  }
 }
 
 .search {
@@ -45,14 +39,58 @@ $color: red;
   @include mdc-card-fill-color($dark-1);
 }
 
-.dots-menu__button {
-  @include mdc-menu-surface-ink-color($font-grey-4);
+.artists__card {
+  @include mdc-card-fill-color($background);
 }
 
-.dots-menu__list {
-  @include mdc-menu-surface-fill-color($font-grey-5);
+.dots-menu {
+  &__holder {
+    @include mdc-menu-surface-fill-color($font-grey-5);
+  }
+
+  &__item {
+    @include mdc-list-item-primary-text-ink-color($font-white-2);
+  }
+
+  &__button {
+    @include mdc-menu-surface-ink-color($font-grey-4);
+  }
 }
 
-.dots-menu__item {
-  @include mdc-list-item-primary-text-ink-color($font-white-2);
+.songs-table {
+  background-color: $dark-2;
+
+  &__head {
+    background-color: $dark-selected; /*$dark-1*/
+  }
+
+  &__th-field {
+    color: $font-white-2;
+  }
+
+  /*&__th_duration_icon {
+    color: ;
+  }*/
+
+  &__row:hover {
+    background-color: $dark-hover;
+  }
+}
+
+/*
+.about__heading {
+  @include mdc-typography(headline4);
+}
+
+.about__text {
+  @include mdc-typography(body1);
+}
+
+.about__subtitle {
+    @include mdc-typography(headline6);
+  }
+*/
+
+.mdc-list-item__text:hover {
+  color: green;
 }
