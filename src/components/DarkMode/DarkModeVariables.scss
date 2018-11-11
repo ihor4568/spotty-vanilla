@@ -15,13 +15,17 @@ $font-grey-4: hsla(0, 0%, 100, 0.5); /*search icon*/
 $font-grey-5: hsla(0, 0%, 18%, 1); /*dividers*/
 
 $mdc-typography-styles-headline4: (
-  color: red
-); /*$font-white-2*/
+  color: $font-white-2
+);
 
 $mdc-typography-styles-headline6: (
-  color: green
-); /*$font-grey-2*/
+  color: $font-white-2
+);
 
 $mdc-typography-styles-body1: (
+  color: red
+);
+
+$mdc-typography-styles-subtitle2: (
   color: blue
-); /*$font-grey-2*/
+);

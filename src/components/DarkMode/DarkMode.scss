@@ -1,7 +1,22 @@
 .page {
   background-color: hsla(0, 0%, 7%, 1);
 }
-$color: red;
+$color: green;
+
+.auth {
+  &__tab-bar {
+    @include mdc-tab-text-label-color($font-white-2);
+    @include mdc-tab-icon-color($dark-icon);
+  }
+
+  &__tab-indicator {
+    @include mdc-tab-indicator-underline-color($font-grey-5);
+    @include mdc-tab-indicator-icon-color($color);
+  }
+
+  &__tab_button {
+  }
+}
 
 .main {
   &__sidebar {
