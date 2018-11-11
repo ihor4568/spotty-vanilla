@@ -15,13 +15,13 @@ export class ShareViewComponent {
 
   async setSongId(songId) {
     MusicService.getSongById(songId).then(async song => {
-      let tempArray = [];
       this.tile.songName = song.name;
       this.tile.imageURL = await MusicService.getAlbumById(song.albumId).then(
         album => album.imageURL
       );
-      tempArray = await MusicService.getAuthorNameFromId(song.authors);
-      this.tile.authors = tempArray.join(", ");
+      this.tile.authors = (await MusicService.getAuthorNameFromId(
+        song.authors
+      )).join(", ");
       this.mount(this.tile);
     });
   }
