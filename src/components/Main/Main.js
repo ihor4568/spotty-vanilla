@@ -12,8 +12,8 @@ import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
 import { NotFoundComponent } from "../NotFound/NotFound";
-import mainTemplate from "./Main.html";
 import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
+import mainTemplate from "./Main.html";
 
 export class MainComponent {
   constructor(mountPoint, props = {}) {
