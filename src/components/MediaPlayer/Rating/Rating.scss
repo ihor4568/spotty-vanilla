@@ -1,0 +1,28 @@
+.audio-rating {
+  &__stars {
+    vertical-align: top;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    user-select: none;
+  }
+  &__stars::before {
+    display: none;
+  }
+  &__star {
+    padding: 0.125rem;
+    color: orange;
+    cursor: pointer;
+  }
+  &__star:before {
+    content: "\e83a";
+  }
+  &__star:hover:before,
+  &__star_selected:before {
+    content: "\e838";
+  }
+  &__star:hover ~ &__star:before,
+  &__star_selected ~ &__star:before {
+    content: "\e838";
+  }
+}

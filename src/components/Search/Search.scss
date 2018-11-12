@@ -1,0 +1,10 @@
+.search {
+  @include mdc-text-field-label-color(#c0c0c0);
+  @include mdc-text-field-fill-color(white);
+  border-radius: 2rem;
+  height: 2.5rem;
+  width: 13rem;
+  &__icon {
+    height: 1rem;
+  }
+}

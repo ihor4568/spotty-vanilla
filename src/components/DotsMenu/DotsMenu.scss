@@ -1,0 +1,12 @@
+.dots-menu {
+  &__button {
+    @include mdc-icon-button-size(2.5rem, 2.5rem, 0);
+    font-size: 2rem;
+  }
+  &__holder {
+    min-width: 15rem;
+  }
+  &__item {
+    cursor: pointer;
+  }
+}

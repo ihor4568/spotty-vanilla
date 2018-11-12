@@ -1,0 +1,30 @@
+<section class="about">
+  <div class="about__content">
+    <h2 class="about__heading mdc-typography--headline4">About</h2>
+    <p class="about__text mdc-typography--body1">
+      This app is for people who really like music. Here it’s easy to find the
+      right music for every moment - just open and listen to your favourite
+      songs. You have a few options to find music on our service. Also you can
+      create your own playlist. Our service is completely free to use.
+    </p>
+    <h4 class="about__subtitle mdc-typography--headline6">
+      It is developed by:
+    </h4>
+    <div class="about__links">
+      <% developers.forEach(item => { %>
+      <a
+        href="https://github.com/<%= item %>"
+        class="about__link mdc-typography--body1"
+        target="_blank"
+      >
+        <img
+          src="https://github.com/<%= item %>.png?size=60"
+          class="about__img "
+          alt=""
+        />
+        <span> <%= item %></span>
+      </a>
+      <% }); %>
+    </div>
+  </div>
+</section>

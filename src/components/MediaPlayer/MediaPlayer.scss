@@ -1,0 +1,25 @@
+@import "./MainControl/MainControl";
+@import "./ProgressBar/ProgressBar";
+@import "./AudioInfo/AudioInfo";
+@import "./Rating/Rating";
+
+.media-player {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fefefe;
+  height: 6.8125rem;
+  &__progress-bar {
+    flex-basis: 100%;
+  }
+  &__audio-info {
+    flex-basis: 33%;
+  }
+  &__dots-menu {
+    margin-right: 1rem;
+  }
+  &__dialog {
+    flex-basis: 100%;
+  }
+}
