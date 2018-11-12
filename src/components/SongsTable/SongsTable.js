@@ -198,15 +198,34 @@ export class SongsTableComponent {
     this.state.currentOrderTypeIndex += 1;
   }
 
+  handleLegal(data) {
+    this.props.onLegalOptionClick({
+      licenseInfo: data.album.licenseInfo,
+      licenseURL: data.album.licenseURL
+    });
+    this.props.onDialogOpen();
+  }
+
   mountChildren() {
-    Array.from(this.dotsMenu).forEach(item => {
+    Array.from(this.dotsMenu).forEach((item, i) => {
       new DotsMenuComponent(item, {
         items: [
+          {
+            name: "Legal info",
+            handler: this.handleLegal.bind(this, this.state.data[i])
+          },
           { name: "Remove from my songs", handler: () => {} },
-          { name: "Share", handler: () => {} }
+          {
+            name: "Share",
+            handler: this.handleShare.bind(this, this.state.data[i])
+          }
         ]
       }).mount();
     });
+  }
+
+  handleShare(data) {
+    window.open(`/song/${data.id}`);
   }
 
   initMaterial() {
