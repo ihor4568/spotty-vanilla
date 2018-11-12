@@ -15,11 +15,11 @@
   "license": "ISC",
   "dependencies": {
     "firebase": "5.5.6",
+    "firebase-tools": "6.0.0",
     "lodash": "4.17.11",
     "material-components-web": "0.40.1"
   },
   "devDependencies": {
-    "firebase-tools": "6.0.0",
     "autoprefixer": "9.1.5",
     "clean-webpack-plugin": "0.1.19",
     "cross-env": "5.2.0",

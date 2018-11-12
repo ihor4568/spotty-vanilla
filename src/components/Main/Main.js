@@ -11,7 +11,7 @@ import { AuthComponent } from "../Auth/Auth";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
-import { AlbumsSongTableComponent } from "../AlbumSongsTable/AlbumSongTable";
+import { AlbumsSongTableComponent } from "../AlbumSongsTable/AlbumSongsTable";
 import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
 
