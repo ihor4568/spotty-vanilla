@@ -9,8 +9,7 @@
     "deploy": "npm run build && firebase deploy",
     "firebase": "firebase",
     "fix": "eslint --fix ./src",
-    "lint": "eslint ./src",
-    "text": "prettier --write ."
+    "lint": "eslint ./src"
   },
   "keywords": [],
   "license": "ISC",
