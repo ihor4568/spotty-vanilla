@@ -13,6 +13,7 @@ import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
 import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
+import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
 
 export class MainComponent {
   constructor(mountPoint, props = {}) {
@@ -33,6 +34,7 @@ export class MainComponent {
     this.appBar = this.mountPoint.querySelector(".main__app-bar");
     this.userPoint = this.mountPoint.querySelector(".main__user");
     this.userSignOut = this.mountPoint.querySelector(".main__sign-out");
+    this.licenseDialog = this.mountPoint.querySelector(".main__license-dialog");
   }
 
   setShareView(songId) {
@@ -42,7 +44,6 @@ export class MainComponent {
     this.mainPoint.classList.add("main__section_disable");
     this.mainContentPoint.classList.add("main__content-mount_disable");
     this.shareView.setSongId(songId);
-    this.shareView.mount();
   }
 
   setAuthView() {
@@ -178,6 +179,14 @@ export class MainComponent {
     }
   }
 
+  handleDialogOpen() {
+    this.licenseDialogComponent.handleOpen();
+  }
+
+  handleSetInfo(info) {
+    this.licenseDialogComponent.setInfo(info);
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -199,8 +208,15 @@ export class MainComponent {
     });
     this.header.mount();
 
+    this.licenseDialogComponent = new LicenseDialogComponent(
+      this.licenseDialog
+    );
+    this.licenseDialogComponent.mount();
+
     this.player = new MediaPlayerComponent(this.playerPoint, {
-      onPlayerChangeState: this.handlePlayerChangeState.bind(this)
+      onDialogOpen: this.handleDialogOpen.bind(this),
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
+      onLegalOptionClick: this.handleSetInfo.bind(this)
     });
     this.player.mount();
 
@@ -208,13 +224,16 @@ export class MainComponent {
     this.search.mount();
 
     this.shareView = new ShareViewComponent(this.mainContentPoint);
+    this.shareView.mount();
 
     this.auth = new AuthComponent(this.mainContentPoint);
 
     this.about = new AboutComponent(this.mainContentPoint);
     this.table = new MySongsComponent(this.mainContentPoint, {
       onSongPlay: this.handleSongPlay.bind(this),
-      onSongStop: this.handleSongStop.bind(this)
+      onSongStop: this.handleSongStop.bind(this),
+      onDialogOpen: this.handleDialogOpen.bind(this),
+      onLegalOptionClick: this.handleSetInfo.bind(this)
     });
 
     this.albums = new AlbumsComponent(this.mainContentPoint);
