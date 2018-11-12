@@ -77,4 +77,14 @@ export class MusicService {
       )
     );
   }
+
+  static rewriteMySong(arr) {
+    return new Promise(() => {
+      FirebaseService.auth().onAuthStateChanged(user => {
+        if (user) {
+          database.ref(`users/${user.uid}/songs`).set(arr);
+        }
+      });
+    });
+  }
 }

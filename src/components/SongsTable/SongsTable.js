@@ -1,6 +1,8 @@
 import _ from "lodash";
 import { MDCRipple } from "@material/ripple";
 
+import { MusicService } from "../../services/MusicService";
+
 import songsTableTemplate from "./SongsTable.html";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
@@ -130,15 +132,22 @@ export class SongsTableComponent {
       `.songs-table__th-icon_${this.state.columnName}`
     );
     this.tableBody = this.mountPoint.querySelector(".songs-table__body");
+    this.tableRow = this.mountPoint.querySelectorAll(".songs-table__row");
   }
 
   addEventListeners() {
     this.tableHead.addEventListener("click", this.handleOrderClick);
-    this.tableBody.addEventListener("dragover", this.handleDragOver.bind(this));
-    this.tableBody.addEventListener(
-      "dragstart",
-      this.handleDragStart.bind(this)
-    );
+    if (this.props.ondrag) {
+      this.tableBody.addEventListener(
+        "dragstart",
+        this.handleDragStart.bind(this)
+      );
+      this.tableBody.addEventListener("drop", this.handleDrop.bind(this));
+      this.tableBody.addEventListener(
+        "dragover",
+        this.handleDragOver.bind(this)
+      );
+    }
     this.tableBody.addEventListener("click", this.handlePlayClick.bind(this));
   }
 
@@ -159,6 +168,16 @@ export class SongsTableComponent {
 
   handleDragStart(e) {
     this.dragElement = e.target;
+  }
+
+  handleDrop(e) {
+    e.preventDefault();
+    this.querySelectors();
+    const songsTable = [];
+    Array.from(this.tableRow).forEach(item => {
+      songsTable.push(item.getAttribute("data-id"));
+    });
+    MusicService.rewriteMySong(songsTable);
   }
 
   handleDragOver(e) {
