@@ -59,8 +59,8 @@ export class MySongsComponent {
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
-      dialogOpen: this.props.dialogOpen,
-      dialogGetInfo: this.props.dialogGetInfo,
+      onDialogOpen: this.props.onDialogOpen,
+      onLegalOptionClick: this.props.onLegalOptionClick,
       playingSongId: this.playingSongId
     });
     this.table.mount();

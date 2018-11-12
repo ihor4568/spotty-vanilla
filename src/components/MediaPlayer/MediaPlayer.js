@@ -66,11 +66,11 @@ export class MediaPlayerComponent {
   }
 
   handleLegal() {
-    this.props.dialogGetInfo({
+    this.props.onLegalOptionClick({
       licenseInfo: this.song.album.licenseInfo,
       licenseURL: this.song.album.licenseURL
     });
-    this.props.dialogOpen();
+    this.props.onDialogOpen();
   }
 
   setNewSong(song) {

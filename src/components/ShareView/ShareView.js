@@ -14,16 +14,14 @@ export class ShareViewComponent {
   }
 
   async setSongId(songId) {
-    MusicService.getSongById(songId).then(async song => {
-      this.tile.songName = song.name;
-      this.tile.imageURL = await MusicService.getAlbumById(song.albumId).then(
-        album => album.imageURL
-      );
-      this.tile.authors = (await MusicService.getAuthorNameFromId(
-        song.authors
-      )).join(", ");
-      this.mount(this.tile);
-    });
+    const song = await MusicService.getSongById(songId);
+    const album = await MusicService.getAlbumById(song.albumId);
+    const authorName = await MusicService.getAuthorNamesByIds(song.authors);
+
+    this.tile.songName = song.name;
+    this.tile.imageURL = album.imageURL;
+    this.tile.authors = authorName.join(", ");
+    this.mount(this.tile);
   }
 
   querySelectors() {

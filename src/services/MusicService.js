@@ -70,7 +70,7 @@ export class MusicService {
       .then(song => song.val());
   }
 
-  static getAuthorNameFromId(authorsIds) {
+  static getAuthorNamesByIds(authorsIds) {
     return Promise.all(
       authorsIds.map(authorId =>
         this.getAuthorById(authorId).then(author => author.name)
