@@ -19,13 +19,13 @@ export class RatingComponent {
 
   getRating(e) {
     const { target } = e;
-    this.sortStars();
+    this.removeStars();
     target.classList.add("audio-rating__star_selected");
     this.audioRating = target.getAttribute("data-about");
     MusicService.setNewRating(this.userUid, this.songId, this.audioRating);
   }
 
-  sortStars() {
+  removeStars() {
     this.starsArray.forEach((item, i) => {
       this.starsArray[i].classList.remove("audio-rating__star_selected");
     });
@@ -42,7 +42,7 @@ export class RatingComponent {
     this.songId = songId;
     this.userUid = userUid;
 
-    this.sortStars();
+    this.removeStars();
     arrayRating.forEach((item, i) => {
       if (item === songId) {
         this.starsArray.forEach((star, k) => {
@@ -54,7 +54,7 @@ export class RatingComponent {
           }
         });
       } else if (i === arrayRating.length) {
-        this.sortStars();
+        this.removeStars();
       }
     });
   }
