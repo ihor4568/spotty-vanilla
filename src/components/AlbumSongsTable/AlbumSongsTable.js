@@ -33,8 +33,8 @@ export class AlbumsSongTableComponent {
     return Promise.all([albumPromise, authorsPromise]);
   }
 
-  fetchSongs() {
-    MusicService.getAlbumSongs(this.getAlbumIdFromUrl())
+  fetchSongs(albumId) {
+    MusicService.getAlbumSongs(albumId)
       .then(songs => {
         this.songs = songs;
 
@@ -48,17 +48,11 @@ export class AlbumsSongTableComponent {
           this.songs[i].album = album;
           this.songs[i].authorsInfo = authorsInfo;
         });
-        this.mount(false);
+        this.mount({ shouldFetchData: false });
       });
   }
 
-  getAlbumIdFromUrl() {
-    const pathnameParts = window.location.href.split("/");
-    return pathnameParts[pathnameParts.length - 1];
-  }
-
-  fetchAuthorForTitle() {
-    const albumId = this.getAlbumIdFromUrl();
+  fetchAuthorForTitle(albumId) {
     Promise.all([MusicService.getAlbums(), MusicService.getAuthors()]).then(
       ([albums, authors]) => {
         albums.forEach(album => {
@@ -93,10 +87,15 @@ export class AlbumsSongTableComponent {
     this.albumSongs.mount();
   }
 
-  mount(shouldFetchData = true) {
-    if (shouldFetchData) {
-      this.fetchSongs();
-      this.fetchAuthorForTitle();
+  mount(params = {}) {
+    const mountingParameters = {
+      ...{ shouldFetchData: true, albumId: null },
+      ...params
+    };
+
+    if (mountingParameters.shouldFetchData) {
+      this.fetchSongs(mountingParameters.albumId);
+      this.fetchAuthorForTitle(mountingParameters.albumId);
       return;
     }
     this.mountPoint.innerHTML = this.render();

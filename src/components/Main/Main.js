@@ -127,6 +127,7 @@ export class MainComponent {
 
   handleGo(pathname, userName) {
     this.userPoint.innerText = userName;
+    const ALBUMS_URL_REGEXP = /albums\/\w+/;
 
     if (pathname === "" || pathname === "login") {
       this.routeNavigate("/albums");
@@ -140,8 +141,13 @@ export class MainComponent {
       return;
     }
 
-    if (/albums\/\w+/.test(pathname)) {
-      this.albumSongs.mount();
+    if (ALBUMS_URL_REGEXP.test(pathname)) {
+      const pathnameParts = pathname.split("/");
+
+      this.albumSongs.mount({
+        albumId: pathnameParts[pathnameParts.length - 1]
+      });
+
       return;
     }
 
