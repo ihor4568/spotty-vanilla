@@ -77,4 +77,29 @@ export class MusicService {
       )
     );
   }
+
+  static getSongRating(userId) {
+    return database
+      .ref(`users/${userId}/rating`)
+      .once("value")
+      .then(rating => rating.val());
+  }
+
+  static setNewRating(userId, songId, ratingValue) {
+    database
+      .ref(`users/${userId}`)
+      .once("value")
+      .then(user => user.val().rating)
+      .then(rating => {
+        if (!rating.includes(songId)) {
+          database.ref(`users/${userId}/rating/${rating.length}`).set(songId);
+          database
+            .ref(`users/${userId}/rating/${rating.length + 1}`)
+            .set(ratingValue);
+        } else {
+          const index = rating.indexOf(songId) + 1;
+          database.ref(`users/${userId}/rating/${index}`).set(ratingValue);
+        }
+      });
+  }
 }

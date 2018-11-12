@@ -31,4 +31,8 @@ export class AuthService {
       });
     });
   }
+
+  static getCurrentUser() {
+    return auth.currentUser;
+  }
 }
