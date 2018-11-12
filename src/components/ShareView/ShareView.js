@@ -36,9 +36,11 @@ export class ShareViewComponent {
   }
 
   mount(data) {
-    this.mountPoint.innerHTML = this.render(data);
-    this.querySelectors();
-    this.initMaterial();
+    if (data) {
+      this.mountPoint.innerHTML = this.render(data);
+      this.querySelectors();
+      this.initMaterial();
+    }
   }
 
   render() {

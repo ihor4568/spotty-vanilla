@@ -224,6 +224,7 @@ export class MainComponent {
     this.search.mount();
 
     this.shareView = new ShareViewComponent(this.mainContentPoint);
+    this.shareView.mount();
 
     this.auth = new AuthComponent(this.mainContentPoint);
 
