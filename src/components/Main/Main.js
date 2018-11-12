@@ -34,6 +34,7 @@ export class MainComponent {
     this.appBar = this.mountPoint.querySelector(".main__app-bar");
     this.userPoint = this.mountPoint.querySelector(".main__user");
     this.userSignOut = this.mountPoint.querySelector(".main__sign-out");
+    this.darkTheme = this.mountPoint.querySelector(".main__switch");
   }
 
   setShareView(songId) {
@@ -78,6 +79,7 @@ export class MainComponent {
       "click",
       this.handleListClick.bind(this)
     );
+    this.darkTheme.addEventListener("click", this.handleDarkTheme.bind(this));
   }
 
   handleListClick(e) {
@@ -188,6 +190,10 @@ export class MainComponent {
       this.table.changeStateSong(songId, isPlaying);
       this.artistSongTable.changeStateSong(songId, isPlaying);
     }
+  }
+
+  handleDarkTheme() {
+    document.documentElement.classList.toggle("page-dark-mode");
   }
 
   mount() {

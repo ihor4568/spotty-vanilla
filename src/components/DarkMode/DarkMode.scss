@@ -1,53 +1,5 @@
-$background: hsla(0, 0%, 7%, 1); /*main background*/
-$dark-1: hsla(0, 0%, 14%, 1); /*top bar*/
-$dark-2: hsla(0, 0%, 11%, 1); /*left menu slider*/
-$dark-selected: hsla(0, 0%, 100%, 0.1); /*selected item*/
-$dark-hover: hsla(0, 0%, 53%, 0.4); /*hover item*/
-
-$font-white-1: hsla(0, 0%, 100%, 1); /*main white*/
-$font-white-2: hsla(0, 0%, 100%, 0.88); /*video name, left slide items name*/
-
-$font-grey-1: hsla(0, 0%, 100%, 0.6); /*left menu heading*/
-$font-grey-2: hsla(0, 0%, 53%, 1); /*video description. subtitle*/
-$font-grey-3: hsla(0, 0%, 60%, 1); /*search pllaceholder*/
-$font-grey-4: hsla(0, 0%, 100, 0.5); /*search icon*/
-$font-grey-5: hsla(0, 0%, 18%, 1); /*dividers*/
-
-.page {
-  background-color: hsla(0, 0%, 7%, 1);
-
-  .auth {
-    &__email,
-    &__name,
-    &__password {
-      @include mdc-text-field-fill-color($background);
-    }
-
-    @include mdc-text-field-ink-color($font-white-2);
-    @include mdc-text-field-label-color($font-grey-3);
-    @include mdc-text-field-caret-color($font-white-2);
-    @include mdc-text-field-bottom-line-color($font-grey-5);
-    @include mdc-text-field-hover-bottom-line-color($dark-hover);
-    @include mdc-text-field-line-ripple-color($dark-selected);
-
-    &__tab-bar {
-      @include mdc-tab-text-label-color($font-white-2);
-      @include mdc-tab-icon-color($font-grey-2);
-    }
-
-    &__tab-indicator {
-      @include mdc-tab-indicator-underline-color($font-grey-5);
-    }
-
-    &__button {
-      @include mdc-button-container-fill-color($dark-selected);
-      @include mdc-button-ink-color($font-white-2);
-    }
-
-    &__ripple {
-      @include mdc-states($dark-hover);
-    }
-  }
+.page-dark-mode {
+  background-color: $background;
 
   .main {
     &__sidebar {
