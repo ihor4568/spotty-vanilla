@@ -1,6 +1,7 @@
 import mySongs from "./MySongs.html";
 import { SongsTableComponent } from "../SongsTable/SongsTable";
 import { MusicService } from "../../services/MusicService";
+import { AuthService } from "../../services/AuthService";
 
 export class MySongsComponent {
   constructor(mountPoint, props = {}) {
@@ -29,7 +30,8 @@ export class MySongsComponent {
   }
 
   fetchSongs() {
-    MusicService.getAlbumSongs("album3")
+    const userId = AuthService.getCurrentUser().uid;
+    MusicService.getUserSongs(userId)
       .then(songs => {
         this.songs = songs;
 
