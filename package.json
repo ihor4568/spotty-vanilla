@@ -10,7 +10,7 @@
     "firebase": "firebase",
     "fix": "eslint --fix ./src",
     "lint": "eslint ./src",
-    "text": "prettier --write index.html"
+    "text": "prettier --write ."
   },
   "keywords": [],
   "license": "ISC",
