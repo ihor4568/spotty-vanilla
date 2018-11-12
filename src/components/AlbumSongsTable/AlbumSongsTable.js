@@ -1,4 +1,4 @@
-import albumSongsTable from "./albumSongsTable.html";
+import albumSongsTable from "./AlbumSongsTable.html";
 import { MusicService } from "../../services/MusicService";
 import { SongsTableComponent } from "../SongsTable/SongsTable";
 
