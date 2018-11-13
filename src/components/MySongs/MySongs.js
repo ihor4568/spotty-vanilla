@@ -29,7 +29,7 @@ export class MySongsComponent {
   }
 
   fetchSongs() {
-    MusicService.getAlbumSongs("album3")
+    MusicService.getAlbumSongs("album4")
       .then(songs => {
         this.songs = songs;
 
@@ -59,6 +59,8 @@ export class MySongsComponent {
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
+      onDialogOpen: this.props.onDialogOpen,
+      onLegalOptionClick: this.props.onLegalOptionClick,
       playingSongId: this.playingSongId
     });
     this.table.mount();
