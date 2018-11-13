@@ -32,14 +32,7 @@ export class ArtistSongTableComponent {
     return Promise.all([albumPromise, authorsPromise]);
   }
 
-  getArtistFromUrl() {
-    const pathNameParts = window.location.href.split("/");
-    return pathNameParts[pathNameParts.length - 1];
-  }
-
-  fetchSongs() {
-    const artistId = this.getArtistFromUrl();
-
+  fetchSongs(artistId) {
     MusicService.getAuthorSongs(artistId)
       .then(songs => {
         this.songs = songs;
@@ -65,12 +58,10 @@ export class ArtistSongTableComponent {
     }
   }
 
-  fetchArtist() {
-    const artistId = this.getArtistFromUrl();
+  fetchArtist(artistId) {
     MusicService.getAuthorById(artistId).then(artist => {
       this.state.artist = artist.name;
       this.state.imageUrl = artist.imageURL;
-      this.mount(false);
     });
   }
 
@@ -84,15 +75,16 @@ export class ArtistSongTableComponent {
     this.table.mount();
   }
 
-  mount(shouldFetchData = true) {
-    if (shouldFetchData) {
-      this.fetchArtist();
-      this.fetchSongs();
+  mount(artistId) {
+    if (artistId) {
+      this.fetchArtist(artistId);
+      this.fetchSongs(artistId);
       return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.mountChildren();
+    this.changeStateSong();
   }
 
   render() {

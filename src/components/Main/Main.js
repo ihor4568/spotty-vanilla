@@ -137,6 +137,11 @@ export class MainComponent {
 
     this.changeActiveMenuItem(`/${pathname}`);
 
+    if (pathname === "songs") {
+      this.table.mount();
+      return;
+    }
+
     if (pathname === "albums") {
       this.albums.mount();
       return;
@@ -149,23 +154,20 @@ export class MainComponent {
       return;
     }
 
-    if (pathname === "about") {
-      this.about.mount();
-      return;
-    }
-
     if (pathname === "artists") {
       this.artist.mount();
       return;
     }
 
     if (/artists\/\w+/.test(pathname)) {
-      this.artistSongTable.mount();
+      const pathnameParts = pathname.split("/");
+      const artistId = pathnameParts[pathnameParts.length - 1];
+      this.artistSongTable.mount(artistId);
       return;
     }
 
-    if (pathname === "songs") {
-      this.table.mount();
+    if (pathname === "about") {
+      this.about.mount();
       return;
     }
 
