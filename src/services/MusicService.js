@@ -86,7 +86,7 @@ export class MusicService {
   }
 
   static setNewRating(userId, songId, ratingValue) {
-    database
+    return database
       .ref(`users/${userId}`)
       .once("value")
       .then(user => user.val().rating)
