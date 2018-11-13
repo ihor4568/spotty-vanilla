@@ -77,6 +77,8 @@ export class MySongsComponent {
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
       onSongRemove: this.handleRemoveSong.bind(this),
+      onDialogOpen: this.props.onDialogOpen,
+      onLegalOptionClick: this.props.onLegalOptionClick,
       playingSongId: this.playingSongId
     });
     this.table.mount();

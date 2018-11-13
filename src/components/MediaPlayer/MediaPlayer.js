@@ -3,26 +3,10 @@ import { AudioInfoComponent } from "./AudioInfo/AudioInfo";
 import { RatingComponent } from "./Rating/Rating";
 import { MainControlComponent } from "./MainControl/MainControl";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
-import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
 
 import playerTemplate from "./MediaPlayer.html";
 import { MusicService } from "../../services/MusicService";
 import { AuthService } from "../../services/AuthService";
-
-const SONG_INFO = {
-  id: "song0",
-  songSrc:
-    "https://storage.mp3cc.biz/download/89035703/U2hXUUsxUTVxellvRHcrQTNaNUdIM0drb2J3dWhaNjNacXRmdGU5bGZtN3pMcHdUNnhicmozMDlHcHBnRHNZRTZoSEJzMldvQTl1SGk1TjU2VFJyK0dHOUFiMUZVZzBYVTQ2NU8xVEwxZjlLbmZtaWlZQk1TVE1MVDBleThqdVg/jazzamor-jazzamor-je-t-aime_(mp3CC.biz).mp3",
-  songImageSrc:
-    "https://s-media-cache-ak0.pinimg.com/originals/0e/f8/fd/0ef8fd42bb061ede2c2b6d1a9689782b.jpg",
-  songName: "Way Back",
-  album: "Lazy Sunday",
-  artistName: "Jazzamor",
-  songId: "song1",
-  licenseInfo:
-    "BJ Block & Dawn Pemberton is licensed under a Attribution-NonCommercial-NoDerivatives (aka Music Sharing) 3.0 International License.",
-  licenseURL: "https://creativecommons.org/licenses/by-nc-nd/3.0/"
-};
 
 export class MediaPlayerComponent {
   constructor(mountPoint, props = {}) {
@@ -49,7 +33,6 @@ export class MediaPlayerComponent {
     this.dotsMenuPoint = this.mountPoint.querySelector(
       ".media-player__dots-menu"
     );
-    this.dialogPoint = this.mountPoint.querySelector(".media-player__dialog");
   }
 
   set audioTime(val) {
@@ -81,15 +64,15 @@ export class MediaPlayerComponent {
   }
 
   handleShare() {
-    window.open(`/song/${SONG_INFO.songId}`);
+    window.open(`/song/${this.song.id}`);
   }
 
   handleLegal() {
-    this.licenseDialogComponent = new LicenseDialogComponent(this.dialogPoint, {
-      licenseInfo: SONG_INFO.licenseInfo, // TODO
-      licenseURL: SONG_INFO.licenseURL
+    this.props.onLegalOptionClick({
+      licenseInfo: this.song.album.licenseInfo,
+      licenseURL: this.song.album.licenseURL
     });
-    this.licenseDialogComponent.mount();
+    this.props.onDialogOpen();
   }
 
   handleAddSong() {
@@ -101,7 +84,7 @@ export class MediaPlayerComponent {
 
   setNewSong(song) {
     this.song = song;
-    this.audioInfoComponent.updateInfo({
+    this.audioInfoComponent.setInfo({
       imageSrc: song.album.imageURL,
       songName: song.name,
       album: song.album.name,
@@ -111,7 +94,7 @@ export class MediaPlayerComponent {
     if (song.songURL !== this.audio.src) {
       this.audio.src = song.songURL;
     }
-
+    this.song = song;
     this.mainControlPannel.play();
 
     this.showPlayer();

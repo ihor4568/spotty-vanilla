@@ -1,15 +1,25 @@
 <div class="dots-menu">
   <div class="mdc-menu-surface--anchor">
     <div class="mdc-menu-surface dots-menu__holder" tabindex="-1">
-      <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
+      <ul
+        class="mdc-list"
+        role="menu"
+        aria-hidden="true"
+        aria-orientation="vertical"
+      >
         <% items.forEach((item, i) => { %>
-        <li class="mdc-list-item mdc-typography--body1 dots-menu__item" role="menuitem" data-id="<%= i %>">
-          <span class="mdc-list-item__text">
-            <%= item.name %></span>
+        <li
+          class="mdc-list-item mdc-typography--body1 dots-menu__item"
+          role="menuitem"
+          data-id="<%= i %>"
+        >
+          <span class="mdc-list-item__text"> <%= item.name %></span>
         </li>
         <% }) %>
       </ul>
     </div>
   </div>
-  <button class="mdc-icon-button material-icons dots-menu__button">more_vert</button>
+  <button class="mdc-icon-button material-icons dots-menu__button">
+    more_vert
+  </button>
 </div>

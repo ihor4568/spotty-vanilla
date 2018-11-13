@@ -105,4 +105,19 @@ export class MusicService {
         return database.ref(`users/${userId}/songs`).set(filteredSongs);
       });
   }
+
+  static getSongById(songId) {
+    return database
+      .ref(`songs/${songId}`)
+      .once("value")
+      .then(song => song.val());
+  }
+
+  static getAuthorNamesByIds(authorsIds) {
+    return Promise.all(
+      authorsIds.map(authorId =>
+        this.getAuthorById(authorId).then(author => author.name)
+      )
+    );
+  }
 }
