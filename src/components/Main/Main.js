@@ -11,7 +11,7 @@ import { AuthComponent } from "../Auth/Auth";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
-import { AlbumsSongTableComponent } from "../AlbumSongsTable/AlbumSongsTable";
+import { AlbumSongsTableComponent } from "../AlbumSongsTable/AlbumSongsTable";
 import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
 import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
@@ -128,7 +128,6 @@ export class MainComponent {
 
   handleGo(pathname, userName) {
     this.userPoint.innerText = userName;
-    const ALBUMS_URL_REGEXP = /albums\/\w+/;
 
     if (pathname === "" || pathname === "login") {
       this.routeNavigate("/albums");
@@ -142,13 +141,10 @@ export class MainComponent {
       return;
     }
 
-    if (ALBUMS_URL_REGEXP.test(pathname)) {
+    if (/albums\/\w+/.test(pathname)) {
       const pathnameParts = pathname.split("/");
-
-      this.albumSongs.mount({
-        albumId: pathnameParts[pathnameParts.length - 1]
-      });
-
+      const albumId = pathnameParts[pathnameParts.length - 1];
+      this.albumSongs.mount(albumId);
       return;
     }
 
@@ -259,7 +255,7 @@ export class MainComponent {
 
     this.artist = new ArtistsComponent(this.mainContentPoint);
 
-    this.albumSongs = new AlbumsSongTableComponent(this.mainContentPoint, {
+    this.albumSongs = new AlbumSongsTableComponent(this.mainContentPoint, {
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)
     });
