@@ -12,6 +12,7 @@ import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
 import { ArtistSongTableComponent } from "../ArtistSongTable/ArtistSongTable";
+import { AlbumSongsTableComponent } from "../AlbumSongsTable/AlbumSongsTable";
 import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
 import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
@@ -144,6 +145,13 @@ export class MainComponent {
       return;
     }
 
+    if (/albums\/\w+/.test(pathname)) {
+      const pathnameParts = pathname.split("/");
+      const albumId = pathnameParts[pathnameParts.length - 1];
+      this.albumSongs.mount(albumId);
+      return;
+    }
+
     if (pathname === "about") {
       this.about.mount();
       return;
@@ -190,6 +198,7 @@ export class MainComponent {
     if (songId) {
       this.table.changeStateSong(songId, isPlaying);
       this.artistSongTable.changeStateSong(songId, isPlaying);
+      this.albumSongs.changeStateSong(songId, isPlaying);
     }
   }
 
@@ -260,6 +269,11 @@ export class MainComponent {
 
     this.artist = new ArtistsComponent(this.mainContentPoint);
     this.artistSongTable = new ArtistSongTableComponent(this.mainContentPoint, {
+      onSongPlay: this.handleSongPlay.bind(this),
+      onSongStop: this.handleSongStop.bind(this)
+    });
+
+    this.albumSongs = new AlbumSongsTableComponent(this.mainContentPoint, {
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)
     });

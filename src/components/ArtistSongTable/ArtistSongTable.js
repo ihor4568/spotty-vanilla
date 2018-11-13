@@ -14,7 +14,9 @@ export class ArtistSongTableComponent {
   }
 
   querySelectors() {
-    this.tableContainer = this.mountPoint.querySelector(".table-container");
+    this.tableContainer = this.mountPoint.querySelector(
+      ".artist-song-table__table-container"
+    );
   }
 
   fetchAuthors(authorsIds) {
@@ -58,7 +60,7 @@ export class ArtistSongTableComponent {
 
   changeStateSong(songId, isPlaying) {
     this.playingSongId = isPlaying ? songId : null;
-    if (this.mountPoint.querySelector(".table-container")) {
+    if (this.mountPoint.querySelector(".artist-song-table__table-container")) {
       this.table.changeStateSong(songId, isPlaying);
     }
   }

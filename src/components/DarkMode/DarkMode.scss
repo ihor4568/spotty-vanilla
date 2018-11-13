@@ -86,6 +86,16 @@
     }
   }
 
+  .album-songs-table {
+    .albums__card-album {
+      color: $font-white-2;
+    }
+
+    .albums__card-artist {
+      color: $font-grey-2;
+    }
+  }
+
   .artists {
     &__heading,
     &__name {
@@ -101,7 +111,7 @@
     }
   }
 
-  .artist {
+  .artist-song-table {
     &__name {
       color: $font-white-2;
     }

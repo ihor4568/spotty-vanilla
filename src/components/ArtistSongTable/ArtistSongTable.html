@@ -1,25 +1,34 @@
-<div class="artist">
-
-  <div class="artist__container">
-    <div class="mdc-card artist__card responsive-grid">
-      <a class="artist__link main__list-item" href=''>
-        <div class="artist__card_shaped">
-          <div class="mdc-card mdc-card__primary-action mdc-ripple artist__ripple">
-            <div class="mdc-card__media mdc-card__media--square artist__media">
-              <% if( imageUrl ) { %>
-              <img class="artist__image" src="<%= imageUrl %>" alt="artist image">
-              <% } %>
+<div class="artist-song-table">
+  <div class="artist-song-table__artist">
+    <div class="artist-song-table__container">
+      <div class="mdc-card artist-song-table__card responsive-grid">
+        <a class="artist-song-table__link main__list-item" href="">
+          <div class="artist-song-table__card_shaped">
+            <div
+              class="mdc-card mdc-card__primary-action mdc-ripple artist-song-table__ripple"
+            >
+              <div
+                class="mdc-card__media mdc-card__media--square artist-song-table__media"
+              >
+                <% if( imageUrl ) { %>
+                <img
+                  class="artist-song-table__image"
+                  src="<%= imageUrl %>"
+                  alt="artist image"
+                />
+                <% } %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="artist__name">
-          <div class="mdc-typography mdc-typography--headline4">
-            <%= artist %>
+          <div class="artist-song-table__name">
+            <div class="mdc-typography mdc-typography--headline4">
+              <%= artist %>
+            </div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </div>
 
+  <div class="artist-song-table__table-container"></div>
 </div>
-<div class="table-container"></div>

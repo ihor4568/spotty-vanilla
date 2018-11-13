@@ -1,23 +1,30 @@
 <div class="albums">
   <h2 class="albums__heading-4 mdc-typography--headline4">Albums</h2>
   <div class="albums__container">
-    <%  albums.forEach( album => {%>
+    <% albums.forEach( album => {%>
     <div class="albums__card-container responsive-grid">
-      <a class="albums__link" href="/albums/<%= album.id %>">
+      <a class="albums__link main__list-item" href="/albums/<%= album.id %>">
         <div class="albums__card mdc-card mdc-card-album">
-          <div class="albums__card-ripple-effect mdc-card__primary-action mdc-ripple-upgraded">
-            <div class="albums__card-media mdc-card__media mdc-card__media-first mdc-card__media--square">
+          <div
+            class="albums__card-ripple-effect mdc-card__primary-action mdc-ripple-upgraded"
+          >
+            <div
+              class="albums__card-media mdc-card__media mdc-card__media-first mdc-card__media--square"
+            >
               <div class="mdc-card__media-content">
                 <img class="albums__card-images" src=<%=album.imageURL %>>
               </div>
             </div>
             <div class="albums__card-description">
-              <h2 class="albums__card-album albums__heading-2 mdc-typography--headline6">
+              <h2
+                class="albums__card-album albums__heading-2 mdc-typography--headline6"
+              >
                 <%= album.name %>
               </h2>
-              <h3 class="albums__card-artist albums__heading-3 mdc-typography--subtitle2">
-                by
-                <%= album.authors %>
+              <h3
+                class="albums__card-artist albums__heading-3 mdc-typography--subtitle2"
+              >
+                by <%= album.authors %>
               </h3>
             </div>
           </div>
