@@ -29,7 +29,7 @@ export class MySongsComponent {
   }
 
   fetchSongs() {
-    MusicService.getAlbumSongs("album1")
+    MusicService.getAlbumSongs("album4")
       .then(songs => {
         this.songs = songs;
 
@@ -47,11 +47,21 @@ export class MySongsComponent {
       });
   }
 
+  changeStateSong(songId, isPlaying) {
+    this.playingSongId = isPlaying ? songId : null;
+    if (this.mountPoint.querySelector(".my-songs")) {
+      this.table.changeStateSong(songId, isPlaying);
+    }
+  }
+
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
-      onSongStop: this.props.onSongStop
+      onSongStop: this.props.onSongStop,
+      onDialogOpen: this.props.onDialogOpen,
+      onLegalOptionClick: this.props.onLegalOptionClick,
+      playingSongId: this.playingSongId
     });
     this.table.mount();
   }

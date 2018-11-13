@@ -7,7 +7,8 @@ export class SearchComponent {
   }
 
   initMaterial() {
-    this.textField = new MDCTextField(this.mountPoint.querySelector(".search"));
+    // eslint-disable-next-line no-new
+    new MDCTextField(this.mountPoint.querySelector(".search"));
   }
 
   mount() {

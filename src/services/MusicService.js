@@ -7,14 +7,14 @@ export class MusicService {
     return database
       .ref("albums")
       .once("value")
-      .then(snapshot => Object.values(snapshot.val()).map(child => child));
+      .then(snapshot => Object.values(snapshot.val()));
   }
 
   static getAuthors() {
     return database
       .ref("authors")
       .once("value")
-      .then(snapshot => Object.values(snapshot.val()).map(child => child));
+      .then(snapshot => Object.values(snapshot.val()));
   }
 
   static getAuthorSongs(authorId) {
@@ -61,5 +61,20 @@ export class MusicService {
       .ref(`authors/${id}`)
       .once("value")
       .then(author => author.val());
+  }
+
+  static getSongById(songId) {
+    return database
+      .ref(`songs/${songId}`)
+      .once("value")
+      .then(song => song.val());
+  }
+
+  static getAuthorNamesByIds(authorsIds) {
+    return Promise.all(
+      authorsIds.map(authorId =>
+        this.getAuthorById(authorId).then(author => author.name)
+      )
+    );
   }
 }
