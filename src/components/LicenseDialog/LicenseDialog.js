@@ -2,13 +2,14 @@ import { MDCDialog } from "@material/dialog";
 import licenseDialogTemplate from "./LicenseDialog.html";
 
 export class LicenseDialogComponent {
-  constructor(mountPoint, props = {}) {
+  constructor(mountPoint) {
     this.mountPoint = mountPoint;
-    this.props = props;
   }
 
   querySelectors() {
     this.dialogPopup = this.mountPoint.querySelector(".license-dialog");
+    this.info = this.mountPoint.querySelector(".license-dialog__info");
+    this.url = this.mountPoint.querySelector(".license-dialog__url");
   }
 
   initMaterial() {
@@ -19,14 +20,18 @@ export class LicenseDialogComponent {
     this.dialog.open();
   }
 
+  setInfo({ licenseInfo, licenseURL }) {
+    this.info.innerHTML = licenseInfo;
+    this.url.href = licenseURL;
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
-    this.handleOpen();
   }
 
   render() {
-    return licenseDialogTemplate(this.props);
+    return licenseDialogTemplate();
   }
 }

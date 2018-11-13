@@ -1,17 +1,21 @@
-import mySongs from "./MySongs.html";
-import { SongsTableComponent } from "../SongsTable/SongsTable";
 import { MusicService } from "../../services/MusicService";
+import { SongsTableComponent } from "../SongsTable/SongsTable";
+import artistSongTable from "./ArtistSongTable.html";
 
-export class MySongsComponent {
+export class ArtistSongTableComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.state = {
+      artist: [],
+      imageUrl: []
+    };
     this.songs = [];
   }
 
   querySelectors() {
     this.tableContainer = this.mountPoint.querySelector(
-      ".my-songs__table-container"
+      ".artist-song-table__table-container"
     );
   }
 
@@ -28,8 +32,15 @@ export class MySongsComponent {
     return Promise.all([albumPromise, authorsPromise]);
   }
 
+  getArtistFromUrl() {
+    const pathNameParts = window.location.href.split("/");
+    return pathNameParts[pathNameParts.length - 1];
+  }
+
   fetchSongs() {
-    MusicService.getAlbumSongs("album4")
+    const artistId = this.getArtistFromUrl();
+
+    MusicService.getAuthorSongs(artistId)
       .then(songs => {
         this.songs = songs;
 
@@ -49,9 +60,18 @@ export class MySongsComponent {
 
   changeStateSong(songId, isPlaying) {
     this.playingSongId = isPlaying ? songId : null;
-    if (this.mountPoint.querySelector(".my-songs")) {
+    if (this.mountPoint.querySelector(".artist-song-table__table-container")) {
       this.table.changeStateSong(songId, isPlaying);
     }
+  }
+
+  fetchArtist() {
+    const artistId = this.getArtistFromUrl();
+    MusicService.getAuthorById(artistId).then(artist => {
+      this.state.artist = artist.name;
+      this.state.imageUrl = artist.imageURL;
+      this.mount(false);
+    });
   }
 
   mountChildren() {
@@ -59,8 +79,6 @@ export class MySongsComponent {
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
-      onDialogOpen: this.props.onDialogOpen,
-      onLegalOptionClick: this.props.onLegalOptionClick,
       playingSongId: this.playingSongId
     });
     this.table.mount();
@@ -68,7 +86,9 @@ export class MySongsComponent {
 
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
+      this.fetchArtist();
       this.fetchSongs();
+      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -76,6 +96,6 @@ export class MySongsComponent {
   }
 
   render() {
-    return mySongs();
+    return artistSongTable(this.state);
   }
 }
