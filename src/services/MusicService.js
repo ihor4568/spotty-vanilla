@@ -80,7 +80,7 @@ export class MusicService {
 
   static getSongRating(userId) {
     return database
-      .ref(`users/${userId}/rating`)
+      .ref(`users/${userId}/rating/`)
       .once("value")
       .then(rating => rating.val());
   }
@@ -90,16 +90,8 @@ export class MusicService {
       .ref(`users/${userId}`)
       .once("value")
       .then(user => user.val().rating)
-      .then(rating => {
-        if (!rating.includes(songId)) {
-          database.ref(`users/${userId}/rating/${rating.length}`).set(songId);
-          database
-            .ref(`users/${userId}/rating/${rating.length + 1}`)
-            .set(ratingValue);
-        } else {
-          const index = rating.indexOf(songId) + 1;
-          database.ref(`users/${userId}/rating/${index}`).set(ratingValue);
-        }
-      });
+      .then(() =>
+        database.ref(`users/${userId}/rating/${songId}`).set(ratingValue)
+      );
   }
 }

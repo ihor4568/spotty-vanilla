@@ -37,24 +37,23 @@ export class RatingComponent {
 
   async setInfo({ songId }) {
     const userUid = await AuthService.getCurrentUser().uid;
-    const arrayRating = await MusicService.getSongRating(userUid);
+    const rating = await MusicService.getSongRating(userUid);
 
     this.songId = songId;
     this.userUid = userUid;
 
     this.removeStars();
-    arrayRating.forEach((item, i) => {
-      if (item === songId) {
+
+    Object.entries(rating).forEach(([key, value]) => {
+      if (key === songId) {
         this.starsArray.forEach((star, k) => {
-          if (this.starsArray[k].dataset.about === arrayRating[i + 1]) {
+          if (this.starsArray[k].dataset.about === value) {
             this.starsArray[k].classList.add("audio-rating__star_selected");
-            this.audioRating = arrayRating[i + 1];
+            this.audioRating = value;
           } else {
             this.starsArray[k].classList.remove("audio-rating__star_selected");
           }
         });
-      } else if (i === arrayRating.length) {
-        this.removeStars();
       }
     });
   }
