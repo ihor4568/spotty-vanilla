@@ -65,11 +65,12 @@ export class MusicService {
 
   static getUserSongs(userId) {
     return database
-      .ref(`users/${userId}`)
+      .ref(`users/${userId}/songs`)
       .once("value")
-      .then(user =>
+      .then(data => data.val() || [])
+      .then(songs =>
         Promise.all(
-          user.val().songs.map(songId =>
+          songs.map(songId =>
             database
               .ref(`songs/${songId}`)
               .once("value")
@@ -81,13 +82,27 @@ export class MusicService {
 
   static setUserSong(userId, songId) {
     return database
-      .ref(`users/${userId}`)
+      .ref(`users/${userId}/songs`)
       .once("value")
-      .then(user => user.val().songs)
+      .then(data => data.val() || [])
       .then(songs => {
         if (!songs.includes(songId)) {
-          database.ref(`users/${userId}/songs/${songs.length}`).set(songId);
+          return database
+            .ref(`users/${userId}/songs/${songs.length}`)
+            .set(songId);
         }
+        return Promise.reject();
+      });
+  }
+
+  static removeUserSong(userId, songId) {
+    return database
+      .ref(`users/${userId}/songs`)
+      .once("value")
+      .then(data => data.val())
+      .then(songs => {
+        const filteredSongs = songs.filter(song => song !== songId);
+        return database.ref(`users/${userId}/songs`).set(filteredSongs);
       });
   }
 }

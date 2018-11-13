@@ -178,6 +178,10 @@ export class MainComponent {
     }
   }
 
+  handleAddSong() {
+    this.table.addSong();
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -200,7 +204,8 @@ export class MainComponent {
     this.header.mount();
 
     this.player = new MediaPlayerComponent(this.playerPoint, {
-      onPlayerChangeState: this.handlePlayerChangeState.bind(this)
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
+      onAddSong: this.handleAddSong.bind(this)
     });
     this.player.mount();
 

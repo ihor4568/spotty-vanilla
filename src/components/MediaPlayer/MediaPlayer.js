@@ -28,7 +28,6 @@ export class MediaPlayerComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-
     this.song = null;
     this.isPlaying = false;
   }
@@ -94,7 +93,10 @@ export class MediaPlayerComponent {
   }
 
   handleAddSong() {
-    MusicService.setUserSong(AuthService.getCurrentUser().uid, this.song.id);
+    MusicService.setUserSong(
+      AuthService.getCurrentUser().uid,
+      this.song.id
+    ).then(() => this.props.onAddSong());
   }
 
   setNewSong(song) {

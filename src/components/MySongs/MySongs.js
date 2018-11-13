@@ -56,11 +56,27 @@ export class MySongsComponent {
     }
   }
 
+  handleRemoveSong(songId) {
+    MusicService.removeUserSong(AuthService.getCurrentUser().uid, songId).then(
+      () => this.mount()
+    );
+  }
+
+  addSong() {
+    if (this.mountPoint.querySelector(".my-songs")) {
+      this.mount();
+    }
+  }
+
   mountChildren() {
+    if (!this.songs.length) {
+      return;
+    }
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
+      onSongRemove: this.handleRemoveSong.bind(this),
       playingSongId: this.playingSongId
     });
     this.table.mount();

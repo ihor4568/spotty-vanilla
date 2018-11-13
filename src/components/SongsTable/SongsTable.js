@@ -174,6 +174,13 @@ export class SongsTableComponent {
     }
   }
 
+  handleRemoveSong(e) {
+    const target = e.target.closest(".songs-table__row");
+    if (target) {
+      this.props.onSongRemove(target.dataset.id);
+    }
+  }
+
   setupOrderIconDisplay() {
     const { currentOrderTypeIndex } = this.state;
 
@@ -202,7 +209,10 @@ export class SongsTableComponent {
     Array.from(this.dotsMenu).forEach(item => {
       new DotsMenuComponent(item, {
         items: [
-          { name: "Remove from my songs", handler: () => {} },
+          {
+            name: "Remove from my songs",
+            handler: this.handleRemoveSong.bind(this)
+          },
           { name: "Share", handler: () => {} }
         ]
       }).mount();
