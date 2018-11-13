@@ -40,7 +40,10 @@ export class MediaPlayerComponent {
   mountChildren() {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
       audio: this.audio,
-      onPlayerChangeState: this.handlePlayerChangeState.bind(this)
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
+      tableData: this.props.tableData,
+      nextSong: this.setNextSong.bind(this),
+      prevSong: this.setPrevSong.bind(this)
     });
     this.mainControlPannel.mount();
     this.audioProgressBar = new ProgressBarComponent(this.progressBar, {
@@ -89,6 +92,103 @@ export class MediaPlayerComponent {
     this.mainControlPannel.play();
 
     this.showPlayer();
+    return this.song;
+  }
+
+  setNextSong() {
+    const songsArray = this.props.tableData.songs;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const index of songsArray.keys()) {
+      if (
+        this.audio.getAttribute("src") ===
+          this.props.tableData.songs[index].songURL &&
+        index < this.props.tableData.songs.length - 1
+      ) {
+        this.song = this.props.tableData.songs[index + 1];
+        this.audio.setAttribute(
+          "src",
+          `${this.props.tableData.songs[index + 1].songURL}`
+        );
+        this.audioInfoComponent.setInfo({
+          imageSrc: this.props.tableData.songs[index + 1].album.imageURL,
+          songName: this.props.tableData.songs[index + 1].name,
+          album: this.props.tableData.songs[index + 1].album.name,
+          artistName: this.props.tableData.songs[index + 1].authorsInfo
+            .map(author => author.name)
+            .join(", ")
+        });
+        this.mainControlPannel.play();
+        break;
+      } else if (
+        this.audio.getAttribute("src") ===
+          this.props.tableData.songs[index].songURL &&
+        index === this.props.tableData.songs.length - 1
+      ) {
+        this.song = this.props.tableData.songs[0]; // eslint-disable-line prefer-destructuring
+        this.audio.setAttribute(
+          "src",
+          `${this.props.tableData.songs[0].songURL}`
+        );
+        this.audioInfoComponent.setInfo({
+          imageSrc: this.props.tableData.songs[0].album.imageURL,
+          songName: this.props.tableData.songs[0].name,
+          album: this.props.tableData.songs[0].album.name,
+          artistName: this.props.tableData.songs[0].authorsInfo
+            .map(author => author.name)
+            .join(", ")
+        });
+        this.mainControlPannel.play();
+        break;
+      }
+    }
+  }
+
+  setPrevSong() {
+    const songsArray = this.props.tableData.songs;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const index of songsArray.keys()) {
+      if (
+        this.audio.getAttribute("src") ===
+          this.props.tableData.songs[index].songURL &&
+        index > 0
+      ) {
+        this.song = this.props.tableData.songs[index - 1];
+        this.audio.setAttribute(
+          "src",
+          `${this.props.tableData.songs[index - 1].songURL}`
+        );
+        this.audioInfoComponent.setInfo({
+          imageSrc: this.props.tableData.songs[index - 1].album.imageURL,
+          songName: this.props.tableData.songs[index - 1].name,
+          album: this.props.tableData.songs[index - 1].album.name,
+          artistName: this.props.tableData.songs[index - 1].authorsInfo
+            .map(author => author.name)
+            .join(", ")
+        });
+        this.mainControlPannel.play();
+        break;
+      } else if (
+        this.audio.getAttribute("src") ===
+          this.props.tableData.songs[index].songURL &&
+        index === 0
+      ) {
+        this.song = this.props.tableData.songs[2]; // eslint-disable-line prefer-destructuring
+        this.audio.setAttribute(
+          "src",
+          `${this.props.tableData.songs[2].songURL}`
+        );
+        this.audioInfoComponent.setInfo({
+          imageSrc: this.props.tableData.songs[2].album.imageURL,
+          songName: this.props.tableData.songs[2].name,
+          album: this.props.tableData.songs[2].album.name,
+          artistName: this.props.tableData.songs[2].authorsInfo
+            .map(author => author.name)
+            .join(", ")
+        });
+        this.mainControlPannel.play();
+        break;
+      }
+    }
   }
 
   showPlayer() {

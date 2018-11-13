@@ -213,13 +213,6 @@ export class MainComponent {
     );
     this.licenseDialogComponent.mount();
 
-    this.player = new MediaPlayerComponent(this.playerPoint, {
-      onDialogOpen: this.handleDialogOpen.bind(this),
-      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
-      onLegalOptionClick: this.handleSetInfo.bind(this)
-    });
-    this.player.mount();
-
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
 
@@ -241,6 +234,14 @@ export class MainComponent {
     this.notFound = new NotFoundComponent(this.mainContentPoint);
 
     this.artist = new ArtistsComponent(this.mainContentPoint);
+
+    this.player = new MediaPlayerComponent(this.playerPoint, {
+      onDialogOpen: this.handleDialogOpen.bind(this),
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
+      onLegalOptionClick: this.handleSetInfo.bind(this),
+      tableData: this.table
+    });
+    this.player.mount();
   }
 
   render() {

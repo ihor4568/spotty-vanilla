@@ -35,7 +35,7 @@
   </thead>
   <tbody class="songs-table__body">
     <% data.forEach(item => { %>
-    <tr class="songs-table__row" data-id="<%= item.id %>" draggable="true">
+    <tr class="songs-table__row" data-id="<%= item.id %>" data-table-id="<%= parseInt(item.number) %>" draggable="true">
       <td class="songs-table__td songs-table__td_play">
         <button class="mdc-button songs-table__td_play-btn">
           <span class="mdc-fab__icon material-icons songs-table__td_play-btn-icon">
