@@ -27,13 +27,11 @@ export class ArtistsComponent {
 
   addEventListeners() {
     this.artistsContainer.addEventListener("click", e => {
-      e.path.forEach(node => {
-        if (node.classList && node.classList.contains("artists__link")) {
-          const artistId = node.dataset.id;
-
-          this.props.onArtistClick(artistId);
-        }
-      });
+      const artistLink = e.target.closest(".artists__link");
+      if (artistLink) {
+        const artistId = artistLink.dataset.id;
+        this.props.onArtistClick(artistId);
+      }
     });
   }
 
