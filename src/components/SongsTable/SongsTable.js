@@ -132,12 +132,12 @@ export class SongsTableComponent {
       `.songs-table__th-icon_${this.state.columnName}`
     );
     this.tableBody = this.mountPoint.querySelector(".songs-table__body");
-    this.tableRow = this.mountPoint.querySelectorAll(".songs-table__row");
+    this.tableRows = this.mountPoint.querySelectorAll(".songs-table__row");
   }
 
   addEventListeners() {
     this.tableHead.addEventListener("click", this.handleOrderClick);
-    if (this.props.ondrag) {
+    if (this.props.onDrag) {
       this.tableBody.addEventListener(
         "dragstart",
         this.handleDragStart.bind(this)
@@ -173,11 +173,10 @@ export class SongsTableComponent {
   handleDrop(e) {
     e.preventDefault();
     this.querySelectors();
-    const songsTable = [];
-    Array.from(this.tableRow).forEach(item => {
-      songsTable.push(item.getAttribute("data-id"));
-    });
-    MusicService.rewriteMySong(songsTable);
+    const songsTable = Array.from(this.tableRows).map(item =>
+      item.getAttribute("data-id")
+    );
+    MusicService.changeSongsOrder(songsTable);
   }
 
   handleDragOver(e) {

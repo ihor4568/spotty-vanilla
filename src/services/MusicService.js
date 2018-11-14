@@ -78,7 +78,7 @@ export class MusicService {
     );
   }
 
-  static rewriteMySong(arr) {
+  static changeSongsOrder(arr) {
     return new Promise(() => {
       FirebaseService.auth().onAuthStateChanged(user => {
         if (user) {
