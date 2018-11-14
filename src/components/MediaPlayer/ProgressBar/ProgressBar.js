@@ -23,7 +23,7 @@ export class ProgressBarComponent {
   }
 
   initMaterial() {
-    this.slider = new MDCSlider(document.querySelector(".progress-bar"));
+    this.slider = new MDCSlider(this.mountPoint.querySelector(".progress-bar"));
   }
 
   timeUpdate() {
@@ -45,12 +45,12 @@ export class ProgressBarComponent {
   }
 
   showModal() {
-    if (this.moveCircle) {
-      this.moveCircle.remove();
+    if (this.extraDiv) {
+      this.extraDiv.remove();
     }
-    this.moveCircle = document.createElement("div");
-    this.moveCircle.className = "progress-bar__move-circle";
-    this.mountPoint.appendChild(this.moveCircle);
+    this.extraDiv = document.createElement("div");
+    this.extraDiv.className = "progress-bar__extra-div";
+    this.mountPoint.appendChild(this.extraDiv);
   }
 
   mouseDownHandler() {
@@ -59,14 +59,13 @@ export class ProgressBarComponent {
     this.showModal();
   }
 
-  mouseUpHandler(e) {
+  mouseUpHandler() {
     this.props.audio.addEventListener("timeupdate", this.timeUpdate);
     this.props.audio.currentTime =
-      (e.clientX / this.progressBarMain.clientWidth) *
-      this.props.audio.duration;
+      (this.slider.value * this.props.audio.duration) / 100;
     document.removeEventListener("mouseup", this.mouseUpHandler);
-    if (this.moveCircle) {
-      this.moveCircle.remove();
+    if (this.extraDiv) {
+      this.extraDiv.remove();
     }
   }
 
