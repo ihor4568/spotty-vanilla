@@ -11,6 +11,7 @@ import { AuthComponent } from "../Auth/Auth";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
+import { AlbumSongsTableComponent } from "../AlbumSongsTable/AlbumSongsTable";
 import { NotFoundComponent } from "../NotFound/NotFound";
 import mainTemplate from "./Main.html";
 import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
@@ -19,6 +20,7 @@ export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.songsData = null;
   }
 
   querySelectors() {
@@ -73,6 +75,10 @@ export class MainComponent {
     this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
     window.addEventListener("popstate", this.handleStatePath.bind(this));
     this.userSignOut.addEventListener("click", this.handleSignOut.bind(this));
+    this.mainContentPoint.addEventListener(
+      "click",
+      this.handleListClick.bind(this)
+    );
   }
 
   handleListClick(e) {
@@ -132,7 +138,22 @@ export class MainComponent {
     this.changeActiveMenuItem(`/${pathname}`);
 
     if (pathname === "albums") {
+      this.songsData = () => {
+        this.player.songsData = this.albumSongs.songs;
+      };
+      setTimeout(this.songsData, 3000);
       this.albums.mount();
+      return;
+    }
+
+    if (/albums\/\w+/.test(pathname)) {
+      const pathnameParts = pathname.split("/");
+      const albumId = pathnameParts[pathnameParts.length - 1];
+      this.songsData = () => {
+        this.player.songsData = this.albumSongs.songs;
+      };
+      setTimeout(this.songsData, 3000);
+      this.albumSongs.mount(albumId);
       return;
     }
 
@@ -142,12 +163,21 @@ export class MainComponent {
     }
 
     if (pathname === "artists") {
+      this.songsData = () => {
+        this.player.songsData = this.artistSongTable.songs;
+      };
+      setTimeout(this.songsData, 3000);
       this.artist.mount();
       return;
     }
 
     if (pathname === "songs") {
+      this.songsData = () => {
+        this.player.songsData = this.table.songs;
+      };
+      setTimeout(this.songsData, 1000);
       this.table.mount();
+
       return;
     }
 
@@ -176,6 +206,7 @@ export class MainComponent {
   handlePlayerChangeState(songId, isPlaying) {
     if (songId) {
       this.table.changeStateSong(songId, isPlaying);
+      this.albumSongs.changeStateSong(songId, isPlaying);
     }
   }
 
@@ -235,11 +266,16 @@ export class MainComponent {
 
     this.artist = new ArtistsComponent(this.mainContentPoint);
 
+    this.albumSongs = new AlbumSongsTableComponent(this.mainContentPoint, {
+      onSongPlay: this.handleSongPlay.bind(this),
+      onSongStop: this.handleSongStop.bind(this)
+    });
+
     this.player = new MediaPlayerComponent(this.playerPoint, {
       onDialogOpen: this.handleDialogOpen.bind(this),
       onPlayerChangeState: this.handlePlayerChangeState.bind(this),
       onLegalOptionClick: this.handleSetInfo.bind(this),
-      tableData: this.table
+      songsData: this.songsData
     });
     this.player.mount();
   }

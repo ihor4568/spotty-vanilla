@@ -5,14 +5,20 @@
       <th class="songs-table__th songs-table__th_number">
         <span class="songs-table__th-field">
           #
-          <i data="number" class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_number"></i>
+          <i
+            data="number"
+            class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_number"
+          ></i>
         </span>
       </th>
       <th class="songs-table__th"></th>
       <th class="songs-table__th songs-table__th_name">
         <span class="songs-table__th-field">
           Name
-          <i data="name" class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_name"></i>
+          <i
+            data="name"
+            class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_name"
+          ></i>
         </span>
       </th>
       <th class="songs-table__th songs-table__th_duration">
@@ -21,13 +27,19 @@
       <th class="songs-table__th songs-table__th_artist">
         <span class="songs-table__th-field">
           Artist
-          <i data="author" class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_author"></i>
+          <i
+            data="author"
+            class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_author"
+          ></i>
         </span>
       </th>
       <th class="songs-table__th songs-table__th_album">
         <span class="songs-table__th-field">
           Album
-          <i data="album" class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_album"></i>
+          <i
+            data="album"
+            class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_album"
+          ></i>
         </span>
       </th>
       <th class="songs-table__th songs-table__th_3dots"></th>
@@ -35,22 +47,32 @@
   </thead>
   <tbody class="songs-table__body">
     <% data.forEach(item => { %>
-    <tr class="songs-table__row" data-id="<%= item.id %>" data-table-id="<%= parseInt(item.number) %>" draggable="true">
+    <tr
+      class="songs-table__row"
+      data-id="<%= item.id %>"
+      data-table-id="<%= parseInt(item.number) %>"
+      draggable="true"
+    >
       <td class="songs-table__td songs-table__td_play">
         <button class="mdc-button songs-table__td_play-btn">
-          <span class="mdc-fab__icon material-icons songs-table__td_play-btn-icon">
-            <%= item.id === playingSongId ? "pause" : "play_arrow" %></span>
+          <span
+            class="mdc-fab__icon material-icons songs-table__td_play-btn-icon"
+          >
+            <%= item.id === playingSongId ? "pause" : "play_arrow" %></span
+          >
         </button>
       </td>
       <td class="songs-table__td songs-table__td_number">
         <%= parseInt(item.number) + 1 %>
       </td>
       <td class="songs-table__td songs-table__td_cover">
-        <img class="songs-table__td_cover-img" src="<%= item.album.imageURL %>" alt="">
+        <img
+          class="songs-table__td_cover-img"
+          src="<%= item.album.imageURL %>"
+          alt=""
+        />
       </td>
-      <td class="songs-table__td songs-table__td_name">
-        <%= item.name %>
-      </td>
+      <td class="songs-table__td songs-table__td_name"><%= item.name %></td>
       <td class="songs-table__td songs-table__td_duration">
         <%= item.duration%>
       </td>
@@ -61,7 +83,9 @@
         <%= item.album.name %>
       </td>
       <td class="songs-table__td songs-table__td_more">
-        <button class="mdc-icon-button material-icons songs-table__td_more-btn">more_vert</button>
+        <button class="mdc-icon-button material-icons songs-table__td_more-btn">
+          more_vert
+        </button>
       </td>
     </tr>
     <% }) %>

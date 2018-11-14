@@ -27,6 +27,7 @@ export class MainControlComponent {
       audio: this.props.audio,
       onPlayerChangeState: this.props.onPlayerChangeState,
       tableData: this.props.tableData,
+      albumData: this.props.albumData,
       nextSong: this.props.nextSong,
       prevSong: this.props.prevSong
     });

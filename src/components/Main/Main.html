@@ -1,28 +1,41 @@
 <div class="main">
   <aside class="main__sidebar mdc-drawer mdc-drawer--dismissible">
     <div class="mdc-drawer__header">
-      <h3 class="mdc-drawer__title main__user">
-        <%= currentUser %>
-      </h3>
+      <h3 class="mdc-drawer__title main__user"><%= currentUser %></h3>
       <a href="/login" class="mdc-drawer__subtitle main__sign-out">Sign Out</a>
     </div>
     <div class="mdc-drawer__content">
       <div class="mdc-list main__list">
-        <a class="mdc-list-item mdc-list-item--activated main__list-item main__my-songs-link" href="/songs" aria-selected="true">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">library_music</i>
+        <a
+          class="mdc-list-item mdc-list-item--activated main__list-item main__my-songs-link"
+          href="/songs"
+          aria-selected="true"
+        >
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true"
+            >library_music</i
+          >
           <span class="mdc-list-item__text">My Songs</span>
         </a>
         <a class="main__list-item mdc-list-item" href="/albums">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">album</i>
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true"
+            >album</i
+          >
           <span class="mdc-list-item__text">Albums</span>
         </a>
-        <a class="main__artists-link mdc-list-item main__list-item" href="/artists">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">person_outline</i>
+        <a
+          class="main__artists-link mdc-list-item main__list-item"
+          href="/artists"
+        >
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true"
+            >person_outline</i
+          >
           <span class="mdc-list-item__text">Artists</span>
         </a>
-        <hr class="mdc-list-divider">
+        <hr class="mdc-list-divider" />
         <a class="mdc-list-item main__list-item" href="/about">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true"
+            >info</i
+          >
           <span class="mdc-list-item__text">About</span>
         </a>
       </div>

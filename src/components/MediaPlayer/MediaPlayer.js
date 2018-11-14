@@ -11,7 +11,10 @@ export class MediaPlayerComponent {
     this.mountPoint = mountPoint;
     this.props = props;
     this.song = null;
+    this.nextSong = null;
+    this.prevSong = null;
     this.isPlaying = false;
+    this.songsData = null;
   }
 
   querySelectors() {
@@ -41,7 +44,6 @@ export class MediaPlayerComponent {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
       audio: this.audio,
       onPlayerChangeState: this.handlePlayerChangeState.bind(this),
-      tableData: this.props.tableData,
       nextSong: this.setNextSong.bind(this),
       prevSong: this.setPrevSong.bind(this)
     });
@@ -84,6 +86,9 @@ export class MediaPlayerComponent {
       album: song.album.name,
       artistName: song.authorsInfo.map(author => author.name).join(", ")
     });
+    this.audioRatingComponent.setInfo({
+      songId: song.id
+    });
 
     if (song.songURL !== this.audio.src) {
       this.audio.src = song.songURL;
@@ -95,100 +100,40 @@ export class MediaPlayerComponent {
     return this.song;
   }
 
-  setNextSong() {
-    const songsArray = this.props.tableData.songs;
-    // eslint-disable-next-line no-restricted-syntax
-    for (const index of songsArray.keys()) {
+  findNextSong() {
+    this.songsData.forEach((val, i) => {
       if (
-        this.audio.getAttribute("src") ===
-          this.props.tableData.songs[index].songURL &&
-        index < this.props.tableData.songs.length - 1
+        this.audio.src === this.songsData[i].songURL &&
+        i < this.songsData.length - 1
       ) {
-        this.song = this.props.tableData.songs[index + 1];
-        this.audio.setAttribute(
-          "src",
-          `${this.props.tableData.songs[index + 1].songURL}`
-        );
-        this.audioInfoComponent.setInfo({
-          imageSrc: this.props.tableData.songs[index + 1].album.imageURL,
-          songName: this.props.tableData.songs[index + 1].name,
-          album: this.props.tableData.songs[index + 1].album.name,
-          artistName: this.props.tableData.songs[index + 1].authorsInfo
-            .map(author => author.name)
-            .join(", ")
-        });
-        this.mainControlPannel.play();
-        break;
+        this.nextSong = this.songsData[i + 1];
       } else if (
-        this.audio.getAttribute("src") ===
-          this.props.tableData.songs[index].songURL &&
-        index === this.props.tableData.songs.length - 1
+        this.audio.src === this.songsData[i].songURL &&
+        i === this.songsData.length - 1
       ) {
-        this.song = this.props.tableData.songs[0]; // eslint-disable-line prefer-destructuring
-        this.audio.setAttribute(
-          "src",
-          `${this.props.tableData.songs[0].songURL}`
-        );
-        this.audioInfoComponent.setInfo({
-          imageSrc: this.props.tableData.songs[0].album.imageURL,
-          songName: this.props.tableData.songs[0].name,
-          album: this.props.tableData.songs[0].album.name,
-          artistName: this.props.tableData.songs[0].authorsInfo
-            .map(author => author.name)
-            .join(", ")
-        });
-        this.mainControlPannel.play();
-        break;
+        this.nextSong = this.songsData[0]; // eslint-disable-line prefer-destructuring
       }
-    }
+    });
+  }
+
+  findPrevSong() {
+    this.songsData.forEach((val, i) => {
+      if (this.audio.src === this.songsData[i].songURL && i > 0) {
+        this.prevSong = this.songsData[i - 1];
+      } else if (this.audio.src === this.songsData[i].songURL && i === 0) {
+        this.prevSong = this.songsData[this.songsData.length - 1];
+      }
+    });
+  }
+
+  setNextSong() {
+    this.findNextSong();
+    this.setNewSong(this.nextSong);
   }
 
   setPrevSong() {
-    const songsArray = this.props.tableData.songs;
-    // eslint-disable-next-line no-restricted-syntax
-    for (const index of songsArray.keys()) {
-      if (
-        this.audio.getAttribute("src") ===
-          this.props.tableData.songs[index].songURL &&
-        index > 0
-      ) {
-        this.song = this.props.tableData.songs[index - 1];
-        this.audio.setAttribute(
-          "src",
-          `${this.props.tableData.songs[index - 1].songURL}`
-        );
-        this.audioInfoComponent.setInfo({
-          imageSrc: this.props.tableData.songs[index - 1].album.imageURL,
-          songName: this.props.tableData.songs[index - 1].name,
-          album: this.props.tableData.songs[index - 1].album.name,
-          artistName: this.props.tableData.songs[index - 1].authorsInfo
-            .map(author => author.name)
-            .join(", ")
-        });
-        this.mainControlPannel.play();
-        break;
-      } else if (
-        this.audio.getAttribute("src") ===
-          this.props.tableData.songs[index].songURL &&
-        index === 0
-      ) {
-        this.song = this.props.tableData.songs[2]; // eslint-disable-line prefer-destructuring
-        this.audio.setAttribute(
-          "src",
-          `${this.props.tableData.songs[2].songURL}`
-        );
-        this.audioInfoComponent.setInfo({
-          imageSrc: this.props.tableData.songs[2].album.imageURL,
-          songName: this.props.tableData.songs[2].name,
-          album: this.props.tableData.songs[2].album.name,
-          artistName: this.props.tableData.songs[2].authorsInfo
-            .map(author => author.name)
-            .join(", ")
-        });
-        this.mainControlPannel.play();
-        break;
-      }
-    }
+    this.findPrevSong();
+    this.setNewSong(this.prevSong);
   }
 
   showPlayer() {
