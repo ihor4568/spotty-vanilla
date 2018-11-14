@@ -11,9 +11,10 @@ import { AuthComponent } from "../Auth/Auth";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
+import { AlbumSongsTableComponent } from "../AlbumSongsTable/AlbumSongsTable";
 import { NotFoundComponent } from "../NotFound/NotFound";
-import mainTemplate from "./Main.html";
 import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
+import mainTemplate from "./Main.html";
 
 export class MainComponent {
   constructor(mountPoint, props = {}) {
@@ -73,6 +74,10 @@ export class MainComponent {
     this.sidebarList.addEventListener("click", this.handleListClick.bind(this));
     window.addEventListener("popstate", this.handleStatePath.bind(this));
     this.userSignOut.addEventListener("click", this.handleSignOut.bind(this));
+    this.mainContentPoint.addEventListener(
+      "click",
+      this.handleListClick.bind(this)
+    );
   }
 
   handleListClick(e) {
@@ -136,6 +141,13 @@ export class MainComponent {
       return;
     }
 
+    if (/albums\/\w+/.test(pathname)) {
+      const pathnameParts = pathname.split("/");
+      const albumId = pathnameParts[pathnameParts.length - 1];
+      this.albumSongs.mount(albumId);
+      return;
+    }
+
     if (pathname === "about") {
       this.about.mount();
       return;
@@ -176,6 +188,7 @@ export class MainComponent {
   handlePlayerChangeState(songId, isPlaying) {
     if (songId) {
       this.table.changeStateSong(songId, isPlaying);
+      this.albumSongs.changeStateSong(songId, isPlaying);
     }
   }
 
@@ -246,6 +259,11 @@ export class MainComponent {
     this.notFound = new NotFoundComponent(this.mainContentPoint);
 
     this.artist = new ArtistsComponent(this.mainContentPoint);
+
+    this.albumSongs = new AlbumSongsTableComponent(this.mainContentPoint, {
+      onSongPlay: this.handleSongPlay.bind(this),
+      onSongStop: this.handleSongStop.bind(this)
+    });
   }
 
   render() {

@@ -19,9 +19,9 @@
     "material-components-web": "0.40.1"
   },
   "devDependencies": {
-    "firebase-tools": "6.0.0",
     "autoprefixer": "9.1.5",
     "clean-webpack-plugin": "0.1.19",
+    "firebase-tools": "6.0.0",
     "cross-env": "5.2.0",
     "css-loader": "1.0.0",
     "ejs-loader": "0.3.1",

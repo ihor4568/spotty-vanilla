@@ -73,6 +73,7 @@ export class MySongsComponent {
       return;
     }
     this.table = new SongsTableComponent(this.tableContainer, {
+      onDrag: true,
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
