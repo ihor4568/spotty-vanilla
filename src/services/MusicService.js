@@ -92,16 +92,10 @@ export class MusicService {
     return database
       .ref(`users/${userId}/rating/`)
       .once("value")
-      .then(rating => rating.val());
+      .then(rating => rating.val() || {});
   }
 
   static setNewRating(userId, songId, ratingValue) {
-    return database
-      .ref(`users/${userId}`)
-      .once("value")
-      .then(user => user.val().rating)
-      .then(() =>
-        database.ref(`users/${userId}/rating/${songId}`).set(ratingValue)
-      );
+    return database.ref(`users/${userId}/rating/${songId}`).set(ratingValue);
   }
 }
