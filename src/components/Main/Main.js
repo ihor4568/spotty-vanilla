@@ -14,8 +14,8 @@ import { ArtistsComponent } from "../Artists/Artists";
 import { ArtistSongTableComponent } from "../ArtistSongTable/ArtistSongTable";
 import { AlbumSongsTableComponent } from "../AlbumSongsTable/AlbumSongsTable";
 import { NotFoundComponent } from "../NotFound/NotFound";
-import mainTemplate from "./Main.html";
 import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
+import mainTemplate from "./Main.html";
 
 export class MainComponent {
   constructor(mountPoint, props = {}) {
