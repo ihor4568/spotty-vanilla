@@ -40,19 +40,18 @@ export class AlbumsComponent {
     );
   }
 
-  addEventsListeners() {
-    this.albumsContainer.addEventListener("click", e => {
-      e.path.forEach(node => {
-        if (node.classList && node.classList.contains("albums__card")) {
-          const albumId = node.dataset.id;
-          this.props.onAlbumClick(albumId);
-        }
-      });
-    });
-  }
-
   getArtistNameById(authors, id) {
     return authors.find(author => author.id === id).name;
+  }
+
+  addEventsListeners() {
+    this.albumsContainer.addEventListener("click", e => {
+      const album = e.target.closest(".albums__card");
+      if (album) {
+        const albumId = album.dataset.id;
+        this.props.onAlbumClick(albumId);
+      }
+    });
   }
 
   mount(shouldFetchData = true) {
