@@ -69,9 +69,6 @@ export class MySongsComponent {
   }
 
   mountChildren() {
-    if (!this.songs.length) {
-      return;
-    }
     this.table = new SongsTableComponent(this.tableContainer, {
       onDrag: true,
       data: this.songs,
@@ -91,7 +88,9 @@ export class MySongsComponent {
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
-    this.mountChildren();
+    if (this.songs.length) {
+      this.mountChildren();
+    }
   }
 
   render() {

@@ -79,7 +79,7 @@ export class MediaPlayerComponent {
     MusicService.setUserSong(
       AuthService.getCurrentUser().uid,
       this.song.id
-    ).then(() => this.props.onAddSong());
+    ).then(this.props.onAddSong);
   }
 
   setNewSong(song) {

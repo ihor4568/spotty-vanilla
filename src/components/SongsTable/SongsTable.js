@@ -192,11 +192,8 @@ export class SongsTableComponent {
     }
   }
 
-  handleRemoveSong(e) {
-    const target = e.target.closest(".songs-table__row");
-    if (target) {
-      this.props.onSongRemove(target.dataset.id);
-    }
+  handleRemoveSong(song) {
+    this.props.onSongRemove(song.id);
   }
 
   setupOrderIconDisplay() {
@@ -241,7 +238,7 @@ export class SongsTableComponent {
           },
           {
             name: "Remove from my songs",
-            handler: this.handleRemoveSong.bind(this)
+            handler: this.handleRemoveSong.bind(this, this.state.data[i])
           },
           {
             name: "Share",

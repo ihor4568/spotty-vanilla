@@ -33,7 +33,7 @@ export class DotsMenuComponent {
     const activeMenuItem = e.target.closest(".dots-menu__item");
     if (activeMenuItem) {
       const id = parseInt(activeMenuItem.dataset.id, 10);
-      this.props.items[id].handler(e);
+      this.props.items[id].handler();
       this.uiMenu.open = false;
     }
   }
