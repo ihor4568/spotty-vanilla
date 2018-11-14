@@ -47,7 +47,7 @@ export class ArtistSongTableComponent {
           this.songs[i].authorsInfo = authorsInfo;
         });
 
-        this.mount(false);
+        this.mount();
       });
   }
 
