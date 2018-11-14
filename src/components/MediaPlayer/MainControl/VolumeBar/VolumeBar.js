@@ -8,7 +8,6 @@ export class VolumeBarComponent {
     this.props = props;
     this.changeVolumeLevel = this.changeVolumeLevel.bind(this);
     this.volumeIconHandler = this.volumeIconHandler.bind(this);
-    this.showModal = this.showModal.bind(this);
     this.mouseDownHandler = this.mouseDownHandler.bind(this);
     this.mouseUpHandler = this.mouseUpHandler.bind(this);
   }
@@ -18,7 +17,7 @@ export class VolumeBarComponent {
       this.mountPoint.querySelector(".volume-bar__slider")
     );
     // using setTimeout to fix the bug with initial render of MDCSlider
-    // layout() is a build in method for MDCSlider
+    // layout() is a built-in method for MDCSlider
     setTimeout(() => {
       this.slider.layout();
     }, 0);
@@ -27,6 +26,9 @@ export class VolumeBarComponent {
   querySelectors() {
     this.volumeBar = this.mountPoint.querySelector(".volume-bar__slider");
     this.volumeIcon = this.mountPoint.querySelector(".volume-bar__icon");
+    this.modalWindow = this.mountPoint.querySelector(
+      ".volume-bar__modal-window"
+    );
   }
 
   changeVolumeLevel() {
@@ -65,27 +67,16 @@ export class VolumeBarComponent {
     this.toggleVolume();
   }
 
-  showModal() {
-    if (this.extraDiv) {
-      this.extraDiv.remove();
-    }
-    this.extraDiv = document.createElement("div");
-    this.extraDiv.className = "volume-bar__extra-div";
-    this.mountPoint.appendChild(this.extraDiv);
-  }
-
   mouseDownHandler() {
     document.addEventListener("mouseup", this.mouseUpHandler);
-    this.showModal();
+    this.modalWindow.style.display = "block";
   }
 
   mouseUpHandler() {
     this.props.audio.volume = this.slider.value / 100;
     this.toggleVolume();
     document.removeEventListener("mouseup", this.mouseUpHandler);
-    if (this.extraDiv) {
-      this.extraDiv.remove();
-    }
+    this.modalWindow.style.display = "none";
   }
 
   addEventListeners() {
