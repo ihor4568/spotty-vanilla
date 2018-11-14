@@ -14,9 +14,11 @@
     width: 100%;
   }
 
-  &__artist-card_shaped {
-    border-radius: 50%;
-    width: 14.931%;
+  &__artist-card {
+    &_shaped {
+      border-radius: 50%;
+      width: 14.931%;
+    }
   }
 
   &__media {
