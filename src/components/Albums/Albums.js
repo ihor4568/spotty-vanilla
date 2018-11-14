@@ -21,7 +21,8 @@ export class AlbumsComponent {
 
   initMaterial() {
     Array.from(this.albumRipplePoint).forEach(el => {
-      this.albumRipplePoint = new MDCRipple(el);
+      // eslint-disable-next-line no-new
+      new MDCRipple(el);
     });
   }
 
@@ -42,7 +43,7 @@ export class AlbumsComponent {
   addEventsListeners() {
     this.albumsContainer.addEventListener("click", e => {
       e.path.forEach(node => {
-        if (node.classList && node.classList.contains("mdc-card-album")) {
+        if (node.classList && node.classList.contains("albums__card")) {
           const albumId = node.dataset.id;
           this.props.onAlbumClick(albumId);
         }
