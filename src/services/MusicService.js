@@ -78,6 +78,16 @@ export class MusicService {
     );
   }
 
+  static changeSongsOrder(arr) {
+    return new Promise(() => {
+      FirebaseService.auth().onAuthStateChanged(user => {
+        if (user) {
+          database.ref(`users/${user.uid}/songs`).set(arr);
+        }
+      });
+    });
+  }
+
   static getSongRating(userId) {
     return database
       .ref(`users/${userId}/rating/`)
