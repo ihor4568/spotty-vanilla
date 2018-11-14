@@ -214,6 +214,10 @@ export class MainComponent {
     this.searchPoint.classList.toggle("main__search_drawer-open");
   }
 
+  handleAlbumClick(albumId) {
+    this.routeNavigate(`/albums/${albumId}`);
+  }
+
   mountChildren() {
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
@@ -249,7 +253,9 @@ export class MainComponent {
       onLegalOptionClick: this.handleSetInfo.bind(this)
     });
 
-    this.albums = new AlbumsComponent(this.mainContentPoint);
+    this.albums = new AlbumsComponent(this.mainContentPoint, {
+      onAlbumClick: this.handleAlbumClick.bind(this)
+    });
 
     this.notFound = new NotFoundComponent(this.mainContentPoint);
 

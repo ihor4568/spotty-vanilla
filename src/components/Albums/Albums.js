@@ -4,8 +4,9 @@ import albumsTemplate from "./Albums.html";
 import { MusicService } from "../../services/MusicService";
 
 export class AlbumsComponent {
-  constructor(mountPoint) {
+  constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
+    this.props = props;
     this.state = {
       albums: []
     };
@@ -15,12 +16,12 @@ export class AlbumsComponent {
     this.albumRipplePoint = this.mountPoint.querySelectorAll(
       ".albums__card-ripple-effect"
     );
+    this.albumsContainer = this.mountPoint.querySelector(".albums__container");
   }
 
   initMaterial() {
     Array.from(this.albumRipplePoint).forEach(el => {
-      // eslint-disable-next-line no-new
-      new MDCRipple(el);
+      this.albumRipplePoint = new MDCRipple(el);
     });
   }
 
@@ -38,6 +39,17 @@ export class AlbumsComponent {
     );
   }
 
+  addEventsListeners() {
+    this.albumsContainer.addEventListener("click", e => {
+      e.path.forEach(node => {
+        if (node.classList && node.classList.contains("mdc-card-album")) {
+          const albumId = node.dataset.id;
+          this.props.onAlbumClick(albumId);
+        }
+      });
+    });
+  }
+
   getArtistNameById(authors, id) {
     return authors.find(author => author.id === id).name;
   }
@@ -45,10 +57,12 @@ export class AlbumsComponent {
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
       this.fetchAlbumsCollectionData();
+      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
+    this.addEventsListeners();
   }
 
   render() {
