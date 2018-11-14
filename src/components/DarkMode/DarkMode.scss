@@ -1,5 +1,44 @@
+.dark-mode {
+  &__holder {
+    margin-top: 3rem;
+  }
+
+  &__list {
+    display: flex;
+  }
+
+  &__icon {
+    cursor: pointer;
+    font-size: 2rem;
+  }
+
+  &__icon_black {
+    border: 0.1875rem solid $dark-1;
+    border-radius: 50%;
+    @include mdc-list-item-primary-text-ink-color($dark-1);
+  }
+
+  &__icon_purple {
+    border: 0.1875rem solid hsla(265, 100%, 47%, 1);
+    border-radius: 50%;
+    @include mdc-list-item-primary-text-ink-color(hsla(265, 100%, 47%, 1));
+  }
+}
+
 .page-dark-mode {
   background-color: $background;
+
+  .dark-mode {
+    &__holder {
+      background-color: $font-grey-5;
+    }
+
+    &__icon_black {
+      border: 0.1875rem solid $background;
+      border-radius: 50%;
+      @include mdc-list-item-primary-text-ink-color($background);
+    }
+  }
 
   .main {
     &__sidebar {

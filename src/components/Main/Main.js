@@ -1,9 +1,9 @@
 import { MDCDrawer } from "@material/drawer";
-import { MDCSwitch } from "@material/switch";
 import { AuthService } from "../../services/AuthService";
 
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
+import { DarkModeComponent } from "../DarkMode/DarkMode";
 import { SearchComponent } from "../Search/Search";
 import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
@@ -70,7 +70,6 @@ export class MainComponent {
     this.drawer = MDCDrawer.attachTo(
       this.mountPoint.querySelector(".main__sidebar")
     );
-    this.switch = new MDCSwitch(this.mountPoint.querySelector(".mdc-switch"));
   }
 
   addEventListeners() {
@@ -201,10 +200,6 @@ export class MainComponent {
     }
   }
 
-  handleDarkTheme() {
-    document.documentElement.classList.toggle("page-dark-mode");
-  }
-
   handleDialogOpen() {
     this.licenseDialogComponent.handleOpen();
   }
@@ -233,6 +228,9 @@ export class MainComponent {
       scrollTarget: this.scrollTarget
     });
     this.header.mount();
+
+    this.darkMode = new DarkModeComponent(this.darkMode);
+    this.darkMode.mount();
 
     this.licenseDialogComponent = new LicenseDialogComponent(
       this.licenseDialog
