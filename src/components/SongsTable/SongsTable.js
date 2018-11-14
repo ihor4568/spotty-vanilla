@@ -39,7 +39,7 @@ export class SongsTableComponent {
     if (target.tagName === "SPAN") {
       return target.firstElementChild.attributes.data.value;
     }
-    if (target.tagName === "I") {
+    if (target.tagName === "I" && target.innerHTML !== "watch_later") {
       return target.attributes.data.value;
     }
     return null;
