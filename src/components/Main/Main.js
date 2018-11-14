@@ -85,7 +85,6 @@ export class MainComponent {
     e.preventDefault();
     const { target } = e;
     const listItem = target.closest(".main__list-item");
-
     if (listItem) {
       this.routeNavigate(listItem.href);
     }
@@ -209,6 +208,10 @@ export class MainComponent {
     this.licenseDialogComponent.setInfo(info);
   }
 
+  handleArtistView(artistId) {
+    this.routeNavigate(`/artists/${artistId}`);
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -262,7 +265,10 @@ export class MainComponent {
 
     this.notFound = new NotFoundComponent(this.mainContentPoint);
 
-    this.artist = new ArtistsComponent(this.mainContentPoint);
+    this.artist = new ArtistsComponent(this.mainContentPoint, {
+      onArtistClick: this.handleArtistView.bind(this)
+    });
+
     this.artistSongTable = new ArtistSongTableComponent(this.mainContentPoint, {
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)

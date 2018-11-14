@@ -6,7 +6,7 @@
   <div class="artists__container">
     <% artists.forEach(item => { %>
     <div class="mdc-card artists__card responsive-grid">
-      <a class="artists__link main__list-item" href="/artists/<%= item.id %>">
+      <div class="artists__link" data-id="<%=item.id %>">
         <div class="artists__artist-card artists__artist-card_shaped">
           <div
             class="mdc-card mdc-card__primary-action mdc-ripple artists__ripple"
@@ -25,7 +25,7 @@
             <%= item.name %>
           </div>
         </div>
-      </a>
+      </div>
     </div>
     <% }) %>
   </div>

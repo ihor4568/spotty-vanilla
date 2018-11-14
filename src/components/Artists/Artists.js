@@ -3,8 +3,9 @@ import artistsTemplate from "./Artists.html";
 import { MusicService } from "../../services/MusicService";
 
 export class ArtistsComponent {
-  constructor(mountPoint) {
+  constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
+    this.props = props;
     this.state = {
       artists: []
     };
@@ -12,12 +13,27 @@ export class ArtistsComponent {
 
   querySelectors() {
     this.cardRipple = this.mountPoint.querySelectorAll(".artists__ripple");
+    this.artistsContainer = this.mountPoint.querySelector(
+      ".artists__container"
+    );
   }
 
   initMaterial() {
     Array.from(this.cardRipple).forEach(item => {
       // eslint-disable-next-line no-new
       new MDCRipple(item);
+    });
+  }
+
+  addEventListeners() {
+    this.artistsContainer.addEventListener("click", e => {
+      e.path.forEach(node => {
+        if (node.classList && node.classList.contains("artists__link")) {
+          const artistId = node.dataset.id;
+
+          this.props.onArtistClick(artistId);
+        }
+      });
     });
   }
 
@@ -36,6 +52,7 @@ export class ArtistsComponent {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.initMaterial();
+    this.addEventListeners();
   }
 
   render() {
