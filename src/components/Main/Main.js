@@ -31,12 +31,12 @@ export class MainComponent {
     this.mainPoint = this.mountPoint.querySelector(".main__section");
     this.sidebarList = this.mountPoint.querySelector(".main__list");
     this.headerPoint = this.mountPoint.querySelector(".main__header");
+    this.darkMode = this.mountPoint.querySelector(".main__dark-mode");
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.appBar = this.mountPoint.querySelector(".main__app-bar");
     this.userPoint = this.mountPoint.querySelector(".main__user");
     this.userSignOut = this.mountPoint.querySelector(".main__sign-out");
-    this.darkTheme = this.mountPoint.querySelector(".main__switch");
     this.licenseDialog = this.mountPoint.querySelector(".main__license-dialog");
   }
 
@@ -81,7 +81,6 @@ export class MainComponent {
       "click",
       this.handleListClick.bind(this)
     );
-    this.darkTheme.addEventListener("click", this.handleDarkTheme.bind(this));
   }
 
   handleListClick(e) {
