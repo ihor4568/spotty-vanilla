@@ -17,6 +17,8 @@ export class VolumeBarComponent {
     this.slider = new MDCSlider(
       this.mountPoint.querySelector(".volume-bar__slider")
     );
+    // using setTimeout to fix the bug with initial render of MDCSlider
+    // layout() is a build in method for MDCSlider
     setTimeout(() => {
       this.slider.layout();
     }, 0);
