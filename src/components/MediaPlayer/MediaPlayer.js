@@ -81,6 +81,9 @@ export class MediaPlayerComponent {
       album: song.album.name,
       artistName: song.authorsInfo.map(author => author.name).join(", ")
     });
+    this.audioRatingComponent.setInfo({
+      songId: song.id
+    });
 
     if (song.songURL !== this.audio.src) {
       this.audio.src = song.songURL;
