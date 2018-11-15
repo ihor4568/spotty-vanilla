@@ -86,7 +86,6 @@ export class MainComponent {
     e.preventDefault();
     const { target } = e;
     const listItem = target.closest(".main__list-item");
-
     if (listItem) {
       this.routeNavigate(listItem.href);
     }
@@ -138,6 +137,11 @@ export class MainComponent {
 
     this.changeActiveMenuItem(`/${pathname}`);
 
+    if (pathname === "songs") {
+      this.table.mount();
+      return;
+    }
+
     if (pathname === "albums") {
       this.albums.mount();
       return;
@@ -150,23 +154,20 @@ export class MainComponent {
       return;
     }
 
-    if (pathname === "about") {
-      this.about.mount();
-      return;
-    }
-
     if (pathname === "artists") {
       this.artist.mount();
       return;
     }
 
     if (/artists\/\w+/.test(pathname)) {
-      this.artistSongTable.mount();
+      const pathnameParts = pathname.split("/");
+      const artistId = pathnameParts[pathnameParts.length - 1];
+      this.artistSongTable.mount(artistId);
       return;
     }
 
-    if (pathname === "songs") {
-      this.table.mount();
+    if (pathname === "about") {
+      this.about.mount();
       return;
     }
 
@@ -208,6 +209,10 @@ export class MainComponent {
     this.licenseDialogComponent.setInfo(info);
   }
 
+  handleArtistClick(artistId) {
+    this.routeNavigate(`/artists/${artistId}`);
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -220,6 +225,10 @@ export class MainComponent {
   handleOpen() {
     this.drawer.open = !this.drawer.open;
     this.searchPoint.classList.toggle("main__search_drawer-open");
+  }
+
+  handleAlbumClick(albumId) {
+    this.routeNavigate(`/albums/${albumId}`);
   }
 
   mountChildren() {
@@ -260,11 +269,16 @@ export class MainComponent {
       onLegalOptionClick: this.handleSetInfo.bind(this)
     });
 
-    this.albums = new AlbumsComponent(this.mainContentPoint);
+    this.albums = new AlbumsComponent(this.mainContentPoint, {
+      onAlbumClick: this.handleAlbumClick.bind(this)
+    });
 
     this.notFound = new NotFoundComponent(this.mainContentPoint);
 
-    this.artist = new ArtistsComponent(this.mainContentPoint);
+    this.artist = new ArtistsComponent(this.mainContentPoint, {
+      onArtistClick: this.handleArtistClick.bind(this)
+    });
+
     this.artistSongTable = new ArtistSongTableComponent(this.mainContentPoint, {
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)

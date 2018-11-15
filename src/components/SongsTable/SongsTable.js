@@ -39,7 +39,7 @@ export class SongsTableComponent {
     if (target.tagName === "SPAN") {
       return target.firstElementChild.attributes.data.value;
     }
-    if (target.tagName === "I") {
+    if (target.tagName === "I" && target.innerHTML !== "watch_later") {
       return target.attributes.data.value;
     }
     return null;
@@ -136,19 +136,21 @@ export class SongsTableComponent {
   }
 
   addEventListeners() {
-    this.tableHead.addEventListener("click", this.handleOrderClick);
-    if (this.props.onDrag) {
-      this.tableBody.addEventListener(
-        "dragstart",
-        this.handleDragStart.bind(this)
-      );
-      this.tableBody.addEventListener("drop", this.handleDrop.bind(this));
-      this.tableBody.addEventListener(
-        "dragover",
-        this.handleDragOver.bind(this)
-      );
+    if (this.tableHead) {
+      this.tableHead.addEventListener("click", this.handleOrderClick);
+      if (this.props.onDrag) {
+        this.tableBody.addEventListener(
+          "dragstart",
+          this.handleDragStart.bind(this)
+        );
+        this.tableBody.addEventListener("drop", this.handleDrop.bind(this));
+        this.tableBody.addEventListener(
+          "dragover",
+          this.handleDragOver.bind(this)
+        );
+      }
+      this.tableBody.addEventListener("click", this.handlePlayClick.bind(this));
     }
-    this.tableBody.addEventListener("click", this.handlePlayClick.bind(this));
   }
 
   isBefore(el1, el2) {

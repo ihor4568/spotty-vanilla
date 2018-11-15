@@ -9,8 +9,10 @@
     box-shadow: none;
   }
 
-  &__card_shaped {
-    border-radius: 50%;
+  &__artist-card {
+    &_shaped {
+      border-radius: 50%;
+    }
   }
 
   &__media {
