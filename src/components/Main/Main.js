@@ -152,7 +152,7 @@ export class MainComponent {
       this.songsData = () => {
         this.player.songsData = this.albumSongs.songs;
       };
-      setTimeout(this.songsData, 3000);
+      setTimeout(this.songsData, 1500);
       this.albumSongs.mount(albumId);
       return;
     }
@@ -166,7 +166,7 @@ export class MainComponent {
       this.songsData = () => {
         this.player.songsData = this.artistSongTable.songs;
       };
-      setTimeout(this.songsData, 3000);
+      setTimeout(this.songsData, 1500);
       this.artist.mount();
       return;
     }
