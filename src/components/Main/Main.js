@@ -11,6 +11,7 @@ import { AuthComponent } from "../Auth/Auth";
 import { AlbumsComponent } from "../Albums/Albums";
 import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
+import { ArtistSongTableComponent } from "../ArtistSongTable/ArtistSongTable";
 import { AlbumSongsTableComponent } from "../AlbumSongsTable/AlbumSongsTable";
 import { NotFoundComponent } from "../NotFound/NotFound";
 import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
@@ -114,12 +115,13 @@ export class MainComponent {
       .replace(/^\/|\/$/g, "")
       .replace(/\/+/g, "/");
 
-    const urlParts = pathname.split("/");
-    if (urlParts[0] === "song" && urlParts[1] && urlParts.length === 2) {
-      const songId = urlParts[1];
+    if (/^song\/\w+/.test(pathname)) {
+      const pathnameParts = pathname.split("/");
+      const songId = pathnameParts[pathnameParts.length - 1];
       this.setShareView(songId);
       return;
     }
+
     AuthService.check().then(
       user => this.handleGo.call(this, pathname, user.displayName),
       this.handleStop.bind(this, pathname)
@@ -136,20 +138,20 @@ export class MainComponent {
 
     this.changeActiveMenuItem(`/${pathname}`);
 
+    if (pathname === "songs") {
+      this.table.mount();
+      return;
+    }
+
     if (pathname === "albums") {
       this.albums.mount();
       return;
     }
 
-    if (/albums\/\w+/.test(pathname)) {
+    if (/^albums\/\w+/.test(pathname)) {
       const pathnameParts = pathname.split("/");
       const albumId = pathnameParts[pathnameParts.length - 1];
       this.albumSongs.mount(albumId);
-      return;
-    }
-
-    if (pathname === "about") {
-      this.about.mount();
       return;
     }
 
@@ -158,8 +160,15 @@ export class MainComponent {
       return;
     }
 
-    if (pathname === "songs") {
-      this.table.mount();
+    if (/^artists\/\w+/.test(pathname)) {
+      const pathnameParts = pathname.split("/");
+      const artistId = pathnameParts[pathnameParts.length - 1];
+      this.artistSongTable.mount(artistId);
+      return;
+    }
+
+    if (pathname === "about") {
+      this.about.mount();
       return;
     }
 
@@ -188,6 +197,7 @@ export class MainComponent {
   handlePlayerChangeState(songId, isPlaying) {
     if (songId) {
       this.table.changeStateSong(songId, isPlaying);
+      this.artistSongTable.changeStateSong(songId, isPlaying);
       this.albumSongs.changeStateSong(songId, isPlaying);
     }
   }
@@ -198,6 +208,10 @@ export class MainComponent {
 
   handleSetInfo(info) {
     this.licenseDialogComponent.setInfo(info);
+  }
+
+  handleArtistClick(artistId) {
+    this.routeNavigate(`/artists/${artistId}`);
   }
 
   mount() {
@@ -212,6 +226,10 @@ export class MainComponent {
   handleOpen() {
     this.drawer.open = !this.drawer.open;
     this.searchPoint.classList.toggle("main__search_drawer-open");
+  }
+
+  handleAlbumClick(albumId) {
+    this.routeNavigate(`/albums/${albumId}`);
   }
 
   mountChildren() {
@@ -250,11 +268,20 @@ export class MainComponent {
     });
     this.player.mount();
 
-    this.albums = new AlbumsComponent(this.mainContentPoint);
+    this.albums = new AlbumsComponent(this.mainContentPoint, {
+      onAlbumClick: this.handleAlbumClick.bind(this)
+    });
 
     this.notFound = new NotFoundComponent(this.mainContentPoint);
 
-    this.artist = new ArtistsComponent(this.mainContentPoint);
+    this.artist = new ArtistsComponent(this.mainContentPoint, {
+      onArtistClick: this.handleArtistClick.bind(this)
+    });
+
+    this.artistSongTable = new ArtistSongTableComponent(this.mainContentPoint, {
+      onSongPlay: this.handleSongPlay.bind(this),
+      onSongStop: this.handleSongStop.bind(this)
+    });
 
     this.albumSongs = new AlbumSongsTableComponent(this.mainContentPoint, {
       onSongPlay: this.handleSongPlay.bind(this),

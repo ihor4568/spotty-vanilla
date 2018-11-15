@@ -1,17 +1,23 @@
-.artists {
-  width: 100%;
+.artist-song-table {
+  &__artist {
+    width: 100%;
+  }
+
   &__container {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 1rem;
   }
 
   &__card {
     box-shadow: none;
+    width: 100%;
   }
 
   &__artist-card {
     &_shaped {
       border-radius: 50%;
+      width: 14.931%;
     }
   }
 
@@ -28,17 +34,17 @@
   }
 
   &__name {
-    width: 100%;
-    margin: auto;
+    margin: auto 0 auto 0;
     text-align: center;
-    padding: $basic-container-gap 0;
-    overflow: hidden;
+    padding: $basic-container-gap;
     white-space: nowrap;
     text-overflow: ellipsis;
     color: #212121;
   }
 
   &__link {
+    display: flex;
+    justify-content: flex-start;
     text-decoration: none;
   }
 }

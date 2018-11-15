@@ -2,8 +2,12 @@
   <div class="album-songs-table">
     <div class="album-songs-table__card-container">
       <div class="album-songs-table__card mdc-card mdc-card-album">
-        <div class="albums__card-ripple-effect mdc-card__primary-action mdc-ripple-upgraded">
-          <div class="albums__card-media mdc-card__media mdc-card__media-first mdc-card__media--square">
+        <div
+          class="albums__card-ripple-effect mdc-card__primary-action mdc-ripple-upgraded"
+        >
+          <div
+            class="albums__card-media mdc-card__media mdc-card__media-first mdc-card__media--square"
+          >
             <div class="mdc-card__media-content">
               <img class="album-songs-table__card-images" src=<%=imageURL %>>
             </div>
@@ -15,10 +19,7 @@
           <%= title %>
         </h2>
         <h3 class="albums__card-artist mdc-typography--headline6">
-          <% if (authors) {%>
-          by
-          <%= authors %>
-          <%} %>
+          <% if (authors) {%> by <%= authors %> <%} %>
         </h3>
       </div>
     </div>

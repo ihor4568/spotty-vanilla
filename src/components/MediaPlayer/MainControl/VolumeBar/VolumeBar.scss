@@ -1,8 +1,11 @@
 .volume-bar {
-  user-select: none;
   display: flex;
   align-items: center;
   margin-left: 2rem;
+
+  &__slider {
+    width: 6rem;
+  }
   &__icon {
     cursor: pointer;
     margin-right: 0.625rem;
@@ -10,20 +13,14 @@
     color: #838383;
     font-size: 1.81rem;
   }
-  &__range {
-    -webkit-appearance: none;
-    background-color: #e6e6e6;
-    width: 6rem;
-    height: 0.313rem;
-    border-radius: 0.4rem;
-    outline: none;
-  }
-  &__range::-webkit-slider-thumb {
-    width: 0.937rem;
-    height: 0.937rem;
-    -webkit-appearance: none;
-    border-radius: 50%;
-    cursor: pointer;
-    background: #6200ee;
+  &__modal-window {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: transparent;
   }
 }

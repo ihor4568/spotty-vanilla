@@ -16,7 +16,7 @@
 @import "@material/tab-indicator/mdc-tab-indicator";
 @import "@material/tab/mdc-tab";
 @import "@material/dialog/mdc-dialog";
-
+@import "@material/slider/mdc-slider";
 @import "./variables";
 @import "./components/ResponsiveGrid/ResponsiveGrid";
 
@@ -32,6 +32,7 @@
 @import "./components/DotsMenu/DotsMenu";
 @import "./components/ShareView/ShareView";
 @import "./components/Artists/Artists";
+@import "./components/ArtistSongTable/ArtistSongTable";
 @import "./components/NotFound/NotFound";
 @import "./components/Auth/Auth";
 @import "./components/MySongs/MySongs";

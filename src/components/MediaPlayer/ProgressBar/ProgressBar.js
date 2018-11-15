@@ -1,3 +1,5 @@
+import { MDCSlider } from "@material/slider";
+
 import progressBarTemplate from "./ProgressBar.html";
 
 export class ProgressBarComponent {
@@ -6,44 +8,37 @@ export class ProgressBarComponent {
     this.audioDuration = 0;
     this.props = props;
     this.timeUpdate = this.timeUpdate.bind(this);
-    this.showModal = this.showModal.bind(this);
-    this.movePlayTime = this.movePlayTime.bind(this);
-    this.mouseUpHandler = this.mouseUpHandler.bind(this);
-    this.mouseDownHandler = this.mouseDownHandler.bind(this);
     this.finishPlay = this.finishPlay.bind(this);
+    this.movePlayTime = this.movePlayTime.bind(this);
+    this.mouseDownHandler = this.mouseDownHandler.bind(this);
+    this.mouseUpHandler = this.mouseUpHandler.bind(this);
   }
 
   querySelectors() {
-    this.progressBar = this.mountPoint.querySelector(".progress-bar__played");
-    this.progressBarMain = this.mountPoint.querySelector(".progress-bar__main");
-    this.progressBarCircle = this.mountPoint.querySelector(
-      ".progress-bar__circle"
+    this.progressBarMain = this.mountPoint.querySelector(".progress-bar");
+    this.progressBarFocus = this.mountPoint.querySelector(
+      ".progress-bar__focus-ring"
     );
-    this.moveCircle = document.createElement("div");
+    this.modalWindow = this.mountPoint.querySelector(
+      ".progress-bar__modal-window"
+    );
+  }
+
+  initMaterial() {
+    this.slider = new MDCSlider(this.mountPoint.querySelector(".progress-bar"));
   }
 
   timeUpdate() {
     this.audioDuration =
       (this.props.audio.currentTime / this.props.audio.duration) * 100;
-    this.progressBar.style.width = `${this.audioDuration}%`;
-    this.progressBarCircle.style.left = `100%`;
-  }
-
-  showModal() {
-    if (this.moveCircle) {
-      this.moveCircle.remove();
-    }
-    this.moveCircle = document.createElement("div");
-    this.moveCircle.className = "progress-bar__move-circle";
-    this.mountPoint.appendChild(this.moveCircle);
+    this.slider.value = this.audioDuration;
   }
 
   movePlayTime(e) {
     const { target } = e;
-    if (target !== this.progressBarCircle) {
+    if (target !== this.progressBarFocus) {
       this.props.audio.currentTime =
-        this.props.audio.duration *
-        (e.offsetX / this.progressBarMain.clientWidth);
+        (this.props.audio.duration * this.slider.value) / 100;
     }
   }
 
@@ -53,18 +48,16 @@ export class ProgressBarComponent {
 
   mouseDownHandler() {
     this.props.audio.removeEventListener("timeupdate", this.timeUpdate);
-    document.addEventListener("mousemove", this.movePlayTime);
-    document.addEventListener("mousemove", this.timeUpdate);
-    this.showModal();
+    document.addEventListener("mouseup", this.mouseUpHandler);
+    this.modalWindow.style.display = "block";
   }
 
   mouseUpHandler() {
     this.props.audio.addEventListener("timeupdate", this.timeUpdate);
-    document.removeEventListener("mousemove", this.movePlayTime);
-    document.removeEventListener("mousemove", this.timeUpdate);
-    if (this.moveCircle) {
-      this.moveCircle.remove();
-    }
+    this.props.audio.currentTime =
+      (this.slider.value * this.props.audio.duration) / 100;
+    document.removeEventListener("mouseup", this.mouseUpHandler);
+    this.modalWindow.style.display = "none";
   }
 
   addEventListeners() {
@@ -72,13 +65,13 @@ export class ProgressBarComponent {
     this.props.audio.addEventListener("ended", this.finishPlay);
     this.progressBarMain.addEventListener("click", this.movePlayTime);
     this.progressBarMain.addEventListener("mousedown", this.mouseDownHandler);
-    this.progressBarCircle.addEventListener("mousedown", this.mouseDownHandler);
-    document.addEventListener("mouseup", this.mouseUpHandler);
+    this.progressBarMain.addEventListener("mouseup", this.mouseUpHandler);
   }
 
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
+    this.initMaterial();
     this.addEventListeners();
   }
 
