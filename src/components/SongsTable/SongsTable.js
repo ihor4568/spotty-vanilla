@@ -98,6 +98,7 @@ export class SongsTableComponent {
 
   handlePlayClick(e) {
     const target = e.target.closest(".songs-table__td_play-btn");
+
     if (target) {
       const songId = target.closest(".songs-table__row").dataset.id;
 
