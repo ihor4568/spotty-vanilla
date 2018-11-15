@@ -208,7 +208,7 @@ export class MainComponent {
     this.licenseDialogComponent.setInfo(info);
   }
 
-  handleArtistView(artistId) {
+  handleArtistClick(artistId) {
     this.routeNavigate(`/artists/${artistId}`);
   }
 
@@ -266,7 +266,7 @@ export class MainComponent {
     this.notFound = new NotFoundComponent(this.mainContentPoint);
 
     this.artist = new ArtistsComponent(this.mainContentPoint, {
-      onArtistClick: this.handleArtistView.bind(this)
+      onArtistClick: this.handleArtistClick.bind(this)
     });
 
     this.artistSongTable = new ArtistSongTableComponent(this.mainContentPoint, {
