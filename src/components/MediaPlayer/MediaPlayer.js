@@ -107,7 +107,8 @@ export class MediaPlayerComponent {
         i < this.songsData.length - 1
       ) {
         this.nextSong = this.songsData[i + 1];
-      } else if (
+      }
+      if (
         this.audio.src === this.songsData[i].songURL &&
         i === this.songsData.length - 1
       ) {
@@ -120,7 +121,8 @@ export class MediaPlayerComponent {
     this.songsData.forEach((val, i) => {
       if (this.audio.src === this.songsData[i].songURL && i > 0) {
         this.prevSong = this.songsData[i - 1];
-      } else if (this.audio.src === this.songsData[i].songURL && i === 0) {
+      }
+      if (this.audio.src === this.songsData[i].songURL && i === 0) {
         this.prevSong = this.songsData[this.songsData.length - 1];
       }
     });
