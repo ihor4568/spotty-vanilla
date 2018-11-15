@@ -46,8 +46,6 @@ export class ArtistSongTableComponent {
           this.songs[i].album = album;
           this.songs[i].authorsInfo = authorsInfo;
         });
-
-        this.mount();
       });
   }
 
