@@ -217,4 +217,16 @@
       @include mdc-fab-ink-color($dark-1);
     }
   }
+
+  .license-dialog {
+    @include mdc-dialog-container-fill-color($dark-1);
+    @include mdc-dialog-scrim-color($background, 0.8);
+    @include mdc-dialog-title-ink-color($font-white-2);
+    @include mdc-dialog-content-ink-color($font-grey-4);
+
+    &__button {
+      @include mdc-button-ink-color($font-white-2);
+      @include mdc-button-filled-accessible($dark-1);
+    }
+  }
 }
