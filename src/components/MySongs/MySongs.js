@@ -8,6 +8,7 @@ export class MySongsComponent {
     this.mountPoint = mountPoint;
     this.props = props;
     this.songs = [];
+    this.isDataFetched = false;
   }
 
   querySelectors() {
@@ -44,7 +45,7 @@ export class MySongsComponent {
           this.songs[i].album = album;
           this.songs[i].authorsInfo = authorsInfo;
         });
-
+        this.isDataFetched = true;
         this.mount(false);
       });
   }
@@ -94,6 +95,9 @@ export class MySongsComponent {
   }
 
   render() {
-    return mySongs();
+    return mySongs({
+      isDataFetched: this.isDataFetched,
+      hasSongs: this.songs.length
+    });
   }
 }
