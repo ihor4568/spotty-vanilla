@@ -1,4 +1,4 @@
-import mySongs from "./MySongs.html";
+import mySongsTemplate from "./MySongs.html";
 import { SongsTableComponent } from "../SongsTable/SongsTable";
 import { MusicService } from "../../services/MusicService";
 import { AuthService } from "../../services/AuthService";
@@ -95,7 +95,7 @@ export class MySongsComponent {
   }
 
   render() {
-    return mySongs({
+    return mySongsTemplate({
       isDataFetched: this.isDataFetched,
       hasSongs: this.songs.length
     });

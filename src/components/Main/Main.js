@@ -200,10 +200,6 @@ export class MainComponent {
     this.licenseDialogComponent.setInfo(info);
   }
 
-  handleAddSong() {
-    this.table.addSong();
-  }
-
   mount() {
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
@@ -230,14 +226,6 @@ export class MainComponent {
     );
     this.licenseDialogComponent.mount();
 
-    this.player = new MediaPlayerComponent(this.playerPoint, {
-      onDialogOpen: this.handleDialogOpen.bind(this),
-      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
-      onLegalOptionClick: this.handleSetInfo.bind(this),
-      onAddSong: this.handleAddSong.bind(this)
-    });
-    this.player.mount();
-
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
 
@@ -253,6 +241,14 @@ export class MainComponent {
       onDialogOpen: this.handleDialogOpen.bind(this),
       onLegalOptionClick: this.handleSetInfo.bind(this)
     });
+
+    this.player = new MediaPlayerComponent(this.playerPoint, {
+      onDialogOpen: this.handleDialogOpen.bind(this),
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
+      onLegalOptionClick: this.handleSetInfo.bind(this),
+      onAddSong: this.table.addSong.bind(this.table)
+    });
+    this.player.mount();
 
     this.albums = new AlbumsComponent(this.mainContentPoint);
 
