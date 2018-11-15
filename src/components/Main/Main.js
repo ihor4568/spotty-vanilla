@@ -138,10 +138,6 @@ export class MainComponent {
     this.changeActiveMenuItem(`/${pathname}`);
 
     if (pathname === "albums") {
-      this.songsData = () => {
-        this.player.songsData = this.albumSongs.songs;
-      };
-      setTimeout(this.songsData, 3000);
       this.albums.mount();
       return;
     }
@@ -149,10 +145,6 @@ export class MainComponent {
     if (/albums\/\w+/.test(pathname)) {
       const pathnameParts = pathname.split("/");
       const albumId = pathnameParts[pathnameParts.length - 1];
-      this.songsData = () => {
-        this.player.songsData = this.albumSongs.songs;
-      };
-      setTimeout(this.songsData, 1500);
       this.albumSongs.mount(albumId);
       return;
     }
@@ -163,19 +155,11 @@ export class MainComponent {
     }
 
     if (pathname === "artists") {
-      this.songsData = () => {
-        this.player.songsData = this.artistSongTable.songs;
-      };
-      setTimeout(this.songsData, 1500);
       this.artist.mount();
       return;
     }
 
     if (pathname === "songs") {
-      this.songsData = () => {
-        this.player.songsData = this.table.songs;
-      };
-      setTimeout(this.songsData, 1000);
       this.table.mount();
 
       return;
@@ -236,6 +220,10 @@ export class MainComponent {
     this.routeNavigate(`/albums/${albumId}`);
   }
 
+  handleSetSongsData(data) {
+    this.player.setSongsData(data);
+  }
+
   mountChildren() {
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
@@ -258,6 +246,7 @@ export class MainComponent {
 
     this.about = new AboutComponent(this.mainContentPoint);
     this.table = new MySongsComponent(this.mainContentPoint, {
+      onDataReceived: this.handleSetSongsData.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this),
       onDialogOpen: this.handleDialogOpen.bind(this),
@@ -273,6 +262,7 @@ export class MainComponent {
     this.artist = new ArtistsComponent(this.mainContentPoint);
 
     this.albumSongs = new AlbumSongsTableComponent(this.mainContentPoint, {
+      onDataReceived: this.handleSetSongsData.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)
     });
@@ -280,8 +270,7 @@ export class MainComponent {
     this.player = new MediaPlayerComponent(this.playerPoint, {
       onDialogOpen: this.handleDialogOpen.bind(this),
       onPlayerChangeState: this.handlePlayerChangeState.bind(this),
-      onLegalOptionClick: this.handleSetInfo.bind(this),
-      songsData: this.songsData
+      onLegalOptionClick: this.handleSetInfo.bind(this)
     });
     this.player.mount();
   }

@@ -100,42 +100,38 @@ export class MediaPlayerComponent {
     return this.song;
   }
 
+  setSongsData(songs) {
+    this.songsData = songs;
+  }
+
   findNextSong() {
-    this.songsData.forEach((val, i) => {
-      if (
-        this.audio.src === this.songsData[i].songURL &&
-        i < this.songsData.length - 1
-      ) {
-        this.nextSong = this.songsData[i + 1];
-      }
-      if (
-        this.audio.src === this.songsData[i].songURL &&
-        i === this.songsData.length - 1
-      ) {
-        this.nextSong = this.songsData[0]; // eslint-disable-line prefer-destructuring
-      }
-    });
+    const index = this.songsData.findIndex(
+      value => this.audio.src === value.songURL
+    );
+
+    if (this.songsData[index + 1]) {
+      return this.songsData[index + 1];
+    }
+    return this.songsData[0];
   }
 
   findPrevSong() {
-    this.songsData.forEach((val, i) => {
-      if (this.audio.src === this.songsData[i].songURL && i > 0) {
-        this.prevSong = this.songsData[i - 1];
-      }
-      if (this.audio.src === this.songsData[i].songURL && i === 0) {
-        this.prevSong = this.songsData[this.songsData.length - 1];
-      }
-    });
+    const index = this.songsData.findIndex(
+      value => this.audio.src === value.songURL
+    );
+
+    if (this.songsData[index - 1]) {
+      return this.songsData[index - 1];
+    }
+    return this.songsData[this.songsData.length - 1];
   }
 
   setNextSong() {
-    this.findNextSong();
-    this.setNewSong(this.nextSong);
+    this.setNewSong(this.findNextSong());
   }
 
   setPrevSong() {
-    this.findPrevSong();
-    this.setNewSong(this.prevSong);
+    this.setNewSong(this.findPrevSong());
   }
 
   showPlayer() {

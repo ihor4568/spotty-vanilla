@@ -29,7 +29,7 @@ export class MySongsComponent {
   }
 
   fetchSongs() {
-    MusicService.getAlbumSongs("album4")
+    return MusicService.getAlbumSongs("album4")
       .then(songs => {
         this.songs = songs;
 
@@ -42,8 +42,6 @@ export class MySongsComponent {
           this.songs[i].album = album;
           this.songs[i].authorsInfo = authorsInfo;
         });
-
-        this.mount(false);
       });
   }
 
@@ -56,7 +54,6 @@ export class MySongsComponent {
 
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
-      onDrag: true,
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
@@ -69,7 +66,10 @@ export class MySongsComponent {
 
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
-      this.fetchSongs();
+      Promise.resolve(this.fetchSongs())
+        .then(() => this.mount(false))
+        .then(() => this.props.onDataReceived(this.songs));
+      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
