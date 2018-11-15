@@ -1,6 +1,8 @@
 import _ from "lodash";
 import { MDCRipple } from "@material/ripple";
 
+import { MusicService } from "../../services/MusicService";
+
 import songsTableTemplate from "./SongsTable.html";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
@@ -37,7 +39,7 @@ export class SongsTableComponent {
     if (target.tagName === "SPAN") {
       return target.firstElementChild.attributes.data.value;
     }
-    if (target.tagName === "I") {
+    if (target.tagName === "I" && target.innerHTML !== "watch_later") {
       return target.attributes.data.value;
     }
     return null;
@@ -130,16 +132,25 @@ export class SongsTableComponent {
       `.songs-table__th-icon_${this.state.columnName}`
     );
     this.tableBody = this.mountPoint.querySelector(".songs-table__body");
+    this.tableRows = this.mountPoint.querySelectorAll(".songs-table__row");
   }
 
   addEventListeners() {
-    this.tableHead.addEventListener("click", this.handleOrderClick);
-    this.tableBody.addEventListener("dragover", this.handleDragOver.bind(this));
-    this.tableBody.addEventListener(
-      "dragstart",
-      this.handleDragStart.bind(this)
-    );
-    this.tableBody.addEventListener("click", this.handlePlayClick.bind(this));
+    if (this.tableHead) {
+      this.tableHead.addEventListener("click", this.handleOrderClick);
+      if (this.props.onDrag) {
+        this.tableBody.addEventListener(
+          "dragstart",
+          this.handleDragStart.bind(this)
+        );
+        this.tableBody.addEventListener("drop", this.handleDrop.bind(this));
+        this.tableBody.addEventListener(
+          "dragover",
+          this.handleDragOver.bind(this)
+        );
+      }
+      this.tableBody.addEventListener("click", this.handlePlayClick.bind(this));
+    }
   }
 
   isBefore(el1, el2) {
@@ -159,6 +170,15 @@ export class SongsTableComponent {
 
   handleDragStart(e) {
     this.dragElement = e.target;
+  }
+
+  handleDrop(e) {
+    e.preventDefault();
+    this.querySelectors();
+    const songsTable = Array.from(this.tableRows).map(item =>
+      item.getAttribute("data-id")
+    );
+    MusicService.changeSongsOrder(songsTable);
   }
 
   handleDragOver(e) {

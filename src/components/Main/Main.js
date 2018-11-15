@@ -13,8 +13,8 @@ import { AboutComponent } from "../About/About";
 import { ArtistsComponent } from "../Artists/Artists";
 import { AlbumSongsTableComponent } from "../AlbumSongsTable/AlbumSongsTable";
 import { NotFoundComponent } from "../NotFound/NotFound";
-import mainTemplate from "./Main.html";
 import { LicenseDialogComponent } from "../LicenseDialog/LicenseDialog";
+import mainTemplate from "./Main.html";
 
 export class MainComponent {
   constructor(mountPoint, props = {}) {
@@ -232,6 +232,10 @@ export class MainComponent {
     this.searchPoint.classList.toggle("main__search_drawer-open");
   }
 
+  handleAlbumClick(albumId) {
+    this.routeNavigate(`/albums/${albumId}`);
+  }
+
   mountChildren() {
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
@@ -260,7 +264,9 @@ export class MainComponent {
       onLegalOptionClick: this.handleSetInfo.bind(this)
     });
 
-    this.albums = new AlbumsComponent(this.mainContentPoint);
+    this.albums = new AlbumsComponent(this.mainContentPoint, {
+      onAlbumClick: this.handleAlbumClick.bind(this)
+    });
 
     this.notFound = new NotFoundComponent(this.mainContentPoint);
 
