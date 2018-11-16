@@ -35,6 +35,7 @@ export class AlbumsComponent {
             .map(author => this.getArtistNameById(authors, author))
             .join(", ")
         }));
+
         this.mount(false);
       }
     );
