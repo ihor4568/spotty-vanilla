@@ -63,6 +63,49 @@ export class MusicService {
       .then(author => author.val());
   }
 
+  static getUserSongs(userId) {
+    return database
+      .ref(`users/${userId}/songs`)
+      .once("value")
+      .then(data => data.val() || [])
+      .then(songs =>
+        Promise.all(
+          songs.map(songId =>
+            database
+              .ref(`songs/${songId}`)
+              .once("value")
+              .then(song => song.val())
+          )
+        )
+      );
+  }
+
+  static setUserSong(userId, songId) {
+    return database
+      .ref(`users/${userId}/songs`)
+      .once("value")
+      .then(data => data.val() || [])
+      .then(songs => {
+        if (!songs.includes(songId)) {
+          return database
+            .ref(`users/${userId}/songs/${songs.length}`)
+            .set(songId);
+        }
+        return Promise.reject();
+      });
+  }
+
+  static removeUserSong(userId, songId) {
+    return database
+      .ref(`users/${userId}/songs`)
+      .once("value")
+      .then(data => data.val())
+      .then(songs => {
+        const filteredSongs = songs.filter(song => song !== songId);
+        return database.ref(`users/${userId}/songs`).set(filteredSongs);
+      });
+  }
+
   static getSongById(songId) {
     return database
       .ref(`songs/${songId}`)
