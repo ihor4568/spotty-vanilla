@@ -28,8 +28,8 @@ export class MainControlComponent {
       onPlayerChangeState: this.props.onPlayerChangeState,
       tableData: this.props.tableData,
       albumData: this.props.albumData,
-      setNextSong: this.props.setNextSong,
-      setPrevSong: this.props.setPrevSong
+      onNextClick: this.props.onNextClick,
+      onPrevClick: this.props.onPrevClick
     });
     this.audioButtons.mount();
     this.audioVolumeBar = new VolumeBarComponent(this.volumeBar, {

@@ -44,8 +44,8 @@ export class MediaPlayerComponent {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
       audio: this.audio,
       onPlayerChangeState: this.handlePlayerChangeState.bind(this),
-      setNextSong: this.setNextSong.bind(this),
-      setPrevSong: this.setPrevSong.bind(this)
+      onNextClick: this.onNextClick.bind(this),
+      onPrevClick: this.onPrevClick.bind(this)
     });
     this.mainControlPannel.mount();
     this.audioProgressBar = new ProgressBarComponent(this.progressBar, {
@@ -134,11 +134,11 @@ export class MediaPlayerComponent {
     return this.songsData[this.songsData.length - 1];
   }
 
-  setNextSong() {
+  onNextClick() {
     this.setNewSong(this.findNextSong());
   }
 
-  setPrevSong() {
+  onPrevClick() {
     this.setNewSong(this.findPrevSong());
   }
 

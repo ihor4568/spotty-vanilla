@@ -60,8 +60,8 @@ export class PlayerButtonsComponent {
     this.playButton.addEventListener("click", () => {
       this.togglePlay();
     });
-    this.nextButton.addEventListener("click", this.props.setNextSong);
-    this.prevButton.addEventListener("click", this.props.setPrevSong);
+    this.nextButton.addEventListener("click", this.props.onNextClick);
+    this.prevButton.addEventListener("click", this.props.onPrevClick);
   }
 
   mount() {
