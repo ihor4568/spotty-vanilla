@@ -21,7 +21,6 @@ export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
-    this.songsData = null;
   }
 
   querySelectors() {
@@ -205,7 +204,7 @@ export class MainComponent {
     this.licenseDialogComponent.handleOpen();
   }
 
-  handleSetInfo(info) {
+  handleLegalOptionClick(info) {
     this.licenseDialogComponent.setInfo(info);
   }
 
@@ -231,7 +230,7 @@ export class MainComponent {
     this.routeNavigate(`/albums/${albumId}`);
   }
 
-  handleSetSongsData(data) {
+  handleDataReceived(data) {
     this.player.setSongsData(data);
   }
 
@@ -257,11 +256,11 @@ export class MainComponent {
 
     this.about = new AboutComponent(this.mainContentPoint);
     this.table = new MySongsComponent(this.mainContentPoint, {
-      onDataReceived: this.handleSetSongsData.bind(this),
+      onDataReceived: this.handleDataReceived.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this),
       onDialogOpen: this.handleDialogOpen.bind(this),
-      onLegalOptionClick: this.handleSetInfo.bind(this)
+      onLegalOptionClick: this.handleLegalOptionClick.bind(this)
     });
 
     this.albums = new AlbumsComponent(this.mainContentPoint, {
@@ -275,13 +274,13 @@ export class MainComponent {
     });
 
     this.artistSongTable = new ArtistSongTableComponent(this.mainContentPoint, {
-      onDataReceived: this.handleSetSongsData.bind(this),
+      onDataReceived: this.handleDataReceived.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)
     });
 
     this.albumSongs = new AlbumSongsTableComponent(this.mainContentPoint, {
-      onDataReceived: this.handleSetSongsData.bind(this),
+      onDataReceived: this.handleDataReceived.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)
     });
@@ -289,7 +288,7 @@ export class MainComponent {
     this.player = new MediaPlayerComponent(this.playerPoint, {
       onDialogOpen: this.handleDialogOpen.bind(this),
       onPlayerChangeState: this.handlePlayerChangeState.bind(this),
-      onLegalOptionClick: this.handleSetInfo.bind(this)
+      onLegalOptionClick: this.handleLegalOptionClick.bind(this)
     });
     this.player.mount();
   }

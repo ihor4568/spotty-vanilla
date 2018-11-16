@@ -11,8 +11,6 @@ export class MediaPlayerComponent {
     this.mountPoint = mountPoint;
     this.props = props;
     this.song = null;
-    this.nextSong = null;
-    this.prevSong = null;
     this.isPlaying = false;
     this.songsData = null;
   }
@@ -44,8 +42,8 @@ export class MediaPlayerComponent {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
       audio: this.audio,
       onPlayerChangeState: this.handlePlayerChangeState.bind(this),
-      nextSong: this.setNextSong.bind(this),
-      prevSong: this.setPrevSong.bind(this)
+      setNextSong: this.setNextSong.bind(this),
+      setPrevSong: this.setPrevSong.bind(this)
     });
     this.mainControlPannel.mount();
     this.audioProgressBar = new ProgressBarComponent(this.progressBar, {
@@ -104,24 +102,25 @@ export class MediaPlayerComponent {
     this.songsData = songs;
   }
 
-  findNextSong() {
+  findCurrentSongIndex() {
     const index = this.songsData.findIndex(
       value => this.audio.src === value.songURL
     );
+    return index;
+  }
 
-    if (this.songsData[index + 1]) {
-      return this.songsData[index + 1];
+  findNextSong() {
+    const songIndex = this.findCurrentSongIndex();
+    if (this.songsData[songIndex + 1]) {
+      return this.songsData[songIndex + 1];
     }
     return this.songsData[0];
   }
 
   findPrevSong() {
-    const index = this.songsData.findIndex(
-      value => this.audio.src === value.songURL
-    );
-
-    if (this.songsData[index - 1]) {
-      return this.songsData[index - 1];
+    const songIndex = this.findCurrentSongIndex();
+    if (this.songsData[songIndex - 1]) {
+      return this.songsData[songIndex - 1];
     }
     return this.songsData[this.songsData.length - 1];
   }
