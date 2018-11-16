@@ -98,4 +98,15 @@ export class MusicService {
   static setNewRating(userId, songId, ratingValue) {
     return database.ref(`users/${userId}/rating/${songId}`).set(ratingValue);
   }
+
+  static getTheme(userId) {
+    return database
+      .ref(`users/${userId}/theme/`)
+      .once("value")
+      .then(theme => theme.val() || "light");
+  }
+
+  static setTheme(userId, themeValue) {
+    return database.ref(`users/${userId}/theme/`).set(themeValue);
+  }
 }

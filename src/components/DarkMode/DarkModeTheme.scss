@@ -1,0 +1,218 @@
+.page_dark-mode {
+  background-color: $background;
+
+  .dark-mode {
+    &__holder {
+      background-color: $font-grey-5;
+    }
+
+    &__icon_black {
+      border: 0.1875rem solid $background;
+      border-radius: 50%;
+      @include mdc-list-item-primary-text-ink-color($background);
+    }
+  }
+
+  .main {
+    &__sidebar {
+      @include mdc-drawer-surface-fill-color($dark-2);
+      @include mdc-drawer-title-ink-color($font-grey-1);
+      @include mdc-drawer-subtitle-ink-color($font-white-2);
+      @include mdc-drawer-item-icon-ink-color($font-grey-2);
+      @include mdc-drawer-item-text-ink-color($font-white-2);
+      @include mdc-drawer-item-activated-icon-ink-color($font-grey-2);
+      @include mdc-drawer-item-activated-text-ink-color($font-white-2);
+      @include mdc-drawer-activated-overlay-color($dark-selected);
+      @include mdc-drawer-divider-color($font-grey-5);
+    }
+
+    &__app-bar {
+      @include mdc-top-app-bar-ink-color($font-white-1);
+      @include mdc-top-app-bar-icon-ink-color($font-white-1);
+      @include mdc-top-app-bar-fill-color($dark-1);
+    }
+  }
+
+  .search {
+    @include mdc-text-field-ink-color($font-white-2);
+    @include mdc-text-field-label-color($font-grey-3);
+    @include mdc-text-field-caret-color($font-white-2);
+    @include mdc-text-field-textarea-fill-color($background);
+    @include mdc-text-field-icon-color($font-grey-4, $styleSecondIcon: false);
+  }
+
+  .my-songs {
+    &__heading {
+      color: $font-white-2;
+    }
+  }
+
+  .songs-table {
+    background-color: $dark-2;
+
+    &__head {
+      background-color: $dark-selected;
+    }
+
+    &__th-field {
+      color: $font-white-2;
+    }
+
+    &__th_duration_icon {
+      color: $font-grey-2;
+    }
+
+    &__row:hover {
+      background-color: $dark-hover;
+    }
+
+    &__td_play-btn {
+      @include mdc-icon-button-ink-color($dark-selected);
+    }
+
+    &__td_play-btn-icon {
+      @include mdc-button-ink-color($font-grey-2);
+    }
+
+    &__td_number,
+    &__td_name,
+    &__td_duration,
+    &__td_Author,
+    &__td_album {
+      color: $font-white-2;
+    }
+  }
+
+  .albums {
+    &__heading-2 {
+      color: $font-white-2;
+    }
+
+    &__heading-3 {
+      color: $font-grey-2;
+    }
+
+    &__card {
+      @include mdc-card-fill-color($dark-1);
+    }
+  }
+
+  .album-songs-table {
+    .albums__card-album {
+      color: $font-white-2;
+    }
+
+    .albums__card-artist {
+      color: $font-grey-2;
+    }
+  }
+
+  .artists {
+    &__heading,
+    &__name {
+      color: $font-white-2;
+    }
+
+    &__card {
+      @include mdc-card-fill-color($background);
+    }
+
+    &__media {
+      @include mdc-card-fill-color($background);
+    }
+  }
+
+  .artist-song-table {
+    &__name {
+      color: $font-white-2;
+    }
+
+    &__card {
+      @include mdc-card-fill-color($background);
+    }
+
+    &__media {
+      @include mdc-card-fill-color($background);
+    }
+  }
+
+  .about {
+    &__heading {
+      color: $font-white-2;
+    }
+
+    &__text {
+      color: $font-grey-2;
+    }
+
+    &__subtitle {
+      color: $font-white-2;
+    }
+
+    &__link {
+      color: $font-white-1;
+    }
+  }
+
+  .dots-menu {
+    &__holder {
+      @include mdc-menu-surface-fill-color($font-grey-5);
+    }
+
+    &__item {
+      @include mdc-list-item-primary-text-ink-color($font-white-2);
+    }
+
+    &__button {
+      @include mdc-menu-surface-ink-color($font-grey-4);
+    }
+  }
+
+  .media-player {
+    background-color: $dark-1;
+
+    .audio-info__song-name {
+      color: $font-white-2;
+    }
+
+    .audio-info__album-artist {
+      color: $font-grey-2;
+    }
+
+    .player-buttons__play-button {
+      @include mdc-fab-accessible($font-white-2);
+      @include mdc-fab-ink-color($dark-1);
+    }
+
+    .player-buttons__navigate-button {
+      @include mdc-fab-accessible($font-grey-1);
+      @include mdc-fab-ink-color($dark-1);
+    }
+  }
+
+  .license-dialog {
+    @include mdc-dialog-container-fill-color($dark-1);
+    @include mdc-dialog-scrim-color($background, 0.8);
+    @include mdc-dialog-title-ink-color($font-white-2);
+    @include mdc-dialog-content-ink-color($font-grey-4);
+
+    &__button {
+      @include mdc-button-ink-color($font-white-2);
+      @include mdc-button-filled-accessible($dark-1);
+    }
+  }
+
+  .share-view {
+    &__card {
+      @include mdc-card-fill-color($dark-1);
+    }
+
+    &__title {
+      color: $font-white-2;
+    }
+
+    &__subtitle {
+      color: $font-grey-2;
+    }
+  }
+}

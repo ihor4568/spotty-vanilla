@@ -1,6 +1,6 @@
 import { MDCDrawer } from "@material/drawer";
 import { AuthService } from "../../services/AuthService";
-
+import { MusicService } from "../../services/MusicService";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
 import { DarkModeComponent } from "../DarkMode/DarkMode";
@@ -80,6 +80,14 @@ export class MainComponent {
       "click",
       this.handleListClick.bind(this)
     );
+  }
+
+  async checkTheme() {
+    const user = await AuthService.check();
+    const currentTheme = await MusicService.getTheme(user.uid);
+    if (currentTheme === "dark") {
+      document.documentElement.classList.add("page_dark-mode");
+    }
   }
 
   handleListClick(e) {
@@ -215,6 +223,7 @@ export class MainComponent {
 
   mount() {
     this.mountPoint.innerHTML = this.render();
+    this.checkTheme();
     this.querySelectors();
     this.initMaterial();
     this.mountChildren();
@@ -232,14 +241,14 @@ export class MainComponent {
   }
 
   mountChildren() {
+    this.darkMode = new DarkModeComponent(this.darkMode);
+    this.darkMode.mount();
+
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
       scrollTarget: this.scrollTarget
     });
     this.header.mount();
-
-    this.darkMode = new DarkModeComponent(this.darkMode);
-    this.darkMode.mount();
 
     this.licenseDialogComponent = new LicenseDialogComponent(
       this.licenseDialog

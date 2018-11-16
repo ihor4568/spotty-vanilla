@@ -1,5 +1,6 @@
 import { MDCMenuSurface } from "@material/menu-surface";
-
+import { AuthService } from "../../services/AuthService";
+import { MusicService } from "../../services/MusicService";
 import darkModeTemplate from "./DarkMode.html";
 
 export class DarkModeComponent {
@@ -9,12 +10,12 @@ export class DarkModeComponent {
   }
 
   querySelectors() {
-    this.darkMode = this.mountPoint.querySelector(".dark-mode__holder");
+    this.darkModeHolder = this.mountPoint.querySelector(".dark-mode__holder");
     this.darkModeButton = this.mountPoint.querySelector(".dark-mode__button");
   }
 
   initMaterial() {
-    this.uiMenu = new MDCMenuSurface(this.darkMode);
+    this.uiMenu = new MDCMenuSurface(this.darkModeHolder);
   }
 
   addEventListeners() {
@@ -22,7 +23,7 @@ export class DarkModeComponent {
       "click",
       this.handleDarkModeButtonClick.bind(this)
     );
-    this.darkMode.addEventListener(
+    this.darkModeHolder.addEventListener(
       "click",
       this.handleDarkModeItemClick.bind(this)
     );
@@ -32,13 +33,16 @@ export class DarkModeComponent {
     this.uiMenu.open = !this.uiMenu.open;
   }
 
-  handleDarkModeItemClick(e) {
+  async handleDarkModeItemClick(e) {
+    const userId = await AuthService.getCurrentUser().uid;
     const dark = e.target.closest(".dark-mode__item_dark");
     const light = e.target.closest(".dark-mode__item_light");
     if (dark) {
-      document.documentElement.classList.add("page-dark-mode");
+      MusicService.setTheme(userId, "dark");
+      document.documentElement.classList.add("page_dark-mode");
     } else if (light) {
-      document.documentElement.classList.remove("page-dark-mode");
+      MusicService.setTheme(userId, "light");
+      document.documentElement.classList.remove("page_dark-mode");
     }
     this.uiMenu.open = false;
   }
