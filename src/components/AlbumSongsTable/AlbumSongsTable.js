@@ -34,7 +34,7 @@ export class AlbumSongsTableComponent {
   }
 
   fetchSongs(albumId) {
-    MusicService.getAlbumSongs(albumId)
+    return MusicService.getAlbumSongs(albumId)
       .then(songs => {
         this.songs = songs;
 
@@ -48,13 +48,15 @@ export class AlbumSongsTableComponent {
           this.songs[i].album = album;
           this.songs[i].authorsInfo = authorsInfo;
         });
-        this.mount(false);
       });
   }
 
   fetchAuthorForTitle(albumId) {
-    Promise.all([MusicService.getAlbums(), MusicService.getAuthors()]).then(
-      ([albums, authors]) => this.fetchAuthorsString([albums, authors], albumId)
+    return Promise.all([
+      MusicService.getAlbums(),
+      MusicService.getAuthors()
+    ]).then(([albums, authors]) =>
+      this.fetchAuthorsString([albums, authors], albumId)
     );
   }
 
@@ -91,8 +93,9 @@ export class AlbumSongsTableComponent {
 
   mount(albumId) {
     if (albumId) {
-      this.fetchSongs(albumId);
-      this.fetchAuthorForTitle(albumId);
+      Promise.all([this.fetchSongs(albumId), this.fetchAuthorForTitle(albumId)])
+        .then(() => this.mount())
+        .then(() => this.props.onDataReceived(this.songs));
       return;
     }
     this.mountPoint.innerHTML = this.render();

@@ -32,7 +32,7 @@ export class MySongsComponent {
 
   fetchSongs() {
     const userId = AuthService.getCurrentUser().uid;
-    MusicService.getUserSongs(userId)
+    return MusicService.getUserSongs(userId)
       .then(songs => {
         this.songs = songs;
 
@@ -46,7 +46,6 @@ export class MySongsComponent {
           this.songs[i].authorsInfo = authorsInfo;
         });
         this.isDataFetched = true;
-        this.mount(false);
       });
   }
 
@@ -71,7 +70,6 @@ export class MySongsComponent {
 
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
-      onDrag: true,
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
@@ -85,7 +83,10 @@ export class MySongsComponent {
 
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
-      this.fetchSongs();
+      Promise.resolve(this.fetchSongs())
+        .then(() => this.mount(false))
+        .then(() => this.props.onDataReceived(this.songs));
+      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();

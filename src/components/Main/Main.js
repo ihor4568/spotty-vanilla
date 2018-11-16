@@ -206,7 +206,7 @@ export class MainComponent {
     this.licenseDialogComponent.handleOpen();
   }
 
-  handleSetInfo(info) {
+  handleLegalOptionClick(info) {
     this.licenseDialogComponent.setInfo(info);
   }
 
@@ -232,6 +232,10 @@ export class MainComponent {
     this.routeNavigate(`/albums/${albumId}`);
   }
 
+  handleDataReceived(data) {
+    this.player.setSongsData(data);
+  }
+
   mountChildren() {
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
@@ -254,19 +258,12 @@ export class MainComponent {
 
     this.about = new AboutComponent(this.mainContentPoint);
     this.table = new MySongsComponent(this.mainContentPoint, {
+      onDataReceived: this.handleDataReceived.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this),
       onDialogOpen: this.handleDialogOpen.bind(this),
-      onLegalOptionClick: this.handleSetInfo.bind(this)
+      onLegalOptionClick: this.handleLegalOptionClick.bind(this)
     });
-
-    this.player = new MediaPlayerComponent(this.playerPoint, {
-      onDialogOpen: this.handleDialogOpen.bind(this),
-      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
-      onLegalOptionClick: this.handleSetInfo.bind(this),
-      onAddSong: this.table.addSong.bind(this.table)
-    });
-    this.player.mount();
 
     this.albums = new AlbumsComponent(this.mainContentPoint, {
       onAlbumClick: this.handleAlbumClick.bind(this)
@@ -279,14 +276,24 @@ export class MainComponent {
     });
 
     this.artistSongTable = new ArtistSongTableComponent(this.mainContentPoint, {
+      onDataReceived: this.handleDataReceived.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)
     });
 
     this.albumSongs = new AlbumSongsTableComponent(this.mainContentPoint, {
+      onDataReceived: this.handleDataReceived.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)
     });
+
+    this.player = new MediaPlayerComponent(this.playerPoint, {
+      onDialogOpen: this.handleDialogOpen.bind(this),
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
+      onLegalOptionClick: this.handleLegalOptionClick.bind(this),
+      onAddSong: this.table.addSong.bind(this.table)
+    });
+    this.player.mount();
   }
 
   render() {
