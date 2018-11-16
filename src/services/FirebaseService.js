@@ -3,7 +3,12 @@ import "firebase/database";
 import "firebase/storage";
 import "firebase/auth";
 
-// eslint-disable-next-line import/no-unresolved
-import config from "../../config.json";
+let config = {};
+try {
+  // eslint-disable-next-line global-require, import/no-unresolved
+  config = require("../../config.json");
+} catch (e) {
+  //
+}
 
 export const FirebaseService = initializeApp(config);

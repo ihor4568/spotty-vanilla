@@ -194,6 +194,10 @@ export class SongsTableComponent {
     }
   }
 
+  handleRemoveSong(song) {
+    this.props.onSongRemove(song.id);
+  }
+
   setupOrderIconDisplay() {
     const { currentOrderTypeIndex } = this.state;
 
@@ -234,7 +238,10 @@ export class SongsTableComponent {
             name: "Legal info",
             handler: this.handleLegal.bind(this, this.state.data[i])
           },
-          { name: "Remove from my songs", handler: () => {} },
+          {
+            name: "Remove from my songs",
+            handler: this.handleRemoveSong.bind(this, this.state.data[i])
+          },
           {
             name: "Share",
             handler: this.handleShare.bind(this, this.state.data[i])

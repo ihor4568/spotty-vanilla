@@ -1,0 +1,19 @@
+.my-songs {
+  &__empty-library-container {
+    margin-top: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__material-icon {
+    font-size: 4rem;
+    color: #5f6368;
+  }
+
+  &__empty-list-text {
+    margin-top: 1rem;
+    color: #5f6368;
+  }
+}

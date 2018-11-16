@@ -94,6 +94,7 @@ export class MainComponent {
     e.preventDefault();
     const { target } = e;
     const listItem = target.closest(".main__list-item");
+
     if (listItem) {
       this.routeNavigate(listItem.href);
     }
@@ -123,12 +124,13 @@ export class MainComponent {
       .replace(/^\/|\/$/g, "")
       .replace(/\/+/g, "/");
 
-    const urlParts = pathname.split("/");
-    if (urlParts[0] === "song" && urlParts[1] && urlParts.length === 2) {
-      const songId = urlParts[1];
+    if (/^song\/\w+/.test(pathname)) {
+      const pathnameParts = pathname.split("/");
+      const songId = pathnameParts[pathnameParts.length - 1];
       this.setShareView(songId);
       return;
     }
+
     AuthService.check().then(
       user => this.handleGo.call(this, pathname, user.displayName),
       this.handleStop.bind(this, pathname)
@@ -155,7 +157,7 @@ export class MainComponent {
       return;
     }
 
-    if (/albums\/\w+/.test(pathname)) {
+    if (/^albums\/\w+/.test(pathname)) {
       const pathnameParts = pathname.split("/");
       const albumId = pathnameParts[pathnameParts.length - 1];
       this.albumSongs.mount(albumId);
@@ -167,7 +169,7 @@ export class MainComponent {
       return;
     }
 
-    if (/artists\/\w+/.test(pathname)) {
+    if (/^artists\/\w+/.test(pathname)) {
       const pathnameParts = pathname.split("/");
       const artistId = pathnameParts[pathnameParts.length - 1];
       this.artistSongTable.mount(artistId);
@@ -213,7 +215,7 @@ export class MainComponent {
     this.licenseDialogComponent.handleOpen();
   }
 
-  handleSetInfo(info) {
+  handleLegalOptionClick(info) {
     this.licenseDialogComponent.setInfo(info);
   }
 
@@ -240,6 +242,10 @@ export class MainComponent {
     this.routeNavigate(`/albums/${albumId}`);
   }
 
+  handleDataReceived(data) {
+    this.player.setSongsData(data);
+  }
+
   mountChildren() {
     this.darkMode = new DarkModeComponent(this.darkMode);
     this.darkMode.mount();
@@ -255,13 +261,6 @@ export class MainComponent {
     );
     this.licenseDialogComponent.mount();
 
-    this.player = new MediaPlayerComponent(this.playerPoint, {
-      onDialogOpen: this.handleDialogOpen.bind(this),
-      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
-      onLegalOptionClick: this.handleSetInfo.bind(this)
-    });
-    this.player.mount();
-
     this.search = new SearchComponent(this.searchPoint);
     this.search.mount();
 
@@ -272,10 +271,11 @@ export class MainComponent {
 
     this.about = new AboutComponent(this.mainContentPoint);
     this.table = new MySongsComponent(this.mainContentPoint, {
+      onDataReceived: this.handleDataReceived.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this),
       onDialogOpen: this.handleDialogOpen.bind(this),
-      onLegalOptionClick: this.handleSetInfo.bind(this)
+      onLegalOptionClick: this.handleLegalOptionClick.bind(this)
     });
 
     this.albums = new AlbumsComponent(this.mainContentPoint, {
@@ -289,14 +289,24 @@ export class MainComponent {
     });
 
     this.artistSongTable = new ArtistSongTableComponent(this.mainContentPoint, {
+      onDataReceived: this.handleDataReceived.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)
     });
 
     this.albumSongs = new AlbumSongsTableComponent(this.mainContentPoint, {
+      onDataReceived: this.handleDataReceived.bind(this),
       onSongPlay: this.handleSongPlay.bind(this),
       onSongStop: this.handleSongStop.bind(this)
     });
+
+    this.player = new MediaPlayerComponent(this.playerPoint, {
+      onDialogOpen: this.handleDialogOpen.bind(this),
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
+      onLegalOptionClick: this.handleLegalOptionClick.bind(this),
+      onAddSong: this.table.addSong.bind(this.table)
+    });
+    this.player.mount();
   }
 
   render() {

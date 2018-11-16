@@ -5,6 +5,8 @@ import { MainControlComponent } from "./MainControl/MainControl";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
 import playerTemplate from "./MediaPlayer.html";
+import { MusicService } from "../../services/MusicService";
+import { AuthService } from "../../services/AuthService";
 
 export class MediaPlayerComponent {
   constructor(mountPoint, props = {}) {
@@ -12,6 +14,7 @@ export class MediaPlayerComponent {
     this.props = props;
     this.song = null;
     this.isPlaying = false;
+    this.songsData = null;
   }
 
   querySelectors() {
@@ -40,7 +43,9 @@ export class MediaPlayerComponent {
   mountChildren() {
     this.mainControlPannel = new MainControlComponent(this.mainControl, {
       audio: this.audio,
-      onPlayerChangeState: this.handlePlayerChangeState.bind(this)
+      onPlayerChangeState: this.handlePlayerChangeState.bind(this),
+      onNextClick: this.onNextClick.bind(this),
+      onPrevClick: this.onPrevClick.bind(this)
     });
     this.mainControlPannel.mount();
     this.audioProgressBar = new ProgressBarComponent(this.progressBar, {
@@ -54,7 +59,7 @@ export class MediaPlayerComponent {
     this.dotsMenu = new DotsMenuComponent(this.dotsMenuPoint, {
       items: [
         { name: "Legal info", handler: this.handleLegal.bind(this) },
-        { name: "Add to my songs", handler: () => {} },
+        { name: "Add to my songs", handler: this.handleAddSong.bind(this) },
         { name: "Share", handler: this.handleShare.bind(this) }
       ]
     });
@@ -71,6 +76,13 @@ export class MediaPlayerComponent {
       licenseURL: this.song.album.licenseURL
     });
     this.props.onDialogOpen();
+  }
+
+  handleAddSong() {
+    MusicService.setUserSong(
+      AuthService.getCurrentUser().uid,
+      this.song.id
+    ).then(this.props.onAddSong);
   }
 
   setNewSong(song) {
@@ -92,6 +104,42 @@ export class MediaPlayerComponent {
     this.mainControlPannel.play();
 
     this.showPlayer();
+    return this.song;
+  }
+
+  setSongsData(songs) {
+    this.songsData = songs;
+  }
+
+  findCurrentSongIndex() {
+    const index = this.songsData.findIndex(
+      value => this.audio.src === value.songURL
+    );
+    return index;
+  }
+
+  findNextSong() {
+    const songIndex = this.findCurrentSongIndex();
+    if (this.songsData[songIndex + 1]) {
+      return this.songsData[songIndex + 1];
+    }
+    return this.songsData[0];
+  }
+
+  findPrevSong() {
+    const songIndex = this.findCurrentSongIndex();
+    if (this.songsData[songIndex - 1]) {
+      return this.songsData[songIndex - 1];
+    }
+    return this.songsData[this.songsData.length - 1];
+  }
+
+  onNextClick() {
+    this.setNewSong(this.findNextSong());
+  }
+
+  onPrevClick() {
+    this.setNewSong(this.findPrevSong());
   }
 
   showPlayer() {

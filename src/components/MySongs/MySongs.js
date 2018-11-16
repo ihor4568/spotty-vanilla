@@ -1,12 +1,14 @@
-import mySongs from "./MySongs.html";
+import mySongsTemplate from "./MySongs.html";
 import { SongsTableComponent } from "../SongsTable/SongsTable";
 import { MusicService } from "../../services/MusicService";
+import { AuthService } from "../../services/AuthService";
 
 export class MySongsComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
     this.songs = [];
+    this.isDataFetched = false;
   }
 
   querySelectors() {
@@ -29,7 +31,8 @@ export class MySongsComponent {
   }
 
   fetchSongs() {
-    MusicService.getAlbumSongs("album4")
+    const userId = AuthService.getCurrentUser().uid;
+    return MusicService.getUserSongs(userId)
       .then(songs => {
         this.songs = songs;
 
@@ -42,8 +45,7 @@ export class MySongsComponent {
           this.songs[i].album = album;
           this.songs[i].authorsInfo = authorsInfo;
         });
-
-        this.mount(false);
+        this.isDataFetched = true;
       });
   }
 
@@ -54,12 +56,24 @@ export class MySongsComponent {
     }
   }
 
+  handleRemoveSong(songId) {
+    MusicService.removeUserSong(AuthService.getCurrentUser().uid, songId).then(
+      () => this.mount()
+    );
+  }
+
+  addSong() {
+    if (this.mountPoint.querySelector(".my-songs")) {
+      this.mount();
+    }
+  }
+
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
-      onDrag: true,
       data: this.songs,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
+      onSongRemove: this.handleRemoveSong.bind(this),
       onDialogOpen: this.props.onDialogOpen,
       onLegalOptionClick: this.props.onLegalOptionClick,
       playingSongId: this.playingSongId
@@ -69,14 +83,22 @@ export class MySongsComponent {
 
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
-      this.fetchSongs();
+      Promise.resolve(this.fetchSongs())
+        .then(() => this.mount(false))
+        .then(() => this.props.onDataReceived(this.songs));
+      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
-    this.mountChildren();
+    if (this.songs.length) {
+      this.mountChildren();
+    }
   }
 
   render() {
-    return mySongs();
+    return mySongsTemplate({
+      isDataFetched: this.isDataFetched,
+      hasSongs: this.songs.length
+    });
   }
 }

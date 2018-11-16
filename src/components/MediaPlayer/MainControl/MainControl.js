@@ -25,7 +25,11 @@ export class MainControlComponent {
     this.audioButtons = new PlayerButtonsComponent(this.buttons, {
       song: this.props.song,
       audio: this.props.audio,
-      onPlayerChangeState: this.props.onPlayerChangeState
+      onPlayerChangeState: this.props.onPlayerChangeState,
+      tableData: this.props.tableData,
+      albumData: this.props.albumData,
+      onNextClick: this.props.onNextClick,
+      onPrevClick: this.props.onPrevClick
     });
     this.audioButtons.mount();
     this.audioVolumeBar = new VolumeBarComponent(this.volumeBar, {
