@@ -5,6 +5,8 @@ import { MainControlComponent } from "./MainControl/MainControl";
 import { DotsMenuComponent } from "../DotsMenu/DotsMenu";
 
 import playerTemplate from "./MediaPlayer.html";
+import { MusicService } from "../../services/MusicService";
+import { AuthService } from "../../services/AuthService";
 
 export class MediaPlayerComponent {
   constructor(mountPoint, props = {}) {
@@ -54,7 +56,7 @@ export class MediaPlayerComponent {
     this.dotsMenu = new DotsMenuComponent(this.dotsMenuPoint, {
       items: [
         { name: "Legal info", handler: this.handleLegal.bind(this) },
-        { name: "Add to my songs", handler: () => {} },
+        { name: "Add to my songs", handler: this.handleAddSong.bind(this) },
         { name: "Share", handler: this.handleShare.bind(this) }
       ]
     });
@@ -71,6 +73,13 @@ export class MediaPlayerComponent {
       licenseURL: this.song.album.licenseURL
     });
     this.props.onDialogOpen();
+  }
+
+  handleAddSong() {
+    MusicService.setUserSong(
+      AuthService.getCurrentUser().uid,
+      this.song.id
+    ).then(this.props.onAddSong);
   }
 
   setNewSong(song) {
