@@ -76,7 +76,8 @@ export class MySongsComponent {
       onSongRemove: this.handleRemoveSong.bind(this),
       onDialogOpen: this.props.onDialogOpen,
       onLegalOptionClick: this.props.onLegalOptionClick,
-      playingSongId: this.playingSongId
+      playingSongId: this.playingSongId,
+      hasRemoveBtn: true
     });
     this.table.mount();
   }
