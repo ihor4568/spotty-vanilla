@@ -32,7 +32,7 @@ export class ProgressBarComponent {
     this.audioDuration =
       (this.props.audio.currentTime / this.props.audio.duration) * 100;
     this.slider.value = this.audioDuration;
-    // this.slider.layout();
+    this.slider.layout();
   }
 
   movePlayTime(e) {
