@@ -71,6 +71,7 @@ export class MySongsComponent {
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
+      onDrag: true,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
       onSongRemove: this.handleRemoveSong.bind(this),
