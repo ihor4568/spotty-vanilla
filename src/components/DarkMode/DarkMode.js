@@ -1,6 +1,6 @@
 import { MDCMenuSurface } from "@material/menu-surface";
 import { AuthService } from "../../services/AuthService";
-import { MusicService } from "../../services/MusicService";
+import { ThemeService } from "../../services/ThemeService";
 import darkModeTemplate from "./DarkMode.html";
 
 export class DarkModeComponent {
@@ -10,8 +10,12 @@ export class DarkModeComponent {
   }
 
   querySelectors() {
-    this.darkModeHolder = this.mountPoint.querySelector(".dark-mode__holder");
-    this.darkModeButton = this.mountPoint.querySelector(".dark-mode__button");
+    this.darkModeHolder = this.mountPoint.querySelector(
+      ".dark-mode-selector__holder"
+    );
+    this.darkModeButton = this.mountPoint.querySelector(
+      ".dark-mode-selector__button"
+    );
   }
 
   initMaterial() {
@@ -35,20 +39,29 @@ export class DarkModeComponent {
 
   async handleDarkModeItemClick(e) {
     const userId = await AuthService.getCurrentUser().uid;
-    const dark = e.target.closest(".dark-mode__item_dark");
-    const light = e.target.closest(".dark-mode__item_light");
+    const dark = e.target.closest(".dark-mode-selector__item_dark");
+    const light = e.target.closest(".dark-mode-selector__item_light");
     if (dark) {
-      MusicService.setTheme(userId, "dark");
+      ThemeService.setTheme(userId, "dark");
       document.documentElement.classList.add("page_dark-mode");
     } else if (light) {
-      MusicService.setTheme(userId, "light");
+      ThemeService.setTheme(userId, "light");
       document.documentElement.classList.remove("page_dark-mode");
     }
     this.uiMenu.open = false;
   }
 
+  async checkTheme() {
+    const user = await AuthService.check();
+    const currentTheme = await ThemeService.getTheme(user.uid);
+    if (currentTheme === "dark") {
+      document.documentElement.classList.add("page_dark-mode");
+    }
+  }
+
   mount() {
     this.mountPoint.innerHTML = this.render();
+    this.checkTheme();
     this.querySelectors();
     this.initMaterial();
     this.addEventListeners();
