@@ -138,7 +138,7 @@ export class SongsTableComponent {
   addEventListeners() {
     if (this.tableHead) {
       this.tableHead.addEventListener("click", this.handleOrderClick);
-      if (this.props.onDrag) {
+      if (this.props.dragAndDrop) {
         this.tableBody.addEventListener(
           "dragstart",
           this.handleDragStart.bind(this)
