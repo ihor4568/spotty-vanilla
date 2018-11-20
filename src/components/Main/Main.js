@@ -30,7 +30,9 @@ export class MainComponent {
     this.mainPoint = this.mountPoint.querySelector(".main__section");
     this.sidebarList = this.mountPoint.querySelector(".main__list");
     this.headerPoint = this.mountPoint.querySelector(".main__header");
-    this.darkMode = this.mountPoint.querySelector(".main__dark-mode");
+    this.themeMode = this.mountPoint.querySelector(
+      ".main__theme-mode-selector"
+    );
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.appBar = this.mountPoint.querySelector(".main__app-bar");
@@ -237,8 +239,8 @@ export class MainComponent {
   }
 
   mountChildren() {
-    this.darkMode = new DarkModeComponent(this.darkMode);
-    this.darkMode.mount();
+    this.themeMode = new DarkModeComponent(this.themeMode);
+    this.themeMode.mount();
 
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
