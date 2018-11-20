@@ -22,7 +22,7 @@ export class AuthComponent {
     this.tabSignUp = this.mountPoint.querySelector(".auth__tab-sign-up");
     this.errorPoint = this.mountPoint.querySelector(".auth__error");
     this.emailInput = this.mountPoint.querySelector(".auth__input_email");
-    this.nameInput = this.mountPoint.querySelector(".auth__input_email");
+    this.nameInput = this.mountPoint.querySelector(".auth__input_name");
     this.passwordInput = this.mountPoint.querySelector(".auth__input_password");
     this.confirmPasswordInput = this.mountPoint.querySelector(
       ".auth__input_confirm-password"
@@ -91,8 +91,8 @@ export class AuthComponent {
       if (this.passwordInput.value === this.confirmPasswordInput.value) {
         AuthService.signUp(
           this.emailInput.value,
-          this.nameInput.value,
-          this.passwordInput.value
+          this.passwordInput.value,
+          this.nameInput.value
         ).catch(this.handleAlert.bind(this));
       } else {
         this.errorPoint.innerText = "Error: Passwords do not match.";

@@ -71,12 +71,14 @@ export class MySongsComponent {
   mountChildren() {
     this.table = new SongsTableComponent(this.tableContainer, {
       data: this.songs,
+      dragAndDrop: true,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
       onSongRemove: this.handleRemoveSong.bind(this),
       onDialogOpen: this.props.onDialogOpen,
       onLegalOptionClick: this.props.onLegalOptionClick,
-      playingSongId: this.playingSongId
+      playingSongId: this.playingSongId,
+      hasRemoveBtn: true
     });
     this.table.mount();
   }
