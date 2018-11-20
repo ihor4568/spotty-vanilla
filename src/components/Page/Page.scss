@@ -34,7 +34,7 @@
         @include mdc-drawer-item-activated-icon-ink-color($font-grey-2);
         @include mdc-drawer-item-activated-text-ink-color($font-white-2);
         @include mdc-drawer-activated-overlay-color($dark-selected);
-        @include mdc-drawer-divider-color($font-grey-5);
+        @include mdc-drawer-divider-color($font-white-1);
       }
 
       &__app-bar {
