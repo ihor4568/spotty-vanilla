@@ -232,22 +232,23 @@ export class SongsTableComponent {
 
   mountChildren() {
     Array.from(this.dotsMenu).forEach((item, i) => {
-      new DotsMenuComponent(item, {
-        items: [
-          {
-            name: "Legal info",
-            handler: this.handleLegal.bind(this, this.state.data[i])
-          },
-          {
-            name: "Remove from my songs",
-            handler: this.handleRemoveSong.bind(this, this.state.data[i])
-          },
-          {
-            name: "Share",
-            handler: this.handleShare.bind(this, this.state.data[i])
-          }
-        ]
-      }).mount();
+      const items = [
+        {
+          name: "Legal info",
+          handler: this.handleLegal.bind(this, this.state.data[i])
+        }
+      ];
+      if (this.props.hasRemoveBtn) {
+        items.push({
+          name: "Remove from my songs",
+          handler: this.handleRemoveSong.bind(this, this.state.data[i])
+        });
+      }
+      items.push({
+        name: "Share",
+        handler: this.handleShare.bind(this, this.state.data[i])
+      });
+      new DotsMenuComponent(item, { items }).mount();
     });
   }
 
