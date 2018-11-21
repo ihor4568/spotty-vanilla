@@ -2,7 +2,7 @@ import { MDCDrawer } from "@material/drawer";
 import { AuthService } from "../../services/AuthService";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
-import { DarkModeSelectorComponent } from "../DarkMode/DarkModeSelector";
+import { DarkModeSelectorComponent } from "../DarkModeSelector/DarkModeSelector";
 import { SearchComponent } from "../Search/Search";
 import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";

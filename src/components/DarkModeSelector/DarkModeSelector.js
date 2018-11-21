@@ -1,7 +1,7 @@
 import { MDCMenuSurface } from "@material/menu-surface";
 import { AuthService } from "../../services/AuthService";
 import { ThemeService } from "../../services/ThemeService";
-import darkModeTemplate from "./DarkModeSelector.html";
+import darkModeSelectorTemplate from "./DarkModeSelector.html";
 
 export class DarkModeSelectorComponent {
   constructor(mountPoint, props = {}) {
@@ -68,6 +68,6 @@ export class DarkModeSelectorComponent {
   }
 
   render() {
-    return darkModeTemplate();
+    return darkModeSelectorTemplate();
   }
 }
