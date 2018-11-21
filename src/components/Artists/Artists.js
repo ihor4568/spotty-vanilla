@@ -1,14 +1,22 @@
 import { MDCRipple } from "@material/ripple";
 import artistsTemplate from "./Artists.html";
 import { MusicService } from "../../services/MusicService";
+import { SearchFunctionalityProviderComponent } from "../SearchFunctionalityProvider/SearchFunctionalityProvider";
 
-export class ArtistsComponent {
+export class ArtistsComponent extends SearchFunctionalityProviderComponent {
   constructor(mountPoint, props = {}) {
+    super();
     this.mountPoint = mountPoint;
     this.props = props;
     this.state = {
-      artists: []
+      initialData: null,
+      filteredData: null
     };
+  }
+
+  handleSearchQuery(term) {
+    super.handleSearchQuery.call(this, term);
+    this.mount(false);
   }
 
   querySelectors() {
@@ -37,7 +45,8 @@ export class ArtistsComponent {
 
   fetchArtistsData() {
     MusicService.getAuthors().then(artists => {
-      this.state.artists = artists;
+      this.state.initialData = artists;
+      this.state.filteredData = [...this.state.initialData];
       this.mount(false);
     });
   }
@@ -54,6 +63,6 @@ export class ArtistsComponent {
   }
 
   render() {
-    return artistsTemplate(this.state);
+    return artistsTemplate({ artists: this.state.filteredData });
   }
 }

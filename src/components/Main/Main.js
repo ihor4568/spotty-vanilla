@@ -1,4 +1,5 @@
 import { MDCDrawer } from "@material/drawer";
+
 import { AuthService } from "../../services/AuthService";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
@@ -20,6 +21,9 @@ export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.state = {
+      currentTab: null
+    };
   }
 
   querySelectors() {
@@ -81,6 +85,17 @@ export class MainComponent {
       "click",
       this.handleListClick.bind(this)
     );
+  }
+
+  handleCurrentTabChange(tab) {
+    this.state.currentTab = tab;
+  }
+
+  handleSearchQuery(term) {
+    const { currentTab } = this.state;
+    if (currentTab.handleSearchQuery) {
+      currentTab.handleSearchQuery(term);
+    }
   }
 
   handleListClick(e) {
@@ -147,6 +162,7 @@ export class MainComponent {
 
     if (pathname === "albums") {
       this.albums.mount();
+      this.handleCurrentTabChange(this.albums);
       return;
     }
 
@@ -157,8 +173,15 @@ export class MainComponent {
       return;
     }
 
+    if (pathname === "about") {
+      this.about.mount();
+      this.handleCurrentTabChange(this.about);
+      return;
+    }
+
     if (pathname === "artists") {
       this.artist.mount();
+      this.handleCurrentTabChange(this.artist);
       return;
     }
 
@@ -171,6 +194,7 @@ export class MainComponent {
 
     if (pathname === "about") {
       this.about.mount();
+      this.handleCurrentTabChange(this.table);
       return;
     }
 
@@ -253,7 +277,9 @@ export class MainComponent {
     );
     this.licenseDialogComponent.mount();
 
-    this.search = new SearchComponent(this.searchPoint);
+    this.search = new SearchComponent(this.searchPoint, {
+      onSearchQuery: this.handleSearchQuery.bind(this)
+    });
     this.search.mount();
 
     this.shareView = new ShareViewComponent(this.mainContentPoint);
