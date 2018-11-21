@@ -1,9 +1,8 @@
 import { MDCDrawer } from "@material/drawer";
-
 import { AuthService } from "../../services/AuthService";
-
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
+import { DarkModeSelectorComponent } from "../DarkModeSelector/DarkModeSelector";
 import { SearchComponent } from "../Search/Search";
 import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
@@ -31,6 +30,9 @@ export class MainComponent {
     this.mainPoint = this.mountPoint.querySelector(".main__section");
     this.sidebarList = this.mountPoint.querySelector(".main__list");
     this.headerPoint = this.mountPoint.querySelector(".main__header");
+    this.themeMode = this.mountPoint.querySelector(
+      ".main__theme-mode-selector"
+    );
     this.playerPoint = this.mountPoint.querySelector(".main__player");
     this.searchPoint = this.mountPoint.querySelector(".main__search");
     this.appBar = this.mountPoint.querySelector(".main__app-bar");
@@ -237,6 +239,9 @@ export class MainComponent {
   }
 
   mountChildren() {
+    this.themeMode = new DarkModeSelectorComponent(this.themeMode);
+    this.themeMode.mount();
+
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
       scrollTarget: this.scrollTarget

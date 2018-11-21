@@ -35,6 +35,9 @@
   &__header {
     width: 70%;
   }
+  &__theme-mode-selector {
+    margin: 0 1rem 0 auto;
+  }
   &__search {
     margin-right: 1.8rem;
     &_drawer-open {

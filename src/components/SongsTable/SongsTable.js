@@ -253,7 +253,7 @@ export class SongsTableComponent {
   }
 
   handleShare(data) {
-    window.open(`/song/${data.id}`);
+    window.open(`/song/${data.id}/`);
   }
 
   initMaterial() {

@@ -17,6 +17,7 @@
 @import "@material/tab/mdc-tab";
 @import "@material/dialog/mdc-dialog";
 @import "@material/slider/mdc-slider";
+
 @import "./variables";
 @import "./components/ResponsiveGrid/ResponsiveGrid";
 
@@ -38,3 +39,4 @@
 @import "./components/MySongs/MySongs";
 @import "./components/SongsTable/SongsTable";
 @import "./components/LicenseDialog/LicenseDialog";
+@import "components/DarkModeSelector/DarkModeSelector";
