@@ -2,7 +2,7 @@ import { MDCDrawer } from "@material/drawer";
 import { AuthService } from "../../services/AuthService";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
-import { DarkModeComponent } from "../DarkMode/DarkMode";
+import { DarkModeSelectorComponent } from "../DarkMode/DarkModeSelector";
 import { SearchComponent } from "../Search/Search";
 import { MySongsComponent } from "../MySongs/MySongs";
 import { ShareViewComponent } from "../ShareView/ShareView";
@@ -239,7 +239,7 @@ export class MainComponent {
   }
 
   mountChildren() {
-    this.themeMode = new DarkModeComponent(this.themeMode);
+    this.themeMode = new DarkModeSelectorComponent(this.themeMode);
     this.themeMode.mount();
 
     this.header = new HeaderComponent(this.headerPoint, {
