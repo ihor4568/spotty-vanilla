@@ -1,7 +1,7 @@
 <div class="albums">
   <h2 class="albums__heading-2 mdc-typography--headline4">Albums</h2>
   <div class="albums__container">
-    <% albums.forEach( album => {%>
+    <% if (!albums) { return "" }%> <% albums.forEach( album => {%>
     <div class="albums__card-container responsive-grid">
       <div
         class="albums__card mdc-card mdc-card-album"
