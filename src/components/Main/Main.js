@@ -51,6 +51,7 @@ export class MainComponent {
     this.appBar.classList.add("main__app-bar_disable");
     this.mainPoint.classList.add("main__section_disable");
     this.mainContentPoint.classList.add("main__content-mount_disable");
+    this.themeMode.classList.add("main__elem_disable");
     this.shareView.setSongId(songId);
   }
 
@@ -68,7 +69,7 @@ export class MainComponent {
     this.searchPoint.classList.remove("main__elem_disable");
     this.appBar.classList.remove("main__app-bar_disable");
     this.mainPoint.classList.remove("main__section_disable");
-    this.mainContentPoint.classList.remove("main__content-mount_disable");
+    this.mainPoint.classList.remove("main__content-mount_disable");
   }
 
   initMaterial() {
@@ -263,8 +264,8 @@ export class MainComponent {
   }
 
   mountChildren() {
-    this.themeMode = new DarkModeSelectorComponent(this.themeMode);
-    this.themeMode.mount();
+    this.themeModeSelector = new DarkModeSelectorComponent(this.themeMode);
+    this.themeModeSelector.mount();
 
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
