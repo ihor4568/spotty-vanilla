@@ -3,6 +3,7 @@ import { SongsTableComponent } from "../SongsTable/SongsTable";
 import { MusicService } from "../../services/MusicService";
 import { AuthService } from "../../services/AuthService";
 import { SearchFunctionalityProviderComponent } from "../SearchFunctionalityProvider/SearchFunctionalityProvider";
+import { Loader } from "../Loader/Loader";
 
 export class MySongsComponent extends SearchFunctionalityProviderComponent {
   constructor(mountPoint, props = {}) {
@@ -10,6 +11,7 @@ export class MySongsComponent extends SearchFunctionalityProviderComponent {
     this.mountPoint = mountPoint;
     this.props = props;
     this.state = {
+      isFetching: false,
       initialData: null,
       filteredData: null
     };
@@ -21,6 +23,11 @@ export class MySongsComponent extends SearchFunctionalityProviderComponent {
   }
 
   querySelectors() {
+    if (this.state.isFetching) {
+      this.loaderContainer = this.mountPoint.querySelector(".artists__loader");
+    } else {
+      this.loaderContainer = null;
+    }
     this.tableContainer = this.mountPoint.querySelector(
       ".my-songs__table-container"
     );
@@ -58,7 +65,7 @@ export class MySongsComponent extends SearchFunctionalityProviderComponent {
         });
 
         this.state.filteredData = [...this.state.initialData];
-        this.isDataFetched = true;
+        this.state.isFetching = false;
       });
   }
 
@@ -101,22 +108,33 @@ export class MySongsComponent extends SearchFunctionalityProviderComponent {
     data = this.state.initialData ? [...this.state.initialData] : []
   ) {
     if (shouldFetchData) {
+      this.state.isFetching = true;
       Promise.resolve(this.fetchSongs())
         .then(() => this.mount(false))
         .then(() => this.props.onDataReceived(this.songs));
-      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
-    if (this.state.initialData.length) {
+    this.mountLoader();
+    if (!this.state.isFetching && data.length) {
       this.mountChildren(data);
     }
   }
 
+  mountLoader() {
+    if (this.state.isFetching) {
+      this.loader = new Loader(this.loaderContainer);
+      this.loader.mount();
+    } else {
+      this.loader = null;
+    }
+  }
+
   render() {
+    const { isFetching, initialData } = this.state;
     return mySongsTemplate({
-      isDataFetched: this.isDataFetched,
-      hasSongs: this.state.initialData.length
+      isFetching,
+      hasSongs: initialData ? initialData.length : false
     });
   }
 }

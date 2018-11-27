@@ -3,6 +3,7 @@ import { MDCRipple } from "@material/ripple";
 import albumsTemplate from "./Albums.html";
 import { MusicService } from "../../services/MusicService";
 import { SearchFunctionalityProviderComponent } from "../SearchFunctionalityProvider/SearchFunctionalityProvider";
+import { Loader } from "../Loader/Loader";
 
 export class AlbumsComponent extends SearchFunctionalityProviderComponent {
   constructor(mountPoint, props = {}) {
@@ -10,6 +11,7 @@ export class AlbumsComponent extends SearchFunctionalityProviderComponent {
     this.mountPoint = mountPoint;
     this.props = props;
     this.state = {
+      isFetching: false,
       initialData: null,
       filteredData: null
     };
@@ -21,6 +23,11 @@ export class AlbumsComponent extends SearchFunctionalityProviderComponent {
   }
 
   querySelectors() {
+    if (this.state.isFetching) {
+      this.loaderContainer = this.mountPoint.querySelector(".artists__loader");
+    } else {
+      this.loaderContainer = null;
+    }
     this.albumRipplePoint = this.mountPoint.querySelectorAll(
       ".albums__card-ripple-effect"
     );
@@ -44,6 +51,7 @@ export class AlbumsComponent extends SearchFunctionalityProviderComponent {
             .join(", ")
         }));
         this.state.filteredData = [...this.state.initialData];
+        this.state.isFetching = false;
         this.mount(false);
       }
     );
@@ -54,27 +62,43 @@ export class AlbumsComponent extends SearchFunctionalityProviderComponent {
   }
 
   addEventsListeners() {
-    this.albumsContainer.addEventListener("click", e => {
-      const album = e.target.closest(".albums__card");
-      if (album) {
-        const albumId = album.dataset.id;
-        this.props.onAlbumClick(albumId);
-      }
-    });
+    if (!this.state.isFetching) {
+      this.albumsContainer.addEventListener("click", e => {
+        const album = e.target.closest(".albums__card");
+        if (album) {
+          const albumId = album.dataset.id;
+          this.props.onAlbumClick(albumId);
+        }
+      });
+    }
   }
 
   mount(shouldFetchData = true) {
     if (shouldFetchData) {
+      this.state.isFetching = true;
       this.fetchAlbumsCollectionData();
-      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
+    this.mountLoader();
     this.initMaterial();
     this.addEventsListeners();
   }
 
+  mountLoader() {
+    if (this.state.isFetching) {
+      this.loader = new Loader(this.loaderContainer);
+      this.loader.mount();
+    } else {
+      this.loader = null;
+    }
+  }
+
   render() {
-    return albumsTemplate({ albums: this.state.filteredData });
+    const { isFetching, filteredData } = this.state;
+    return albumsTemplate({
+      isFetching,
+      albums: filteredData
+    });
   }
 }

@@ -1,5 +1,7 @@
 <div class="my-songs">
-  <% if (isDataFetched) { %> <% if (hasSongs) { %>
+  <% if (isFetching) { %>
+  <div class="artists__loader"></div>
+  <% } else if (hasSongs) { %>
   <h2 class="mdc-typography--headline4 my-songs__heading">My Songs</h2>
   <div class="my-songs__table-container"></div>
   <% } else { %>
@@ -9,5 +11,5 @@
       My Songs library is empty
     </div>
   </div>
-  <% }} %>
+  <% } %>
 </div>
