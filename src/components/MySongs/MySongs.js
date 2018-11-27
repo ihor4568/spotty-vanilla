@@ -18,7 +18,6 @@ export class MySongsComponent extends SearchFunctionalityProviderComponent {
   handleSearchQuery(term) {
     super.handleSearchQuery.call(this, term);
     this.mount(false, this.state.filteredData);
-    this.isDataFetched = false;
   }
 
   querySelectors() {

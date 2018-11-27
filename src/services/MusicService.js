@@ -23,12 +23,7 @@ export class MusicService {
       .once("value")
       .then(author =>
         Promise.all(
-          author.val().songs.map(songId =>
-            database
-              .ref(`songs/${songId}`)
-              .once("value")
-              .then(song => song.val())
-          )
+          author.val().songs.map(songId => MusicService.getSongById(songId))
         )
       );
   }
@@ -39,12 +34,7 @@ export class MusicService {
       .once("value")
       .then(album =>
         Promise.all(
-          album.val().songs.map(songId =>
-            database
-              .ref(`songs/${songId}`)
-              .once("value")
-              .then(song => song.val())
-          )
+          album.val().songs.map(songId => MusicService.getSongById(songId))
         )
       );
   }
@@ -69,14 +59,7 @@ export class MusicService {
       .once("value")
       .then(data => data.val() || [])
       .then(songs =>
-        Promise.all(
-          songs.map(songId =>
-            database
-              .ref(`songs/${songId}`)
-              .once("value")
-              .then(song => song.val())
-          )
-        )
+        Promise.all(songs.map(songId => MusicService.getSongById(songId)))
       );
   }
 
@@ -138,7 +121,7 @@ export class MusicService {
       .then(rating => rating.val() || {});
   }
 
-  static setNewRating(userId, songId, ratingValue) {
+  static setNewSongRating(userId, songId, ratingValue) {
     return database.ref(`users/${userId}/rating/${songId}`).set(ratingValue);
   }
 }
