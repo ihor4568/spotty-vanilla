@@ -179,6 +179,7 @@ export class SongsTableComponent {
       item.getAttribute("data-id")
     );
     MusicService.changeSongsOrder(songsTable);
+    this.props.onDragnDrop();
   }
 
   handleDragOver(e) {
