@@ -88,6 +88,10 @@ export class MySongsComponent extends SearchFunctionalityProviderComponent {
     }
   }
 
+  getNewData() {
+    this.mount(true);
+  }
+
   mountChildren(data) {
     this.table = new SongsTableComponent(this.tableContainer, {
       data,
@@ -98,7 +102,8 @@ export class MySongsComponent extends SearchFunctionalityProviderComponent {
       onDialogOpen: this.props.onDialogOpen,
       onLegalOptionClick: this.props.onLegalOptionClick,
       playingSongId: this.playingSongId,
-      hasRemoveBtn: true
+      hasRemoveBtn: true,
+      onDragnDrop: this.getNewData.bind(this)
     });
     this.table.mount();
   }
@@ -109,15 +114,15 @@ export class MySongsComponent extends SearchFunctionalityProviderComponent {
   ) {
     if (shouldFetchData) {
       this.state.isFetching = true;
-      Promise.resolve(this.fetchSongs())
-        .then(() => this.mount(false))
-        .then(() => this.props.onDataReceived(this.songs));
+      this.fetchSongs().then(() => this.mount(false));
+      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
     this.mountLoader();
     if (!this.state.isFetching && data.length) {
       this.mountChildren(data);
+      this.props.onDataReceived(data);
     }
   }
 

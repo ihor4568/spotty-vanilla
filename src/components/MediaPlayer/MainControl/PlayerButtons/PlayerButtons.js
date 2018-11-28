@@ -25,6 +25,8 @@ export class PlayerButtonsComponent {
   finishPlay() {
     this.isPlayNow = false;
     this.playButton.children[0].innerText = "play_arrow";
+    this.props.onPlayerChangeState(false);
+    this.props.onNextClick();
   }
 
   initMaterial() {
