@@ -61,6 +61,7 @@ export class MainComponent {
     this.appBar.classList.add("main__app-bar_disable");
     this.mainPoint.classList.add("main__section_disable");
     this.mainContentPoint.classList.add("main__content-mount_disable");
+    this.themeMode.classList.add("main__elem_disable");
     this.auth.mount();
   }
 
