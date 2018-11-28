@@ -22,7 +22,7 @@ export class RatingComponent {
     this.removeStars();
     target.classList.add("audio-rating__star_selected");
     this.audioRating = target.getAttribute("data-about");
-    MusicService.setNewRating(this.userUid, this.songId, this.audioRating);
+    MusicService.setNewSongRating(this.userUid, this.songId, this.audioRating);
   }
 
   removeStars() {

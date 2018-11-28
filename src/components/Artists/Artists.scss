@@ -5,6 +5,14 @@
     flex-wrap: wrap;
   }
 
+  &__loader {
+    position: absolute;
+    height: calc(100vh - 109px);
+    width: 100%;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
   &__card {
     box-shadow: none;
   }

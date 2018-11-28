@@ -158,6 +158,7 @@ export class MainComponent {
 
     if (pathname === "songs") {
       this.table.mount();
+      this.handleCurrentTabChange(this.table);
       return;
     }
 

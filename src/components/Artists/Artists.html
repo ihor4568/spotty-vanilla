@@ -1,10 +1,12 @@
 <div class="artists">
+  <% if (isFetching) { %>
+  <div class="artists__loader"></div>
+  <% } else { %>
   <h2 class="mdc-typography mdc-typography--headline4 artists__heading">
     Artists
   </h2>
-
   <div class="artists__container">
-    <% if (!artists) { return "" }%> <% artists.forEach(item => { %>
+    <% artists.forEach( item => {%>
     <div class="mdc-card artists__card responsive-grid">
       <div class="artists__link" data-id="<%=item.id %>">
         <div class="artists__artist-card artists__artist-card_shaped">
@@ -27,6 +29,6 @@
         </div>
       </div>
     </div>
-    <% }) %>
+    <% })} %>
   </div>
 </div>
