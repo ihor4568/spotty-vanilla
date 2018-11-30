@@ -6,6 +6,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p",
     "start": "webpack-dev-server --mode=development",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "deploy": "npm run build && firebase deploy",
     "firebase": "firebase",
     "fix": "eslint --fix ./src",
@@ -19,6 +21,12 @@
     "material-components-web": "0.40.1"
   },
   "devDependencies": {
+    "@babel/core": "7.1.5",
+    "@babel/plugin-transform-modules-commonjs": "7.1.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-loader": "8.0.4",
+    "faker": "4.1.0",
+    "jest": "23.6.0",
     "autoprefixer": "9.1.5",
     "clean-webpack-plugin": "0.1.19",
     "firebase-tools": "6.0.0",
