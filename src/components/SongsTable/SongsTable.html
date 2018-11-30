@@ -38,8 +38,8 @@
         <span class="songs-table__th-field">
           Album
           <i
-            data="album"
-            class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_album"
+            data="album-name"
+            class="fas fa-arrow-up songs-table__th-icon songs-table__th-icon_album-name"
           ></i>
         </span>
       </th>
@@ -72,9 +72,7 @@
       <td class="songs-table__td songs-table__td_duration">
         <%= item.duration%>
       </td>
-      <td class="songs-table__td songs-table__td_Author">
-        <%= item.authorsInfo.map(author => author.name).join(", ") %>
-      </td>
+      <td class="songs-table__td songs-table__td_Author"><%= item.author %></td>
       <td class="songs-table__td songs-table__td_album">
         <%= item.album.name %>
       </td>
