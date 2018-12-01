@@ -11,8 +11,9 @@ export class AuthService {
 
   static signUp(email, pass, name) {
     return auth.createUserWithEmailAndPassword(email, pass).then(() => {
-      auth.currentUser.updateProfile({ displayName: name });
-      window.location.reload();
+      auth.currentUser
+        .updateProfile({ displayName: name })
+        .then(() => window.location.reload());
     });
   }
 
