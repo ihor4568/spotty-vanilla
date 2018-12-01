@@ -1,4 +1,7 @@
 <div class="albums">
+  <% if (isFetching) { %>
+  <div class="artists__loader"></div>
+  <% } else { %>
   <h2 class="albums__heading-2 mdc-typography--headline4">Albums</h2>
   <div class="albums__container">
     <% albums.forEach( album => {%>
@@ -32,6 +35,6 @@
         </div>
       </div>
     </div>
-    <% }) %>
+    <% })} %>
   </div>
 </div>

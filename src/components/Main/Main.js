@@ -1,4 +1,5 @@
 import { MDCDrawer } from "@material/drawer";
+
 import { AuthService } from "../../services/AuthService";
 import { MediaPlayerComponent } from "../MediaPlayer/MediaPlayer";
 import { HeaderComponent } from "../Header/Header";
@@ -20,6 +21,9 @@ export class MainComponent {
   constructor(mountPoint, props = {}) {
     this.mountPoint = mountPoint;
     this.props = props;
+    this.state = {
+      currentTab: null
+    };
   }
 
   querySelectors() {
@@ -47,6 +51,7 @@ export class MainComponent {
     this.appBar.classList.add("main__app-bar_disable");
     this.mainPoint.classList.add("main__section_disable");
     this.mainContentPoint.classList.add("main__content-mount_disable");
+    this.themeMode.classList.add("main__elem_disable");
     this.shareView.setSongId(songId);
   }
 
@@ -56,6 +61,7 @@ export class MainComponent {
     this.appBar.classList.add("main__app-bar_disable");
     this.mainPoint.classList.add("main__section_disable");
     this.mainContentPoint.classList.add("main__content-mount_disable");
+    this.themeMode.classList.add("main__elem_disable");
     this.auth.mount();
   }
 
@@ -64,7 +70,7 @@ export class MainComponent {
     this.searchPoint.classList.remove("main__elem_disable");
     this.appBar.classList.remove("main__app-bar_disable");
     this.mainPoint.classList.remove("main__section_disable");
-    this.mainContentPoint.classList.remove("main__content-mount_disable");
+    this.mainPoint.classList.remove("main__content-mount_disable");
   }
 
   initMaterial() {
@@ -81,6 +87,17 @@ export class MainComponent {
       "click",
       this.handleListClick.bind(this)
     );
+  }
+
+  handleCurrentTabChange(tab) {
+    this.state.currentTab = tab;
+  }
+
+  handleSearchQuery(term) {
+    const { currentTab } = this.state;
+    if (currentTab.handleSearchQuery) {
+      currentTab.handleSearchQuery(term);
+    }
   }
 
   handleListClick(e) {
@@ -142,11 +159,13 @@ export class MainComponent {
 
     if (pathname === "songs") {
       this.table.mount();
+      this.handleCurrentTabChange(this.table);
       return;
     }
 
     if (pathname === "albums") {
       this.albums.mount();
+      this.handleCurrentTabChange(this.albums);
       return;
     }
 
@@ -157,8 +176,15 @@ export class MainComponent {
       return;
     }
 
+    if (pathname === "about") {
+      this.about.mount();
+      this.handleCurrentTabChange(this.about);
+      return;
+    }
+
     if (pathname === "artists") {
       this.artist.mount();
+      this.handleCurrentTabChange(this.artist);
       return;
     }
 
@@ -171,6 +197,7 @@ export class MainComponent {
 
     if (pathname === "about") {
       this.about.mount();
+      this.handleCurrentTabChange(this.table);
       return;
     }
 
@@ -239,8 +266,8 @@ export class MainComponent {
   }
 
   mountChildren() {
-    this.themeMode = new DarkModeSelectorComponent(this.themeMode);
-    this.themeMode.mount();
+    this.themeModeSelector = new DarkModeSelectorComponent(this.themeMode);
+    this.themeModeSelector.mount();
 
     this.header = new HeaderComponent(this.headerPoint, {
       onOpen: this.handleOpen.bind(this),
@@ -253,7 +280,9 @@ export class MainComponent {
     );
     this.licenseDialogComponent.mount();
 
-    this.search = new SearchComponent(this.searchPoint);
+    this.search = new SearchComponent(this.searchPoint, {
+      onSearchQuery: this.handleSearchQuery.bind(this)
+    });
     this.search.mount();
 
     this.shareView = new ShareViewComponent(this.mainContentPoint);

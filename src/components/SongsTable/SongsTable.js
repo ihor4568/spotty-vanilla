@@ -21,8 +21,8 @@ export class SongsTableComponent {
     this.mountPoint = mountPoint;
     this.props = props;
     this.state = {
-      data: this.fillObjectsWithNumbersAsIndices(this.props.data),
-      initialData: this.fillObjectsWithNumbersAsIndices(this.props.data),
+      data: this.fillObjectsWithSortableFields(this.props.data),
+      initialData: this.fillObjectsWithSortableFields(this.props.data),
       currentOrderTypeIndex: 1,
       columnName: ""
     };
@@ -31,8 +31,13 @@ export class SongsTableComponent {
     this.playingSongId = this.props.playingSongId;
   }
 
-  fillObjectsWithNumbersAsIndices(array) {
-    return array.map((item, index) => ({ ...item, number: index }));
+  fillObjectsWithSortableFields(array) {
+    return array.map((item, number) => ({
+      ...item,
+      number,
+      author: item.authorsInfo.map(author => author.name).join(", "),
+      "album-name": item.album.name
+    }));
   }
 
   getColumnName(target) {
@@ -179,6 +184,7 @@ export class SongsTableComponent {
       item.getAttribute("data-id")
     );
     MusicService.changeSongsOrder(songsTable);
+    this.props.onDragnDrop();
   }
 
   handleDragOver(e) {

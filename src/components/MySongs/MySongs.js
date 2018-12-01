@@ -2,16 +2,32 @@ import mySongsTemplate from "./MySongs.html";
 import { SongsTableComponent } from "../SongsTable/SongsTable";
 import { MusicService } from "../../services/MusicService";
 import { AuthService } from "../../services/AuthService";
+import { SearchFunctionalityProviderComponent } from "../SearchFunctionalityProvider/SearchFunctionalityProvider";
+import { Loader } from "../Loader/Loader";
 
-export class MySongsComponent {
+export class MySongsComponent extends SearchFunctionalityProviderComponent {
   constructor(mountPoint, props = {}) {
+    super();
     this.mountPoint = mountPoint;
     this.props = props;
-    this.songs = [];
-    this.isDataFetched = false;
+    this.state = {
+      isFetching: false,
+      initialData: null,
+      filteredData: null
+    };
+  }
+
+  handleSearchQuery(term) {
+    super.handleSearchQuery.call(this, term);
+    this.mount(false, this.state.filteredData);
   }
 
   querySelectors() {
+    if (this.state.isFetching) {
+      this.loaderContainer = this.mountPoint.querySelector(".artists__loader");
+    } else {
+      this.loaderContainer = null;
+    }
     this.tableContainer = this.mountPoint.querySelector(
       ".my-songs__table-container"
     );
@@ -34,18 +50,22 @@ export class MySongsComponent {
     const userId = AuthService.getCurrentUser().uid;
     return MusicService.getUserSongs(userId)
       .then(songs => {
-        this.songs = songs;
+        this.state.initialData = songs;
 
-        return Promise.all(this.songs.map(song => this.fetchInfoBySong(song)));
+        return Promise.all(
+          this.state.initialData.map(song => this.fetchInfoBySong(song))
+        );
       })
       .then(songsInfo => {
         songsInfo.forEach((item, i) => {
           const [album, authorsInfo] = item;
 
-          this.songs[i].album = album;
-          this.songs[i].authorsInfo = authorsInfo;
+          this.state.initialData[i].album = album;
+          this.state.initialData[i].authorsInfo = authorsInfo;
         });
-        this.isDataFetched = true;
+
+        this.state.filteredData = [...this.state.initialData];
+        this.state.isFetching = false;
       });
   }
 
@@ -68,9 +88,13 @@ export class MySongsComponent {
     }
   }
 
-  mountChildren() {
+  getNewData() {
+    this.mount(true);
+  }
+
+  mountChildren(data) {
     this.table = new SongsTableComponent(this.tableContainer, {
-      data: this.songs,
+      data,
       dragAndDrop: true,
       onSongPlay: this.props.onSongPlay,
       onSongStop: this.props.onSongStop,
@@ -78,29 +102,43 @@ export class MySongsComponent {
       onDialogOpen: this.props.onDialogOpen,
       onLegalOptionClick: this.props.onLegalOptionClick,
       playingSongId: this.playingSongId,
-      hasRemoveBtn: true
+      hasRemoveBtn: true,
+      onDragnDrop: this.getNewData.bind(this)
     });
     this.table.mount();
   }
 
-  mount(shouldFetchData = true) {
+  mount(
+    shouldFetchData = true,
+    data = this.state.initialData ? [...this.state.initialData] : []
+  ) {
     if (shouldFetchData) {
-      Promise.resolve(this.fetchSongs())
-        .then(() => this.mount(false))
-        .then(() => this.props.onDataReceived(this.songs));
-      return;
+      this.state.isFetching = true;
+      this.fetchSongs().then(() => this.mount(false));
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
-    if (this.songs.length) {
-      this.mountChildren();
+    this.mountLoader();
+    if (!this.state.isFetching && data.length) {
+      this.mountChildren(data);
+      this.props.onDataReceived(data);
+    }
+  }
+
+  mountLoader() {
+    if (this.state.isFetching) {
+      this.loader = new Loader(this.loaderContainer);
+      this.loader.mount();
+    } else {
+      this.loader = null;
     }
   }
 
   render() {
+    const { isFetching, initialData } = this.state;
     return mySongsTemplate({
-      isDataFetched: this.isDataFetched,
-      hasSongs: this.songs.length
+      isFetching,
+      hasSongs: initialData ? initialData.length : false
     });
   }
 }
