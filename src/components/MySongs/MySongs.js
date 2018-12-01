@@ -115,7 +115,6 @@ export class MySongsComponent extends SearchFunctionalityProviderComponent {
     if (shouldFetchData) {
       this.state.isFetching = true;
       this.fetchSongs().then(() => this.mount(false));
-      return;
     }
     this.mountPoint.innerHTML = this.render();
     this.querySelectors();
